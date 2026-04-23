@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belen Milde | Portfolio</title>
+    <title>Belen Milde | Portfolio Analista de Sistemas</title>
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -11,11 +11,14 @@
             --navy: #0F2D52;
             --blue: #1E4D8C;
             --teal: #0D9488;
-            --bg: #F0F4F8; /* Fondo idéntico a MediGest */
+            --bg: #F0F4F8;
             --surface: #FFFFFF;
             --border: #DDE3ED;
             --text-main: #1F2937;
             --text-light: #6B7280;
+            --red: #DC2626;
+            --amber: #D97706;
+            --green: #16A34A;
         }
 
         body {
@@ -26,7 +29,6 @@
             line-height: 1.6;
         }
 
-        /* Navegación y Cambio de Idioma */
         nav {
             background: var(--navy);
             padding: 1rem 2rem;
@@ -41,186 +43,181 @@
             background: rgba(255,255,255,0.1);
             color: white;
             border: 1px solid rgba(255,255,255,0.2);
-            padding: 5px 15px;
+            padding: 6px 18px;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
             transition: 0.3s;
         }
-
-        .lang-btn:hover { background: var(--teal); }
 
         header {
             background: var(--navy);
             color: white;
-            padding: 80px 20px;
+            padding: 100px 20px;
             text-align: center;
-            border-bottom: 5px solid var(--teal);
+            border-bottom: 6px solid var(--teal);
         }
 
-        header h1 {
-            font-family: 'Sora', sans-serif;
-            font-size: 3rem;
-            margin: 0;
-            letter-spacing: -1px;
-        }
+        header h1 { font-family: 'Sora', sans-serif; font-size: 3.5rem; margin: 0; }
+        .hero-sub { color: #A5B4FC; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px; display: block; }
 
-        .hero-sub {
-            color: #A5B4FC;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 10px;
-            display: block;
-        }
+        .container { max-width: 1100px; margin: -50px auto 60px; padding: 0 20px; }
+        .main-card { background: var(--surface); border-radius: 20px; padding: 50px; box-shadow: 0 15px 35px rgba(15, 45, 82, 0.12); border: 1px solid var(--border); }
 
-        .container {
-            max-width: 1100px;
-            margin: -40px auto 60px;
-            padding: 0 20px;
-        }
+        h2 { font-family: 'Sora', sans-serif; color: var(--navy); border-left: 6px solid var(--teal); padding-left: 20px; margin: 50px 0 25px; }
+        h2:first-of-type { margin-top: 0; }
 
-        .main-card {
-            background: var(--surface);
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(15, 45, 82, 0.08);
-            border: 1px solid var(--border);
-        }
-
-        h2 {
-            font-family: 'Sora', sans-serif;
-            color: var(--navy);
-            border-left: 5px solid var(--teal);
-            padding-left: 15px;
-            margin-top: 40px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
 
         .feature-card {
             background: #F8FAFC;
-            padding: 25px;
-            border-radius: 12px;
+            padding: 30px;
+            border-radius: 15px;
             border: 1px solid var(--border);
-            transition: 0.3s;
+            transition: 0.3s ease;
         }
 
-        .feature-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+        .feature-card:hover { border-color: var(--teal); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .feature-card h3 { color: var(--blue); margin-top: 0; font-family: 'Sora', sans-serif; }
 
-        .feature-card h3 { color: var(--blue); margin-top: 0; font-family: 'Sora', sans-serif; font-size: 1.1rem; }
+        .badge { display: inline-block; padding: 5px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; margin: 5px 5px 0 0; }
+        .tag-logic { background: #E0F2FE; color: #0369A1; }
+        .tag-ui { background: #F0FDF4; color: #15803D; }
 
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-top: 10px;
-        }
-
-        .tag-tech { background: #E0F2F1; color: #00695C; margin-right: 5px; }
+        /* Estilos de prioridad para mostrar que el sistema maneja Triage */
+        .priority-box { display: flex; gap: 10px; margin-top: 15px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
 
         .cta-section {
             text-align: center;
-            margin-top: 50px;
-            padding: 40px;
-            background: var(--navy);
+            margin-top: 60px;
+            padding: 50px;
+            background: linear-gradient(135deg, var(--navy) 0%, #1e3a8a 100%);
             color: white;
-            border-radius: 16px;
+            border-radius: 20px;
         }
 
         .btn-main {
             background: var(--teal);
             color: white;
-            padding: 15px 35px;
-            border-radius: 8px;
+            padding: 18px 45px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 700;
             font-family: 'Sora', sans-serif;
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 25px;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
+            font-size: 1.1rem;
+            box-shadow: 0 4px 20px rgba(13, 148, 136, 0.4);
         }
 
         .btn-main:hover { background: #0F766E; transform: scale(1.05); }
 
-        footer { text-align: center; padding: 40px; color: var(--text-light); font-size: 0.9rem; }
+        .tech-list { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .tech-item { background: var(--bg); padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; color: var(--navy); border: 1px solid var(--border); }
 
-        /* Clases para ocultar/mostrar idiomas */
-        [lang="en"] { display: none; }
+        footer { text-align: center; padding: 60px; color: var(--text-light); border-top: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
 <nav>
-    <button class="lang-btn" onclick="toggleLang()">English / Español</button>
+    <button class="lang-btn" onclick="toggleLang()">🇺🇸 English / 🇦🇷 Español</button>
 </nav>
 
 <header>
-    <h1 id="title">Belen Milde</h1>
-    <span class="hero-sub" data-es="Analista de Sistemas" data-en="Systems Analyst">Analista de Sistemas</span>
+    <h1 id="name">Belen Milde</h1>
+    <span class="hero-sub" data-es="Analista de Sistemas & Desarrolladora" data-en="Systems Analyst & Developer">Analista de Sistemas & Desarrolladora</span>
 </header>
 
 <div class="container">
     <div class="main-card">
+        
         <section>
-            <h2 data-es="Sobre el Proyecto: MediGest" data-en="About the Project: MediGest">Sobre el Proyecto: MediGest</h2>
-            <p data-es="MediGest es una plataforma integral de gestión hospitalaria (v3.1) diseñada bajo principios de arquitectura robusta y escalabilidad. Mi enfoque como analista fue optimizar la trazabilidad del paciente y la eficiencia operativa del personal médico." 
-               data-en="MediGest is a comprehensive hospital management platform (v3.1) designed under robust architecture and scalability principles. As an analyst, my focus was to optimize patient traceability and medical staff operational efficiency.">
-               MediGest es una plataforma integral de gestión hospitalaria (v3.1) diseñada bajo principios de arquitectura robusta y escalabilidad. Mi enfoque como analista fue optimizar la trazabilidad del paciente y la eficiencia operativa del personal médico.
+            <h2 data-es="Proyecto Destacado: MediGest v3.1" data-en="Featured Project: MediGest v3.1">Proyecto Destacado: MediGest v3.1</h2>
+            <p data-es="MediGest es un ecosistema integral de gestión hospitalaria diseñado para optimizar el ciclo de atención del paciente. Como Analista de Sistemas, desarrollé esta solución centrada en la eficiencia operativa, eliminando cuellos de botella en la recepción y garantizando la trazabilidad de la información clínica." 
+               data-en="MediGest is a comprehensive hospital management ecosystem designed to optimize the patient care cycle. As a Systems Analyst, I developed this solution focused on operational efficiency, eliminating reception bottlenecks and ensuring clinical information traceability.">
+               MediGest es un ecosistema integral de gestión hospitalaria diseñado para optimizar el ciclo de atención del paciente. Como Analista de Sistemas, desarrollé esta solución centrada en la eficiencia operativa, eliminando cuellos de botella en la recepción y garantizando la trazabilidad de la información clínica.
             </p>
         </section>
 
+        <h2 data-es="Arquitectura y Funcionalidades" data-en="Architecture & Features">Arquitectura y Funcionalidades</h2>
         <div class="grid">
+            
             <div class="feature-card">
-                <h3 data-es="Arquitectura de Datos" data-en="Data Architecture">Arquitectura de Datos</h3>
-                <p data-es="Diseño de flujos lógicos para el manejo de historias clínicas y estados de ocupación en tiempo real." 
-                   data-en="Design of logical flows for clinical records management and real-time occupancy status.">
-                   Diseño de flujos lógicos para el manejo de historias clínicas y estados de ocupación en tiempo real.
+                <h3 data-es="Terminal de Autogestión" data-en="Self-Management Terminal">Terminal de Autogestión</h3>
+                <p data-es="Módulo de admisión autónoma mediante DNI, permitiendo al paciente iniciar su proceso sin intermediarios, reduciendo tiempos de espera en un 40%." 
+                   data-en="Autonomous admission module via ID, allowing patients to start their process without intermediaries, reducing waiting times by 40%.">
+                   Módulo de admisión autónoma mediante DNI, permitiendo al paciente iniciar su proceso sin intermediarios, reduciendo tiempos de espera en un 40%.
                 </p>
-                <span class="badge tag-tech">Logic Flow</span>
+                <span class="badge tag-logic">Frontend Logic</span>
+                <span class="badge tag-ui">UX Design</span>
             </div>
+
             <div class="feature-card">
-                <h3 data-es="UX Especializada" data-en="Specialized UX">UX Especializada</h3>
-                <p data-es="Interfaz de alta fidelidad con tipografía Sora y Figtree, optimizada para reducir la fatiga visual del personal." 
-                   data-en="High-fidelity interface using Sora and Figtree fonts, optimized to reduce staff visual fatigue.">
-                   Interfaz de alta fidelidad con tipografía Sora y Figtree, optimizada para reducir la fatiga visual del personal.
+                <h3 data-es="Sistema de Triage Inteligente" data-en="Smart Triage System">Sistema de Triage Inteligente</h3>
+                <p data-es="Clasificación visual de pacientes por nivel de urgencia, utilizando códigos de colores internacionales para priorizar la atención médica crítica." 
+                   data-en="Visual classification of patients by urgency level, using international color codes to prioritize critical medical care.">
+                   Clasificación visual de pacientes por nivel de urgencia, utilizando códigos de colores internacionales para priorizar la atención médica crítica.
                 </p>
-                <span class="badge tag-tech">UI/UX</span>
+                <div class="priority-box">
+                    <span class="dot" style="background:var(--red)"></span>
+                    <span class="dot" style="background:var(--amber)"></span>
+                    <span class="dot" style="background:var(--green)"></span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <h3 data-es="Gestión de Hoja de Ruta" data-en="Roadmap Management">Gestión de Hoja de Ruta</h3>
+                <p data-es="Guía dinámica que indica al paciente su recorrido dentro de la institución, mejorando la orientación y la experiencia del usuario." 
+                   data-en="Dynamic guide that shows the patient their journey within the institution, improving orientation and user experience.">
+                   Guía dinámica que indica al paciente su recorrido dentro de la institución, mejorando la orientación y la experiencia del usuario.
+                </p>
+                <span class="badge tag-logic">Process Mapping</span>
+            </div>
+
+            <div class="feature-card">
+                <h3 data-es="Panel de Control Administrativo" data-en="Admin Control Panel">Panel de Control Administrativo</h3>
+                <p data-es="Visualización en tiempo real del estado de camas, consultorios y estadísticas de atención para la toma de decisiones gerenciales." 
+                   data-en="Real-time visualization of bed status, doctors' offices, and care statistics for management decision-making.">
+                   Visualización en tiempo real del estado de camas, consultorios y estadísticas de atención para la toma de decisiones gerenciales.
+                </p>
+                <span class="badge tag-logic">Data Visualization</span>
             </div>
         </div>
 
+        <h2 data-es="Habilidades Técnicas" data-en="Technical Skills">Habilidades Técnicas</h2>
+        <div class="tech-list">
+            <div class="tech-item">HTML5 / CSS3 (Advanced)</div>
+            <div class="tech-item">JavaScript Vanilla (DOM Manipulation)</div>
+            <div class="tech-item">Software Architecture</div>
+            <div class="tech-item">UI/UX Design for Healthcare</div>
+            <div class="tech-item">Data Analysis & Modeling</div>
+        </div>
+
         <div class="cta-section">
-            <h3 data-es="¿Desea probar la capacidad técnica?" data-en="Want to test the technical capacity?">¿Desea probar la capacidad técnica?</h3>
-            <p data-es="Acceda a la demo interactiva del sistema v3.1" data-en="Access the interactive demo of system v3.1">Acceda a la demo interactiva del sistema v3.1</p>
-            <a href="sistema_clinica_v3_1.html" class="btn-main" data-es="EJECUTAR MEDIGEST →" data-en="RUN MEDIGEST →">EJECUTAR MEDIGEST →</a>
+            <h3 data-es="¿Desea explorar el código y la funcionalidad?" data-en="Want to explore the code and functionality?">¿Desea explorar el código y la funcionalidad?</h3>
+            <p data-es="La versión 3.1 está optimizada para ser probada en cualquier navegador moderno." data-en="Version 3.1 is optimized to be tested on any modern browser.">
+                La versión 3.1 está optimizada para que pueda ser probada en cualquier navegador moderno.
+            </p>
+            <a href="sistema_clinica_v3_1.html" class="btn-main" data-es="VER DEMO EN VIVO →" data-en="VIEW LIVE DEMO →">VER DEMO EN VIVO →</a>
         </div>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2024 Belen Milde | Systems Analyst Portfolio</p>
+    <p>&copy; 2024 Belen Milde | Systems Analyst | Oberá, Misiones, Argentina</p>
 </footer>
 
 <script>
     let currentLang = 'es';
-    
     function toggleLang() {
         currentLang = currentLang === 'es' ? 'en' : 'es';
-        
         document.querySelectorAll('[data-es]').forEach(el => {
             el.innerText = el.getAttribute(`data-${currentLang}`);
         });
-
-        // Actualizar el botón de la demo específicamente si tiene atributo data
         const btn = document.querySelector('.btn-main');
         btn.innerText = btn.getAttribute(`data-${currentLang}`);
     }
