@@ -1,1 +1,1120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediGest · Sistema de Gestión Hospitalaria</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0F2D52;
+  --blue: #1E4D8C;
+  --blue-mid: #2B6CB0;
+  --blue-light: #EBF4FF;
+  --teal: #0D9488;
+  --teal-light: #CCFBF1;
+  --amber: #D97706;
+  --amber-light: #FEF3C7;
+  --red: #DC2626;
+  --red-light: #FEE2E2;
+  --green: #16A34A;
+  --green-light: #DCFCE7;
+  --bg: #F0F4F8;
+  --surface: #FFFFFF;
+  --border: #DDE3ED;
+  --border-light: #EEF2F7;
+  --text: #0F2D52;
+  --text-mid: #4A5568;
+  --text-muted: #8896A7;
+  --sidebar-w: 220px;
+  --topbar-h: 52px;
+  --font: 'Figtree', sans-serif;
+  --font-display: 'Sora', sans-serif;
+  --mono: 'DM Mono', monospace;
+  --radius: 10px;
+  --shadow: 0 2px 6px rgba(15,45,82,0.07), 0 1px 2px rgba(15,45,82,0.05);
+  --shadow-md: 0 6px 18px rgba(15,45,82,0.12), 0 2px 6px rgba(15,45,82,0.06);
+  --shadow-card: 0 2px 8px rgba(15,45,82,0.08), 0 0 0 0.5px rgba(15,45,82,0.04);
+  --transition-page: 180ms cubic-bezier(0.4,0,0.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;}
+button{font-family:var(--font);cursor:pointer;}
+input,select,textarea{font-family:var(--font);}
 
+/* PAGE TRANSITIONS */
+@keyframes pageIn {
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes countUp {
+  from { opacity:0; transform:translateY(4px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes pulseDot {
+  0%,100% { transform:scale(1); opacity:1; }
+  50%      { transform:scale(1.5); opacity:0.5; }
+}
+@keyframes fadeSlideIn {
+  from { opacity:0; transform:translateX(6px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+
+/* LAYOUT */
+.layout{display:flex;height:100vh;overflow:hidden;}
+.sidebar{width:var(--sidebar-w);background:linear-gradient(180deg,#0A2244 0%,#0F2D52 40%,#122F56 100%);display:flex;flex-direction:column;flex-shrink:0;transition:width 0.2s;box-shadow:2px 0 12px rgba(15,45,82,0.18);}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{height:var(--topbar-h);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0;box-shadow:0 1px 4px rgba(15,45,82,0.06);}
+.content{flex:1;overflow-y:auto;padding:20px;}
+
+/* SIDEBAR */
+.sb-logo{padding:16px 16px 12px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.sb-logo-name{color:#fff;font-size:15px;font-weight:700;letter-spacing:-0.02em;font-family:var(--font-display);}
+.sb-logo-sub{color:rgba(255,255,255,0.4);font-size:10px;margin-top:2px;letter-spacing:0.04em;text-transform:uppercase;}
+.sb-nav{flex:1;padding:10px 8px;overflow-y:auto;}
+.sb-section{font-size:9.5px;font-weight:600;color:rgba(255,255,255,0.28);letter-spacing:0.12em;text-transform:uppercase;padding:14px 8px 5px;}
+.sb-item{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:7px;cursor:pointer;font-size:12.5px;color:rgba(255,255,255,0.55);margin-bottom:1px;transition:all 0.18s cubic-bezier(0.4,0,0.2,1);border-left:2px solid transparent;}
+.sb-item:hover{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.9);border-left-color:rgba(255,255,255,0.2);}
+.sb-item.active{background:rgba(255,255,255,0.13);color:#fff;border-left-color:#5DCAA5;}
+.sb-item .ico{width:16px;text-align:center;flex-shrink:0;opacity:0.65;transition:opacity 0.15s;}
+.sb-item.active .ico,.sb-item:hover .ico{opacity:1;}
+.sb-badge{margin-left:auto;background:var(--red);color:#fff;font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:99px;font-family:var(--mono);}
+.sb-badge.green{background:var(--teal);}
+.sb-user{padding:12px;border-top:1px solid rgba(255,255,255,0.08);}
+.sb-user-row{display:flex;align-items:center;gap:8px;}
+.sb-avatar{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.15);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:var(--font-display);}
+.sb-user-name{color:#fff;font-size:12px;font-weight:600;}
+.sb-user-role{color:rgba(255,255,255,0.4);font-size:10px;}
+
+/* TOPBAR */
+.tb-title{font-size:15px;font-weight:600;color:var(--text);flex:1;font-family:var(--font-display);letter-spacing:-0.01em;}
+.tb-search{flex:1;max-width:280px;position:relative;}
+.tb-search input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:7px 12px 7px 32px;font-size:12.5px;color:var(--text);outline:none;}
+.tb-search input:focus{border-color:var(--blue-mid);background:#fff;}
+.tb-search::before{content:'⌕';position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:14px;pointer-events:none;}
+.tb-btn{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;border:1px solid var(--border);background:var(--surface);font-size:12px;color:var(--text-mid);}
+.tb-btn:hover{background:var(--bg);}
+.tb-btn.primary{background:var(--blue);color:#fff;border-color:var(--blue);}
+.tb-btn.primary:hover{background:var(--blue-mid);}
+.tb-pill{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:99px;font-size:11px;}
+.tb-pill.warn{background:var(--amber-light);color:var(--amber);}
+.tb-pill.ok{background:var(--green-light);color:var(--green);}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.dot.green{background:var(--green);}
+.dot.amber{background:var(--amber);}
+.dot.red{background:var(--red);}
+.dot.blue{background:var(--blue-mid);}
+.dot.gray{background:var(--text-muted);}
+
+/* CARDS & PANELS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-card);}
+.card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0;}
+.card-title{font-size:13px;font-weight:600;color:var(--text);font-family:var(--font-display);letter-spacing:-0.01em;}
+.card-body{padding:12px 16px 14px;}
+.card-foot{padding:10px 16px;border-top:1px solid var(--border-light);}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:99px;}
+.badge-blue{background:var(--blue-light);color:var(--blue-mid);}
+.badge-green{background:var(--green-light);color:var(--green);}
+.badge-amber{background:var(--amber-light);color:var(--amber);}
+.badge-red{background:var(--red-light);color:var(--red);}
+.badge-teal{background:var(--teal-light);color:var(--teal);}
+.badge-gray{background:var(--border-light);color:var(--text-muted);}
+/* Pulsing dot for live badges */
+.badge-blue .dot.blue, .badge-amber .dot.amber {
+  animation: pulseDot 2s infinite;
+}
+/* METRICS ROW */
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px;}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow-card);transition:box-shadow 0.2s,transform 0.2s;}
+.metric:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);}
+.metric-label{font-size:10.5px;color:var(--text-muted);margin-bottom:5px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;}
+.metric-value{font-size:28px;font-weight:700;color:var(--navy);line-height:1;font-family:var(--font-display);letter-spacing:-0.02em;}
+.metric-value.counting{animation:countUp 0.6s ease-out both;}
+.metric-sub{font-size:11px;margin-top:5px;font-weight:500;}
+.metric-sub.up{color:var(--green);}
+.metric-sub.warn{color:var(--amber);}
+.metric-sub.down{color:var(--red);}
+.metric-sub.neu{color:var(--text-muted);}
+
+/* GRID LAYOUTS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px;}
+.g12{display:grid;grid-template-columns:1fr 2fr;gap:14px;margin-bottom:14px;}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{font-size:10px;font-weight:700;color:var(--text-muted);text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);letter-spacing:0.06em;text-transform:uppercase;font-family:var(--font-display);}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--border-light);font-size:12.5px;color:var(--text-mid);vertical-align:middle;transition:background 0.12s,border-left 0.12s;border-left:2px solid transparent;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:#F6F9FD;border-left-color:var(--blue-mid);}
+.tbl .td-name{color:var(--text);font-weight:600;}
+
+/* AVATAR */
+.av{width:30px;height:30px;border-radius:50%;background:var(--blue-light);color:var(--blue-mid);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;flex-shrink:0;}
+.av.teal{background:var(--teal-light);color:var(--teal);}
+.av.amber{background:var(--amber-light);color:var(--amber);}
+.av.navy{background:var(--navy);color:#fff;}
+.av-row{display:flex;align-items:center;gap:8px;}
+
+/* FORM */
+.form-row{display:grid;gap:10px;margin-bottom:10px;}
+.form-row.c2{grid-template-columns:1fr 1fr;}
+.form-row.c3{grid-template-columns:1fr 1fr 1fr;}
+.form-group{display:flex;flex-direction:column;gap:4px;}
+.form-label{font-size:11px;font-weight:600;color:var(--text-muted);letter-spacing:0.03em;}
+.form-input{padding:8px 11px;border:1px solid var(--border);border-radius:7px;font-size:13px;color:var(--text);background:var(--surface);outline:none;transition:border 0.15s;}
+.form-input:focus{border-color:var(--blue-mid);box-shadow:0 0 0 3px rgba(43,108,176,0.1);}
+select.form-input{cursor:pointer;}
+
+/* SECTIONS */
+.page{display:none;}
+.page.active{display:block;animation:pageIn var(--transition-page) both;}
+.page-header{margin-bottom:18px;}
+.page-header h1{font-size:20px;font-weight:700;color:var(--navy);font-family:var(--font-display);letter-spacing:-0.02em;}
+.page-header p{font-size:12.5px;color:var(--text-muted);margin-top:3px;}
+
+/* ROW ITEMS */
+.item-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border-light);}
+.item-row:last-child{border-bottom:none;}
+.ir-info{flex:1;min-width:0;}
+.ir-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ir-sub{font-size:11px;color:var(--text-muted);margin-top:1px;}
+.ir-end{text-align:right;flex-shrink:0;}
+.ir-time{font-size:11px;color:var(--text-muted);}
+
+/* AUDIT */
+.audit-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-light);align-items:flex-start;}
+.audit-item:last-child{border-bottom:none;}
+.audit-ico{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:600;}
+.audit-text{font-size:12px;color:var(--text);line-height:1.4;}
+.audit-meta{font-size:10.5px;color:var(--text-muted);margin-top:2px;font-family:var(--mono);}
+
+/* STATUS INDICATOR */
+.status-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border-light);}
+.status-row:last-child{border-bottom:none;}
+.sr-label{font-size:12.5px;font-weight:500;color:var(--text);flex:1;}
+.sr-sub{font-size:11px;color:var(--text-muted);}
+
+/* CAMA */
+.bed-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.bed{border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer;transition:transform 0.15s;}
+.bed:hover{transform:translateY(-1px);}
+.bed.free{background:var(--green-light);border:1px solid #BBF7D0;}
+.bed.occ{background:var(--blue-light);border:1px solid #BFDBFE;}
+.bed.clean{background:var(--amber-light);border:1px solid #FDE68A;}
+.bed.res{background:var(--red-light);border:1px solid #FECACA;}
+.bed-num{font-size:13px;font-weight:600;color:var(--navy);}
+.bed-label{font-size:9px;font-weight:500;margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;}
+.bed.free .bed-label{color:var(--green);}
+.bed.occ .bed-label{color:var(--blue-mid);}
+.bed.clean .bed-label{color:var(--amber);}
+.bed.res .bed-label{color:var(--red);}
+
+/* TIMELINE */
+.timeline{padding:4px 0;}
+.tl-item{display:flex;gap:12px;padding:8px 0;position:relative;}
+.tl-item:not(:last-child)::before{content:'';position:absolute;left:15px;top:32px;bottom:0;width:1px;background:var(--border);}
+.tl-ico{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;}
+.tl-body{flex:1;}
+.tl-title{font-size:12.5px;font-weight:500;color:var(--text);}
+.tl-sub{font-size:11px;color:var(--text-muted);margin-top:1px;}
+.tl-date{font-size:10px;color:var(--text-muted);font-family:var(--mono);}
+
+/* LIVE STATUS PULSE */
+.dot.pulse { animation: pulseDot 1.8s infinite; }
+.dot.pulse-slow { animation: pulseDot 2.5s infinite; }
+
+/* PROGRESS BAR */
+.prog-wrap{margin-bottom:10px;}
+.prog-head{display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-bottom:4px;}
+.prog-track{height:6px;background:var(--border-light);border-radius:3px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:3px;transition:width 0.5s;}
+
+/* DIVIDER */
+.divider{border:none;border-top:1px solid var(--border-light);margin:12px 0;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+/* ===== MÓDULO 03: NOTIFICACIONES ===== */
+
+/* BELL BUTTON */
+.bell-btn{position:relative;width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:background 0.15s;flex-shrink:0;}
+.bell-btn:hover{background:var(--bg);}
+.bell-badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:99px;display:flex;align-items:center;justify-content:center;padding:0 3px;font-family:var(--mono);border:2px solid var(--surface);}
+
+/* NOTIFICATION PANEL */
+.notif-panel{position:fixed;top:0;right:-380px;width:360px;height:100vh;background:var(--surface);border-left:1px solid var(--border);box-shadow:-6px 0 24px rgba(15,45,82,0.12);z-index:200;display:flex;flex-direction:column;transition:right 0.25s cubic-bezier(0.4,0,0.2,1);}
+.notif-panel.open{right:0;}
+.notif-panel-head{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.notif-panel-title{font-size:14px;font-weight:700;color:var(--navy);font-family:var(--font-display);}
+.notif-panel-actions{display:flex;gap:6px;align-items:center;}
+.notif-mark-all{font-size:11px;color:var(--blue-mid);cursor:pointer;background:none;border:none;font-family:var(--font);}
+.notif-close{width:26px;height:26px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);}
+.notif-body{flex:1;overflow-y:auto;padding:10px 0;}
+.notif-group-label{font-size:9.5px;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px 4px;}
+.notif-item{display:flex;gap:10px;padding:10px 18px;cursor:pointer;transition:background 0.12s;border-left:3px solid transparent;}
+.notif-item:hover{background:#FAFBFD;}
+.notif-item.unread{background:#F6F9FD;border-left-color:var(--blue-mid);}
+.notif-item.unread-red{background:#FFF6F6;border-left-color:var(--red);}
+.notif-item.unread-amber{background:#FFFBF0;border-left-color:var(--amber);}
+.ni-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.ni-text{font-size:12.5px;color:var(--text);line-height:1.4;flex:1;}
+.ni-text b{font-weight:600;}
+.ni-time{font-size:10.5px;color:var(--text-muted);margin-top:2px;}
+.notif-overlay{display:none;position:fixed;inset:0;z-index:199;}
+.notif-overlay.open{display:block;}
+
+/* ALERT BANNER (UCI / crítico) */
+.alert-banner{display:none;background:var(--red);color:#fff;padding:7px 20px;font-size:12px;font-weight:500;align-items:center;gap:8px;flex-shrink:0;}
+.alert-banner.show{display:flex;}
+.ab-ico{font-size:14px;}
+.ab-text{flex:1;}
+.ab-text b{font-weight:700;}
+
+/* ALERGIA BANNER */
+.alergia-banner{display:none;background:#FFF1F1;border:1px solid #FECACA;border-radius:8px;padding:10px 14px;margin-bottom:12px;align-items:center;gap:10px;font-size:13px;color:var(--red);}
+.alergia-banner.show{display:flex;}
+.ab2-ico{font-size:18px;flex-shrink:0;}
+
+/* TOAST CONTAINER */
+.toast-container{position:fixed;bottom:20px;right:20px;z-index:500;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
+.toast{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:500;font-family:var(--font);box-shadow:var(--shadow-md);pointer-events:all;min-width:260px;max-width:340px;animation:toastIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;border-left:3px solid;}
+.toast.out{animation:toastOut 0.25s ease forwards;}
+@keyframes toastIn{from{opacity:0;transform:translateY(16px) scale(0.96);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes toastOut{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(8px);}}
+.toast.success{background:#F0FDF4;color:#166534;border-left-color:var(--green);}
+.toast.warn{background:#FFFBEB;color:#92400E;border-left-color:var(--amber);}
+.toast.error{background:#FEF2F2;color:#991B1B;border-left-color:var(--red);}
+.toast.info{background:#EFF6FF;color:#1E40AF;border-left-color:var(--blue-mid);}
+.toast-ico{font-size:16px;flex-shrink:0;}
+.toast-msg{flex:1;line-height:1.35;}
+.toast-close{background:none;border:none;cursor:pointer;font-size:14px;opacity:0.5;color:inherit;padding:0 0 0 4px;}
+.toast-close:hover{opacity:1;}
+
+/* MODAL OVERLAY */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,45,82,0.35);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(2px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--surface);border-radius:14px;width:100%;max-width:520px;box-shadow:var(--shadow-md);max-height:90vh;overflow-y:auto;animation:pageIn 0.18s ease both;}
+.modal-head{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.modal-title{font-size:15px;font-weight:700;color:var(--navy);font-family:var(--font-display);letter-spacing:-0.01em;}
+.modal-close{background:none;border:none;font-size:18px;color:var(--text-muted);cursor:pointer;line-height:1;}
+.modal-body{padding:18px 20px;}
+.modal-foot{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;}
+
+/* PATIENT DETAIL TAB */
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.tab{padding:8px 14px;font-size:12.5px;font-weight:500;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+.tab.active{color:var(--blue-mid);border-bottom-color:var(--blue-mid);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ALERT BOX */
+.alert{padding:10px 14px;border-radius:8px;font-size:12.5px;margin-bottom:10px;display:flex;align-items:flex-start;gap:8px;}
+.alert.info{background:var(--blue-light);color:var(--blue-mid);}
+.alert.warn{background:var(--amber-light);color:var(--amber);}
+.alert.success{background:var(--green-light);color:var(--green);}
+.alert.danger{background:var(--red-light);color:var(--red);}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:30px 20px;color:var(--text-muted);}
+.empty-ico{font-size:32px;margin-bottom:8px;}
+.empty-text{font-size:13px;}
+
+/* ACTION BTN */
+.action-btn{padding:7px 14px;border-radius:7px;font-size:12.5px;font-weight:500;border:1px solid var(--border);background:var(--surface);color:var(--text-mid);cursor:pointer;transition:all 0.15s;}
+.action-btn:hover{background:var(--bg);}
+.action-btn.primary{background:var(--blue);color:#fff;border-color:var(--blue);}
+.action-btn.primary:hover{background:var(--blue-mid);}
+.action-btn.danger{background:var(--red-light);color:var(--red);border-color:#FECACA;}
+.action-btn.success{background:var(--green-light);color:var(--green);border-color:#BBF7D0;}
+.action-btn.sm{padding:5px 10px;font-size:11.5px;}
+
+/* QR STUB */
+.qr-stub{width:64px;height:64px;background:var(--bg);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.qr-inner{width:44px;height:44px;background:repeating-linear-gradient(0deg,var(--text) 0,var(--text) 2px,transparent 2px,transparent 5px),repeating-linear-gradient(90deg,var(--text) 0,var(--text) 2px,transparent 2px,transparent 5px);opacity:0.2;}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-name">MediGest Pro</div>
+    <div class="sb-logo-sub">Sistema de Gestión Hospitalaria</div>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-section">Principal</div>
+    <div class="sb-item active" onclick="nav('dashboard')"><span class="ico">⊞</span> Dashboard</div>
+    <div class="sb-section">Recepción</div>
+    <div class="sb-item" onclick="nav('recepcion')"><span class="ico">◎</span> Admisión <span class="sb-badge">3</span></div>
+    <div class="sb-item" onclick="nav('turnos')"><span class="ico">◷</span> Turnos</div>
+    <div class="sb-section">Clínico</div>
+    <div class="sb-item" onclick="nav('pacientes')"><span class="ico">♥</span> Pacientes</div>
+    <div class="sb-item" onclick="nav('medico')"><span class="ico">✚</span> Panel Médico</div>
+    <div class="sb-item" onclick="nav('internacion')"><span class="ico">▤</span> Internación</div>
+    <div class="sb-item" onclick="nav('laboratorio')"><span class="ico">⊘</span> Laboratorio <span class="sb-badge green">5</span></div>
+    <div class="sb-section">Sistema</div>
+    <div class="sb-item" onclick="nav('auditoria')"><span class="ico">⊛</span> Auditoría</div>
+    <div class="sb-item" onclick="nav('interop')"><span class="ico">⇌</span> Interop.</div>
+    <div class="sb-item" onclick="nav('estadisticas')"><span class="ico">▸</span> Estadísticas</div>
+  </div>
+  <div class="sb-user">
+    <div class="sb-user-row">
+      <div class="sb-avatar">AD</div>
+      <div>
+        <div class="sb-user-name">Admin General</div>
+        <div class="sb-user-role">Administrador · turno mañana</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <!-- UCI ALERT BANNER -->
+  <div class="alert-banner show" id="uci-banner">
+    <span class="ab-ico">🔴</span>
+    <span class="ab-text"><b>UCI al 100% de capacidad.</b> No hay camas disponibles. Derivar nuevos ingresos a Clínica Médica o Observación.</span>
+    <span style="font-size:11px;opacity:0.8;white-space:nowrap;">4/4 camas ocupadas</span>
+  </div>
+  <div class="topbar">
+    <div class="tb-title" id="tb-title">Dashboard</div>
+    <div class="tb-search"><input type="text" placeholder="Buscar paciente, DNI, turno…"></div>
+    <div class="tb-pill warn"><div class="dot amber pulse"></div>3 en sala de espera</div>
+    <div class="tb-pill ok"><div class="dot green pulse-slow"></div>Sistema operativo</div>
+    <button class="bell-btn" onclick="toggleNotifPanel()" title="Notificaciones">🔔<span class="bell-badge" id="bell-count">5</span></button>
+    <button class="tb-btn primary" onclick="openModal('modal-nuevo-paciente')">+ Nuevo paciente</button>
+    <div style="font-size:11.5px;color:var(--text-muted);white-space:nowrap;">Mié 22 abr · 09:41</div>
+  </div>
+
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header"><h1>Dashboard general</h1><p>Resumen operativo del establecimiento en tiempo real</p></div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-label">Turnos hoy</div><div class="metric-value">38</div><div class="metric-sub up">+5 espontáneos</div></div>
+        <div class="metric"><div class="metric-label">Pacientes en sala</div><div class="metric-value">3</div><div class="metric-sub neu">Espera prom. 9 min</div></div>
+        <div class="metric"><div class="metric-label">Internados</div><div class="metric-value">14</div><div class="metric-sub warn">2 en observación</div></div>
+        <div class="metric"><div class="metric-label">Lab. pendientes</div><div class="metric-value">7</div><div class="metric-sub neu">3 recibidos hoy</div></div>
+        <div class="metric"><div class="metric-label">Ausentismo</div><div class="metric-value">4</div><div class="metric-sub down">↑ vs ayer</div></div>
+      </div>
+      <div class="g21">
+        <div class="card">
+          <div class="card-head"><span class="card-title">Sala de espera · en vivo</span><span class="badge badge-blue"><div class="dot blue pulse"></div>Actualizado ahora</span></div>
+          <div class="card-body">
+            <table class="tbl">
+              <thead><tr><th>#</th><th>Paciente</th><th>Médico</th><th>Turno</th><th>Check-in</th><th>Estado</th></tr></thead>
+              <tbody>
+                <tr><td><b>01</b></td><td class="td-name">García, Marta</td><td>Dr. Suárez</td><td>09:00</td><td>08:52</td><td><span class="badge badge-amber">En consulta</span></td></tr>
+                <tr><td><b>02</b></td><td class="td-name">López, Carlos</td><td>Dra. Romero</td><td>09:15</td><td>09:08</td><td><span class="badge badge-blue">Llamado</span></td></tr>
+                <tr><td><b>03</b></td><td class="td-name">Ferreyra, Ana</td><td>Dra. Romero</td><td>09:30</td><td>09:21</td><td><span class="badge badge-gray">Esperando</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Auditoría reciente</span><span class="badge badge-gray">Solo admin</span></div>
+          <div class="card-body">
+            <div class="audit-item"><div class="audit-ico" style="background:var(--blue-light);color:var(--blue-mid);">VER</div><div><div class="audit-text">Dra. Romero consultó historial de <b>López, Carlos</b></div><div class="audit-meta">09:09 · Tablet-Consultorio-2 · 192.168.1.14</div></div></div>
+            <div class="audit-item"><div class="audit-ico" style="background:var(--amber-light);color:var(--amber);">MOD</div><div><div class="audit-text">Enf. Pérez modificó signos vitales de <b>García, M.</b></div><div class="audit-meta">08:58 · PC-Enfermería-1 · 192.168.1.8</div></div></div>
+            <div class="audit-item"><div class="audit-ico" style="background:var(--green-light);color:var(--green);">LOG</div><div><div class="audit-text">Recepción Díaz inició sesión correctamente</div><div class="audit-meta">08:30 · PC-Recepción · 192.168.1.3</div></div></div>
+            <div class="audit-item"><div class="audit-ico" style="background:var(--blue-light);color:var(--blue-mid);">VER</div><div><div class="audit-text">Dr. Suárez vio resultados lab. de <b>García, M.</b></div><div class="audit-meta">08:55 · Tablet-Consultorio-1 · 192.168.1.12</div></div></div>
+          </div>
+          <div class="card-foot"><button class="action-btn sm" onclick="nav('auditoria')">Ver registro completo →</button></div>
+        </div>
+      </div>
+      <div class="g3">
+        <div class="card">
+          <div class="card-head"><span class="card-title">Interoperabilidad</span><span class="badge badge-green">4/4 activos</span></div>
+          <div class="card-body">
+            <div class="status-row"><div class="dot green"></div><div><div class="sr-label">Lab. Central</div><div class="sr-sub">HL7 FHIR · conectado</div></div></div>
+            <div class="status-row"><div class="dot green"></div><div><div class="sr-label">OSDE / Swiss Medical</div><div class="sr-sub">API REST · afiliación OK</div></div></div>
+            <div class="status-row"><div class="dot amber"></div><div><div class="sr-label">Imágenes DICOM</div><div class="sr-sub">Reconectando…</div></div></div>
+            <div class="status-row"><div class="dot green"></div><div><div class="sr-label">WhatsApp / SMS</div><div class="sr-sub">Twilio · activo</div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Ocupación · camas</span></div>
+          <div class="card-body">
+            <div class="prog-wrap"><div class="prog-head"><span>Clínica Médica</span><span>8/12</span></div><div class="prog-track"><div class="prog-fill" style="width:66%;background:var(--blue-mid);"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Pediatría</span><span>3/8</span></div><div class="prog-track"><div class="prog-fill" style="width:37%;background:var(--teal);"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Cirugía</span><span>5/6</span></div><div class="prog-track"><div class="prog-fill" style="width:83%;background:var(--amber);"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>UCI</span><span>4/4</span></div><div class="prog-track"><div class="prog-fill" style="width:100%;background:var(--red);"></div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Estadísticas semana</span></div>
+          <div class="card-body">
+            <div class="prog-wrap"><div class="prog-head"><span>Asistencia turnos</span><span>87%</span></div><div class="prog-track"><div class="prog-fill" style="width:87%;background:var(--green);"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Espera &lt;15 min</span><span>72%</span></div><div class="prog-track"><div class="prog-fill" style="width:72%;background:var(--blue-mid);"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Lab. en plazo</span><span>94%</span></div><div class="prog-track"><div class="prog-fill" style="width:94%;background:var(--teal);"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Check-in kiosco</span><span>61%</span></div><div class="prog-track"><div class="prog-fill" style="width:61%;background:#7F77DD;"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECEPCION -->
+    <div class="page" id="page-recepcion">
+      <div class="page-header"><h1>Admisión de Pacientes</h1><p>Registro de ingreso, verificación de cobertura y asignación de turno</p></div>
+      <div class="alert info">ℹ Hay 3 pacientes esperando check-in manual en recepción.</div>
+      <div class="g12">
+        <div class="card">
+          <div class="card-head"><span class="card-title">Cola de espera</span><span class="badge badge-amber">3 en espera</span></div>
+          <div class="card-body">
+            <div class="item-row"><div class="av">GM</div><div class="ir-info"><div class="ir-name">García, Marta</div><div class="ir-sub">OSDE · Clínica Médica</div></div><div class="ir-end"><span class="badge badge-amber">En consulta</span><div class="ir-time">08:52</div></div></div>
+            <div class="item-row"><div class="av teal">LC</div><div class="ir-info"><div class="ir-name">López, Carlos</div><div class="ir-sub">Swiss Medical · Cardiología</div></div><div class="ir-end"><span class="badge badge-blue">Llamado</span><div class="ir-time">09:08</div></div></div>
+            <div class="item-row"><div class="av amber">FA</div><div class="ir-info"><div class="ir-name">Ferreyra, Ana</div><div class="ir-sub">Galeno · Pediatría</div></div><div class="ir-end"><span class="badge badge-gray">Esperando</span><div class="ir-time">09:21</div></div></div>
+            <div class="item-row"><div class="av">RM</div><div class="ir-info"><div class="ir-name">Rodríguez, M. (espontáneo)</div><div class="ir-sub">Sin cobertura · Guardia</div></div><div class="ir-end"><span class="badge badge-red">Urgente</span><div class="ir-time">09:35</div></div></div>
+          </div>
+          <div class="card-foot" style="display:flex;gap:8px;"><button class="action-btn sm primary" onclick="openModal('modal-checkin')">Registrar llegada</button><button class="action-btn sm">Llamar paciente</button></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Verificación de cobertura</span></div>
+          <div class="card-body">
+            <div class="form-row c2">
+              <div class="form-group"><label class="form-label">DNI / Documento</label><input class="form-input" type="text" value="28.541.902"></div>
+              <div class="form-group"><label class="form-label">Obra social</label><select class="form-input"><option>OSDE</option><option>Swiss Medical</option><option>Galeno</option><option>PAMI</option><option>Particular</option></select></div>
+            </div>
+            <div class="form-row c2">
+              <div class="form-group"><label class="form-label">Nº de afiliado</label><input class="form-input" type="text" value="1-4502-8811-00"></div>
+              <div class="form-group"><label class="form-label">Plan</label><input class="form-input" type="text" value="210 Clásico"></div>
+            </div>
+            <button class="action-btn primary" style="width:100%;margin-top:4px;">Verificar afiliación en tiempo real</button>
+            <div class="alert success" style="margin-top:10px;">✓ Afiliado activo · Plan 210 · Carencias: ninguna · Co-seguro: $800</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TURNOS -->
+    <div class="page" id="page-turnos">
+      <div class="page-header"><h1>Gestión de Turnos</h1><p>Agenda diaria y programación de citas médicas</p></div>
+      <div class="g21">
+        <div class="card">
+          <div class="card-head"><span class="card-title">Agenda · Miércoles 22 abr</span>
+            <div style="display:flex;gap:6px;">
+              <button class="action-btn sm">◁ Ant.</button>
+              <button class="action-btn sm">Sig. ▷</button>
+              <button class="action-btn sm primary" onclick="openModal('modal-nuevo-turno')">+ Nuevo turno</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="tbl">
+              <thead><tr><th>Hora</th><th>Paciente</th><th>Especialidad</th><th>Médico</th><th>Cobertura</th><th>Estado</th><th></th></tr></thead>
+              <tbody>
+                <tr><td class="td-name">08:30</td><td>Pérez, Juan</td><td>Clínica</td><td>Dr. Suárez</td><td>OSDE</td><td><span class="badge badge-green">Atendido</span></td><td><button class="action-btn sm">Ver</button></td></tr>
+                <tr><td class="td-name">09:00</td><td>García, Marta</td><td>Cardiología</td><td>Dr. Suárez</td><td>OSDE</td><td><span class="badge badge-amber">En curso</span></td><td><button class="action-btn sm">Ver</button></td></tr>
+                <tr><td class="td-name">09:15</td><td>López, Carlos</td><td>Clínica</td><td>Dra. Romero</td><td>Swiss Med.</td><td><span class="badge badge-blue">En sala</span></td><td><button class="action-btn sm">Ver</button></td></tr>
+                <tr><td class="td-name">09:30</td><td>Ferreyra, Ana</td><td>Pediatría</td><td>Dra. Romero</td><td>Galeno</td><td><span class="badge badge-gray">Confirmado</span></td><td><button class="action-btn sm">Ver</button></td></tr>
+                <tr><td class="td-name">10:00</td><td>Martínez, R.</td><td>Traumatología</td><td>Dr. Vega</td><td>PAMI</td><td><span class="badge badge-gray">Confirmado</span></td><td><button class="action-btn sm">Ver</button></td></tr>
+                <tr><td class="td-name">10:30</td><td>–</td><td>–</td><td>Dr. Suárez</td><td>–</td><td><span class="badge badge-green">Disponible</span></td><td><button class="action-btn sm primary" onclick="openModal('modal-nuevo-turno')">Asignar</button></td></tr>
+                <tr><td class="td-name">11:00</td><td>Sosa, Patricia</td><td>Ginecología</td><td>Dra. Torres</td><td>Particular</td><td><span class="badge badge-red">Cancelado</span></td><td><button class="action-btn sm">Ver</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Recordatorios automáticos</span></div>
+          <div class="card-body">
+            <div class="alert info" style="margin-bottom:12px;">📱 WhatsApp/SMS enviado automáticamente 24h y 2h antes de cada turno.</div>
+            <div class="item-row"><div class="dot green"></div><div class="ir-info"><div class="ir-name">Ferreyra, Ana</div><div class="ir-sub">WhatsApp enviado · hace 2h</div></div><span class="badge badge-green">Entregado</span></div>
+            <div class="item-row"><div class="dot green"></div><div class="ir-info"><div class="ir-name">Martínez, R.</div><div class="ir-sub">SMS enviado · hace 45 min</div></div><span class="badge badge-green">Entregado</span></div>
+            <div class="item-row"><div class="dot amber"></div><div class="ir-info"><div class="ir-name">Sosa, Patricia</div><div class="ir-sub">Sin respuesta · canceló</div></div><span class="badge badge-red">Canceló</span></div>
+            <div class="item-row"><div class="dot blue"></div><div class="ir-info"><div class="ir-name">Rodríguez, M. (lista espera)</div><div class="ir-sub">Notificado por vacante de Sosa</div></div><span class="badge badge-blue">Esperando</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACIENTES -->
+    <div class="page" id="page-pacientes">
+      <div class="page-header"><h1>Gestión de Pacientes</h1><p>Registro, historial clínico y trazabilidad de accesos</p></div>
+      <div class="g21">
+        <div class="card">
+          <div class="card-head"><span class="card-title">Listado de pacientes</span><button class="action-btn sm primary" onclick="openModal('modal-nuevo-paciente')">+ Nuevo</button></div>
+          <div class="card-body">
+            <table class="tbl">
+              <thead><tr><th>Paciente</th><th>DNI</th><th>Cobertura</th><th>Última visita</th><th>Estado</th><th></th></tr></thead>
+              <tbody>
+                <tr><td><div class="av-row"><div class="av">GM</div><span class="td-name">García, Marta</span></div></td><td style="font-family:var(--mono);font-size:11.5px;">22.113.440</td><td>OSDE 210</td><td>Hoy</td><td><span class="badge badge-green">Activo</span></td><td><button class="action-btn sm" onclick="openModal('modal-paciente-detalle')">Historia</button></td></tr>
+                <tr><td><div class="av-row"><div class="av teal">LC</div><span class="td-name">López, Carlos</span></div></td><td style="font-family:var(--mono);font-size:11.5px;">28.541.902</td><td>Swiss Med.</td><td>Hoy</td><td><span class="badge badge-green">Activo</span></td><td><button class="action-btn sm" onclick="openModal('modal-paciente-detalle')">Historia</button></td></tr>
+                <tr><td><div class="av-row"><div class="av amber">FA</div><span class="td-name">Ferreyra, Ana</span></div></td><td style="font-family:var(--mono);font-size:11.5px;">35.780.211</td><td>Galeno</td><td>15/04</td><td><span class="badge badge-green">Activo</span></td><td><button class="action-btn sm" onclick="openModal('modal-paciente-detalle')">Historia</button></td></tr>
+                <tr><td><div class="av-row"><div class="av">RP</div><span class="td-name">Rodríguez, Patricio</span></div></td><td style="font-family:var(--mono);font-size:11.5px;">18.992.007</td><td>PAMI</td><td>02/04</td><td><span class="badge badge-gray">Inactivo</span></td><td><button class="action-btn sm" onclick="openModal('modal-paciente-detalle')">Historia</button></td></tr>
+                <tr><td><div class="av-row"><div class="av navy">SP</div><span class="td-name">Sosa, Patricia</span></div></td><td style="font-family:var(--mono);font-size:11.5px;">30.445.881</td><td>Particular</td><td>10/03</td><td><span class="badge badge-amber">Seguimiento</span></td><td><button class="action-btn sm" onclick="openModal('modal-paciente-detalle')">Historia</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Accesos recientes al historial</span><span class="badge badge-gray">Trazabilidad</span></div>
+          <div class="card-body">
+            <div class="audit-item"><div class="audit-ico" style="background:var(--blue-light);color:var(--blue-mid);">VER</div><div><div class="audit-text"><b>Dra. Romero</b> · Historia de López, Carlos</div><div class="audit-meta">09:09 · Consultorio 2 · IP 192.168.1.14</div></div></div>
+            <div class="audit-item"><div class="audit-ico" style="background:var(--amber-light);color:var(--amber);">MOD</div><div><div class="audit-text"><b>Enf. Pérez</b> · Signos vitales García, Marta</div><div class="audit-meta">08:58 · Enfermería · IP 192.168.1.8</div></div></div>
+            <div class="audit-item"><div class="audit-ico" style="background:var(--blue-light);color:var(--blue-mid);">VER</div><div><div class="audit-text"><b>Dr. Suárez</b> · Resultados lab. García, M.</div><div class="audit-meta">08:55 · Consultorio 1 · IP 192.168.1.12</div></div></div>
+            <div class="audit-item"><div class="audit-ico" style="background:var(--teal-light);color:var(--teal);">EXP</div><div><div class="audit-text"><b>Dra. Romero</b> · Exportó PDF Sosa, Patricia</div><div class="audit-meta">08:20 · Consultorio 2 · IP 192.168.1.14</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDICO -->
+    <div class="page" id="page-medico">
+      <div class="page-header"><h1>Panel Médico</h1><p>Consulta activa, evolución clínica y prescripción digital</p></div>
+      <div class="g21">
+        <div>
+          <div class="card" style="margin-bottom:14px;">
+            <div class="card-head"><span class="card-title">Consulta activa · López, Carlos</span><div style="display:flex;gap:6px;"><button class="action-btn sm success">Finalizar consulta</button><button class="action-btn sm danger">Derivar</button></div></div>
+            <div class="card-body">
+              <div class="tabs">
+                <div class="tab active" onclick="showTab('med', 'evolucion', this)">Evolución</div>
+                <div class="tab" onclick="showTab('med', 'antecedentes', this)">Antecedentes</div>
+                <div class="tab" onclick="showTab('med', 'prescripcion', this)">Receta digital</div>
+                <div class="tab" onclick="showTab('med', 'laboratorio', this)">Laboratorio</div>
+              </div>
+              <div class="tab-panel active" id="med-evolucion">
+                <div class="form-row c2">
+                  <div class="form-group"><label class="form-label">Motivo de consulta</label><input class="form-input" type="text" value="Dolor precordial leve, disnea de esfuerzo"></div>
+                  <div class="form-group"><label class="form-label">Diagnóstico presuntivo</label><input class="form-input" type="text" value="HTA grado I, descartar cardiopatía isquémica"></div>
+                </div>
+                <div class="form-row c3">
+                  <div class="form-group"><label class="form-label">TA</label><input class="form-input" type="text" value="148/92 mmHg"></div>
+                  <div class="form-group"><label class="form-label">FC</label><input class="form-input" type="text" value="88 lpm"></div>
+                  <div class="form-group"><label class="form-label">SpO2</label><input class="form-input" type="text" value="97%"></div>
+                </div>
+                <div class="form-group"><label class="form-label">Evolución / notas</label><textarea class="form-input" rows="3" style="resize:vertical;">Paciente masculino 45 años, refiere episodios de dolor precordial leve con esfuerzo físico moderado. No irradiación. Sin fiebre. Solicito ECG y laboratorio cardíaco urgente.</textarea></div>
+                <div style="display:flex;gap:8px;margin-top:10px;"><button class="action-btn primary">Guardar evolución</button><button class="action-btn">Solicitar estudio</button></div>
+              </div>
+              <div class="tab-panel" id="med-antecedentes">
+                <div class="form-row c2">
+                  <div class="form-group"><label class="form-label">Patologías conocidas</label><input class="form-input" value="HTA · Dislipemia"></div>
+                  <div class="form-group"><label class="form-label">Alergias</label><input class="form-input" value="Penicilina (urticaria)"></div>
+                </div>
+                <div class="form-row c2">
+                  <div class="form-group"><label class="form-label">Medicación habitual</label><input class="form-input" value="Enalapril 10mg · Atorvastatina 20mg"></div>
+                  <div class="form-group"><label class="form-label">Cirugías previas</label><input class="form-input" value="Apendicectomía (2010)"></div>
+                </div>
+              </div>
+              <div class="tab-panel" id="med-prescripcion">
+                <div class="alergia-banner show">
+                  <span class="ab2-ico">⚠️</span>
+                  <div><b style="font-size:13px;">Alerta de alergia registrada: PENICILINA</b><div style="font-size:11.5px;margin-top:2px;color:#B91C1C;">Verificar que ningún medicamento prescripto contenga penicilinas o cefalosporinas.</div></div>
+                </div>
+                <div class="alert warn" style="margin-bottom:10px;">⚠ Revisá la alerta de alergia antes de prescribir.</div>
+                <div class="form-row c2">
+                  <div class="form-group"><label class="form-label">Medicamento</label><input class="form-input" value="Enalapril"></div>
+                  <div class="form-group"><label class="form-label">Dosis</label><input class="form-input" value="10mg cada 12hs"></div>
+                </div>
+                <div class="form-row c2">
+                  <div class="form-group"><label class="form-label">Duración</label><input class="form-input" value="30 días"></div>
+                  <div class="form-group"><label class="form-label">Cantidad</label><input class="form-input" value="60 comprimidos"></div>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:10px;align-items:center;">
+                  <button class="action-btn primary">Firmar con QR digital</button>
+                  <button class="action-btn">Agregar otro fármaco</button>
+                  <div class="qr-stub"><div class="qr-inner"></div></div>
+                  <div style="font-size:11px;color:var(--text-muted);">Código QR<br>de verificación</div>
+                </div>
+              </div>
+              <div class="tab-panel" id="med-laboratorio">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                  <span style="font-size:12.5px;font-weight:500;color:var(--text);">Estudios solicitados</span>
+                  <button class="action-btn sm primary">+ Solicitar estudio</button>
+                </div>
+                <div class="item-row"><div class="dot amber"></div><div class="ir-info"><div class="ir-name">Hemograma completo + Troponina I</div><div class="ir-sub">Solicitado 09:12 · Lab. Central · HL7 enviado</div></div><span class="badge badge-amber">Pendiente</span></div>
+                <div class="item-row"><div class="dot green"></div><div class="ir-info"><div class="ir-name">Perfil lipídico</div><div class="ir-sub">Resultado recibido · 08:40</div></div><span class="badge badge-green">Recibido</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom:14px;">
+            <div class="card-head"><span class="card-title">Mis turnos de hoy</span></div>
+            <div class="card-body">
+              <div class="item-row"><div class="dot green"></div><div class="ir-info"><div class="ir-name">García, Marta</div><div class="ir-sub">09:00 · Clínica Médica</div></div><span class="badge badge-green">Atendido</span></div>
+              <div class="item-row"><div class="dot amber"></div><div class="ir-info"><div class="ir-name">López, Carlos</div><div class="ir-sub">09:15 · Cardiología</div></div><span class="badge badge-amber">En curso</span></div>
+              <div class="item-row"><div class="dot gray"></div><div class="ir-info"><div class="ir-name">Ferreyra, Ana</div><div class="ir-sub">09:30 · Pediatría</div></div><span class="badge badge-gray">Próximo</span></div>
+              <div class="item-row"><div class="dot gray"></div><div class="ir-info"><div class="ir-name">Martínez, R.</div><div class="ir-sub">10:00 · Traumatología</div></div><span class="badge badge-gray">Próximo</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><span class="card-title">Timeline clínico</span></div>
+            <div class="card-body">
+              <div class="timeline">
+                <div class="tl-item"><div class="tl-ico" style="background:var(--amber-light);">⊘</div><div class="tl-body"><div class="tl-title">Laboratorio solicitado</div><div class="tl-sub">Troponina I · enviado al lab.</div><div class="tl-date">hoy 09:12</div></div></div>
+                <div class="tl-item"><div class="tl-ico" style="background:var(--blue-light);">✎</div><div class="tl-body"><div class="tl-title">Evolución registrada</div><div class="tl-sub">Consulta Dra. Romero</div><div class="tl-date">hoy 09:09</div></div></div>
+                <div class="tl-item"><div class="tl-ico" style="background:var(--green-light);">✚</div><div class="tl-body"><div class="tl-title">Check-in registrado</div><div class="tl-sub">Kiosco sala de espera</div><div class="tl-date">hoy 09:08</div></div></div>
+                <div class="tl-item"><div class="tl-ico" style="background:var(--border-light);">◷</div><div class="tl-body"><div class="tl-title">Visita anterior</div><div class="tl-sub">HTA control · Dr. Suárez</div><div class="tl-date">15/04/2026</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERNACION -->
+    <div class="page" id="page-internacion">
+      <div class="page-header"><h1>Internación y Camas</h1><p>Estado en tiempo real de camas por sector</p></div>
+      <div class="g3" style="margin-bottom:14px;">
+        <div class="metric"><div class="metric-label">Camas totales</div><div class="metric-value">58</div><div class="metric-sub neu">4 sectores</div></div>
+        <div class="metric"><div class="metric-label">Ocupadas</div><div class="metric-value">38</div><div class="metric-sub warn">65%</div></div>
+        <div class="metric"><div class="metric-label">Disponibles</div><div class="metric-value">14</div><div class="metric-sub up">Para admisión</div></div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-head"><span class="card-title">Clínica Médica · Piso 2</span><div style="display:flex;gap:4px;"><span class="badge badge-green">● Libre</span><span class="badge badge-blue">● Ocupada</span><span class="badge badge-amber">● Limpieza</span><span class="badge badge-red">● Reservada</span></div></div>
+          <div class="card-body">
+            <div class="bed-grid">
+              <div class="bed occ"><div class="bed-num">201</div><div class="bed-label">Ocupada</div></div>
+              <div class="bed occ"><div class="bed-num">202</div><div class="bed-label">Ocupada</div></div>
+              <div class="bed free"><div class="bed-num">203</div><div class="bed-label">Libre</div></div>
+              <div class="bed occ"><div class="bed-num">204</div><div class="bed-label">Ocupada</div></div>
+              <div class="bed clean"><div class="bed-num">205</div><div class="bed-label">Limpieza</div></div>
+              <div class="bed free"><div class="bed-num">206</div><div class="bed-label">Libre</div></div>
+              <div class="bed occ"><div class="bed-num">207</div><div class="bed-label">Ocupada</div></div>
+              <div class="bed res"><div class="bed-num">208</div><div class="bed-label">Reservada</div></div>
+              <div class="bed free"><div class="bed-num">209</div><div class="bed-label">Libre</div></div>
+              <div class="bed occ"><div class="bed-num">210</div><div class="bed-label">Ocupada</div></div>
+              <div class="bed occ"><div class="bed-num">211</div><div class="bed-label">Ocupada</div></div>
+              <div class="bed free"><div class="bed-num">212</div><div class="bed-label">Libre</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">UCI · Piso 4</span><span class="badge badge-red">Capacidad máxima</span></div>
+          <div class="card-body">
+            <div class="bed-grid">
+              <div class="bed occ"><div class="bed-num">401</div><div class="bed-label">Ocupada</div></div>
+              <div class="bed occ"><div class="bed-num">402</div><div class="bed-label">Ocupada</div></div>
+              <div class="bed occ"><div class="bed-num">403</div><div class="bed-label">Ocupada</div></div>
+              <div class="bed occ"><div class="bed-num">404</div><div class="bed-label">Ocupada</div></div>
+            </div>
+            <div class="alert danger" style="margin-top:12px;">⚠ UCI al 100%. Derivar nuevos ingresos a Clínica Médica o sector de observación.</div>
+            <div class="divider"></div>
+            <div class="item-row"><div class="av navy">PM</div><div class="ir-info"><div class="ir-name">Pérez, Miguel · Cama 401</div><div class="ir-sub">Ingreso: 20/04 · Diagnóstico: IAM</div></div><span class="badge badge-red">Crítico</span></div>
+            <div class="item-row"><div class="av">RV</div><div class="ir-info"><div class="ir-name">Ríos, Valentina · Cama 402</div><div class="ir-sub">Ingreso: 21/04 · Diagnóstico: ACV</div></div><span class="badge badge-amber">Estable</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LABORATORIO -->
+    <div class="page" id="page-laboratorio">
+      <div class="page-header"><h1>Laboratorio</h1><p>Órdenes enviadas, resultados recibidos e integración HL7</p></div>
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-head"><span class="card-title">Órdenes de laboratorio · hoy</span><span class="badge badge-teal">HL7 FHIR activo</span></div>
+        <div class="card-body">
+          <table class="tbl">
+            <thead><tr><th>Paciente</th><th>Estudio</th><th>Médico</th><th>Enviado</th><th>Estado</th><th>Resultado</th></tr></thead>
+            <tbody>
+              <tr><td class="td-name">García, Marta</td><td>Hemograma + Glucemia</td><td>Dr. Suárez</td><td>08:40</td><td><span class="badge badge-green">Recibido</span></td><td><button class="action-btn sm">Ver PDF</button></td></tr>
+              <tr><td class="td-name">López, Carlos</td><td>Troponina I + Lipidograma</td><td>Dra. Romero</td><td>09:12</td><td><span class="badge badge-amber">Procesando</span></td><td>–</td></tr>
+              <tr><td class="td-name">Ferreyra, Ana</td><td>Orina completa</td><td>Dra. Romero</td><td>09:20</td><td><span class="badge badge-amber">Pendiente</span></td><td>–</td></tr>
+              <tr><td class="td-name">Martínez, R.</td><td>Rx Rodilla izq. + ASTO</td><td>Dr. Vega</td><td>08:55</td><td><span class="badge badge-green">Recibido</span></td><td><button class="action-btn sm">Ver DICOM</button></td></tr>
+              <tr><td class="td-name">Sosa, Patricia</td><td>PAP + Colpocitología</td><td>Dra. Torres</td><td>07:30</td><td><span class="badge badge-green">Recibido</span></td><td><button class="action-btn sm">Ver PDF</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUDITORIA -->
+    <div class="page" id="page-auditoria">
+      <div class="page-header"><h1>Registro de Auditoría</h1><p>Acceso exclusivo administradores · Registros inmutables</p></div>
+      <div class="alert danger" style="margin-bottom:14px;">🔒 Este módulo es de solo lectura. Ningún registro puede modificarse ni eliminarse. Almacenamiento redundante activado.</div>
+      <div class="card">
+        <div class="card-head"><span class="card-title">Log de accesos · Miércoles 22 abr</span>
+          <div style="display:flex;gap:6px;">
+            <select class="form-input" style="padding:5px 10px;font-size:12px;width:auto;">
+              <option>Todos los eventos</option><option>Solo lecturas</option><option>Solo modificaciones</option><option>Solo logins</option>
+            </select>
+            <button class="action-btn sm">Exportar CSV</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="tbl">
+            <thead><tr><th>Hora</th><th>Usuario</th><th>Rol</th><th>Acción</th><th>Paciente</th><th>Dispositivo</th><th>IP</th></tr></thead>
+            <tbody>
+              <tr><td style="font-family:var(--mono);font-size:11px;">09:12</td><td class="td-name">Dra. Romero</td><td><span class="badge badge-blue">Médico</span></td><td><span class="badge badge-teal">SOLICITUD LAB</span></td><td>López, Carlos</td><td>Tablet-Cons-2</td><td style="font-family:var(--mono);font-size:11px;">192.168.1.14</td></tr>
+              <tr><td style="font-family:var(--mono);font-size:11px;">09:09</td><td class="td-name">Dra. Romero</td><td><span class="badge badge-blue">Médico</span></td><td><span class="badge badge-blue">LECTURA</span></td><td>López, Carlos</td><td>Tablet-Cons-2</td><td style="font-family:var(--mono);font-size:11px;">192.168.1.14</td></tr>
+              <tr><td style="font-family:var(--mono);font-size:11px;">08:58</td><td class="td-name">Enf. Pérez</td><td><span class="badge badge-teal">Enfermería</span></td><td><span class="badge badge-amber">MODIFICACIÓN</span></td><td>García, Marta</td><td>PC-Enfermería-1</td><td style="font-family:var(--mono);font-size:11px;">192.168.1.8</td></tr>
+              <tr><td style="font-family:var(--mono);font-size:11px;">08:55</td><td class="td-name">Dr. Suárez</td><td><span class="badge badge-blue">Médico</span></td><td><span class="badge badge-blue">LECTURA</span></td><td>García, Marta</td><td>Tablet-Cons-1</td><td style="font-family:var(--mono);font-size:11px;">192.168.1.12</td></tr>
+              <tr><td style="font-family:var(--mono);font-size:11px;">08:40</td><td class="td-name">Dr. Suárez</td><td><span class="badge badge-blue">Médico</span></td><td><span class="badge badge-teal">SOLICITUD LAB</span></td><td>García, Marta</td><td>Tablet-Cons-1</td><td style="font-family:var(--mono);font-size:11px;">192.168.1.12</td></tr>
+              <tr><td style="font-family:var(--mono);font-size:11px;">08:30</td><td class="td-name">Recep. Díaz</td><td><span class="badge badge-gray">Recepción</span></td><td><span class="badge badge-green">LOGIN</span></td><td>–</td><td>PC-Recepción</td><td style="font-family:var(--mono);font-size:11px;">192.168.1.3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTEROP -->
+    <div class="page" id="page-interop">
+      <div class="page-header"><h1>Interoperabilidad</h1><p>Conexiones con sistemas externos y estado de integraciones</p></div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-head"><span class="card-title">Estado de conexiones</span></div>
+          <div class="card-body">
+            <div class="status-row"><div class="dot green"></div><div style="flex:1;"><div class="sr-label">Laboratorio Central</div><div class="sr-sub">Protocolo HL7 FHIR R4 · Última sync: hace 3 min</div></div><span class="badge badge-green">Activo</span></div>
+            <div class="status-row"><div class="dot green"></div><div style="flex:1;"><div class="sr-label">OSDE / Swiss Medical</div><div class="sr-sub">API REST · Verificación afiliación en tiempo real</div></div><span class="badge badge-green">Activo</span></div>
+            <div class="status-row"><div class="dot green"></div><div style="flex:1;"><div class="sr-label">PAMI</div><div class="sr-sub">WebService PAMI · credenciales vigentes</div></div><span class="badge badge-green">Activo</span></div>
+            <div class="status-row"><div class="dot amber"></div><div style="flex:1;"><div class="sr-label">Imágenes DICOM (RX / ECO)</div><div class="sr-sub">Reconectando… timeout en última respuesta</div></div><span class="badge badge-amber">Intermitente</span></div>
+            <div class="status-row"><div class="dot green"></div><div style="flex:1;"><div class="sr-label">WhatsApp / SMS (Twilio)</div><div class="sr-sub">Recordatorios automáticos activos</div></div><span class="badge badge-green">Activo</span></div>
+            <div class="status-row"><div class="dot blue"></div><div style="flex:1;"><div class="sr-label">Firma digital (AFIP / RENAPER)</div><div class="sr-sub">Validación DNI y firma electrónica</div></div><span class="badge badge-blue">Configurando</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Exportaciones disponibles</span></div>
+          <div class="card-body">
+            <div class="item-row"><div style="font-size:18px;">📄</div><div class="ir-info"><div class="ir-name">Historia clínica completa</div><div class="ir-sub">Formato PDF con firma digital</div></div><button class="action-btn sm primary">Exportar</button></div>
+            <div class="item-row"><div style="font-size:18px;">⚙</div><div class="ir-info"><div class="ir-name">Datos clínicos estructurados</div><div class="ir-sub">JSON / HL7 FHIR R4</div></div><button class="action-btn sm">Exportar</button></div>
+            <div class="item-row"><div style="font-size:18px;">📊</div><div class="ir-info"><div class="ir-name">Estadísticas del período</div><div class="ir-sub">Excel / CSV con filtros</div></div><button class="action-btn sm">Exportar</button></div>
+            <div class="item-row"><div style="font-size:18px;">🔬</div><div class="ir-info"><div class="ir-name">Órdenes de laboratorio</div><div class="ir-sub">Envío directo HL7 a laboratorio</div></div><button class="action-btn sm">Enviar</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESTADISTICAS -->
+    <div class="page" id="page-estadisticas">
+      <div class="page-header"><h1>Estadísticas y Reportes</h1><p>Panel de administración · datos operativos y clínicos</p></div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-label">Consultas (mes)</div><div class="metric-value">842</div><div class="metric-sub up">+12% vs marzo</div></div>
+        <div class="metric"><div class="metric-label">Asistencia turnos</div><div class="metric-value">87%</div><div class="metric-sub up">↑ 3% vs mes ant.</div></div>
+        <div class="metric"><div class="metric-label">Tiempo espera prom.</div><div class="metric-value">11'</div><div class="metric-sub warn">Meta: 10 min</div></div>
+        <div class="metric"><div class="metric-label">Ocupación camas</div><div class="metric-value">65%</div><div class="metric-sub neu">UCI: 100%</div></div>
+        <div class="metric"><div class="metric-label">NPS pacientes</div><div class="metric-value">78</div><div class="metric-sub up">↑ 5 pts vs feb</div></div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-head"><span class="card-title">Rendimiento por especialidad</span></div>
+          <div class="card-body">
+            <div class="prog-wrap"><div class="prog-head"><span>Clínica Médica</span><span>234 consultas</span></div><div class="prog-track"><div class="prog-fill" style="width:90%;background:var(--blue-mid);"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Pediatría</span><span>180 consultas</span></div><div class="prog-track"><div class="prog-fill" style="width:70%;background:var(--teal);"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Cardiología</span><span>120 consultas</span></div><div class="prog-track"><div class="prog-fill" style="width:46%;background:var(--amber);"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Traumatología</span><span>98 consultas</span></div><div class="prog-track"><div class="prog-fill" style="width:38%;background:#7F77DD;"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Ginecología</span><span>87 consultas</span></div><div class="prog-track"><div class="prog-fill" style="width:33%;background:var(--red);"></div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Ausentismo y lista de espera</span></div>
+          <div class="card-body">
+            <div class="prog-wrap"><div class="prog-head"><span>Ausentismo general</span><span>13%</span></div><div class="prog-track"><div class="prog-fill" style="width:13%;background:var(--red);"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Reducción con recordatorios SMS</span><span>-38%</span></div><div class="prog-track"><div class="prog-fill" style="width:60%;background:var(--green);"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Check-in por kiosco</span><span>61%</span></div><div class="prog-track"><div class="prog-fill" style="width:61%;background:#7F77DD;"></div></div></div>
+            <div class="prog-wrap"><div class="prog-head"><span>Vacantes reasignadas (lista espera)</span><span>82%</span></div><div class="prog-track"><div class="prog-fill" style="width:82%;background:var(--teal);"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- MODAL: NUEVO PACIENTE -->
+<div class="modal-overlay" id="modal-nuevo-paciente">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Registro de nuevo paciente</span><button class="modal-close" onclick="closeModal('modal-nuevo-paciente')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-row c2"><div class="form-group"><label class="form-label">Apellido</label><input class="form-input" placeholder="García"></div><div class="form-group"><label class="form-label">Nombre/s</label><input class="form-input" placeholder="Marta Elena"></div></div>
+      <div class="form-row c3"><div class="form-group"><label class="form-label">DNI</label><input class="form-input" placeholder="00.000.000"></div><div class="form-group"><label class="form-label">Fecha nacimiento</label><input class="form-input" type="date"></div><div class="form-group"><label class="form-label">Sexo</label><select class="form-input"><option>Femenino</option><option>Masculino</option><option>Otro</option></select></div></div>
+      <div class="form-row c2"><div class="form-group"><label class="form-label">Obra social</label><select class="form-input"><option>OSDE</option><option>Swiss Medical</option><option>PAMI</option><option>Galeno</option><option>Particular</option></select></div><div class="form-group"><label class="form-label">Nº afiliado</label><input class="form-input" placeholder="0-0000-0000-00"></div></div>
+      <div class="form-row c2"><div class="form-group"><label class="form-label">Teléfono (WhatsApp)</label><input class="form-input" placeholder="+54 9 3755 000000"></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" placeholder="paciente@email.com"></div></div>
+      <div class="form-group"><label class="form-label">Alergias conocidas</label><input class="form-input" placeholder="Ej: Penicilina, AINES…"></div>
+    </div>
+    <div class="modal-foot"><button class="action-btn" onclick="closeModal('modal-nuevo-paciente')">Cancelar</button><button class="action-btn primary">Registrar paciente</button></div>
+  </div>
+</div>
+
+<!-- MODAL: NUEVO TURNO -->
+<div class="modal-overlay" id="modal-nuevo-turno">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Asignar nuevo turno</span><button class="modal-close" onclick="closeModal('modal-nuevo-turno')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-row c2"><div class="form-group"><label class="form-label">Paciente (DNI o nombre)</label><input class="form-input" placeholder="Buscar…"></div><div class="form-group"><label class="form-label">Especialidad</label><select class="form-input"><option>Clínica Médica</option><option>Cardiología</option><option>Pediatría</option><option>Traumatología</option><option>Ginecología</option></select></div></div>
+      <div class="form-row c2"><div class="form-group"><label class="form-label">Médico</label><select class="form-input"><option>Dra. Romero</option><option>Dr. Suárez</option><option>Dr. Vega</option><option>Dra. Torres</option></select></div><div class="form-group"><label class="form-label">Fecha y hora</label><input class="form-input" type="datetime-local"></div></div>
+      <div class="form-group"><label class="form-label">Motivo de consulta</label><input class="form-input" placeholder="Opcional"></div>
+      <div class="alert info" style="margin-top:10px;">📱 Se enviará recordatorio automático 24h y 2h antes del turno.</div>
+    </div>
+    <div class="modal-foot"><button class="action-btn" onclick="closeModal('modal-nuevo-turno')">Cancelar</button><button class="action-btn primary">Confirmar turno</button></div>
+  </div>
+</div>
+
+<!-- MODAL: DETALLE PACIENTE -->
+<div class="modal-overlay" id="modal-paciente-detalle">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Historia Clínica · López, Carlos M.</span><button class="modal-close" onclick="closeModal('modal-paciente-detalle')">✕</button></div>
+    <div class="modal-body">
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:center;">
+        <div class="av teal" style="width:44px;height:44px;font-size:15px;">LC</div>
+        <div><div style="font-size:15px;font-weight:600;color:var(--navy);">López, Carlos M.</div><div style="font-size:12px;color:var(--text-muted);">DNI 28.541.902 · 45 años · Swiss Medical 310</div></div>
+        <div style="margin-left:auto;display:flex;gap:6px;"><button class="action-btn sm">Exportar PDF</button><button class="action-btn sm primary">Nueva evolución</button></div>
+      </div>
+      <div class="tabs">
+        <div class="tab active" onclick="showTab('pac', 'resumen', this)">Resumen</div>
+        <div class="tab" onclick="showTab('pac', 'evoluciones', this)">Evoluciones</div>
+        <div class="tab" onclick="showTab('pac', 'accesos', this)">Accesos</div>
+      </div>
+      <div class="tab-panel active" id="pac-resumen">
+        <div class="form-row c3">
+          <div class="form-group"><label class="form-label">Patologías</label><input class="form-input" value="HTA · Dislipemia" readonly></div>
+          <div class="form-group"><label class="form-label">Alergias</label><input class="form-input" value="Penicilina" readonly style="background:var(--red-light);color:var(--red);"></div>
+          <div class="form-group"><label class="form-label">Medicación</label><input class="form-input" value="Enalapril · Atorvastatina" readonly></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="pac-evoluciones">
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-ico" style="background:var(--blue-light);">✎</div><div class="tl-body"><div class="tl-title">Consulta Cardiología · Dra. Romero</div><div class="tl-sub">Dolor precordial leve. Solicita Troponina I + ECG</div><div class="tl-date">hoy 09:09</div></div></div>
+          <div class="tl-item"><div class="tl-ico" style="background:var(--border-light);">✎</div><div class="tl-body"><div class="tl-title">Control HTA · Dr. Suárez</div><div class="tl-sub">TA 146/90. Ajuste dosis Enalapril a 10mg c/12hs</div><div class="tl-date">15/04/2026</div></div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="pac-accesos">
+        <div class="audit-item"><div class="audit-ico" style="background:var(--blue-light);color:var(--blue-mid);">VER</div><div><div class="audit-text"><b>Dra. Romero</b> consultó historia clínica completa</div><div class="audit-meta">hoy 09:09 · Tablet-Consultorio-2 · 192.168.1.14</div></div></div>
+        <div class="audit-item"><div class="audit-ico" style="background:var(--blue-light);color:var(--blue-mid);">VER</div><div><div class="audit-text"><b>Dr. Suárez</b> consultó historia clínica</div><div class="audit-meta">15/04 14:22 · Tablet-Consultorio-1 · 192.168.1.12</div></div></div>
+        <div class="audit-item"><div class="audit-ico" style="background:var(--teal-light);color:var(--teal);">EXP</div><div><div class="audit-text"><b>Recep. Díaz</b> exportó datos básicos para admisión</div><div class="audit-meta">22/04 08:31 · PC-Recepción · 192.168.1.3</div></div></div>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="action-btn" onclick="closeModal('modal-paciente-detalle')">Cerrar</button></div>
+  </div>
+</div>
+
+<!-- MODAL: CHECK-IN -->
+<div class="modal-overlay" id="modal-checkin">
+  <div class="modal" style="max-width:400px;">
+    <div class="modal-head"><span class="modal-title">Registrar llegada manual</span><button class="modal-close" onclick="closeModal('modal-checkin')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group" style="margin-bottom:10px;"><label class="form-label">Buscar paciente</label><input class="form-input" placeholder="Nombre o DNI…"></div>
+      <div class="alert info">El sistema notificará automáticamente al médico asignado al confirmar el check-in.</div>
+    </div>
+    <div class="modal-foot"><button class="action-btn" onclick="closeModal('modal-checkin')">Cancelar</button><button class="action-btn primary">Confirmar llegada</button></div>
+  </div>
+</div>
+
+<!-- NOTIFICATION PANEL OVERLAY -->
+<div class="notif-overlay" id="notif-overlay" onclick="closeNotifPanel()"></div>
+
+<!-- NOTIFICATION PANEL -->
+<div class="notif-panel" id="notif-panel">
+  <div class="notif-panel-head">
+    <span class="notif-panel-title">Notificaciones</span>
+    <div class="notif-panel-actions">
+      <button class="notif-mark-all" onclick="markAllRead()">Marcar todas como leídas</button>
+      <button class="notif-close" onclick="closeNotifPanel()">✕</button>
+    </div>
+  </div>
+  <div class="notif-body">
+    <!-- URGENTES -->
+    <div class="notif-group-label">🔴 Urgentes</div>
+    <div class="notif-item unread-red" onclick="handleNotif(this, 'internacion')">
+      <div class="ni-ico" style="background:var(--red-light);">🛏</div>
+      <div>
+        <div class="ni-text"><b>UCI al 100%</b> — No hay camas disponibles. Se requiere derivación inmediata.</div>
+        <div class="ni-time">hace 2 min</div>
+      </div>
+    </div>
+    <div class="notif-item unread-red" onclick="handleNotif(this, 'medico')">
+      <div class="ni-ico" style="background:var(--red-light);">⚠️</div>
+      <div>
+        <div class="ni-text"><b>Alerta de alergia</b> — López, Carlos: Penicilina. Verificar prescripción activa.</div>
+        <div class="ni-time">hace 5 min</div>
+      </div>
+    </div>
+    <!-- LABORATORIO -->
+    <div class="notif-group-label">🔬 Laboratorio</div>
+    <div class="notif-item unread" onclick="handleNotif(this, 'laboratorio')">
+      <div class="ni-ico" style="background:var(--teal-light);">📋</div>
+      <div>
+        <div class="ni-text"><b>Resultado recibido</b> — Hemograma García, M. Hay valores fuera de rango.</div>
+        <div class="ni-time">hace 8 min</div>
+      </div>
+    </div>
+    <div class="notif-item unread" onclick="handleNotif(this, 'laboratorio')">
+      <div class="ni-ico" style="background:var(--blue-light);">📤</div>
+      <div>
+        <div class="ni-text"><b>Orden enviada</b> — Troponina I · López, Carlos. HL7 enviado a Lab. Central.</div>
+        <div class="ni-time">hace 12 min</div>
+      </div>
+    </div>
+    <!-- TURNOS -->
+    <div class="notif-group-label">🗓 Turnos</div>
+    <div class="notif-item unread-amber" onclick="handleNotif(this, 'turnos')">
+      <div class="ni-ico" style="background:var(--amber-light);">⏰</div>
+      <div>
+        <div class="ni-text"><b>Turno en 5 min</b> — Ferreyra, Ana con Dra. Romero · 09:30.</div>
+        <div class="ni-time">hace 1 min</div>
+      </div>
+    </div>
+    <!-- SISTEMA -->
+    <div class="notif-group-label">⚙ Sistema</div>
+    <div class="notif-item" onclick="handleNotif(this, 'interop')">
+      <div class="ni-ico" style="background:var(--amber-light);">🔌</div>
+      <div>
+        <div class="ni-text"><b>DICOM intermitente</b> — Reconectando con servidor de imágenes.</div>
+        <div class="ni-time">hace 18 min</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toast-container"></div>
+
+<script>
+const pages = {
+  dashboard:'Dashboard',
+  recepcion:'Admisión · Recepción',
+  turnos:'Gestión de Turnos',
+  pacientes:'Pacientes',
+  medico:'Panel Médico',
+  internacion:'Internación y Camas',
+  laboratorio:'Laboratorio',
+  auditoria:'Auditoría',
+  interop:'Interoperabilidad',
+  estadisticas:'Estadísticas'
+};
+
+function nav(id) {
+  document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); });
+  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+  const page = document.getElementById('page-' + id);
+  page.classList.add('active');
+  page.style.animation = 'none';
+  page.offsetHeight;
+  page.style.animation = '';
+  document.getElementById('tb-title').textContent = pages[id] || id;
+  event.currentTarget.classList.add('active');
+  if (id === 'dashboard') runCounters();
+}
+
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+
+function showTab(group, id, el) {
+  document.querySelectorAll(`[id^="${group}-"]`).forEach(p => p.classList.remove('active'));
+  document.getElementById(group + '-' + id).classList.add('active');
+  el.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── COUNTER ANIMATION ──────────────────────────────────
+function animateCounter(el, target, duration) {
+  if (isNaN(parseInt(target))) return;
+  const num = parseInt(target);
+  const suffix = target.toString().replace(/[0-9]/g, '');
+  let start = null;
+  el.classList.add('counting');
+  function step(ts) {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / duration, 1);
+    const e = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(e * num) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(step);
+}
+function runCounters() {
+  document.querySelectorAll('.metric-value').forEach((el, i) => {
+    const target = el.dataset.target || el.textContent.trim();
+    el.dataset.target = target;
+    setTimeout(() => animateCounter(el, target, 700), i * 80);
+  });
+}
+window.addEventListener('DOMContentLoaded', () => { runCounters(); });
+
+// ── TOAST SYSTEM ───────────────────────────────────────
+const icons = { success:'✅', warn:'⚠️', error:'❌', info:'ℹ️' };
+function showToast(msg, type = 'success', duration = 4000) {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerHTML = `<span class="toast-ico">${icons[type]||'ℹ️'}</span><span class="toast-msg">${msg}</span><button class="toast-close" onclick="dismissToast(this.parentElement)">✕</button>`;
+  c.appendChild(t);
+  setTimeout(() => dismissToast(t), duration);
+}
+function dismissToast(t) {
+  if (!t || !t.parentElement) return;
+  t.classList.add('out');
+  setTimeout(() => t.remove(), 280);
+}
+
+// Intercept action buttons to show toasts
+document.addEventListener('click', e => {
+  const b = e.target.closest('button.action-btn.primary, button.tb-btn.primary');
+  if (!b) return;
+  const txt = b.textContent.trim();
+  const map = {
+    'Registrar paciente': ['success', '✓ Paciente registrado correctamente'],
+    'Confirmar turno':    ['success', '✓ Turno asignado · recordatorio programado'],
+    'Confirmar llegada':  ['success', '✓ Check-in registrado · médico notificado'],
+    'Guardar evolución':  ['success', '✓ Evolución guardada en historia clínica'],
+    'Firmar con QR digital': ['success', '✓ Receta firmada digitalmente · QR generado'],
+    'Verificar afiliación en tiempo real': ['info', 'Verificando con OSDE…'],
+    '+ Nuevo paciente':   null,
+    'Exportar': ['success', '✓ Exportación iniciada · recibirás el archivo en breve'],
+    'Enviar':   ['success', '✓ Orden enviada por HL7 al laboratorio'],
+  };
+  if (map[txt] === null) return; // don't toast on modal-openers
+  if (map[txt]) {
+    const [type, msg] = map[txt];
+    setTimeout(() => showToast(msg, type), 100);
+  }
+});
+
+// ── NOTIFICATION PANEL ─────────────────────────────────
+function toggleNotifPanel() {
+  const p = document.getElementById('notif-panel');
+  const o = document.getElementById('notif-overlay');
+  const isOpen = p.classList.contains('open');
+  if (isOpen) { p.classList.remove('open'); o.classList.remove('open'); }
+  else { p.classList.add('open'); o.classList.add('open'); }
+}
+function closeNotifPanel() {
+  document.getElementById('notif-panel').classList.remove('open');
+  document.getElementById('notif-overlay').classList.remove('open');
+}
+function handleNotif(el, page) {
+  el.classList.remove('unread','unread-red','unread-amber');
+  el.style.borderLeftColor = 'transparent';
+  updateBellCount(-1);
+  closeNotifPanel();
+  // navigate to relevant page
+  const sbItem = document.querySelector(`.sb-item[onclick*="${page}"]`);
+  if (sbItem) { sbItem.click(); }
+}
+function markAllRead() {
+  document.querySelectorAll('.notif-item.unread, .notif-item.unread-red, .notif-item.unread-amber').forEach(el => {
+    el.classList.remove('unread','unread-red','unread-amber');
+    el.style.borderLeftColor = 'transparent';
+  });
+  document.getElementById('bell-count').style.display = 'none';
+  showToast('Todas las notificaciones marcadas como leídas', 'info');
+}
+function updateBellCount(delta) {
+  const el = document.getElementById('bell-count');
+  const cur = parseInt(el.textContent) || 0;
+  const next = Math.max(0, cur + delta);
+  el.textContent = next;
+  el.style.display = next === 0 ? 'none' : 'flex';
+}
+
+// Demo: auto-show a "turno próximo" toast after 3s
+setTimeout(() => {
+  showToast('⏰ Turno en 5 min — Ferreyra, Ana · Dra. Romero (09:30)', 'warn', 6000);
+}, 3000);
+</script>
+</body>
+</html>
