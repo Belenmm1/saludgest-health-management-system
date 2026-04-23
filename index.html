@@ -3,179 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belen Milde | Portfolio Analista de Sistemas</title>
+    <title>Belen Milde | Analista de Sistemas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0f172a;
-            --card: #1e293b;
-            --primary: #3b82f6;
-            --accent: #10b981;
-            --text-main: #f1f5f9;
-            --text-dim: #94a3b8;
+            --navy: #0F2D52;
+            --blue: #1E4D8C;
+            --blue-mid: #2B6CB0;
+            --teal: #0D9488;
+            --bg: #F0F4F8; /* El mismo fondo grisáceo de MediGest */
+            --surface: #FFFFFF;
+            --text-main: #1F2937;
+            --text-light: #6B7280;
         }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Figtree', sans-serif;
             background-color: var(--bg);
             color: var(--text-main);
             margin: 0;
-            line-height: 1.6;
-        }
-
-        header {
-            height: 400px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at top right, #1e3a8a, var(--bg));
+            min-height: 100vh;
+        }
+
+        /* Estética de Header inspirada en el Sidebar del sistema */
+        header {
+            background-color: var(--navy);
+            color: white;
+            padding: 4rem 2rem;
             text-align: center;
-            border-bottom: 1px solid #334155;
+            border-bottom: 4px solid var(--teal);
         }
 
-        .profile-badge {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--primary);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.8rem;
+        h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: 2.5rem;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: #A5B4FC;
+            font-weight: 500;
+            margin-top: 0.5rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
         }
 
-        h1 { font-size: 3rem; margin: 0; }
-        .subtitle { color: var(--text-dim); font-size: 1.2rem; margin-top: 10px; }
-
-        .container { max-width: 900px; margin: -50px auto 50px; padding: 0 20px; }
-
-        .project-card {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
-            border: 1px solid #334155;
+        .container {
+            max-width: 1000px;
+            margin: -2rem auto 3rem;
+            padding: 0 1rem;
+            flex-grow: 1;
         }
 
-        .tags { display: flex; gap: 10px; margin-bottom: 20px; }
-        .tag { background: #334155; color: #e2e8f0; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; }
+        .main-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 10px 25px rgba(15, 45, 82, 0.1);
+            border: 1px solid #DDE3ED;
+        }
 
-        h2 { color: var(--accent); margin-top: 0; }
+        .section-title {
+            font-family: 'Sora', sans-serif;
+            color: var(--navy);
+            border-bottom: 2px solid var(--blue-light);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
 
-        .features {
+        .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 30px 0;
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .feature {
-            background: rgba(15, 23, 42, 0.5);
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 3px solid var(--primary);
-        }
-
-        .feature strong { display: block; color: var(--primary); margin-bottom: 5px; }
-
-        .cta-box {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid #334155;
-        }
-
-        .btn {
+        /* Estilo de los items como los "stats" del sistema */
+        .skill-tag {
+            background: var(--bg);
+            color: var(--blue-mid);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid #DDE3ED;
             display: inline-block;
-            background: var(--primary);
+            margin: 0.2rem;
+        }
+
+        /* Botón idéntico al de tu sistema MediGest */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--teal);
             color: white;
-            padding: 16px 32px;
-            border-radius: 12px;
+            padding: 1rem 2rem;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
-            transition: all 0.3s;
-            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
+            font-family: 'Sora', sans-serif;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(13, 148, 136, 0.2);
+            margin-top: 2rem;
         }
 
-        .btn:hover {
+        .btn-primary:hover {
+            background-color: #0F766E;
             transform: translateY(-2px);
-            background: #2563eb;
-            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.5);
         }
 
-        .stack {
-            margin-top: 60px;
+        footer {
             text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
         }
 
-        .stack-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            color: var(--text-dim);
-            font-weight: 600;
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .main-card { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="profile-badge">Disponible para nuevos proyectos</div>
     <h1>Maricela Belén Milde</h1>
-    <p class="subtitle">Systems Analyst & Full Stack Developer</p>
+    <div class="subtitle">Systems Analyst & Software Developer</div>
 </header>
 
 <div class="container">
-    <div class="project-card">
-        <div class="tags">
-            <span class="tag">Java</span>
-            <span class="tag">Python</span>
-            <span class="tag">SQL Specialist</span>
-            <span class="tag">SaaS Architecture</span>
-        </div>
+    <div class="main-card">
+        <h2 class="section-title">Proyecto Principal: MediGest</h2>
+        <p>Desarrollo de un ecosistema integral para la gestión hospitalaria, enfocado en la arquitectura de datos y la eficiencia operativa de centros de salud modernos.</p>
         
-        <h2>SaludGest v3.1: Gestión Hospitalaria Escalable</h2>
-        <p>Como Analista de Sistemas, desarrollé esta solución enfocada en la optimización de procesos clínicos. No es solo un programa, es una arquitectura diseñada para manejar flujos de datos críticos, garantizando integridad y accesibilidad.</p>
-        
-        <div class="features">
-            <div class="feature">
-                <strong>Análisis de Requerimientos</strong>
-                Lógica de negocio aplicada a la gestión de turnos y pacientes en tiempo real.
+        <div class="grid">
+            <div>
+                <h4 style="color: var(--blue-mid); margin-bottom: 10px;">Lógica de Negocio</h4>
+                <p style="font-size: 0.95rem; color: var(--text-light);">
+                    Aplicación de procesos CRUD avanzados, gestión de historias clínicas y control de flujo de pacientes con validaciones de integridad técnica.
+                </p>
+                <div style="margin-top: 1rem;">
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Business Logic</span>
+                    <span class="skill-tag">UX/UI Health</span>
+                </div>
             </div>
-            <div class="feature">
-                <strong>Arquitectura SaaS</strong>
-                Estructura preparada para escalabilidad y despliegue modular.
-            </div>
-            <div class="feature">
-                <strong>Optimización SQL</strong>
-                Manejo estructurado de información clínica cumpliendo estándares técnicos.
-            </div>
-            <div class="feature">
-                <strong>UX Médica</strong>
-                Interfaz diseñada para reducir la carga cognitiva del personal de salud.
+            
+            <div style="background: #F8FAFC; padding: 1.5rem; border-radius: 8px; border: 1px dashed var(--blue);">
+                <h4 style="margin-top: 0; color: var(--navy);">Especificaciones Técnicas</h4>
+                <ul style="font-size: 0.85rem; padding-left: 1.2rem;">
+                    <li>Despliegue escalable en entorno web.</li>
+                    <li>Interfaz responsiva de alta fidelidad.</li>
+                    <li>Arquitectura modular v3.1 optimizada.</li>
+                </ul>
             </div>
         </div>
 
-        <div class="cta-box">
-            <p style="margin-bottom: 25px; color: var(--text-dim);">Explora la capacidad técnica del sistema en el entorno de pruebas:</p>
-            <a href="sistema_clinica_v3_1.html" class="btn">🚀 EJECUTAR SISTEMA v3.1</a>
-        </div>
-    </div>
-
-    <div class="stack">
-        <p style="color: var(--text-dim); margin-bottom: 20px;">CORE TECH STACK</p>
-        <div class="stack-grid">
-            <span>PYTHON</span>
-            <span>JAVA</span>
-            <span>SQL</span>
-            <span>HTML/JS</span>
+        <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #EEF2F6;">
+            <p style="font-weight: 600; color: var(--navy);">¿Desea ver el sistema en acción?</p>
+            <a href="sistema_clinica_v3_1.html" class="btn-primary">
+                ABRIR MEDIGEST v3.1 →
+            </a>
         </div>
     </div>
 </div>
 
-<footer style="text-align: center; padding-bottom: 50px; color: var(--text-dim); font-size: 0.8rem;">
-    &copy; 2024 Belén Milde | Transformando procesos complejos en soluciones digitales.
+<footer>
+    &copy; 2024 Belen Milde | Oberá, Misiones, Argentina.
 </footer>
 
 </body>
