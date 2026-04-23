@@ -3,180 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belen Milde | Analista de Sistemas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Belen Milde | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --navy: #0F2D52;
             --blue: #1E4D8C;
-            --blue-mid: #2B6CB0;
             --teal: #0D9488;
-            --bg: #F0F4F8; /* El mismo fondo grisáceo de MediGest */
+            --bg: #F0F4F8; /* Fondo idéntico a MediGest */
             --surface: #FFFFFF;
+            --border: #DDE3ED;
             --text-main: #1F2937;
             --text-light: #6B7280;
         }
 
         body {
+            margin: 0;
             font-family: 'Figtree', sans-serif;
             background-color: var(--bg);
             color: var(--text-main);
-            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Navegación y Cambio de Idioma */
+        nav {
+            background: var(--navy);
+            padding: 1rem 2rem;
             display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            justify-content: flex-end;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        /* Estética de Header inspirada en el Sidebar del sistema */
-        header {
-            background-color: var(--navy);
+        .lang-btn {
+            background: rgba(255,255,255,0.1);
             color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            border-bottom: 4px solid var(--teal);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: 0.3s;
         }
 
-        h1 {
+        .lang-btn:hover { background: var(--teal); }
+
+        header {
+            background: var(--navy);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--teal);
+        }
+
+        header h1 {
             font-family: 'Sora', sans-serif;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin: 0;
             letter-spacing: -1px;
         }
 
-        .subtitle {
+        .hero-sub {
             color: #A5B4FC;
-            font-weight: 500;
-            margin-top: 0.5rem;
-            text-transform: uppercase;
+            font-weight: 600;
             letter-spacing: 2px;
-            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-top: 10px;
+            display: block;
         }
 
         .container {
-            max-width: 1000px;
-            margin: -2rem auto 3rem;
-            padding: 0 1rem;
-            flex-grow: 1;
+            max-width: 1100px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
         }
 
         .main-card {
             background: var(--surface);
-            border-radius: 12px;
-            padding: 3rem;
-            box-shadow: 0 10px 25px rgba(15, 45, 82, 0.1);
-            border: 1px solid #DDE3ED;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(15, 45, 82, 0.08);
+            border: 1px solid var(--border);
         }
 
-        .section-title {
+        h2 {
             font-family: 'Sora', sans-serif;
             color: var(--navy);
-            border-bottom: 2px solid var(--blue-light);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--teal);
+            padding-left: 15px;
+            margin-top: 40px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
         }
 
-        /* Estilo de los items como los "stats" del sistema */
-        .skill-tag {
-            background: var(--bg);
-            color: var(--blue-mid);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            border: 1px solid #DDE3ED;
+        .feature-card {
+            background: #F8FAFC;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+
+        .feature-card h3 { color: var(--blue); margin-top: 0; font-family: 'Sora', sans-serif; font-size: 1.1rem; }
+
+        .badge {
             display: inline-block;
-            margin: 0.2rem;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 10px;
         }
 
-        /* Botón idéntico al de tu sistema MediGest */
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--teal);
+        .tag-tech { background: #E0F2F1; color: #00695C; margin-right: 5px; }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 40px;
+            background: var(--navy);
             color: white;
-            padding: 1rem 2rem;
+            border-radius: 16px;
+        }
+
+        .btn-main {
+            background: var(--teal);
+            color: white;
+            padding: 15px 35px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
             font-family: 'Sora', sans-serif;
-            transition: all 0.2s;
-            box-shadow: 0 4px 6px rgba(13, 148, 136, 0.2);
-            margin-top: 2rem;
+            display: inline-block;
+            margin-top: 20px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
         }
 
-        .btn-primary:hover {
-            background-color: #0F766E;
-            transform: translateY(-2px);
-        }
+        .btn-main:hover { background: #0F766E; transform: scale(1.05); }
 
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
+        footer { text-align: center; padding: 40px; color: var(--text-light); font-size: 0.9rem; }
 
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            .main-card { padding: 1.5rem; }
-        }
+        /* Clases para ocultar/mostrar idiomas */
+        [lang="en"] { display: none; }
     </style>
 </head>
 <body>
 
+<nav>
+    <button class="lang-btn" onclick="toggleLang()">English / Español</button>
+</nav>
+
 <header>
-    <h1>Maricela Belén Milde</h1>
-    <div class="subtitle">Systems Analyst & Software Developer</div>
+    <h1 id="title">Belen Milde</h1>
+    <span class="hero-sub" data-es="Analista de Sistemas" data-en="Systems Analyst">Analista de Sistemas</span>
 </header>
 
 <div class="container">
     <div class="main-card">
-        <h2 class="section-title">Proyecto Principal: MediGest</h2>
-        <p>Desarrollo de un ecosistema integral para la gestión hospitalaria, enfocado en la arquitectura de datos y la eficiencia operativa de centros de salud modernos.</p>
-        
+        <section>
+            <h2 data-es="Sobre el Proyecto: MediGest" data-en="About the Project: MediGest">Sobre el Proyecto: MediGest</h2>
+            <p data-es="MediGest es una plataforma integral de gestión hospitalaria (v3.1) diseñada bajo principios de arquitectura robusta y escalabilidad. Mi enfoque como analista fue optimizar la trazabilidad del paciente y la eficiencia operativa del personal médico." 
+               data-en="MediGest is a comprehensive hospital management platform (v3.1) designed under robust architecture and scalability principles. As an analyst, my focus was to optimize patient traceability and medical staff operational efficiency.">
+               MediGest es una plataforma integral de gestión hospitalaria (v3.1) diseñada bajo principios de arquitectura robusta y escalabilidad. Mi enfoque como analista fue optimizar la trazabilidad del paciente y la eficiencia operativa del personal médico.
+            </p>
+        </section>
+
         <div class="grid">
-            <div>
-                <h4 style="color: var(--blue-mid); margin-bottom: 10px;">Lógica de Negocio</h4>
-                <p style="font-size: 0.95rem; color: var(--text-light);">
-                    Aplicación de procesos CRUD avanzados, gestión de historias clínicas y control de flujo de pacientes con validaciones de integridad técnica.
+            <div class="feature-card">
+                <h3 data-es="Arquitectura de Datos" data-en="Data Architecture">Arquitectura de Datos</h3>
+                <p data-es="Diseño de flujos lógicos para el manejo de historias clínicas y estados de ocupación en tiempo real." 
+                   data-en="Design of logical flows for clinical records management and real-time occupancy status.">
+                   Diseño de flujos lógicos para el manejo de historias clínicas y estados de ocupación en tiempo real.
                 </p>
-                <div style="margin-top: 1rem;">
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Business Logic</span>
-                    <span class="skill-tag">UX/UI Health</span>
-                </div>
+                <span class="badge tag-tech">Logic Flow</span>
             </div>
-            
-            <div style="background: #F8FAFC; padding: 1.5rem; border-radius: 8px; border: 1px dashed var(--blue);">
-                <h4 style="margin-top: 0; color: var(--navy);">Especificaciones Técnicas</h4>
-                <ul style="font-size: 0.85rem; padding-left: 1.2rem;">
-                    <li>Despliegue escalable en entorno web.</li>
-                    <li>Interfaz responsiva de alta fidelidad.</li>
-                    <li>Arquitectura modular v3.1 optimizada.</li>
-                </ul>
+            <div class="feature-card">
+                <h3 data-es="UX Especializada" data-en="Specialized UX">UX Especializada</h3>
+                <p data-es="Interfaz de alta fidelidad con tipografía Sora y Figtree, optimizada para reducir la fatiga visual del personal." 
+                   data-en="High-fidelity interface using Sora and Figtree fonts, optimized to reduce staff visual fatigue.">
+                   Interfaz de alta fidelidad con tipografía Sora y Figtree, optimizada para reducir la fatiga visual del personal.
+                </p>
+                <span class="badge tag-tech">UI/UX</span>
             </div>
         </div>
 
-        <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #EEF2F6;">
-            <p style="font-weight: 600; color: var(--navy);">¿Desea ver el sistema en acción?</p>
-            <a href="sistema_clinica_v3_1.html" class="btn-primary">
-                ABRIR MEDIGEST v3.1 →
-            </a>
+        <div class="cta-section">
+            <h3 data-es="¿Desea probar la capacidad técnica?" data-en="Want to test the technical capacity?">¿Desea probar la capacidad técnica?</h3>
+            <p data-es="Acceda a la demo interactiva del sistema v3.1" data-en="Access the interactive demo of system v3.1">Acceda a la demo interactiva del sistema v3.1</p>
+            <a href="sistema_clinica_v3_1.html" class="btn-main" data-es="EJECUTAR MEDIGEST →" data-en="RUN MEDIGEST →">EJECUTAR MEDIGEST →</a>
         </div>
     </div>
 </div>
 
 <footer>
-    &copy; 2024 Belen Milde | Oberá, Misiones, Argentina.
+    <p>&copy; 2024 Belen Milde | Systems Analyst Portfolio</p>
 </footer>
+
+<script>
+    let currentLang = 'es';
+    
+    function toggleLang() {
+        currentLang = currentLang === 'es' ? 'en' : 'es';
+        
+        document.querySelectorAll('[data-es]').forEach(el => {
+            el.innerText = el.getAttribute(`data-${currentLang}`);
+        });
+
+        // Actualizar el botón de la demo específicamente si tiene atributo data
+        const btn = document.querySelector('.btn-main');
+        btn.innerText = btn.getAttribute(`data-${currentLang}`);
+    }
+</script>
 
 </body>
 </html>
