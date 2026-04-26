@@ -309,16 +309,152 @@ textarea.entrada{min-height:80px;resize:vertical;}
 .qr-interior{width:44px;height:44px;background:repeating-linear-gradient(0deg,var(--texto) 0,var(--texto) 2px,transparent 2px,transparent 5px),repeating-linear-gradient(90deg,var(--texto) 0,var(--texto) 2px,transparent 2px,transparent 5px);opacity:0.2;}
 
 /* ═══════════════════════════════════════════
-   BOTÓN DE ACCIÓN
+   BOTÓN DE ACCIÓN — mínimo 44px (módulo 05)
 ═══════════════════════════════════════════ */
-.boton{padding:8px 14px;border-radius:7px;font-size:12.5px;font-weight:500;border:1px solid var(--borde);background:var(--superficie);color:var(--texto-medio);cursor:pointer;transition:all 0.15s;min-height:36px;}
+.boton{padding:8px 14px;border-radius:7px;font-size:12.5px;font-weight:500;border:1px solid var(--borde);background:var(--superficie);color:var(--texto-medio);cursor:pointer;transition:all 0.15s;min-height:44px;position:relative;}
 .boton:hover{background:var(--fondo);}
 .boton.primario{background:var(--azul);color:#fff;border-color:var(--azul);}
 .boton.primario:hover{background:var(--azul-medio);}
 .boton.peligro{background:var(--rojo-claro);color:var(--rojo);border-color:#FECACA;}
 .boton.exito{background:var(--verde-claro);color:var(--verde);border-color:#BBF7D0;}
 .boton.ambar{background:var(--ambar-claro);color:var(--ambar);border-color:#FDE68A;}
-.boton.chico{padding:5px 10px;font-size:11.5px;min-height:30px;}
+.boton.chico{padding:6px 12px;font-size:11.5px;min-height:44px;}
+/* Toda la fila de tabla es clicable */
+.tabla.clicable tbody tr{cursor:pointer;}
+.tabla.clicable tbody tr td{padding-top:12px;padding-bottom:12px;}
+
+/* ═══════════════════════════════════════════
+   MÓDULO 05 — ATAJOS DE TECLADO (tooltips)
+═══════════════════════════════════════════ */
+[data-atajo]{position:relative;}
+[data-atajo]::after{
+  content: attr(data-atajo);
+  position:absolute;
+  bottom:calc(100% + 7px);
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--azul-oscuro);
+  color:#fff;
+  font-size:10px;
+  font-weight:600;
+  font-family:var(--mono);
+  padding:3px 7px;
+  border-radius:5px;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.15s;
+  z-index:999;
+  letter-spacing:0.04em;
+}
+[data-atajo]::before{
+  content:'';
+  position:absolute;
+  bottom:calc(100% + 2px);
+  left:50%;
+  transform:translateX(-50%);
+  border:4px solid transparent;
+  border-top-color:var(--azul-oscuro);
+  opacity:0;
+  transition:opacity 0.15s;
+  pointer-events:none;
+  z-index:999;
+}
+[data-atajo]:hover::after,[data-atajo]:hover::before{opacity:1;}
+
+/* ═══════════════════════════════════════════
+   MÓDULO 05 — MODO ALTO CONTRASTE
+═══════════════════════════════════════════ */
+.boton-contraste{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 12px;min-height:44px;
+  border-radius:7px;border:1px solid var(--borde);
+  background:var(--superficie);font-size:11.5px;
+  font-weight:600;color:var(--texto-medio);
+  cursor:pointer;transition:all 0.15s;
+  flex-shrink:0;
+}
+.boton-contraste:hover{background:var(--fondo);}
+.contraste-ico{font-size:14px;}
+
+/* Variables que se sobreescriben en alto contraste */
+body.alto-contraste{
+  --fondo:        #FFFFFF;
+  --superficie:   #FFFFFF;
+  --borde:        #000000;
+  --borde-claro:  #333333;
+  --texto:        #000000;
+  --texto-medio:  #111111;
+  --texto-suave:  #333333;
+  --azul-oscuro:  #000000;
+  --azul:         #003399;
+  --azul-medio:   #0044CC;
+  --azul-claro:   #CCE0FF;
+  --verde:        #005500;
+  --verde-claro:  #CCFFCC;
+  --ambar:        #664400;
+  --ambar-claro:  #FFEEAA;
+  --rojo:         #990000;
+  --rojo-claro:   #FFCCCC;
+  --verde-mar:    #004433;
+  --verde-mar-claro:#CCFFEE;
+}
+body.alto-contraste .lateral{background:#000 !important;}
+body.alto-contraste .lat-logo-nombre,
+body.alto-contraste .lat-item,
+body.alto-contraste .lat-usuario-nombre{color:#fff !important;}
+body.alto-contraste .tarjeta,
+body.alto-contraste .metrica,
+body.alto-contraste .modal{
+  border:2px solid #000 !important;
+  box-shadow:none !important;
+}
+body.alto-contraste .tabla td,
+body.alto-contraste .tabla th{border-color:#000 !important;}
+body.alto-contraste .boton{border:2px solid currentColor !important;font-weight:700;}
+body.alto-contraste .etiqueta{border:1.5px solid currentColor !important;font-weight:700;}
+body.alto-contraste .barra-superior{border-bottom:2px solid #000 !important;}
+
+/* Indicador visual de modo activo */
+body.alto-contraste .boton-contraste{
+  background:#000;color:#fff;border-color:#000;
+}
+body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
+
+/* ═══════════════════════════════════════════
+   MÓDULO 05 — OVERLAY DE ATAJOS DE TECLADO
+═══════════════════════════════════════════ */
+.panel-atajos{
+  display:none;position:fixed;inset:0;
+  background:rgba(15,45,82,0.6);
+  z-index:600;align-items:center;justify-content:center;
+  backdrop-filter:blur(3px);
+}
+.panel-atajos.abierto{display:flex;animation:aparecerPagina 0.18s ease both;}
+.atajos-modal{
+  background:var(--superficie);border-radius:14px;
+  padding:24px 28px;max-width:420px;width:100%;
+  box-shadow:var(--sombra-media);
+}
+.atajos-titulo{
+  font-size:15px;font-weight:700;color:var(--azul-oscuro);
+  font-family:var(--fuente-titulo);margin-bottom:16px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.atajos-cerrar{background:none;border:none;font-size:18px;cursor:pointer;color:var(--texto-suave);}
+.atajos-fila{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 0;border-bottom:1px solid var(--borde-claro);font-size:13px;
+}
+.atajos-fila:last-child{border-bottom:none;}
+.atajos-desc{color:var(--texto-medio);}
+.atajos-tecla{
+  background:var(--fondo);border:1.5px solid var(--borde);
+  border-radius:5px;padding:3px 10px;font-family:var(--mono);
+  font-size:11px;font-weight:700;color:var(--texto);
+  box-shadow:0 2px 0 var(--borde);
+}
+.atajos-pie{margin-top:14px;font-size:11px;color:var(--texto-suave);text-align:center;}
 
 /* ═══════════════════════════════════════════
    PANEL DE NOTIFICACIONES
@@ -558,7 +694,17 @@ textarea.entrada{min-height:80px;resize:vertical;}
     <div class="bs-etiqueta alerta"><div class="punto ambar latido"></div>3 en sala de espera</div>
     <div class="bs-etiqueta bien"><div class="punto verde latido-lento"></div>Sistema operativo</div>
 
-    <button class="boton-campana" onclick="alternarPanelNotif()" title="Notificaciones">🔔<span class="campana-contador" id="contador-campana">5</span></button>
+    <button class="boton-campana" onclick="alternarPanelNotif()" title="Notificaciones" data-atajo="Alt + N">🔔<span class="campana-contador" id="contador-campana">5</span></button>
+
+    <!-- Módulo 05: Alto contraste -->
+    <button class="boton-contraste" onclick="alternarAltoContraste()" id="boton-contraste" data-atajo="Alt + C" title="Modo alto contraste">
+      <span class="contraste-ico">◑</span>Contraste
+    </button>
+
+    <!-- Módulo 05: Panel de atajos -->
+    <button class="boton-contraste" onclick="abrirPanelAtaljos()" data-atajo="?" title="Ver atajos de teclado" style="padding:6px 10px;">
+      ⌨
+    </button>
 
     <!-- Reloj en vivo — módulo 04 -->
     <div class="reloj-vivo">
@@ -566,7 +712,7 @@ textarea.entrada{min-height:80px;resize:vertical;}
       <span class="reloj-turno">Turno Mañana</span>
     </div>
 
-    <button class="bs-boton primario" onclick="abrirModal('modal-nuevo-paciente')" title="Atajo: N">＋ Nuevo paciente</button>
+    <button class="bs-boton primario" onclick="abrirModal('modal-nuevo-paciente')" data-atajo="N · Nuevo paciente">＋ Nuevo paciente</button>
   </div>
 
   <div class="contenido">
@@ -1101,6 +1247,27 @@ textarea.entrada{min-height:80px;resize:vertical;}
 </div>
 
 <div class="contenedor-tostadas" id="contenedor-tostadas"></div>
+
+<!-- ═══ MÓDULO 05: PANEL DE ATAJOS DE TECLADO ═══ -->
+<div class="panel-atajos" id="panel-atajos" onclick="if(event.target===this)cerrarPanelAtaljos()">
+  <div class="atajos-modal">
+    <div class="atajos-titulo">
+      ⌨ Atajos de teclado
+      <button class="atajos-cerrar" onclick="cerrarPanelAtaljos()">✕</button>
+    </div>
+    <div class="atajos-fila"><span class="atajos-desc">Nuevo paciente</span><span class="atajos-tecla">N</span></div>
+    <div class="atajos-fila"><span class="atajos-desc">Nuevo turno</span><span class="atajos-tecla">T</span></div>
+    <div class="atajos-fila"><span class="atajos-desc">Foco en búsqueda</span><span class="atajos-tecla">B</span></div>
+    <div class="atajos-fila"><span class="atajos-desc">Alto contraste</span><span class="atajos-tecla">Alt + C</span></div>
+    <div class="atajos-fila"><span class="atajos-desc">Cerrar modal / panel</span><span class="atajos-tecla">Esc</span></div>
+    <div class="atajos-fila"><span class="atajos-desc">Ir al Tablero</span><span class="atajos-tecla">1</span></div>
+    <div class="atajos-fila"><span class="atajos-desc">Ir a Turnos</span><span class="atajos-tecla">2</span></div>
+    <div class="atajos-fila"><span class="atajos-desc">Ir a Pacientes</span><span class="atajos-tecla">3</span></div>
+    <div class="atajos-fila"><span class="atajos-desc">Ir a Guardia</span><span class="atajos-tecla">4</span></div>
+    <div class="atajos-fila"><span class="atajos-desc">Ver esta pantalla</span><span class="atajos-tecla">?</span></div>
+    <div class="atajos-pie">Los atajos no funcionan cuando un campo de texto está enfocado.</div>
+  </div>
+</div>
 
 <!-- ═══ MODALES ═══ -->
 
@@ -1722,6 +1889,78 @@ function verificarAfiliacion() {
     res.innerHTML = '<div class="aviso exito" style="margin-top:10px;">✓ Afiliado activo · Plan 210 · Carencias: ninguna · Co-seguro: $1.200</div>';
     mostrarTostada('✓ Afiliación verificada correctamente','exito');
   }, 1400);
+}
+
+/* ─── MÓDULO 05: ALTO CONTRASTE ─── */
+function alternarAltoContraste() {
+  const activado = document.body.classList.toggle('alto-contraste');
+  const etiqueta = activado ? 'Modo alto contraste activado' : 'Modo alto contraste desactivado';
+  const tipo = activado ? 'info' : 'alerta';
+  mostrarTostada(etiqueta, tipo);
+  localStorage.setItem('altoContraste', activado ? 'si' : 'no');
+}
+
+/* Restaurar preferencia guardada */
+if (localStorage.getItem('altoContraste') === 'si') {
+  document.body.classList.add('alto-contraste');
+}
+
+/* ─── MÓDULO 05: PANEL DE ATAJOS ─── */
+function abrirPanelAtaljos() {
+  document.getElementById('panel-atajos').classList.add('abierto');
+}
+function cerrarPanelAtaljos() {
+  document.getElementById('panel-atajos').classList.remove('abierto');
+}
+
+/* ─── MÓDULO 05: ATAJOS DE TECLADO ─── */
+document.addEventListener('keydown', evento => {
+  /* No disparar si el foco está en un campo de texto */
+  const etiquetaActiva = document.activeElement.tagName;
+  const enCampo = ['INPUT','TEXTAREA','SELECT'].includes(etiquetaActiva);
+
+  /* Esc: cerrar lo que esté abierto */
+  if (evento.key === 'Escape') {
+    /* cerrar panel atajos */
+    document.getElementById('panel-atajos').classList.remove('abierto');
+    /* cerrar panel notificaciones */
+    cerrarPanelNotif();
+    /* cerrar cualquier modal abierto */
+    document.querySelectorAll('.fondo-modal.abierto').forEach(m => m.classList.remove('abierto'));
+    return;
+  }
+
+  /* Alt + C: alto contraste (siempre disponible) */
+  if (evento.altKey && evento.key.toLowerCase() === 'c') {
+    evento.preventDefault();
+    alternarAltoContraste();
+    return;
+  }
+
+  /* Los siguientes solo si no hay campo enfocado */
+  if (enCampo) return;
+
+  const mapaAtaljos = {
+    'n': () => abrirModal('modal-nuevo-paciente'),
+    't': () => abrirModal('modal-nuevo-turno'),
+    'b': () => { document.getElementById('campoBusqueda').focus(); },
+    '?': () => abrirPanelAtaljos(),
+    '1': () => navegarDesdeAtajo('tablero'),
+    '2': () => navegarDesdeAtajo('turnos'),
+    '3': () => navegarDesdeAtajo('pacientes'),
+    '4': () => navegarDesdeAtajo('guardia'),
+  };
+
+  const accion = mapaAtaljos[evento.key.toLowerCase()];
+  if (accion) {
+    evento.preventDefault();
+    accion();
+  }
+});
+
+function navegarDesdeAtajo(nombreModulo) {
+  const elemento = document.querySelector(`.lat-item[onclick*="${nombreModulo}"]`);
+  if (elemento) elemento.click();
 }
 
 /* ─── INICIALIZAR ─── */
