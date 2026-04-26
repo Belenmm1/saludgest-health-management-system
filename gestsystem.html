@@ -626,12 +626,266 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .aviso-conflicto{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;display:none;gap:8px;font-size:12.5px;color:var(--ambar);}
 .aviso-conflicto.visible{display:flex;}
 
-/* Responsive */
+/* ═══════════════════════════════════════════
+   RESPONSIVE — TABLET Y CELULAR
+═══════════════════════════════════════════ */
+
+/* ── TABLET (hasta 1024px) ── */
 @media(max-width:1024px){
-  :root{--ancho-lateral:0px;}
-  .lateral{display:none;}
-  .metricas{grid-template-columns:repeat(3,1fr);}
-  .grilla-2,.grilla-2-1,.grilla-1-2{grid-template-columns:1fr;}
+  .lateral{ display:none; }
+  .metricas{ grid-template-columns:repeat(3,1fr); }
+  .grilla-2,.grilla-2-1,.grilla-1-2{ grid-template-columns:1fr; }
+  .grilla-3{ grid-template-columns:1fr 1fr; }
+  .bs-busqueda{ max-width:200px; }
+  .boton-contraste span:not(.contraste-ico){ display:none; }
+}
+
+/* ── CELULAR (hasta 640px) ── */
+@media(max-width:640px){
+
+  /* Ocultar elementos de escritorio en barra superior */
+  .bs-etiqueta,
+  .reloj-vivo,
+  .boton-contraste,
+  .bs-busqueda{ display:none !important; }
+
+  /* Barra superior compacta */
+  .barra-superior{
+    padding:0 12px;
+    gap:8px;
+    height:52px;
+  }
+  .bs-titulo{ font-size:13px; }
+
+  /* Campana más grande para touch */
+  .boton-campana{ width:40px; height:40px; font-size:18px; }
+
+  /* Botón nuevo paciente compacto */
+  .bs-boton.primario{ padding:7px 10px; font-size:12px; }
+
+  /* Contenido con menos padding */
+  .contenido{ padding:12px; }
+
+  /* Métricas: 2 columnas en celular */
+  .metricas{
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+    margin-bottom:12px;
+  }
+  .metrica{ padding:12px; }
+  .metrica-valor{ font-size:22px; }
+
+  /* Todas las grillas en 1 columna */
+  .grilla-2,.grilla-2-1,.grilla-1-2,.grilla-3{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  /* Tarjetas más compactas */
+  .tarjeta-cabeza{ padding:12px 12px 0; flex-wrap:wrap; gap:6px; }
+  .tarjeta-cuerpo{ padding:10px 12px 12px; }
+  .tarjeta-pie{ padding:8px 12px; }
+  .tarjeta-titulo{ font-size:12.5px; }
+
+  /* Tablas: scroll horizontal */
+  .tarjeta-cuerpo{ overflow-x:auto; }
+  .tabla{ font-size:12px; min-width:480px; }
+  .tabla th, .tabla td{ padding:8px 10px; }
+
+  /* Ocultar columnas menos importantes en tablas */
+  .tabla .col-ocultar-movil{ display:none; }
+
+  /* Módulo cabecera */
+  .modulo-cabecera h1{ font-size:16px; }
+  .modulo-cabecera p{ font-size:11.5px; }
+
+  /* Formularios */
+  .fila-campo.dos,.fila-campo.tres{ grid-template-columns:1fr; }
+
+  /* Modal a pantalla completa en celular */
+  .fondo-modal{ padding:0; align-items:flex-end; }
+  .modal{
+    border-radius:16px 16px 0 0;
+    max-height:92vh;
+    max-width:100%;
+  }
+  .modal.grande{ max-width:100%; }
+
+  /* Botones más grandes para touch */
+  .boton{ min-height:44px; font-size:13px; }
+  .boton.chico{ min-height:40px; font-size:12px; padding:6px 12px; }
+
+  /* Banner UCI más compacto */
+  .banner-critico{ font-size:11px; padding:6px 12px; }
+  .banner-critico span:last-child{ display:none; }
+
+  /* Tostadas ocupan todo el ancho */
+  .contenedor-tostadas{ left:12px; right:12px; bottom:80px; }
+  .tostada{ min-width:unset; max-width:100%; font-size:12.5px; }
+
+  /* Panel notificaciones a pantalla completa */
+  .panel-notificaciones{ width:100%; right:-100%; }
+
+  /* Panel de atajos adaptado */
+  .atajos-modal{ margin:12px; }
+
+  /* Guardia: cabecera compacta */
+  .guardia-cabecera{ padding:14px; gap:10px; }
+  .guardia-ico-grande{ font-size:24px; }
+  .guardia-titulo-bloque{ font-size:15px; }
+
+  /* Camas: más columnas chicas */
+  .grilla-camas{ grid-template-columns:repeat(4,1fr); gap:6px; }
+  .cama{ padding:8px 4px; }
+  .cama-num{ font-size:12px; }
+  .cama-etiqueta{ font-size:8px; }
+
+  /* Config: toggles */
+  .toggle-fila{ gap:8px; }
+
+  /* Pestaña médico: scroll horizontal */
+  .pestanias{ overflow-x:auto; gap:0; white-space:nowrap; }
+  .pestania{ padding:8px 10px; font-size:12px; flex-shrink:0; }
+}
+
+/* ── MENÚ INFERIOR MÓVIL ── */
+.nav-movil{
+  display:none;
+  position:fixed;
+  bottom:0; left:0; right:0;
+  height:60px;
+  background:var(--superficie);
+  border-top:1px solid var(--borde);
+  z-index:150;
+  box-shadow:0 -2px 12px rgba(15,45,82,0.1);
+}
+.nav-movil-items{
+  display:flex;
+  height:100%;
+}
+.nav-movil-item{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  cursor:pointer;
+  font-size:9.5px;
+  font-weight:600;
+  color:var(--texto-suave);
+  transition:color 0.15s;
+  border:none;
+  background:none;
+  padding:0;
+  min-height:44px;
+  position:relative;
+}
+.nav-movil-item.activo{ color:var(--azul-medio); }
+.nav-movil-item .nm-ico{ font-size:18px; line-height:1; }
+.nav-movil-item .nm-etiqueta{ font-size:9px; letter-spacing:0.02em; }
+.nav-movil-item .nm-badge{
+  position:absolute;
+  top:6px; right:calc(50% - 18px);
+  background:var(--rojo);
+  color:#fff;
+  font-size:8.5px;
+  font-weight:700;
+  min-width:14px;
+  height:14px;
+  border-radius:99px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 3px;
+  border:1.5px solid var(--superficie);
+  font-family:var(--mono);
+}
+
+/* Botón menú completo en nav móvil */
+.nav-movil-mas{
+  position:fixed;
+  bottom:70px;
+  right:14px;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:var(--azul);
+  color:#fff;
+  font-size:22px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 14px rgba(30,77,140,0.4);
+  border:none;
+  cursor:pointer;
+  z-index:151;
+  transition:transform 0.2s, background 0.15s;
+}
+.nav-movil-mas:hover{ background:var(--azul-medio); transform:scale(1.05); }
+
+/* Cajón menú completo en móvil */
+.cajon-menu{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:160;
+}
+.cajon-fondo{
+  position:absolute;
+  inset:0;
+  background:rgba(15,45,82,0.4);
+}
+.cajon-contenido{
+  position:absolute;
+  bottom:0; left:0; right:0;
+  background:var(--superficie);
+  border-radius:16px 16px 0 0;
+  padding:16px;
+  max-height:75vh;
+  overflow-y:auto;
+  animation:aparecerPagina 0.2s ease both;
+}
+.cajon-titulo{
+  font-size:13px;
+  font-weight:700;
+  color:var(--texto-suave);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+  padding-bottom:8px;
+  border-bottom:1px solid var(--borde-claro);
+}
+.cajon-grilla{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+.cajon-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  padding:12px 6px;
+  border-radius:10px;
+  background:var(--fondo);
+  cursor:pointer;
+  border:1px solid var(--borde-claro);
+  font-size:11px;
+  font-weight:500;
+  color:var(--texto-medio);
+  text-align:center;
+  transition:background 0.15s;
+  min-height:44px;
+}
+.cajon-item:hover, .cajon-item.activo{ background:var(--azul-claro); color:var(--azul-medio); }
+.cajon-item .ci-ico{ font-size:20px; }
+
+@media(max-width:640px){
+  .nav-movil{ display:block; }
+  .nav-movil-mas{ display:flex; }
+  /* Agregar padding inferior para no tapar contenido con nav */
+  .contenido{ padding-bottom:72px; }
 }
 </style>
 </head>
@@ -1248,7 +1502,59 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 
 <div class="contenedor-tostadas" id="contenedor-tostadas"></div>
 
-<!-- ═══ MÓDULO 05: PANEL DE ATAJOS DE TECLADO ═══ -->
+<!-- ═══ NAVEGACIÓN INFERIOR MÓVIL ═══ -->
+<nav class="nav-movil" id="navMovil">
+  <div class="nav-movil-items">
+    <button class="nav-movil-item activo" onclick="navegarMovil('tablero',this)" id="nm-tablero">
+      <span class="nm-ico">⊞</span>
+      <span class="nm-etiqueta">Tablero</span>
+    </button>
+    <button class="nav-movil-item" onclick="navegarMovil('turnos',this)" id="nm-turnos">
+      <span class="nm-ico">◷</span>
+      <span class="nm-etiqueta">Turnos</span>
+    </button>
+    <button class="nav-movil-item" onclick="navegarMovil('pacientes',this)" id="nm-pacientes">
+      <span class="nm-ico">♥</span>
+      <span class="nm-etiqueta">Pacientes</span>
+    </button>
+    <button class="nav-movil-item" onclick="navegarMovil('guardia',this)" id="nm-guardia">
+      <span class="nm-ico">🚨</span>
+      <span class="nm-etiqueta">Guardia</span>
+      <span class="nm-badge">3</span>
+    </button>
+    <button class="nav-movil-item" onclick="abrirCajonMenu()">
+      <span class="nm-ico">☰</span>
+      <span class="nm-etiqueta">Más</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Botón flotante acceso rápido -->
+<button class="nav-movil-mas" onclick="abrirModal('modal-nuevo-paciente')" title="Nuevo paciente">＋</button>
+
+<!-- Cajón menú completo -->
+<div class="cajon-menu" id="cajonMenu">
+  <div class="cajon-fondo" onclick="cerrarCajonMenu()"></div>
+  <div class="cajon-contenido">
+    <div class="cajon-titulo">Todos los módulos</div>
+    <div class="cajon-grilla">
+      <div class="cajon-item" onclick="navegarMovilCajon('tablero')"><span class="ci-ico">⊞</span>Tablero</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('admision')"><span class="ci-ico">◎</span>Admisión</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('turnos')"><span class="ci-ico">◷</span>Turnos</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('pacientes')"><span class="ci-ico">♥</span>Pacientes</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('medico')"><span class="ci-ico">✚</span>Médico</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('internacion')"><span class="ci-ico">▤</span>Internación</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('laboratorio')"><span class="ci-ico">⊘</span>Laboratorio</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('guardia')"><span class="ci-ico">🚨</span>Guardia</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('facturacion')"><span class="ci-ico">💳</span>Facturación</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('auditoria')"><span class="ci-ico">⊛</span>Auditoría</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('interoperabilidad')"><span class="ci-ico">⇌</span>Interop.</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('estadisticas')"><span class="ci-ico">▸</span>Estadísticas</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('configuracion')"><span class="ci-ico">⚙</span>Config.</div>
+      <div class="cajon-item" onclick="cerrarCajonMenu();alternarAltoContraste()"><span class="ci-ico">◑</span>Contraste</div>
+    </div>
+  </div>
+</div>
 <div class="panel-atajos" id="panel-atajos" onclick="if(event.target===this)cerrarPanelAtaljos()">
   <div class="atajos-modal">
     <div class="atajos-titulo">
@@ -1889,6 +2195,49 @@ function verificarAfiliacion() {
     res.innerHTML = '<div class="aviso exito" style="margin-top:10px;">✓ Afiliado activo · Plan 210 · Carencias: ninguna · Co-seguro: $1.200</div>';
     mostrarTostada('✓ Afiliación verificada correctamente','exito');
   }, 1400);
+}
+
+/* ─── NAVEGACIÓN MÓVIL ─── */
+function navegarMovil(nombreModulo, elementoClicado) {
+  /* Navegar al módulo */
+  document.querySelectorAll('.modulo').forEach(m => m.classList.remove('activo'));
+  document.querySelectorAll('.lat-item').forEach(i => i.classList.remove('activo'));
+  const modulo = document.getElementById('modulo-' + nombreModulo);
+  if (modulo) {
+    modulo.classList.add('activo');
+    modulo.style.animation = 'none';
+    modulo.offsetHeight;
+    modulo.style.animation = '';
+  }
+  const titulos = {
+    tablero:'Tablero general', admision:'Admisión', turnos:'Turnos',
+    pacientes:'Pacientes', medico:'Panel Médico', internacion:'Internación',
+    laboratorio:'Laboratorio', guardia:'Guardia', facturacion:'Facturación',
+    auditoria:'Auditoría', interoperabilidad:'Interoperabilidad',
+    estadisticas:'Estadísticas', configuracion:'Configuración'
+  };
+  document.getElementById('titulo-modulo').textContent = titulos[nombreModulo] || nombreModulo;
+  /* Actualizar estado activo en nav móvil */
+  document.querySelectorAll('.nav-movil-item').forEach(b => b.classList.remove('activo'));
+  if (elementoClicado) elementoClicado.classList.add('activo');
+  /* Sincronizar con sidebar de escritorio */
+  const itemLateral = document.querySelector(`.lat-item[onclick*="${nombreModulo}"]`);
+  if (itemLateral) itemLateral.classList.add('activo');
+  if (nombreModulo === 'tablero') animarContadores();
+}
+
+function navegarMovilCajon(nombreModulo) {
+  cerrarCajonMenu();
+  /* Desmarcar nav móvil inferior */
+  document.querySelectorAll('.nav-movil-item').forEach(b => b.classList.remove('activo'));
+  navegarMovil(nombreModulo, null);
+}
+
+function abrirCajonMenu() {
+  document.getElementById('cajonMenu').style.display = 'block';
+}
+function cerrarCajonMenu() {
+  document.getElementById('cajonMenu').style.display = 'none';
 }
 
 /* ─── MÓDULO 05: ALTO CONTRASTE ─── */
