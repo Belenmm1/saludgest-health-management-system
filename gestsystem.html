@@ -4,189 +4,226 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MediGest Pro · Sistema de Gestión Hospitalaria</title>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Serif:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 
 /* ═══════════════════════════════════════════
    VARIABLES GLOBALES
 ═══════════════════════════════════════════ */
 :root {
-  --azul-oscuro:      #0F2D52;
-  --azul:             #1E4D8C;
-  --azul-medio:       #2B6CB0;
-  --azul-claro:       #EBF4FF;
+  /* ── Colores de estado (sin cambio) ── */
+  --color-critico:       #C53030;
+  --color-critico-fondo: #FFF5F5;
+  --color-critico-borde: #FEB2B2;
+  --color-alerta:        #B7791F;
+  --color-alerta-fondo:  #FFFFF0;
+  --color-alerta-borde:  #F6E05E;
+  --color-ok:            #276749;
+  --color-ok-fondo:      #F0FFF4;
+  --color-ok-borde:      #9AE6B4;
+  --color-info:          #2C5282;
+  --color-info-fondo:    #EBF8FF;
+  --color-info-borde:    #BEE3F8;
+
+  /* ── Alias para compatibilidad con clases existentes ── */
   --verde-mar:        #0D9488;
   --verde-mar-claro:  #CCFBF1;
-  --ambar:            #D97706;
-  --ambar-claro:      #FEF3C7;
-  --rojo:             #DC2626;
-  --rojo-claro:       #FEE2E2;
-  --verde:            #16A34A;
-  --verde-claro:      #DCFCE7;
-  --morado:           #6D28D9;
-  --morado-claro:     #EDE9FE;
-  --fondo:            #F0F4F8;
-  --superficie:       #FFFFFF;
-  --borde:            #DDE3ED;
-  --borde-claro:      #EEF2F7;
-  --texto:            #0F2D52;
-  --texto-medio:      #4A5568;
-  --texto-suave:      #8896A7;
-  --ancho-lateral:    220px;
-  --alto-superior:    56px;
-  --fuente:           'Figtree', sans-serif;
-  --fuente-titulo:    'Sora', sans-serif;
-  --mono:             'DM Mono', monospace;
-  --radio:            10px;
-  --sombra:           0 2px 6px rgba(15,45,82,0.07), 0 1px 2px rgba(15,45,82,0.05);
-  --sombra-media:     0 6px 18px rgba(15,45,82,0.12), 0 2px 6px rgba(15,45,82,0.06);
-  --sombra-tarjeta:   0 2px 8px rgba(15,45,82,0.08), 0 0 0 0.5px rgba(15,45,82,0.04);
-  --transicion:       180ms cubic-bezier(0.4,0,0.2,1);
+  --ambar:            #B7791F;
+  --ambar-claro:      #FFFFF0;
+  --rojo:             #C53030;
+  --rojo-claro:       #FFF5F5;
+  --verde:            #276749;
+  --verde-claro:      #F0FFF4;
+  --morado:           #553C9A;
+  --morado-claro:     #FAF5FF;
+  --azul-oscuro:      #1A202C;
+  --azul:             #2C5282;
+  --azul-medio:       #2B6CB0;
+  --azul-claro:       #EBF8FF;
+
+  /* ── Superficie y estructura — MÓDULO 02 ── */
+  --color-fondo:           #F5F4F0;
+  --color-tarjeta:         #FAFAF8;
+  --color-borde:           #E8E6E0;
+  --color-borde-suave:     #F0EDE6;
+  --color-texto:           #1A1A16;
+  --color-texto-medio:     #4A4840;
+  --color-texto-suave:     #928E84;
+  --color-registro:        #FAFAF8;
+  --color-fondo-formulario:#F5F4F0;
+
+  /* ── Alias borde/fondo para clases existentes ── */
+  --fondo:       var(--color-fondo);
+  --superficie:  var(--color-tarjeta);
+  --borde:       var(--color-borde);
+  --borde-claro: var(--color-borde-suave);
+  --texto:       var(--color-texto);
+  --texto-medio: var(--color-texto-medio);
+  --texto-suave: var(--color-texto-suave);
+
+  /* ── Sidebar — MÓDULO 05 ── */
+  --color-sidebar:       #111827;
+  --ancho-lateral:       200px;
+
+  /* ── Topbar — MÓDULO 04 ── */
+  --alto-superior:       46px;
+
+  /* ── Tipografía — MÓDULO 01 ── */
+  --fuente:         'IBM Plex Sans', sans-serif;
+  --fuente-titulo:  'IBM Plex Serif', serif;
+  --mono:           'IBM Plex Mono', monospace;
+
+  /* ── Radio — MÓDULO 03 (reducido) ── */
+  --radio:          5px;
+
+  /* ── Sombras — MÓDULO 03 (eliminadas de tarjetas) ── */
+  --sombra:         none;
+  --sombra-media:   0 4px 16px rgba(0,0,0,0.12);
+  --sombra-tarjeta: none;
+  --transicion:     180ms cubic-bezier(0.4,0,0.2,1);
 }
 
 /* ═══════════════════════════════════════════
    BASE
 ═══════════════════════════════════════════ */
 *{box-sizing:border-box;margin:0;padding:0;}
-html{font-size:14px;}
-body{font-family:var(--fuente);background:var(--fondo);color:var(--texto);line-height:1.5;overflow-x:hidden;}
+html{font-size:13px;}
+body{font-family:var(--fuente);background:var(--color-fondo);color:var(--color-texto);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 button,input,select,textarea{font-family:var(--fuente);}
-::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(--borde);border-radius:3px;}
+::-webkit-scrollbar-thumb{background:var(--color-borde);border-radius:2px;}
 
 /* ═══════════════════════════════════════════
    ANIMACIONES
 ═══════════════════════════════════════════ */
-@keyframes aparecerPagina{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-@keyframes contadorAnima{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
-@keyframes puntoLatido{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.5);opacity:0.5;}}
-@keyframes tostadaEntra{from{opacity:0;transform:translateY(16px) scale(0.96);}to{opacity:1;transform:translateY(0) scale(1);}}
-@keyframes tostadaSale{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(8px);}}
+@keyframes aparecerPagina{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+@keyframes contadorAnima{from{opacity:0;transform:translateY(3px);}to{opacity:1;transform:translateY(0);}}
+@keyframes tostadaEntra{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@keyframes tostadaSale{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(6px);}}
 @keyframes desvanecerEntrar{from{opacity:0;}to{opacity:1;}}
 
 /* ═══════════════════════════════════════════
    ESTRUCTURA
 ═══════════════════════════════════════════ */
 .estructura{display:flex;height:100vh;overflow:hidden;}
-.lateral{width:var(--ancho-lateral);background:linear-gradient(180deg,#0A2244 0%,#0F2D52 40%,#122F56 100%);display:flex;flex-direction:column;flex-shrink:0;box-shadow:2px 0 12px rgba(15,45,82,0.18);}
+.lateral{width:var(--ancho-lateral);background:var(--color-sidebar);display:flex;flex-direction:column;flex-shrink:0;}
 .principal{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-.barra-superior{height:var(--alto-superior);background:var(--superficie);border-bottom:1px solid var(--borde);display:flex;align-items:center;padding:0 16px;gap:10px;flex-shrink:0;box-shadow:0 1px 4px rgba(15,45,82,0.06);position:relative;z-index:50;}
-.contenido{flex:1;overflow-y:auto;padding:20px;}
+.barra-superior{height:var(--alto-superior);background:#fff;border-bottom:1px solid var(--color-borde);display:flex;align-items:center;padding:0 14px;gap:9px;flex-shrink:0;position:relative;z-index:50;}
+.contenido{flex:1;overflow-y:auto;padding:18px;}
 
 /* ═══════════════════════════════════════════
    MENÚ LATERAL
 ═══════════════════════════════════════════ */
-.lat-logo{padding:14px 16px 12px;border-bottom:1px solid rgba(255,255,255,0.08);}
-.lat-logo-nombre{color:#fff;font-size:15px;font-weight:700;letter-spacing:-0.02em;font-family:var(--fuente-titulo);}
-.lat-logo-sub{color:rgba(255,255,255,0.4);font-size:10px;margin-top:2px;letter-spacing:0.04em;text-transform:uppercase;}
-.lat-nav{flex:1;padding:10px 8px;overflow-y:auto;}
-.lat-seccion{font-size:9.5px;font-weight:600;color:rgba(255,255,255,0.28);letter-spacing:0.12em;text-transform:uppercase;padding:14px 8px 5px;}
-.lat-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:12.5px;color:rgba(255,255,255,0.55);margin-bottom:1px;transition:all 0.18s cubic-bezier(0.4,0,0.2,1);border-left:2px solid transparent;min-height:38px;}
-.lat-item:hover{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.9);border-left-color:rgba(255,255,255,0.2);}
-.lat-item.activo{background:rgba(255,255,255,0.13);color:#fff;border-left-color:#5DCAA5;}
-.lat-item .icono{width:16px;text-align:center;flex-shrink:0;opacity:0.65;transition:opacity 0.15s;}
-.lat-item.activo .icono,.lat-item:hover .icono{opacity:1;}
-.lat-contador{margin-left:auto;background:var(--rojo);color:#fff;font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:99px;font-family:var(--mono);}
+.lat-logo{padding:12px 14px 10px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.lat-logo-nombre{color:#fff;font-size:13px;font-weight:500;letter-spacing:0.01em;font-family:var(--fuente);}
+.lat-logo-sub{color:rgba(255,255,255,0.3);font-size:9.5px;margin-top:2px;letter-spacing:0.06em;text-transform:uppercase;font-family:var(--mono);}
+.lat-nav{flex:1;padding:8px 6px;overflow-y:auto;}
+.lat-seccion{font-size:9px;font-weight:500;color:rgba(255,255,255,0.22);letter-spacing:0.14em;text-transform:uppercase;padding:18px 8px 4px;font-family:var(--mono);}
+.lat-item{display:flex;align-items:center;gap:9px;padding:0 8px;border-radius:4px;cursor:pointer;font-size:12px;color:rgba(255,255,255,0.48);margin-bottom:1px;transition:color 0.14s,background 0.14s;border-left:2px solid transparent;min-height:32px;}
+.lat-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.85);}
+.lat-item.activo{background:rgba(255,255,255,0.09);color:#fff;border-left-color:#fff;}
+.lat-item .icono{width:22px;text-align:center;flex-shrink:0;font-family:var(--mono);font-size:10px;font-weight:500;color:rgba(255,255,255,0.35);letter-spacing:0;}
+.lat-item.activo .icono,.lat-item:hover .icono{color:rgba(255,255,255,0.7);}
+.lat-contador{margin-left:auto;background:var(--color-critico);color:#fff;font-size:9px;font-weight:600;padding:1px 5px;border-radius:3px;font-family:var(--mono);}
 .lat-contador.verde{background:var(--verde-mar);}
 .lat-contador.ambar{background:var(--ambar);}
-.lat-usuario{padding:12px;border-top:1px solid rgba(255,255,255,0.08);}
+.lat-usuario{padding:10px 12px;border-top:1px solid rgba(255,255,255,0.07);}
 .lat-usuario-fila{display:flex;align-items:center;gap:8px;}
-.lat-avatar{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.15);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:var(--fuente-titulo);}
-.lat-usuario-nombre{color:#fff;font-size:12px;font-weight:600;}
-.lat-usuario-rol{color:rgba(255,255,255,0.4);font-size:10px;}
+.lat-avatar{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:500;flex-shrink:0;font-family:var(--mono);}
+.lat-usuario-nombre{color:rgba(255,255,255,0.75);font-size:11.5px;font-weight:400;}
+.lat-usuario-rol{color:rgba(255,255,255,0.3);font-size:9.5px;}
 
 /* ═══════════════════════════════════════════
    BARRA SUPERIOR
 ═══════════════════════════════════════════ */
-.bs-titulo{font-size:15px;font-weight:600;color:var(--texto);font-family:var(--fuente-titulo);letter-spacing:-0.01em;flex-shrink:0;}
+.bs-titulo{font-size:13px;font-weight:400;color:var(--color-texto);font-family:var(--fuente);letter-spacing:0;flex-shrink:0;}
 
 /* — BÚSQUEDA GLOBAL — */
-.bs-busqueda{position:relative;flex:1;max-width:300px;}
-.bs-busqueda input{width:100%;background:var(--fondo);border:1px solid var(--borde);border-radius:8px;padding:7px 12px 7px 32px;font-size:12.5px;color:var(--texto);outline:none;transition:border-color 0.15s,box-shadow 0.15s;}
-.bs-busqueda input:focus{border-color:var(--azul-medio);background:#fff;box-shadow:0 0 0 3px rgba(43,108,176,0.1);}
-.bs-busqueda::before{content:'⌕';position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--texto-suave);font-size:14px;pointer-events:none;}
+.bs-busqueda{position:relative;flex:1;max-width:280px;}
+.bs-busqueda input{width:100%;background:var(--color-fondo);border:1px solid var(--color-borde);border-radius:4px;padding:6px 11px 6px 28px;font-size:12px;color:var(--color-texto);outline:none;transition:border-color 0.14s;}
+.bs-busqueda input:focus{border-color:var(--azul-medio);background:#fff;}
+.bs-busqueda::before{content:'⌕';position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--color-texto-suave);font-size:13px;pointer-events:none;}
 /* Desplegable búsqueda */
-.busqueda-dd{display:none;position:absolute;top:calc(100% + 5px);left:0;right:0;background:var(--superficie);border:1px solid var(--borde);border-radius:10px;box-shadow:var(--sombra-media);z-index:300;overflow:hidden;max-height:320px;overflow-y:auto;}
-.busqueda-dd.abierto{display:block;animation:desvanecerEntrar 0.15s ease;}
+.busqueda-dd{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1px solid var(--color-borde);border-radius:5px;box-shadow:var(--sombra-media);z-index:300;overflow:hidden;max-height:300px;overflow-y:auto;}
+.busqueda-dd.abierto{display:block;animation:desvanecerEntrar 0.12s ease;}
 .bdd-grupo{padding-top:4px;}
-.bdd-titulo{font-size:9.5px;font-weight:700;color:var(--texto-suave);letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px 4px;}
-.bdd-item{display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;transition:background 0.12s;font-size:13px;}
-.bdd-item:hover{background:var(--fondo);}
-.bdd-ico{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
-.bdd-nombre{font-weight:500;color:var(--texto);flex:1;}
-.bdd-sub{font-size:11px;color:var(--texto-suave);}
-.bdd-separador{border:none;border-top:1px solid var(--borde-claro);}
-.bdd-vacio{padding:14px;text-align:center;font-size:12.5px;color:var(--texto-suave);}
+.bdd-titulo{font-size:9px;font-weight:500;color:var(--color-texto-suave);letter-spacing:0.1em;text-transform:uppercase;padding:7px 13px 3px;font-family:var(--mono);}
+.bdd-item{display:flex;align-items:center;gap:10px;padding:7px 13px;cursor:pointer;transition:background 0.1s;font-size:12.5px;}
+.bdd-item:hover{background:var(--color-fondo);}
+.bdd-ico{width:24px;height:24px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.bdd-nombre{font-weight:400;color:var(--color-texto);flex:1;}
+.bdd-sub{font-size:11px;color:var(--color-texto-suave);}
+.bdd-separador{border:none;border-top:1px solid var(--color-borde-suave);}
+.bdd-vacio{padding:12px;text-align:center;font-size:12px;color:var(--color-texto-suave);}
 
-/* Etiquetas de estado barra */
-.bs-etiqueta{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:99px;font-size:11px;flex-shrink:0;}
+/* Estado barra — sin dot parpadeante, solo texto */
+.bs-etiqueta{display:flex;align-items:center;gap:5px;padding:4px 9px;border-radius:3px;font-size:11px;flex-shrink:0;font-family:var(--mono);}
 .bs-etiqueta.alerta{background:var(--ambar-claro);color:var(--ambar);}
-.bs-etiqueta.bien{background:var(--verde-claro);color:var(--verde);}
+.bs-etiqueta.bien{background:var(--color-ok-fondo);color:var(--color-ok);}
 
-/* Punto */
-.punto{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.punto.verde{background:var(--verde);}
+/* Indicador de estado — rectángulo estático, sin latido */
+.punto{width:3px;height:10px;border-radius:1px;flex-shrink:0;}
+.punto.verde{background:var(--color-ok);}
 .punto.ambar{background:var(--ambar);}
-.punto.rojo{background:var(--rojo);}
+.punto.rojo{background:var(--color-critico);}
 .punto.azul{background:var(--azul-medio);}
-.punto.gris{background:var(--texto-suave);}
-.punto.latido{animation:puntoLatido 1.8s infinite;}
-.punto.latido-lento{animation:puntoLatido 2.5s infinite;}
+.punto.gris{background:var(--color-texto-suave);}
+.punto.latido{animation:none;}
+.punto.latido-lento{animation:none;}
 
-/* — RELOJ EN VIVO — */
-.reloj-vivo{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;gap:0;}
-.reloj-tiempo{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--texto);letter-spacing:0.04em;line-height:1;}
-.reloj-turno{font-size:10px;color:var(--verde-mar);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-top:2px;}
+/* — RELOJ — */
+.reloj-vivo{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;}
+.reloj-tiempo{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--color-texto);letter-spacing:0.06em;line-height:1;font-variant-numeric:tabular-nums;}
+.reloj-turno{font-size:9px;color:var(--color-texto-suave);font-weight:400;text-transform:uppercase;letter-spacing:0.07em;margin-top:2px;font-family:var(--mono);}
 
 /* Campana */
-.boton-campana{position:relative;width:34px;height:34px;border-radius:8px;border:1px solid var(--borde);background:var(--superficie);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:background 0.15s;flex-shrink:0;}
-.boton-campana:hover{background:var(--fondo);}
-.campana-contador{position:absolute;top:-4px;right:-4px;background:var(--rojo);color:#fff;font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:99px;display:flex;align-items:center;justify-content:center;padding:0 3px;font-family:var(--mono);border:2px solid var(--superficie);}
+.boton-campana{position:relative;width:30px;height:30px;border-radius:4px;border:1px solid var(--color-borde);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:background 0.12s;flex-shrink:0;}
+.boton-campana:hover{background:var(--color-fondo);}
+.campana-contador{position:absolute;top:-4px;right:-4px;background:var(--color-critico);color:#fff;font-size:8.5px;font-weight:600;min-width:14px;height:14px;border-radius:2px;display:flex;align-items:center;justify-content:center;padding:0 2px;font-family:var(--mono);border:1.5px solid #fff;}
 
-.bs-boton{display:flex;align-items:center;gap:5px;padding:7px 13px;border-radius:7px;border:1px solid var(--borde);background:var(--superficie);font-size:12px;color:var(--texto-medio);cursor:pointer;min-height:34px;transition:all 0.15s;flex-shrink:0;}
-.bs-boton:hover{background:var(--fondo);}
+.bs-boton{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:4px;border:1px solid var(--color-borde);background:#fff;font-size:11.5px;color:var(--color-texto-medio);cursor:pointer;min-height:30px;transition:background 0.12s;flex-shrink:0;}
+.bs-boton:hover{background:var(--color-fondo);}
 .bs-boton.primario{background:var(--azul);color:#fff;border-color:var(--azul);}
 .bs-boton.primario:hover{background:var(--azul-medio);}
 
 /* Banner UCI */
-.banner-critico{display:none;background:var(--rojo);color:#fff;padding:7px 20px;font-size:12px;font-weight:500;align-items:center;gap:8px;flex-shrink:0;}
+.banner-critico{display:none;background:var(--color-critico);color:#fff;padding:6px 18px;font-size:11.5px;font-weight:500;align-items:center;gap:8px;flex-shrink:0;font-family:var(--mono);}
 .banner-critico.visible{display:flex;}
-.bc-texto b{font-weight:700;}
+.bc-texto b{font-weight:600;}
 
 /* ═══════════════════════════════════════════
-   TARJETAS
+   TARJETAS — sin sombra, borde cálido, radio reducido
 ═══════════════════════════════════════════ */
-.tarjeta{background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio);box-shadow:var(--sombra-tarjeta);}
-.tarjeta-cabeza{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0;gap:8px;flex-wrap:wrap;}
-.tarjeta-titulo{font-size:13px;font-weight:600;color:var(--texto);font-family:var(--fuente-titulo);letter-spacing:-0.01em;}
-.tarjeta-cuerpo{padding:12px 16px 14px;}
-.tarjeta-pie{padding:10px 16px;border-top:1px solid var(--borde-claro);}
+.tarjeta{background:var(--color-tarjeta);border:1px solid var(--color-borde);border-radius:var(--radio);}
+.tarjeta-cabeza{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 0;gap:8px;flex-wrap:wrap;}
+.tarjeta-titulo{font-size:12.5px;font-weight:500;color:var(--color-texto);letter-spacing:0;}
+.tarjeta-cuerpo{padding:10px 14px 12px;}
+.tarjeta-pie{padding:8px 14px;border-top:1px solid var(--color-borde-suave);}
 
-/* Etiquetas */
-.etiqueta{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:99px;}
-.etiqueta-azul{background:var(--azul-claro);color:var(--azul-medio);}
-.etiqueta-verde{background:var(--verde-claro);color:var(--verde);}
+/* Etiquetas de estado — fondo neutro cálido, color solo en texto */
+.etiqueta{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:500;padding:2px 7px;border-radius:3px;}
+.etiqueta-azul{background:#EBF8FF;color:#2C5282;}
+.etiqueta-verde{background:var(--color-ok-fondo);color:var(--color-ok);}
 .etiqueta-ambar{background:var(--ambar-claro);color:var(--ambar);}
-.etiqueta-rojo{background:var(--rojo-claro);color:var(--rojo);}
+.etiqueta-rojo{background:var(--color-critico-fondo);color:var(--color-critico);}
 .etiqueta-verdemar{background:var(--verde-mar-claro);color:var(--verde-mar);}
-.etiqueta-gris{background:var(--borde-claro);color:var(--texto-suave);}
+.etiqueta-gris{background:#F4F4F1;color:var(--color-texto-suave);}
 .etiqueta-morado{background:var(--morado-claro);color:var(--morado);}
 
 /* ═══════════════════════════════════════════
-   MÉTRICAS
+   MÉTRICAS — números en mono, tamaño reducido
 ═══════════════════════════════════════════ */
-.metricas{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px;}
-.metrica{background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio);padding:14px 16px;box-shadow:var(--sombra-tarjeta);transition:box-shadow 0.2s,transform 0.2s;}
-.metrica:hover{box-shadow:var(--sombra-media);transform:translateY(-1px);}
-.metrica-etiqueta{font-size:10.5px;color:var(--texto-suave);margin-bottom:5px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;}
-.metrica-valor{font-size:28px;font-weight:700;color:var(--azul-oscuro);line-height:1;font-family:var(--fuente-titulo);letter-spacing:-0.02em;}
-.metrica-valor.contando{animation:contadorAnima 0.6s ease-out both;}
-.metrica-sub{font-size:11px;margin-top:5px;font-weight:500;}
-.metrica-sub.arriba{color:var(--verde);}
+.metricas{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px;}
+.metrica{background:var(--color-tarjeta);border:1px solid var(--color-borde);border-radius:var(--radio);padding:10px 12px;}
+.metrica-etiqueta{font-size:9.5px;color:var(--color-texto-suave);margin-bottom:6px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;font-family:var(--mono);}
+.metrica-valor{font-size:22px;font-weight:500;color:var(--color-texto);line-height:1;font-family:var(--mono);letter-spacing:0;font-variant-numeric:tabular-nums;}
+.metrica-valor.contando{animation:contadorAnima 0.5s ease-out both;}
+.metrica-sub{font-size:10.5px;margin-top:5px;font-weight:400;}
+.metrica-sub.arriba{color:var(--color-ok);}
 .metrica-sub.alerta{color:var(--ambar);}
-.metrica-sub.abajo{color:var(--rojo);}
-.metrica-sub.neutro{color:var(--texto-suave);}
+.metrica-sub.abajo{color:var(--color-critico);}
+.metrica-sub.neutro{color:var(--color-texto-suave);}
 
 /* ═══════════════════════════════════════════
    GRILLAS
@@ -486,17 +523,21 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .ba-icono{font-size:18px;flex-shrink:0;}
 
 /* Tostadas */
-.contenedor-tostadas{position:fixed;bottom:20px;right:20px;z-index:500;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
-.tostada{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:500;font-family:var(--fuente);box-shadow:var(--sombra-media);pointer-events:all;min-width:260px;max-width:340px;animation:tostadaEntra 0.3s cubic-bezier(0.34,1.56,0.64,1) both;border-left:3px solid;}
-.tostada.saliendo{animation:tostadaSale 0.25s ease forwards;}
-.tostada.exito{background:#F0FDF4;color:#166534;border-left-color:var(--verde);}
-.tostada.alerta{background:#FFFBEB;color:#92400E;border-left-color:var(--ambar);}
-.tostada.error{background:#FEF2F2;color:#991B1B;border-left-color:var(--rojo);}
-.tostada.info{background:#EFF6FF;color:#1E40AF;border-left-color:var(--azul-medio);}
-.tostada-icono{font-size:16px;flex-shrink:0;}
+.contenedor-tostadas{position:fixed;bottom:20px;right:20px;z-index:500;display:flex;flex-direction:column;gap:6px;pointer-events:none;}
+.tostada{display:flex;align-items:center;gap:0;padding:0;border-radius:4px;font-size:12.5px;font-weight:500;font-family:var(--fuente);pointer-events:all;min-width:240px;max-width:340px;animation:tostadaEntra 0.25s ease both;overflow:hidden;border:1px solid;}
+.tostada.saliendo{animation:tostadaSale 0.2s ease forwards;}
+.tostada-barra{width:3px;min-height:100%;flex-shrink:0;align-self:stretch;}
+.tostada-contenido{padding:10px 12px;flex:1;display:flex;align-items:center;gap:8px;}
+.tostada.exito{background:#F9FBF9;border-color:#C6E6CC;color:#1A3D22;}
+.tostada.exito .tostada-barra{background:var(--verde);}
+.tostada.alerta{background:#FFFCF5;border-color:#F0DFA0;color:#4A3200;}
+.tostada.alerta .tostada-barra{background:var(--ambar);}
+.tostada.error{background:#FDF9F9;border-color:#F0BFBF;color:#3D1010;}
+.tostada.error .tostada-barra{background:var(--rojo);}
+.tostada.info{background:#F5F8FD;border-color:#BDD0EE;color:#0F2D52;}
+.tostada.info .tostada-barra{background:var(--azul-medio);}
 .tostada-mensaje{flex:1;line-height:1.35;}
-.tostada-cerrar{background:none;border:none;cursor:pointer;font-size:14px;opacity:0.5;color:inherit;padding:0 0 0 4px;}
-.tostada-cerrar:hover{opacity:1;}
+.tostada-cerrar{background:none;border:none;cursor:pointer;font-size:13px;opacity:0.4;color:inherit;padding:0 4px;margin-left:auto;}
 
 /* ═══════════════════════════════════════════
    MODAL
@@ -884,12 +925,304 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 @media(max-width:640px){
   .nav-movil{ display:block; }
   .nav-movil-mas{ display:flex; }
-  /* Agregar padding inferior para no tapar contenido con nav */
   .contenido{ padding-bottom:72px; }
 }
+
+/* ═══════════════════════════════════════════
+   MÓDULO 01 — PANTALLA DE LOGIN
+═══════════════════════════════════════════ */
+#pantalla-login {
+  position:fixed; inset:0; z-index:1000;
+  background:linear-gradient(135deg, #060E1A 0%, #0F2D52 50%, #0A2244 100%);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:20px;
+  animation:desvanecerEntrar 0.4s ease;
+}
+#pantalla-login.oculto {
+  animation:loginSalida 0.35s ease forwards;
+  pointer-events:none;
+}
+@keyframes loginSalida {
+  from { opacity:1; transform:scale(1); }
+  to   { opacity:0; transform:scale(1.03); }
+}
+
+.login-card {
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:18px;
+  padding:40px 38px 36px;
+  width:100%;
+  max-width:420px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 24px 60px rgba(0,0,0,0.5);
+}
+
+/* Logo / marca */
+.login-logo {
+  text-align:center;
+  margin-bottom:32px;
+}
+.login-logo-icono {
+  width:60px; height:60px;
+  background:linear-gradient(135deg, #1E4D8C, #0D9488);
+  border-radius:16px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:28px;
+  margin:0 auto 14px;
+  box-shadow:0 8px 24px rgba(30,77,140,0.4);
+}
+.login-logo-nombre {
+  font-family:'Sora', sans-serif;
+  font-size:22px; font-weight:700;
+  color:#fff; letter-spacing:-0.02em;
+}
+.login-logo-inst {
+  font-size:11.5px; color:rgba(255,255,255,0.4);
+  margin-top:4px; letter-spacing:0.04em;
+}
+
+/* Campos del form */
+.login-grupo { margin-bottom:16px; }
+.login-label {
+  display:block;
+  font-size:11px; font-weight:600;
+  color:rgba(255,255,255,0.55);
+  letter-spacing:0.05em; text-transform:uppercase;
+  margin-bottom:7px;
+}
+.login-input {
+  width:100%;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:9px;
+  padding:11px 14px;
+  font-size:14px; font-family:'Figtree', sans-serif;
+  color:#fff;
+  outline:none;
+  transition:border-color 0.18s, background 0.18s, box-shadow 0.18s;
+  min-height:44px;
+}
+.login-input:focus {
+  border-color:rgba(93,202,165,0.7);
+  background:rgba(255,255,255,0.1);
+  box-shadow:0 0 0 3px rgba(93,202,165,0.15);
+}
+.login-input::placeholder { color:rgba(255,255,255,0.25); }
+.login-input.error-campo {
+  border-color:rgba(248,113,113,0.7);
+  box-shadow:0 0 0 3px rgba(248,113,113,0.15);
+}
+
+/* Fila recuérdame + olvidé */
+.login-opciones {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:20px; font-size:12px;
+}
+.login-check-wrap {
+  display:flex; align-items:center; gap:7px;
+  cursor:pointer; color:rgba(255,255,255,0.5);
+}
+.login-check-wrap input[type=checkbox] { accent-color:#5DCAA5; cursor:pointer; }
+.login-check-wrap:hover { color:rgba(255,255,255,0.75); }
+.login-olvidé {
+  color:rgba(93,202,165,0.8);
+  cursor:pointer; font-size:12px;
+  background:none; border:none; font-family:inherit;
+  transition:color 0.15s;
+}
+.login-olvidé:hover { color:#5DCAA5; }
+
+/* Botón entrar */
+.login-btn {
+  width:100%;
+  background:linear-gradient(135deg, #1E4D8C, #2B6CB0);
+  color:#fff;
+  border:none; border-radius:9px;
+  padding:13px;
+  font-size:14px; font-weight:700; font-family:'Sora', sans-serif;
+  cursor:pointer;
+  transition:opacity 0.15s, transform 0.12s, box-shadow 0.15s;
+  min-height:46px;
+  letter-spacing:-0.01em;
+  box-shadow:0 4px 14px rgba(30,77,140,0.4);
+}
+.login-btn:hover { opacity:0.92; transform:translateY(-1px); box-shadow:0 6px 20px rgba(30,77,140,0.5); }
+.login-btn:active { transform:translateY(0); }
+.login-btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+
+/* Error general */
+.login-error {
+  display:none;
+  background:rgba(220,38,38,0.12);
+  border:1px solid rgba(220,38,38,0.3);
+  border-radius:8px;
+  padding:10px 14px;
+  font-size:13px; color:#FCA5A5;
+  margin-bottom:16px;
+  text-align:center;
+  animation:desvanecerEntrar 0.2s ease;
+}
+.login-error.visible { display:block; }
+
+/* Aviso recuperación */
+.login-recuperacion {
+  display:none;
+  background:rgba(13,148,136,0.12);
+  border:1px solid rgba(13,148,136,0.3);
+  border-radius:8px;
+  padding:10px 14px;
+  font-size:12.5px; color:#5EEAD4;
+  margin-bottom:16px;
+  text-align:center;
+  animation:desvanecerEntrar 0.2s ease;
+}
+.login-recuperacion.visible { display:block; }
+
+/* Usuarios demo */
+.login-demo-titulo {
+  text-align:center;
+  font-size:10px; font-weight:700;
+  color:rgba(255,255,255,0.25);
+  letter-spacing:0.1em; text-transform:uppercase;
+  margin:22px 0 12px;
+}
+.login-demo-grilla {
+  display:grid; grid-template-columns:1fr 1fr; gap:8px;
+}
+.login-demo-btn {
+  display:flex; align-items:center; gap:8px;
+  padding:9px 11px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:9px;
+  cursor:pointer;
+  transition:background 0.15s, border-color 0.15s;
+  text-align:left;
+}
+.login-demo-btn:hover {
+  background:rgba(255,255,255,0.09);
+  border-color:rgba(255,255,255,0.16);
+}
+.login-demo-avatar {
+  width:28px; height:28px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; color:#fff; flex-shrink:0;
+}
+.login-demo-nombre { font-size:11.5px; font-weight:600; color:rgba(255,255,255,0.75); line-height:1.2; }
+.login-demo-rol    { font-size:9.5px; color:rgba(255,255,255,0.35); margin-top:1px; }
+
+/* Chip de rol en la barra superior */
+.bs-rol-chip {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:4px 10px; border-radius:99px;
+  font-size:11px; font-weight:600; flex-shrink:0;
+}
+.bs-rol-chip.admin     { background:var(--morado-claro); color:var(--morado); }
+.bs-rol-chip.medico    { background:var(--azul-claro);   color:var(--azul-medio); }
+.bs-rol-chip.enfermeria{ background:var(--verde-mar-claro);color:var(--verde-mar); }
+.bs-rol-chip.recepcion { background:var(--ambar-claro);  color:var(--ambar); }
+
+/* Botón cerrar sesión en barra */
+.bs-cerrar-sesion {
+  display:flex; align-items:center; gap:5px;
+  padding:6px 11px;
+  border:1px solid var(--borde);
+  background:var(--superficie);
+  border-radius:7px;
+  font-size:12px; font-weight:500; color:var(--rojo);
+  cursor:pointer; flex-shrink:0;
+  transition:all 0.15s; min-height:32px;
+}
+.bs-cerrar-sesion:hover { background:var(--rojo-claro); border-color:var(--rojo); }
 </style>
 </head>
 <body>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA DE LOGIN — MÓDULO 01
+═══════════════════════════════════════════ -->
+<div id="pantalla-login">
+  <div class="login-card">
+
+    <!-- Logo -->
+    <div class="login-logo">
+      <div class="login-logo-icono">🏥</div>
+      <div class="login-logo-nombre">MediGest Pro</div>
+      <div class="login-logo-inst">Centro de Salud · Sistema de Gestión</div>
+    </div>
+
+    <!-- Aviso recuperación -->
+    <div class="login-recuperacion" id="login-recuperacion">
+      📧 Se envió un enlace de recuperación a tu correo. Revisá tu bandeja de entrada.
+    </div>
+
+    <!-- Error -->
+    <div class="login-error" id="login-error">
+      Correo o contraseña incorrectos. Verificá los datos e intentá de nuevo.
+    </div>
+
+    <!-- Formulario -->
+    <div class="login-grupo">
+      <label class="login-label" for="login-email">Correo electrónico</label>
+      <input class="login-input" type="email" id="login-email"
+             placeholder="usuario@medigest.ar" autocomplete="email">
+    </div>
+    <div class="login-grupo">
+      <label class="login-label" for="login-pass">Contraseña</label>
+      <input class="login-input" type="password" id="login-pass"
+             placeholder="••••••••" autocomplete="current-password">
+    </div>
+
+    <div class="login-opciones">
+      <label class="login-check-wrap">
+        <input type="checkbox" id="login-recordar"> Recordar sesión
+      </label>
+      <button class="login-olvidé" onclick="mostrarRecuperacion()">Olvidé mi contraseña</button>
+    </div>
+
+    <button class="login-btn" id="login-btn" onclick="intentarLogin()">
+      Iniciar sesión
+    </button>
+
+    <!-- Usuarios demo -->
+    <div class="login-demo-titulo">Usuarios de demo — hacé clic para acceso rápido</div>
+    <div class="login-demo-grilla">
+      <div class="login-demo-btn" onclick="loginDemo('admin@medigest.ar','admin123')">
+        <div class="login-demo-avatar" style="background:#6D28D9;">AD</div>
+        <div>
+          <div class="login-demo-nombre">Admin General</div>
+          <div class="login-demo-rol">Administrador</div>
+        </div>
+      </div>
+      <div class="login-demo-btn" onclick="loginDemo('romero@medigest.ar','medico123')">
+        <div class="login-demo-avatar" style="background:#1E4D8C;">DR</div>
+        <div>
+          <div class="login-demo-nombre">Dra. Romero</div>
+          <div class="login-demo-rol">Médico</div>
+        </div>
+      </div>
+      <div class="login-demo-btn" onclick="loginDemo('perez.enf@medigest.ar','enf123')">
+        <div class="login-demo-avatar" style="background:#0D9488;">EP</div>
+        <div>
+          <div class="login-demo-nombre">Enf. Pérez</div>
+          <div class="login-demo-rol">Enfermería</div>
+        </div>
+      </div>
+      <div class="login-demo-btn" onclick="loginDemo('diaz.recep@medigest.ar','recep123')">
+        <div class="login-demo-avatar" style="background:#D97706;">RD</div>
+        <div>
+          <div class="login-demo-nombre">Recep. Díaz</div>
+          <div class="login-demo-rol">Recepción</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- / PANTALLA DE LOGIN -->
+
 <div class="estructura">
 
 <!-- ═══════ MENÚ LATERAL ═══════ -->
@@ -900,22 +1233,22 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
   </div>
   <div class="lat-nav">
     <div class="lat-seccion">Principal</div>
-    <div class="lat-item activo" onclick="navegarA('tablero',this)"><span class="icono">⊞</span> Tablero</div>
+    <div class="lat-item activo" onclick="navegarA('tablero',this)"><span class="icono">TB</span> Tablero</div>
     <div class="lat-seccion">Recepción</div>
-    <div class="lat-item" onclick="navegarA('admision',this)"><span class="icono">◎</span> Admisión <span class="lat-contador">3</span></div>
-    <div class="lat-item" onclick="navegarA('turnos',this)"><span class="icono">◷</span> Turnos</div>
+    <div class="lat-item" onclick="navegarA('admision',this)"><span class="icono">AD</span> Admisión <span class="lat-contador">3</span></div>
+    <div class="lat-item" onclick="navegarA('turnos',this)"><span class="icono">TU</span> Turnos</div>
     <div class="lat-seccion">Clínico</div>
-    <div class="lat-item" onclick="navegarA('pacientes',this)"><span class="icono">♥</span> Pacientes</div>
-    <div class="lat-item" onclick="navegarA('medico',this)"><span class="icono">✚</span> Panel Médico</div>
-    <div class="lat-item" onclick="navegarA('internacion',this)"><span class="icono">▤</span> Internación</div>
-    <div class="lat-item" onclick="navegarA('laboratorio',this)"><span class="icono">⊘</span> Laboratorio <span class="lat-contador verde">5</span></div>
-    <div class="lat-item" onclick="navegarA('guardia',this)"><span class="icono">🚨</span> Guardia <span class="lat-contador">3</span></div>
+    <div class="lat-item" onclick="navegarA('pacientes',this)"><span class="icono">PC</span> Pacientes</div>
+    <div class="lat-item" onclick="navegarA('medico',this)"><span class="icono">MD</span> Panel Médico</div>
+    <div class="lat-item" onclick="navegarA('internacion',this)"><span class="icono">IN</span> Internación</div>
+    <div class="lat-item" onclick="navegarA('laboratorio',this)"><span class="icono">LB</span> Laboratorio <span class="lat-contador verde">5</span></div>
+    <div class="lat-item" onclick="navegarA('guardia',this)"><span class="icono">GU</span> Guardia <span class="lat-contador">3</span></div>
     <div class="lat-seccion">Administración</div>
-    <div class="lat-item" onclick="navegarA('facturacion',this)"><span class="icono">💳</span> Facturación</div>
-    <div class="lat-item" onclick="navegarA('auditoria',this)"><span class="icono">⊛</span> Auditoría</div>
-    <div class="lat-item" onclick="navegarA('interoperabilidad',this)"><span class="icono">⇌</span> Interop.</div>
-    <div class="lat-item" onclick="navegarA('estadisticas',this)"><span class="icono">▸</span> Estadísticas</div>
-    <div class="lat-item" onclick="navegarA('configuracion',this)"><span class="icono">⚙</span> Configuración</div>
+    <div class="lat-item" onclick="navegarA('facturacion',this)"><span class="icono">FC</span> Facturación</div>
+    <div class="lat-item" onclick="navegarA('auditoria',this)"><span class="icono">AU</span> Auditoría</div>
+    <div class="lat-item" onclick="navegarA('interoperabilidad',this)"><span class="icono">IO</span> Interop.</div>
+    <div class="lat-item" onclick="navegarA('estadisticas',this)"><span class="icono">ES</span> Estadísticas</div>
+    <div class="lat-item" onclick="navegarA('configuracion',this)"><span class="icono">CF</span> Configuración</div>
   </div>
   <div class="lat-usuario">
     <div class="lat-usuario-fila">
@@ -966,7 +1299,13 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
       <span class="reloj-turno">Turno Mañana</span>
     </div>
 
-    <button class="bs-boton primario" onclick="abrirModal('modal-nuevo-paciente')" data-atajo="N · Nuevo paciente">＋ Nuevo paciente</button>
+    <!-- Chip de rol activo — módulo 01 -->
+    <span class="bs-rol-chip admin" id="bs-rol-chip">⚙ Administrador</span>
+
+    <button class="bs-boton primario" onclick="abrirModal('modal-nuevo-paciente')" data-atajo="N · Nuevo paciente" id="btn-nuevo-paciente">＋ Nuevo paciente</button>
+
+    <!-- Cerrar sesión — módulo 01 -->
+    <button class="bs-cerrar-sesion" onclick="cerrarSesion()" title="Cerrar sesión">⏻</button>
   </div>
 
   <div class="contenido">
@@ -2311,6 +2650,221 @@ function navegarDesdeAtajo(nombreModulo) {
   const elemento = document.querySelector(`.lat-item[onclick*="${nombreModulo}"]`);
   if (elemento) elemento.click();
 }
+
+/* ═══════════════════════════════════════════
+   MÓDULO 01 — SISTEMA DE LOGIN Y ROLES
+═══════════════════════════════════════════ */
+
+/* ── Definición de usuarios demo ── */
+const USUARIOS_DEMO = {
+  'admin@medigest.ar':      { pass:'admin123',   nombre:'Admin General',  iniciales:'AD', rol:'admin',      rolLabel:'Administrador', turno:'Turno Mañana' },
+  'romero@medigest.ar':     { pass:'medico123',  nombre:'Dra. Romero',    iniciales:'DR', rol:'medico',     rolLabel:'Médico',         turno:'Turno Mañana' },
+  'perez.enf@medigest.ar':  { pass:'enf123',     nombre:'Enf. Pérez',     iniciales:'EP', rol:'enfermeria', rolLabel:'Enfermería',     turno:'Turno Mañana' },
+  'diaz.recep@medigest.ar': { pass:'recep123',   nombre:'Recep. Díaz',    iniciales:'RD', rol:'recepcion',  rolLabel:'Recepción',      turno:'Turno Mañana' },
+};
+
+/* ── Permisos por rol: qué módulos puede ver cada uno ──
+   Formato: { seccion: [ lista de onclick-module-names ] }
+*/
+const PERMISOS_ROL = {
+  admin: {
+    nav: ['tablero','admision','turnos','pacientes','medico','internacion','laboratorio','guardia','facturacion','auditoria','interoperabilidad','estadisticas','configuracion'],
+    btnNuevoPaciente: true,
+  },
+  medico: {
+    nav: ['tablero','pacientes','medico','laboratorio','turnos'],
+    btnNuevoPaciente: false,
+  },
+  enfermeria: {
+    nav: ['tablero','pacientes','internacion','guardia'],
+    btnNuevoPaciente: false,
+  },
+  recepcion: {
+    nav: ['tablero','admision','turnos','facturacion'],
+    btnNuevoPaciente: true,
+  },
+};
+
+/* ── Usuario actualmente logueado ── */
+let usuarioActivo = null;
+
+/* ── Intentar login con email + pass ── */
+function intentarLogin() {
+  const email = document.getElementById('login-email').value.trim().toLowerCase();
+  const pass  = document.getElementById('login-pass').value;
+  const errorEl = document.getElementById('login-error');
+  const recuperEl = document.getElementById('login-recuperacion');
+
+  // Limpiar estados previos
+  errorEl.classList.remove('visible');
+  recuperEl.classList.remove('visible');
+  document.getElementById('login-email').classList.remove('error-campo');
+  document.getElementById('login-pass').classList.remove('error-campo');
+
+  if (!email || !pass) {
+    errorEl.textContent = 'Completá el correo y la contraseña para continuar.';
+    errorEl.classList.add('visible');
+    if (!email) document.getElementById('login-email').classList.add('error-campo');
+    if (!pass)  document.getElementById('login-pass').classList.add('error-campo');
+    return;
+  }
+
+  const usuario = USUARIOS_DEMO[email];
+  if (!usuario || usuario.pass !== pass) {
+    errorEl.textContent = 'Correo o contraseña incorrectos. Verificá los datos e intentá de nuevo.';
+    errorEl.classList.add('visible');
+    document.getElementById('login-email').classList.add('error-campo');
+    document.getElementById('login-pass').classList.add('error-campo');
+    // Animación de shake en la card
+    const card = document.querySelector('.login-card');
+    card.style.animation = 'none'; card.offsetHeight;
+    card.style.animation = 'loginShake 0.4s ease';
+    return;
+  }
+
+  // Login correcto
+  const recordar = document.getElementById('login-recordar').checked;
+  if (recordar) sessionStorage.setItem('medigest-sesion', email);
+
+  entrarAlSistema(email, usuario);
+}
+
+/* ── Login directo desde botones demo ── */
+function loginDemo(email, pass) {
+  document.getElementById('login-email').value = email;
+  document.getElementById('login-pass').value = pass;
+  intentarLogin();
+}
+
+/* ── Entrar al sistema con el usuario dado ── */
+function entrarAlSistema(email, usuario) {
+  usuarioActivo = { email, ...usuario };
+
+  // Aplicar permisos al menú lateral
+  aplicarPermisos(usuario.rol);
+
+  // Actualizar UI de barra superior
+  const chip = document.getElementById('bs-rol-chip');
+  chip.className = 'bs-rol-chip ' + usuario.rol;
+  const iconosRol = { admin:'⚙', medico:'🩺', enfermeria:'💉', recepcion:'📋' };
+  chip.textContent = (iconosRol[usuario.rol]||'') + ' ' + usuario.rolLabel;
+
+  // Actualizar chip de usuario en menú lateral
+  document.querySelector('.lat-usuario-nombre').textContent = usuario.nombre;
+  document.querySelector('.lat-usuario-rol').textContent    = usuario.rolLabel + ' · ' + usuario.turno;
+  document.querySelector('.lat-avatar').textContent         = usuario.iniciales;
+  document.getElementById('relojTurno') && (document.getElementById('relojTurno').textContent = usuario.turno);
+
+  // Mostrar/ocultar botón "Nuevo paciente"
+  const btnNuevo = document.getElementById('btn-nuevo-paciente');
+  if (btnNuevo) btnNuevo.style.display = PERMISOS_ROL[usuario.rol].btnNuevoPaciente ? '' : 'none';
+
+  // Navegar al tablero
+  const primerModulo = PERMISOS_ROL[usuario.rol].nav[0] || 'tablero';
+  const primerItem = document.querySelector(`.lat-item[onclick*="'${primerModulo}'"]`);
+  navegarA(primerModulo, primerItem);
+
+  // Ocultar pantalla de login con animación
+  const pantalla = document.getElementById('pantalla-login');
+  pantalla.classList.add('oculto');
+  setTimeout(() => pantalla.style.display = 'none', 380);
+
+  // Tostada de bienvenida
+  setTimeout(() => mostrarTostada(`Bienvenido/a, ${usuario.nombre}`, 'exito', 4000), 500);
+}
+
+/* ── Aplicar permisos al menú lateral ── */
+function aplicarPermisos(rol) {
+  const permitidos = new Set(PERMISOS_ROL[rol].nav);
+
+  // Ocultar / mostrar items del sidebar
+  document.querySelectorAll('.lat-item[onclick^="navegarA"]').forEach(item => {
+    const match = item.getAttribute('onclick').match(/navegarA\('([^']+)'/);
+    if (!match) return;
+    const modulo = match[1];
+    item.style.display = permitidos.has(modulo) ? '' : 'none';
+  });
+
+  // Ocultar secciones de nav que quedaron sin items visibles
+  document.querySelectorAll('.lat-seccion').forEach(sec => {
+    let siguiente = sec.nextElementSibling;
+    let tieneItems = false;
+    while (siguiente && !siguiente.classList.contains('lat-seccion') && !siguiente.classList.contains('lat-usuario')) {
+      if (siguiente.classList.contains('lat-item') && siguiente.style.display !== 'none') {
+        tieneItems = true; break;
+      }
+      siguiente = siguiente.nextElementSibling;
+    }
+    sec.style.display = tieneItems ? '' : 'none';
+  });
+
+  // También ocultar módulos del cajón móvil según permisos
+  document.querySelectorAll('.cajon-item[onclick]').forEach(item => {
+    const match = item.getAttribute('onclick').match(/navegarMovilCajon\('([^']+)'/);
+    if (!match) return;
+    item.style.display = permitidos.has(match[1]) ? '' : 'none';
+  });
+}
+
+/* ── Cerrar sesión ── */
+function cerrarSesion() {
+  usuarioActivo = null;
+  sessionStorage.removeItem('medigest-sesion');
+
+  // Limpiar campos del login
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-pass').value = '';
+  document.getElementById('login-error').classList.remove('visible');
+  document.getElementById('login-recuperacion').classList.remove('visible');
+  document.getElementById('login-email').classList.remove('error-campo');
+  document.getElementById('login-pass').classList.remove('error-campo');
+
+  // Mostrar pantalla de login
+  const pantalla = document.getElementById('pantalla-login');
+  pantalla.style.display = '';
+  pantalla.classList.remove('oculto');
+  pantalla.style.animation = 'none'; pantalla.offsetHeight;
+  pantalla.style.animation = 'desvanecerEntrar 0.3s ease';
+}
+
+/* ── Recuperación de contraseña ── */
+function mostrarRecuperacion() {
+  const email = document.getElementById('login-email').value.trim();
+  const rec = document.getElementById('login-recuperacion');
+  const err = document.getElementById('login-error');
+  err.classList.remove('visible');
+  if (email) {
+    rec.textContent = `📧 Se envió un enlace de recuperación a ${email}. Revisá tu bandeja de entrada.`;
+  } else {
+    rec.textContent = '📧 Ingresá tu correo arriba y volvé a hacer clic en "Olvidé mi contraseña".';
+  }
+  rec.classList.add('visible');
+}
+
+/* ── Shake animation para error de login ── */
+const loginShakeStyle = document.createElement('style');
+loginShakeStyle.textContent = `
+  @keyframes loginShake {
+    0%,100%{transform:translateX(0);}
+    20%{transform:translateX(-8px);}
+    40%{transform:translateX(8px);}
+    60%{transform:translateX(-5px);}
+    80%{transform:translateX(5px);}
+  }
+`;
+document.head.appendChild(loginShakeStyle);
+
+/* ── Enter en campos de login ── */
+document.getElementById('login-email').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('login-pass').focus(); });
+document.getElementById('login-pass').addEventListener('keydown',  e => { if (e.key === 'Enter') intentarLogin(); });
+
+/* ── Restaurar sesión si estaba guardada ── */
+(function restaurarSesion() {
+  const emailGuardado = sessionStorage.getItem('medigest-sesion');
+  if (emailGuardado && USUARIOS_DEMO[emailGuardado]) {
+    entrarAlSistema(emailGuardado, USUARIOS_DEMO[emailGuardado]);
+  }
+})();
 
 /* ─── INICIALIZAR ─── */
 window.addEventListener('DOMContentLoaded', () => {
