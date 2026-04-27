@@ -202,14 +202,14 @@ button,input,select,textarea{font-family:var(--fuente);}
 .tarjeta-pie{padding:8px 14px;border-top:1px solid var(--color-borde-suave);}
 
 /* Etiquetas de estado — fondo neutro cálido, color solo en texto */
-.etiqueta{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:500;padding:2px 7px;border-radius:3px;}
-.etiqueta-azul{background:#EBF8FF;color:#2C5282;}
-.etiqueta-verde{background:var(--color-ok-fondo);color:var(--color-ok);}
-.etiqueta-ambar{background:var(--ambar-claro);color:var(--ambar);}
-.etiqueta-rojo{background:var(--color-critico-fondo);color:var(--color-critico);}
-.etiqueta-verdemar{background:var(--verde-mar-claro);color:var(--verde-mar);}
-.etiqueta-gris{background:#F4F4F1;color:var(--color-texto-suave);}
-.etiqueta-morado{background:var(--morado-claro);color:var(--morado);}
+.etiqueta{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:500;padding:2px 7px;border-radius:3px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.02em;}
+.etiqueta-azul{background:#F4F4F1;color:#3D3D38;border:1px solid #E0DDD7;}
+.etiqueta-verde{background:#EDFFF3;color:#1A5C32;}
+.etiqueta-ambar{background:#FFF8ED;color:#7A4D0A;}
+.etiqueta-rojo{background:#FFEEED;color:#9B1C1C;}
+.etiqueta-verdemar{background:#EDFFF8;color:#0D5C48;}
+.etiqueta-gris{background:#F4F4F1;color:#6B6B64;}
+.etiqueta-morado{background:#F3F0FF;color:#5B21B6;}
 
 /* ═══════════════════════════════════════════
    MÉTRICAS — números en mono, tamaño reducido
@@ -236,129 +236,143 @@ button,input,select,textarea{font-family:var(--fuente);}
 /* ═══════════════════════════════════════════
    TABLA
 ═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   TABLA — módulo 02: colores cálidos, densidad aumentada
+═══════════════════════════════════════════ */
 .tabla{width:100%;border-collapse:collapse;}
-.tabla th{font-size:10px;font-weight:700;color:var(--texto-suave);text-align:left;padding:8px 12px;border-bottom:1px solid var(--borde);letter-spacing:0.06em;text-transform:uppercase;font-family:var(--fuente-titulo);}
-.tabla td{padding:10px 12px;border-bottom:1px solid var(--borde-claro);font-size:12.5px;color:var(--texto-medio);vertical-align:middle;transition:background 0.12s;border-left:2px solid transparent;}
+.tabla th{font-size:9.5px;font-weight:500;color:var(--color-texto-suave);text-align:left;padding:7px 10px;border-bottom:1px solid var(--color-borde);letter-spacing:0.08em;text-transform:uppercase;font-family:var(--mono);}
+.tabla td{padding:7px 10px;border-bottom:1px solid var(--color-borde-suave);font-size:12px;color:var(--color-texto-medio);vertical-align:middle;transition:background 0.1s;border-left:2px solid transparent;}
 .tabla tr:last-child td{border-bottom:none;}
-.tabla tr:hover td{background:#F6F9FD;border-left-color:var(--azul-medio);}
-.tabla .td-nombre{color:var(--texto);font-weight:600;}
+.tabla tr:hover td{background:#F2F0EB;border-left-color:var(--color-borde);}
+.tabla .td-nombre{color:var(--color-texto);font-weight:500;}
 /* Filas completas clicables */
 .tabla.clicable tbody tr{cursor:pointer;}
+.tabla.clicable tbody tr td{padding-top:8px;padding-bottom:8px;}
 
 /* ═══════════════════════════════════════════
    AVATAR
 ═══════════════════════════════════════════ */
-.av{width:30px;height:30px;border-radius:50%;background:var(--azul-claro);color:var(--azul-medio);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;flex-shrink:0;}
-.av.verde-mar{background:var(--verde-mar-claro);color:var(--verde-mar);}
-.av.ambar{background:var(--ambar-claro);color:var(--ambar);}
-.av.oscuro{background:var(--azul-oscuro);color:#fff;}
+/* ═══════════════════════════════════════════
+   AVATAR — módulo 02: neutros cálidos en lugar de azules
+═══════════════════════════════════════════ */
+.av{width:28px;height:28px;border-radius:50%;background:#EDEAE4;color:var(--color-texto-medio);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;font-family:var(--mono);}
+.av.verde-mar{background:#D4F1EC;color:#0A5F53;}
+.av.ambar{background:#FFF0D4;color:#7A4D0A;}
+.av.oscuro{background:var(--color-sidebar);color:#fff;}
 .fila-av{display:flex;align-items:center;gap:8px;}
 
 /* ═══════════════════════════════════════════
    FORMULARIO
 ═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   FORMULARIO — módulo 02: variables nuevas, radio reducido
+═══════════════════════════════════════════ */
 .fila-campo{display:grid;gap:10px;margin-bottom:10px;}
 .fila-campo.dos{grid-template-columns:1fr 1fr;}
 .fila-campo.tres{grid-template-columns:1fr 1fr 1fr;}
 .grupo-campo{display:flex;flex-direction:column;gap:4px;}
-.etiqueta-campo{font-size:11px;font-weight:600;color:var(--texto-suave);letter-spacing:0.03em;}
-.entrada{padding:9px 11px;border:1px solid var(--borde);border-radius:7px;font-size:13px;color:var(--texto);background:var(--superficie);outline:none;transition:border 0.15s;min-height:38px;}
-.entrada:focus{border-color:var(--azul-medio);box-shadow:0 0 0 3px rgba(43,108,176,0.1);}
+.etiqueta-campo{font-size:10px;font-weight:500;color:var(--color-texto-suave);letter-spacing:0.06em;text-transform:uppercase;font-family:var(--mono);}
+.entrada{padding:8px 10px;border:1px solid var(--color-borde);border-radius:4px;font-size:13px;color:var(--color-texto);background:var(--color-tarjeta);outline:none;transition:border-color 0.14s;min-height:36px;}
+.entrada:focus{border-color:var(--azul-medio);}
 select.entrada{cursor:pointer;}
-textarea.entrada{min-height:80px;resize:vertical;}
+textarea.entrada{min-height:78px;resize:vertical;}
 
 /* ═══════════════════════════════════════════
    MÓDULOS / PÁGINAS
 ═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   MÓDULOS / PÁGINAS — módulo 01: serif weight 300 en h1
+═══════════════════════════════════════════ */
 .modulo{display:none;}
 .modulo.activo{display:block;animation:aparecerPagina var(--transicion) both;}
-.modulo-cabecera{margin-bottom:18px;}
-.modulo-cabecera h1{font-size:20px;font-weight:700;color:var(--azul-oscuro);font-family:var(--fuente-titulo);letter-spacing:-0.02em;}
-.modulo-cabecera p{font-size:12.5px;color:var(--texto-suave);margin-top:3px;}
+.modulo-cabecera{margin-bottom:16px;}
+.modulo-cabecera h1{font-size:18px;font-weight:300;color:var(--color-texto);font-family:var(--fuente-titulo);letter-spacing:-0.01em;}
+.modulo-cabecera p{font-size:11.5px;color:var(--color-texto-suave);margin-top:3px;}
 
 /* ═══════════════════════════════════════════
-   FILAS DE ÍTEM
+   FILAS DE ÍTEM — variables nuevas
 ═══════════════════════════════════════════ */
-.fila-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--borde-claro);}
+.fila-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--color-borde-suave);}
 .fila-item:last-child{border-bottom:none;}
 .fi-info{flex:1;min-width:0;}
-.fi-nombre{font-size:13px;font-weight:500;color:var(--texto);}
-.fi-sub{font-size:11px;color:var(--texto-suave);margin-top:1px;}
+.fi-nombre{font-size:12.5px;font-weight:500;color:var(--color-texto);}
+.fi-sub{font-size:11px;color:var(--color-texto-suave);margin-top:1px;}
 .fi-fin{text-align:right;flex-shrink:0;}
-.fi-hora{font-size:11px;color:var(--texto-suave);}
+.fi-hora{font-size:11px;color:var(--color-texto-suave);font-family:var(--mono);}
 
 /* ═══════════════════════════════════════════
-   AUDITORÍA
+   AUDITORÍA — variables nuevas
 ═══════════════════════════════════════════ */
-.aud-fila{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--borde-claro);align-items:flex-start;}
+.aud-fila{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--color-borde-suave);align-items:flex-start;}
 .aud-fila:last-child{border-bottom:none;}
-.aud-icono{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:600;}
-.aud-texto{font-size:12px;color:var(--texto);line-height:1.4;}
-.aud-meta{font-size:10.5px;color:var(--texto-suave);margin-top:2px;font-family:var(--mono);}
+.aud-icono{width:24px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:600;font-family:var(--mono);}
+.aud-texto{font-size:12px;color:var(--color-texto);line-height:1.4;}
+.aud-meta{font-size:10px;color:var(--color-texto-suave);margin-top:2px;font-family:var(--mono);}
 
 /* ═══════════════════════════════════════════
-   LÍNEA DE TIEMPO
+   LÍNEA DE TIEMPO — variables nuevas
 ═══════════════════════════════════════════ */
 .linea-tiempo{padding:4px 0;}
-.lt-item{display:flex;gap:12px;padding:8px 0;position:relative;}
-.lt-item:not(:last-child)::before{content:'';position:absolute;left:15px;top:32px;bottom:0;width:1px;background:var(--borde);}
-.lt-icono{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;}
+.lt-item{display:flex;gap:12px;padding:7px 0;position:relative;}
+.lt-item:not(:last-child)::before{content:'';position:absolute;left:14px;top:30px;bottom:0;width:1px;background:var(--color-borde);}
+.lt-icono{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;}
 .lt-cuerpo{flex:1;}
-.lt-titulo{font-size:12.5px;font-weight:500;color:var(--texto);}
-.lt-sub{font-size:11px;color:var(--texto-suave);margin-top:1px;}
-.lt-fecha{font-size:10px;color:var(--texto-suave);font-family:var(--mono);}
+.lt-titulo{font-size:12px;font-weight:500;color:var(--color-texto);}
+.lt-sub{font-size:11px;color:var(--color-texto-suave);margin-top:1px;}
+.lt-fecha{font-size:10px;color:var(--color-texto-suave);font-family:var(--mono);}
 
 /* ═══════════════════════════════════════════
-   BARRA DE PROGRESO
+   BARRA DE PROGRESO — variables nuevas
 ═══════════════════════════════════════════ */
-.progreso{margin-bottom:10px;}
-.progreso-cabeza{display:flex;justify-content:space-between;font-size:11px;color:var(--texto-suave);margin-bottom:4px;}
-.progreso-pista{height:6px;background:var(--borde-claro);border-radius:3px;overflow:hidden;}
-.progreso-relleno{height:100%;border-radius:3px;transition:width 0.5s;}
+.progreso{margin-bottom:9px;}
+.progreso-cabeza{display:flex;justify-content:space-between;font-size:11px;color:var(--color-texto-suave);margin-bottom:4px;}
+.progreso-pista{height:4px;background:var(--color-borde);border-radius:2px;overflow:hidden;}
+.progreso-relleno{height:100%;border-radius:2px;transition:width 0.5s;}
 
 /* ═══════════════════════════════════════════
    DIVISOR
 ═══════════════════════════════════════════ */
-.divisor{border:none;border-top:1px solid var(--borde-claro);margin:12px 0;}
+.divisor{border:none;border-top:1px solid var(--color-borde-suave);margin:10px 0;}
 
 /* ═══════════════════════════════════════════
-   PESTAÑAS
+   PESTAÑAS — variables nuevas
 ═══════════════════════════════════════════ */
-.pestanias{display:flex;gap:2px;border-bottom:1px solid var(--borde);margin-bottom:16px;}
-.pestania{padding:8px 14px;font-size:12.5px;font-weight:500;color:var(--texto-suave);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color 0.15s;}
-.pestania.activa{color:var(--azul-medio);border-bottom-color:var(--azul-medio);}
+.pestanias{display:flex;gap:0;border-bottom:1px solid var(--color-borde);margin-bottom:14px;}
+.pestania{padding:7px 14px;font-size:12px;font-weight:400;color:var(--color-texto-suave);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color 0.14s;}
+.pestania.activa{color:var(--color-texto);border-bottom-color:var(--color-texto);}
 .panel-pestania{display:none;}
 .panel-pestania.activo{display:block;}
 
 /* ═══════════════════════════════════════════
-   AVISOS
+   AVISOS — módulo 02: sin azul como decoración, fondos cálidos
 ═══════════════════════════════════════════ */
-.aviso{padding:10px 14px;border-radius:8px;font-size:12.5px;margin-bottom:10px;display:flex;align-items:flex-start;gap:8px;line-height:1.4;}
-.aviso.info{background:var(--azul-claro);color:var(--azul-medio);}
-.aviso.alerta{background:var(--ambar-claro);color:var(--ambar);}
-.aviso.exito{background:var(--verde-claro);color:var(--verde);}
-.aviso.peligro{background:var(--rojo-claro);color:var(--rojo);}
+.aviso{padding:9px 12px;border-radius:4px;font-size:12px;margin-bottom:10px;display:flex;align-items:flex-start;gap:8px;line-height:1.4;border-left:3px solid;}
+.aviso.info{background:#F0F7FF;color:#1E3A5F;border-left-color:#7BAED4;border:1px solid #C8DCF0;border-left:3px solid #7BAED4;}
+.aviso.alerta{background:#FFFCF0;color:#5C3C0A;border:1px solid #E8D5A0;border-left:3px solid var(--ambar);}
+.aviso.exito{background:#F0FAF4;color:#1A3D22;border:1px solid #B0D9BE;border-left:3px solid var(--verde);}
+.aviso.peligro{background:#FFF5F5;color:#5A1010;border:1px solid #F0C0C0;border-left:3px solid var(--rojo);}
 
 /* ═══════════════════════════════════════════
-   QR SIMULADO
+   QR SIMULADO — variables nuevas
 ═══════════════════════════════════════════ */
-.qr-simulado{width:64px;height:64px;background:var(--fondo);border:1px solid var(--borde);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.qr-interior{width:44px;height:44px;background:repeating-linear-gradient(0deg,var(--texto) 0,var(--texto) 2px,transparent 2px,transparent 5px),repeating-linear-gradient(90deg,var(--texto) 0,var(--texto) 2px,transparent 2px,transparent 5px);opacity:0.2;}
+.qr-simulado{width:60px;height:60px;background:var(--color-fondo);border:1px solid var(--color-borde);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.qr-interior{width:40px;height:40px;background:repeating-linear-gradient(0deg,var(--color-texto) 0,var(--color-texto) 2px,transparent 2px,transparent 5px),repeating-linear-gradient(90deg,var(--color-texto) 0,var(--color-texto) 2px,transparent 2px,transparent 5px);opacity:0.15;}
 
 /* ═══════════════════════════════════════════
-   BOTÓN DE ACCIÓN — mínimo 44px (módulo 05)
+   BOTONES — módulo 02+03: radius 4px, sin azul decorativo
 ═══════════════════════════════════════════ */
-.boton{padding:8px 14px;border-radius:7px;font-size:12.5px;font-weight:500;border:1px solid var(--borde);background:var(--superficie);color:var(--texto-medio);cursor:pointer;transition:all 0.15s;min-height:44px;position:relative;}
-.boton:hover{background:var(--fondo);}
-.boton.primario{background:var(--azul);color:#fff;border-color:var(--azul);}
-.boton.primario:hover{background:var(--azul-medio);}
-.boton.peligro{background:var(--rojo-claro);color:var(--rojo);border-color:#FECACA;}
-.boton.exito{background:var(--verde-claro);color:var(--verde);border-color:#BBF7D0;}
-.boton.ambar{background:var(--ambar-claro);color:var(--ambar);border-color:#FDE68A;}
-.boton.chico{padding:6px 12px;font-size:11.5px;min-height:44px;}
-/* Toda la fila de tabla es clicable */
+.boton{padding:7px 13px;border-radius:4px;font-size:12px;font-weight:500;border:1px solid var(--color-borde);background:var(--color-tarjeta);color:var(--color-texto-medio);cursor:pointer;transition:background 0.12s,border-color 0.12s;min-height:36px;position:relative;}
+.boton:hover{background:var(--color-fondo);border-color:#D0CDC6;}
+.boton.primario{background:#1A1A16;color:#fff;border-color:#1A1A16;}
+.boton.primario:hover{background:#333330;}
+.boton.peligro{background:#FFF5F5;color:var(--color-critico);border-color:#F0C0C0;}
+.boton.peligro:hover{background:#FFE8E8;}
+.boton.exito{background:#F0FAF4;color:var(--color-ok);border-color:#B0D9BE;}
+.boton.exito:hover{background:#E0F5E8;}
+.boton.ambar{background:#FFFCF0;color:var(--ambar);border-color:#E8D5A0;}
+.boton.chico{padding:5px 10px;font-size:11px;min-height:30px;}
 .tabla.clicable tbody tr{cursor:pointer;}
-.tabla.clicable tbody tr td{padding-top:12px;padding-bottom:12px;}
+.tabla.clicable tbody tr td{padding-top:8px;padding-bottom:8px;}
 
 /* ═══════════════════════════════════════════
    MÓDULO 05 — ATAJOS DE TECLADO (tooltips)
@@ -540,18 +554,18 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .tostada-cerrar{background:none;border:none;cursor:pointer;font-size:13px;opacity:0.4;color:inherit;padding:0 4px;margin-left:auto;}
 
 /* ═══════════════════════════════════════════
-   MODAL
+   MODAL — módulo 02: variables nuevas, radius reducido
 ═══════════════════════════════════════════ */
-.fondo-modal{display:none;position:fixed;inset:0;background:rgba(15,45,82,0.35);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(2px);padding:20px;}
+.fondo-modal{display:none;position:fixed;inset:0;background:rgba(26,26,22,0.4);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(2px);padding:20px;}
 .fondo-modal.abierto{display:flex;}
-.modal{background:var(--superficie);border-radius:14px;width:100%;max-width:520px;box-shadow:var(--sombra-media);max-height:90vh;overflow-y:auto;animation:aparecerPagina 0.18s ease both;}
+.modal{background:var(--color-tarjeta);border-radius:6px;width:100%;max-width:520px;box-shadow:0 8px 32px rgba(0,0,0,0.16);max-height:90vh;overflow-y:auto;animation:aparecerPagina 0.18s ease both;border:1px solid var(--color-borde);}
 .modal.grande{max-width:700px;}
-.modal-cabeza{padding:18px 20px 14px;border-bottom:1px solid var(--borde);display:flex;align-items:center;justify-content:space-between;}
-.modal-titulo{font-size:15px;font-weight:700;color:var(--azul-oscuro);font-family:var(--fuente-titulo);letter-spacing:-0.01em;}
-.modal-cerrar{background:none;border:none;font-size:18px;color:var(--texto-suave);cursor:pointer;line-height:1;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:background 0.15s;}
-.modal-cerrar:hover{background:var(--fondo);}
-.modal-cuerpo{padding:18px 20px;}
-.modal-pie{padding:12px 20px;border-top:1px solid var(--borde);display:flex;gap:8px;justify-content:flex-end;}
+.modal-cabeza{padding:16px 18px 12px;border-bottom:1px solid var(--color-borde);display:flex;align-items:center;justify-content:space-between;}
+.modal-titulo{font-size:14px;font-weight:500;color:var(--color-texto);font-family:var(--fuente);letter-spacing:0;}
+.modal-cerrar{background:none;border:none;font-size:16px;color:var(--color-texto-suave);cursor:pointer;line-height:1;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:3px;transition:background 0.12s;}
+.modal-cerrar:hover{background:var(--color-fondo);}
+.modal-cuerpo{padding:16px 18px;}
+.modal-pie{padding:10px 18px;border-top:1px solid var(--color-borde-suave);display:flex;gap:8px;justify-content:flex-end;}
 
 /* ═══════════════════════════════════════════
    TOOLTIP CAMA (módulo 02)
@@ -929,297 +943,290 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 }
 
 /* ═══════════════════════════════════════════
-   MÓDULO 01 — PANTALLA DE LOGIN
+   MÓDULO 01 — LOGIN DOS COLUMNAS (editorial)
 ═══════════════════════════════════════════ */
 #pantalla-login {
   position:fixed; inset:0; z-index:1000;
-  background:linear-gradient(135deg, #060E1A 0%, #0F2D52 50%, #0A2244 100%);
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  padding:20px;
-  animation:desvanecerEntrar 0.4s ease;
+  display:flex;
+  animation:desvanecerEntrar 0.3s ease;
 }
 #pantalla-login.oculto {
-  animation:loginSalida 0.35s ease forwards;
+  animation:loginSalida 0.3s ease forwards;
   pointer-events:none;
 }
 @keyframes loginSalida {
-  from { opacity:1; transform:scale(1); }
-  to   { opacity:0; transform:scale(1.03); }
+  from { opacity:1; }
+  to   { opacity:0; }
 }
 
-.login-card {
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:18px;
-  padding:40px 38px 36px;
-  width:100%;
-  max-width:420px;
-  backdrop-filter:blur(12px);
-  box-shadow:0 24px 60px rgba(0,0,0,0.5);
+/* Columna izquierda — institucional oscura */
+.login-col-izq {
+  width:45%;
+  background:#111827;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:48px 44px;
+  flex-shrink:0;
 }
-
-/* Logo / marca */
-.login-logo {
-  text-align:center;
-  margin-bottom:32px;
-}
-.login-logo-icono {
-  width:60px; height:60px;
-  background:linear-gradient(135deg, #1E4D8C, #0D9488);
-  border-radius:16px;
-  display:flex; align-items:center; justify-content:center;
+.login-inst-nombre {
+  font-family:'IBM Plex Serif', serif;
+  font-weight:300;
   font-size:28px;
-  margin:0 auto 14px;
-  box-shadow:0 8px 24px rgba(30,77,140,0.4);
+  color:#fff;
+  line-height:1.25;
+  letter-spacing:-0.01em;
 }
-.login-logo-nombre {
-  font-family:'Sora', sans-serif;
-  font-size:22px; font-weight:700;
-  color:#fff; letter-spacing:-0.02em;
+.login-inst-sub {
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  color:rgba(255,255,255,0.3);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  margin-top:12px;
 }
-.login-logo-inst {
-  font-size:11.5px; color:rgba(255,255,255,0.4);
-  margin-top:4px; letter-spacing:0.04em;
+.login-inst-pie {
+  font-size:11px;
+  color:rgba(255,255,255,0.2);
+  font-family:'IBM Plex Mono', monospace;
+  line-height:1.6;
 }
 
-/* Campos del form */
-.login-grupo { margin-bottom:16px; }
+/* Columna derecha — formulario sobre fondo crema */
+.login-col-der {
+  flex:1;
+  background:#F5F4F0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px 32px;
+}
+.login-form-wrap {
+  width:100%;
+  max-width:360px;
+}
+.login-form-titulo {
+  font-size:16px;
+  font-weight:500;
+  color:#111827;
+  margin-bottom:6px;
+  font-family:'IBM Plex Sans', sans-serif;
+}
+.login-form-sub {
+  font-size:12px;
+  color:#6B6B64;
+  margin-bottom:32px;
+  font-family:'IBM Plex Mono', monospace;
+}
+
+/* Campos con solo borde inferior — estilo editorial */
+.login-grupo { margin-bottom:20px; }
 .login-label {
   display:block;
-  font-size:11px; font-weight:600;
-  color:rgba(255,255,255,0.55);
-  letter-spacing:0.05em; text-transform:uppercase;
-  margin-bottom:7px;
+  font-size:10px; font-weight:500;
+  color:#9B9B92;
+  letter-spacing:0.1em; text-transform:uppercase;
+  margin-bottom:8px;
+  font-family:'IBM Plex Mono', monospace;
 }
 .login-input {
   width:100%;
-  background:rgba(255,255,255,0.07);
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:9px;
-  padding:11px 14px;
-  font-size:14px; font-family:'Figtree', sans-serif;
-  color:#fff;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid #C8C5BE;
+  border-radius:0;
+  padding:8px 0;
+  font-size:14px;
+  font-family:'IBM Plex Sans', sans-serif;
+  color:#111827;
   outline:none;
-  transition:border-color 0.18s, background 0.18s, box-shadow 0.18s;
-  min-height:44px;
+  transition:border-color 0.15s;
+  min-height:40px;
 }
-.login-input:focus {
-  border-color:rgba(93,202,165,0.7);
-  background:rgba(255,255,255,0.1);
-  box-shadow:0 0 0 3px rgba(93,202,165,0.15);
-}
-.login-input::placeholder { color:rgba(255,255,255,0.25); }
-.login-input.error-campo {
-  border-color:rgba(248,113,113,0.7);
-  box-shadow:0 0 0 3px rgba(248,113,113,0.15);
-}
+.login-input:focus { border-bottom-color:#111827; }
+.login-input::placeholder { color:#C0BDB7; }
+.login-input.error-campo { border-bottom-color:#C0312B; }
 
 /* Fila recuérdame + olvidé */
 .login-opciones {
   display:flex; align-items:center; justify-content:space-between;
-  margin-bottom:20px; font-size:12px;
+  margin-bottom:24px; font-size:12px;
 }
 .login-check-wrap {
   display:flex; align-items:center; gap:7px;
-  cursor:pointer; color:rgba(255,255,255,0.5);
+  cursor:pointer; color:#6B6B64;
+  font-family:'IBM Plex Sans', sans-serif;
 }
-.login-check-wrap input[type=checkbox] { accent-color:#5DCAA5; cursor:pointer; }
-.login-check-wrap:hover { color:rgba(255,255,255,0.75); }
+.login-check-wrap input[type=checkbox] { accent-color:#111827; cursor:pointer; }
 .login-olvidé {
-  color:rgba(93,202,165,0.8);
-  cursor:pointer; font-size:12px;
-  background:none; border:none; font-family:inherit;
-  transition:color 0.15s;
+  color:#9B9B92;
+  cursor:pointer; font-size:11px;
+  background:none; border:none;
+  font-family:'IBM Plex Mono', monospace;
+  text-decoration:underline;
+  letter-spacing:0.02em;
 }
-.login-olvidé:hover { color:#5DCAA5; }
+.login-olvidé:hover { color:#111827; }
 
-/* Botón entrar */
+/* Botón rectangular sin radius */
 .login-btn {
   width:100%;
-  background:linear-gradient(135deg, #1E4D8C, #2B6CB0);
-  color:#fff;
-  border:none; border-radius:9px;
+  background:#111827;
+  color:#F5F4F0;
+  border:none; border-radius:0;
   padding:13px;
-  font-size:14px; font-weight:700; font-family:'Sora', sans-serif;
+  font-size:11px; font-weight:500;
+  font-family:'IBM Plex Mono', monospace;
+  letter-spacing:0.1em; text-transform:uppercase;
   cursor:pointer;
-  transition:opacity 0.15s, transform 0.12s, box-shadow 0.15s;
-  min-height:46px;
-  letter-spacing:-0.01em;
-  box-shadow:0 4px 14px rgba(30,77,140,0.4);
+  transition:background 0.15s;
+  min-height:44px;
 }
-.login-btn:hover { opacity:0.92; transform:translateY(-1px); box-shadow:0 6px 20px rgba(30,77,140,0.5); }
-.login-btn:active { transform:translateY(0); }
-.login-btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+.login-btn:hover { background:#1F2937; }
+.login-btn:disabled { opacity:0.4; cursor:not-allowed; }
 
-/* Error general */
+/* Error / recuperación */
 .login-error {
   display:none;
-  background:rgba(220,38,38,0.12);
-  border:1px solid rgba(220,38,38,0.3);
-  border-radius:8px;
-  padding:10px 14px;
-  font-size:13px; color:#FCA5A5;
+  border-left:2px solid #C0312B;
+  padding:8px 12px;
+  font-size:12px; color:#C0312B;
   margin-bottom:16px;
-  text-align:center;
-  animation:desvanecerEntrar 0.2s ease;
+  font-family:'IBM Plex Sans', sans-serif;
+  background:#FFEEED;
 }
 .login-error.visible { display:block; }
-
-/* Aviso recuperación */
 .login-recuperacion {
   display:none;
-  background:rgba(13,148,136,0.12);
-  border:1px solid rgba(13,148,136,0.3);
-  border-radius:8px;
-  padding:10px 14px;
-  font-size:12.5px; color:#5EEAD4;
+  border-left:2px solid #1A7A3C;
+  padding:8px 12px;
+  font-size:12px; color:#1A7A3C;
   margin-bottom:16px;
-  text-align:center;
-  animation:desvanecerEntrar 0.2s ease;
+  font-family:'IBM Plex Sans', sans-serif;
+  background:#EDFFF3;
 }
 .login-recuperacion.visible { display:block; }
 
-/* Usuarios demo */
-.login-demo-titulo {
-  text-align:center;
-  font-size:10px; font-weight:700;
-  color:rgba(255,255,255,0.25);
-  letter-spacing:0.1em; text-transform:uppercase;
-  margin:22px 0 12px;
+/* Usuarios demo — una línea de texto separados por · */
+.login-demo-linea {
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid #E0DDD7;
+  font-size:11px;
+  color:#9B9B92;
+  font-family:'IBM Plex Mono', monospace;
+  line-height:1.8;
 }
-.login-demo-grilla {
-  display:grid; grid-template-columns:1fr 1fr; gap:8px;
+.login-demo-linea b { color:#4A4A44; font-weight:500; display:block; margin-bottom:6px; letter-spacing:0.06em; text-transform:uppercase; font-size:9.5px; }
+.login-demo-link {
+  color:#4A4A44; cursor:pointer; text-decoration:underline; text-underline-offset:2px;
 }
-.login-demo-btn {
-  display:flex; align-items:center; gap:8px;
-  padding:9px 11px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:9px;
-  cursor:pointer;
-  transition:background 0.15s, border-color 0.15s;
-  text-align:left;
-}
-.login-demo-btn:hover {
-  background:rgba(255,255,255,0.09);
-  border-color:rgba(255,255,255,0.16);
-}
-.login-demo-avatar {
-  width:28px; height:28px; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  font-size:10px; font-weight:700; color:#fff; flex-shrink:0;
-}
-.login-demo-nombre { font-size:11.5px; font-weight:600; color:rgba(255,255,255,0.75); line-height:1.2; }
-.login-demo-rol    { font-size:9.5px; color:rgba(255,255,255,0.35); margin-top:1px; }
+.login-demo-link:hover { color:#111827; }
 
 /* Chip de rol en la barra superior */
 .bs-rol-chip {
   display:inline-flex; align-items:center; gap:5px;
-  padding:4px 10px; border-radius:99px;
-  font-size:11px; font-weight:600; flex-shrink:0;
+  padding:3px 8px; border-radius:2px;
+  font-size:10px; font-weight:500; flex-shrink:0;
+  font-family:'IBM Plex Mono', monospace;
+  letter-spacing:0.04em; text-transform:uppercase;
 }
-.bs-rol-chip.admin     { background:var(--morado-claro); color:var(--morado); }
-.bs-rol-chip.medico    { background:var(--azul-claro);   color:var(--azul-medio); }
-.bs-rol-chip.enfermeria{ background:var(--verde-mar-claro);color:var(--verde-mar); }
-.bs-rol-chip.recepcion { background:var(--ambar-claro);  color:var(--ambar); }
+.bs-rol-chip.admin     { background:#EDE9FE; color:#5B21B6; }
+.bs-rol-chip.medico    { background:#EBF8FF; color:#2C5282; }
+.bs-rol-chip.enfermeria{ background:#E6FFFA; color:#234E52; }
+.bs-rol-chip.recepcion { background:#FFFBEB; color:#744210; }
 
-/* Botón cerrar sesión en barra */
+/* Botón cerrar sesión */
 .bs-cerrar-sesion {
   display:flex; align-items:center; gap:5px;
-  padding:6px 11px;
-  border:1px solid var(--borde);
-  background:var(--superficie);
-  border-radius:7px;
-  font-size:12px; font-weight:500; color:var(--rojo);
+  padding:5px 10px;
+  border:1px solid var(--color-borde);
+  background:transparent;
+  border-radius:3px;
+  font-size:11px; font-weight:500; color:var(--color-critico);
   cursor:pointer; flex-shrink:0;
-  transition:all 0.15s; min-height:32px;
+  font-family:'IBM Plex Mono', monospace;
+  transition:all 0.12s; min-height:30px;
 }
-.bs-cerrar-sesion:hover { background:var(--rojo-claro); border-color:var(--rojo); }
+.bs-cerrar-sesion:hover { background:var(--rojo-claro); }
+
+/* Responsive login */
+@media(max-width:640px){
+  .login-col-izq{ display:none; }
+  .login-col-der{ padding:32px 20px; }
+}
 </style>
 </head>
 <body>
 
 <!-- ═══════════════════════════════════════════
-     PANTALLA DE LOGIN — MÓDULO 01
+     PANTALLA DE LOGIN — DOS COLUMNAS
 ═══════════════════════════════════════════ -->
 <div id="pantalla-login">
-  <div class="login-card">
 
-    <!-- Logo -->
-    <div class="login-logo">
-      <div class="login-logo-icono">🏥</div>
-      <div class="login-logo-nombre">MediGest Pro</div>
-      <div class="login-logo-inst">Centro de Salud · Sistema de Gestión</div>
+  <!-- Columna izquierda: institucional -->
+  <div class="login-col-izq">
+    <div>
+      <div class="login-inst-nombre">Centro de Salud<br>MediGest Pro</div>
+      <div class="login-inst-sub">Sistema de Gestión Hospitalaria</div>
     </div>
-
-    <!-- Aviso recuperación -->
-    <div class="login-recuperacion" id="login-recuperacion">
-      📧 Se envió un enlace de recuperación a tu correo. Revisá tu bandeja de entrada.
+    <div class="login-inst-pie">
+      Sistema de uso exclusivo<br>del personal autorizado.<br>Todos los accesos quedan registrados.
     </div>
-
-    <!-- Error -->
-    <div class="login-error" id="login-error">
-      Correo o contraseña incorrectos. Verificá los datos e intentá de nuevo.
-    </div>
-
-    <!-- Formulario -->
-    <div class="login-grupo">
-      <label class="login-label" for="login-email">Correo electrónico</label>
-      <input class="login-input" type="email" id="login-email"
-             placeholder="usuario@medigest.ar" autocomplete="email">
-    </div>
-    <div class="login-grupo">
-      <label class="login-label" for="login-pass">Contraseña</label>
-      <input class="login-input" type="password" id="login-pass"
-             placeholder="••••••••" autocomplete="current-password">
-    </div>
-
-    <div class="login-opciones">
-      <label class="login-check-wrap">
-        <input type="checkbox" id="login-recordar"> Recordar sesión
-      </label>
-      <button class="login-olvidé" onclick="mostrarRecuperacion()">Olvidé mi contraseña</button>
-    </div>
-
-    <button class="login-btn" id="login-btn" onclick="intentarLogin()">
-      Iniciar sesión
-    </button>
-
-    <!-- Usuarios demo -->
-    <div class="login-demo-titulo">Usuarios de demo — hacé clic para acceso rápido</div>
-    <div class="login-demo-grilla">
-      <div class="login-demo-btn" onclick="loginDemo('admin@medigest.ar','admin123')">
-        <div class="login-demo-avatar" style="background:#6D28D9;">AD</div>
-        <div>
-          <div class="login-demo-nombre">Admin General</div>
-          <div class="login-demo-rol">Administrador</div>
-        </div>
-      </div>
-      <div class="login-demo-btn" onclick="loginDemo('romero@medigest.ar','medico123')">
-        <div class="login-demo-avatar" style="background:#1E4D8C;">DR</div>
-        <div>
-          <div class="login-demo-nombre">Dra. Romero</div>
-          <div class="login-demo-rol">Médico</div>
-        </div>
-      </div>
-      <div class="login-demo-btn" onclick="loginDemo('perez.enf@medigest.ar','enf123')">
-        <div class="login-demo-avatar" style="background:#0D9488;">EP</div>
-        <div>
-          <div class="login-demo-nombre">Enf. Pérez</div>
-          <div class="login-demo-rol">Enfermería</div>
-        </div>
-      </div>
-      <div class="login-demo-btn" onclick="loginDemo('diaz.recep@medigest.ar','recep123')">
-        <div class="login-demo-avatar" style="background:#D97706;">RD</div>
-        <div>
-          <div class="login-demo-nombre">Recep. Díaz</div>
-          <div class="login-demo-rol">Recepción</div>
-        </div>
-      </div>
-    </div>
-
   </div>
+
+  <!-- Columna derecha: formulario -->
+  <div class="login-col-der">
+    <div class="login-form-wrap">
+
+      <div class="login-form-titulo">Iniciar sesión</div>
+      <div class="login-form-sub">Ingresá tus credenciales para continuar</div>
+
+      <!-- Recuperación -->
+      <div class="login-recuperacion" id="login-recuperacion">
+        Se envió un enlace de recuperación a tu correo. Revisá tu bandeja de entrada.
+      </div>
+
+      <!-- Error -->
+      <div class="login-error" id="login-error">
+        Correo o contraseña incorrectos. Verificá los datos e intentá de nuevo.
+      </div>
+
+      <!-- Campos -->
+      <div class="login-grupo">
+        <label class="login-label" for="login-email">Correo electrónico</label>
+        <input class="login-input" type="email" id="login-email"
+               placeholder="usuario@medigest.ar" autocomplete="email">
+      </div>
+      <div class="login-grupo">
+        <label class="login-label" for="login-pass">Contraseña</label>
+        <input class="login-input" type="password" id="login-pass"
+               placeholder="••••••••" autocomplete="current-password">
+      </div>
+
+      <div class="login-opciones">
+        <label class="login-check-wrap">
+          <input type="checkbox" id="login-recordar"> Recordar sesión
+        </label>
+        <button class="login-olvidé" onclick="mostrarRecuperacion()">Olvidé mi contraseña</button>
+      </div>
+
+      <button class="login-btn" id="login-btn" onclick="intentarLogin()">
+        Iniciar sesión
+      </button>
+
+      <!-- Usuarios demo como texto plano -->
+      <div class="login-demo-linea">
+        <b>Acceso rápido — demo</b>
+        <span class="login-demo-link" onclick="loginDemo('admin@medigest.ar','admin123')">Admin</span>
+        · <span class="login-demo-link" onclick="loginDemo('romero@medigest.ar','medico123')">Dra. Romero</span>
+        · <span class="login-demo-link" onclick="loginDemo('perez.enf@medigest.ar','enf123')">Enf. Pérez</span>
+        · <span class="login-demo-link" onclick="loginDemo('diaz.recep@medigest.ar','recep123')">Recep. Díaz</span>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 <!-- / PANTALLA DE LOGIN -->
 
@@ -2242,13 +2249,12 @@ function animarContadores() {
   });
 }
 
-/* ─── TOSTADAS ─── */
-const ICONOS_TOSTADA = { exito:'✅', alerta:'⚠️', error:'❌', info:'ℹ️' };
+/* ─── TOSTADAS — sin emoji, con barra de color ─── */
 function mostrarTostada(msg, tipo='exito', dur=4000) {
   const c = document.getElementById('contenedor-tostadas');
   const t = document.createElement('div');
   t.className = `tostada ${tipo}`;
-  t.innerHTML = `<span class="tostada-icono">${ICONOS_TOSTADA[tipo]||'ℹ️'}</span><span class="tostada-mensaje">${msg}</span><button class="tostada-cerrar" onclick="ocultarTostada(this.parentElement)">✕</button>`;
+  t.innerHTML = `<div class="tostada-barra"></div><div class="tostada-contenido"><span class="tostada-mensaje">${msg}</span><button class="tostada-cerrar" onclick="ocultarTostada(this.closest('.tostada'))">✕</button></div>`;
   c.appendChild(t);
   setTimeout(() => ocultarTostada(t), dur);
 }
