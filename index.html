@@ -516,7 +516,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .pn-titulo{font-size:14px;font-weight:700;color:var(--color-texto);font-family:var(--fuente-titulo);}
 .pn-acciones{display:flex;gap:6px;align-items:center;}
 .pn-marcar-todo{font-size:11px;color:var(--color-texto-suave);cursor:pointer;background:none;border:none;font-family:var(--fuente);}
-.pn-cerrar{width:26px;height:26px;border-radius:6px;border:1px solid var(--borde);background:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--texto-suave);}
+.pn-cerrar{width:26px;height:26px;border-radius:4px;border:1px solid var(--borde);background:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--texto-suave);}
 .pn-cuerpo{flex:1;overflow-y:auto;padding:10px 0;}
 .pn-grupo-titulo{font-size:9.5px;font-weight:700;color:var(--texto-suave);letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px 4px;}
 .notif-item{display:flex;gap:10px;padding:10px 18px;cursor:pointer;transition:background 0.12s;border-left:3px solid transparent;}
@@ -558,7 +558,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 ═══════════════════════════════════════════ */
 .fondo-modal{display:none;position:fixed;inset:0;background:rgba(26,26,22,0.4);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(2px);padding:20px;}
 .fondo-modal.abierto{display:flex;}
-.modal{background:var(--color-tarjeta);border-radius:6px;width:100%;max-width:520px;box-shadow:0 8px 32px rgba(0,0,0,0.16);max-height:90vh;overflow-y:auto;animation:aparecerPagina 0.18s ease both;border:1px solid var(--color-borde);}
+.modal{background:var(--color-tarjeta);border-radius:5px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:aparecerPagina 0.18s ease both;border:1px solid var(--color-borde);}
 .modal.grande{max-width:700px;}
 .modal-cabeza{padding:16px 18px 12px;border-bottom:1px solid var(--color-borde);display:flex;align-items:center;justify-content:space-between;}
 .modal-titulo{font-size:14px;font-weight:500;color:var(--color-texto);font-family:var(--fuente);letter-spacing:0;}
@@ -580,7 +580,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 /* Mapa de camas */
 .grilla-camas{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
 .cama{border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;}
-.cama:hover{transform:translateY(-2px);box-shadow:var(--sombra);}
+.cama:hover{border-color:var(--borde);}
 .cama.libre{background:var(--verde-claro);border:1px solid #BBF7D0;}
 .cama.ocupada{background:#EDE9E3;border:1px solid #D4CFC7;}
 .cama.limpieza{background:var(--ambar-claro);border:1px solid #FDE68A;}
@@ -603,7 +603,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .guardia-acciones-cab .boton{background:rgba(255,255,255,0.15);color:#fff;border-color:rgba(255,255,255,0.25);}
 .guardia-acciones-cab .boton:hover{background:rgba(255,255,255,0.25);}
 /* Fila de triage */
-.triage-fila{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio);margin-bottom:8px;transition:box-shadow 0.15s;cursor:pointer;min-height:60px;}
+.triage-fila{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio);margin-bottom:8px;cursor:pointer;min-height:60px;}
 .triage-fila:hover{box-shadow:var(--sombra);}
 .triage-nivel{width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;letter-spacing:0.03em;flex-shrink:0;}
 .nivel-rojo{background:var(--rojo-claro);color:var(--rojo);border:1.5px solid #FCA5A5;}
@@ -612,7 +612,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .triage-info{flex:1;min-width:0;}
 .triage-nombre{font-weight:600;font-size:13.5px;color:var(--texto);}
 .triage-desc{font-size:12px;color:var(--texto-suave);margin-top:2px;}
-.triage-espera{font-family:var(--mono);font-size:12.5px;font-weight:500;padding:4px 10px;border-radius:6px;background:var(--fondo);color:var(--texto-medio);flex-shrink:0;}
+.triage-espera{font-family:var(--mono);font-size:12.5px;font-weight:500;padding:4px 10px;border-radius:4px;background:var(--fondo);color:var(--texto-medio);flex-shrink:0;}
 .triage-espera.larga{background:var(--ambar-claro);color:var(--ambar);}
 .triage-espera.urgente{background:var(--rojo-claro);color:var(--rojo);}
 .triage-acciones{display:flex;gap:6px;flex-shrink:0;}
@@ -620,7 +620,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 /* ═══════════════════════════════════════════
    MÓDULO 04: FACTURACIÓN
 ═══════════════════════════════════════════ */
-.factura-fila{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio);margin-bottom:8px;transition:box-shadow 0.15s;cursor:pointer;}
+.factura-fila{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio);margin-bottom:8px;cursor:pointer;}
 .factura-fila:hover{box-shadow:var(--sombra);}
 .factura-info{flex:1;}
 .factura-nombre{font-weight:600;font-size:13px;color:var(--texto);}
@@ -639,7 +639,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 ═══════════════════════════════════════════ */
 .config-seccion{margin-bottom:22px;}
 .config-seccion-titulo{font-family:var(--fuente-titulo);font-size:14px;font-weight:600;color:var(--color-texto);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--borde);}
-.usuario-fila{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--superficie);border:1px solid var(--borde);border-radius:8px;margin-bottom:6px;transition:box-shadow 0.15s;}
+.usuario-fila{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--superficie);border:1px solid var(--borde);border-radius:5px;margin-bottom:6px;}
 .usuario-fila:hover{box-shadow:var(--sombra);}
 .rol-chip{padding:2px 8px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:0.04em;}
 .rol-admin{background:var(--morado-claro);color:var(--morado);}
@@ -1271,7 +1271,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 <!-- ═══════ ÁREA PRINCIPAL ═══════ -->
 <div class="principal">
   <div class="banner-critico visible" id="banner-uci">
-    <span>🔴</span>
+    <span class="punto rojo" style="width:6px;height:6px;border-radius:50%;display:inline-block;"></span>
     <span class="bc-texto"><b>UCI al 100% de capacidad.</b> No hay camas disponibles. Derivar nuevos ingresos a Clínica Médica o Guardia.</span>
     <span style="font-size:11px;opacity:0.8;margin-left:auto;white-space:nowrap;">4/4 camas ocupadas</span>
   </div>
@@ -1288,7 +1288,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
     <div class="bs-etiqueta alerta"><div class="punto ambar latido"></div>3 en sala de espera</div>
     <div class="bs-etiqueta bien"><div class="punto verde latido-lento"></div>Sistema operativo</div>
 
-    <button class="boton-campana" onclick="alternarPanelNotif()" title="Notificaciones" data-atajo="Alt + N">🔔<span class="campana-contador" id="contador-campana">5</span></button>
+    <button class="boton-campana" onclick="alternarPanelNotif()" title="Notificaciones" data-atajo="Alt + N"><span class="icono">NT</span><span class="campana-contador" id="contador-campana">5</span></button>
 
     <!-- Módulo 05: Alto contraste -->
     <button class="boton-contraste" onclick="alternarAltoContraste()" id="boton-contraste" data-atajo="Alt + C" title="Modo alto contraste">
@@ -1307,7 +1307,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
     </div>
 
     <!-- Chip de rol activo — módulo 01 -->
-    <span class="bs-rol-chip admin" id="bs-rol-chip">⚙ Administrador</span>
+    <span class="bs-rol-chip admin" id="bs-rol-chip">Administrador</span>
 
     <button class="bs-boton primario" onclick="abrirModal('modal-nuevo-paciente')" data-atajo="N · Nuevo paciente" id="btn-nuevo-paciente">＋ Nuevo paciente</button>
 
@@ -1434,7 +1434,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
         <div class="tarjeta">
           <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Recordatorios automáticos</span></div>
           <div class="tarjeta-cuerpo">
-            <div class="aviso info" style="margin-bottom:12px;">📱 WhatsApp/SMS enviado automáticamente 24h y 2h antes de cada turno.</div>
+            <div class="aviso info" style="margin-bottom:12px;">WhatsApp/SMS enviado automáticamente 24h y 2h antes de cada turno.</div>
             <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Ferreyra, Ana</div><div class="fi-sub">WhatsApp enviado · hace 2h</div></div><span class="etiqueta etiqueta-verde">Entregado</span></div>
             <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Martínez, R.</div><div class="fi-sub">SMS enviado · hace 45 min</div></div><span class="etiqueta etiqueta-verde">Entregado</span></div>
             <div class="fila-item"><div class="punto ambar"></div><div class="fi-info"><div class="fi-nombre">Sosa, Patricia</div><div class="fi-sub">Sin respuesta · canceló</div></div><span class="etiqueta etiqueta-rojo">Canceló</span></div>
@@ -1481,7 +1481,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
           <div class="tarjeta" style="margin-bottom:14px;">
             <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Consulta activa · López, Carlos</span>
               <div style="display:flex;gap:6px;">
-                <button class="boton chico exito" onclick="mostrarTostada('✓ Consulta finalizada y guardada en el historial','exito')">Finalizar consulta</button>
+                <button class="boton chico exito" onclick="mostrarTostada('Consulta finalizada y guardada en el historial','exito')">Finalizar consulta</button>
                 <button class="boton chico peligro">Derivar</button>
               </div>
             </div>
@@ -1503,7 +1503,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
                   <div class="grupo-campo"><label class="etiqueta-campo">SpO2</label><input class="entrada" value="97%"></div>
                 </div>
                 <div class="grupo-campo"><label class="etiqueta-campo">Evolución / notas</label><textarea class="entrada" rows="3">Paciente masculino 45 años, refiere episodios de dolor precordial leve con esfuerzo. Sin fiebre. Solicito ECG y laboratorio cardíaco urgente.</textarea></div>
-                <div style="display:flex;gap:8px;margin-top:10px;"><button class="boton primario" onclick="mostrarTostada('✓ Evolución guardada en historia clínica','exito')">Guardar evolución</button><button class="boton">Solicitar estudio</button></div>
+                <div style="display:flex;gap:8px;margin-top:10px;"><button class="boton primario" onclick="mostrarTostada('Evolución guardada en historia clínica','exito')">Guardar evolución</button><button class="boton">Solicitar estudio</button></div>
               </div>
               <div class="panel-pestania" id="med-antecedentes">
                 <div class="fila-campo dos">
@@ -1526,7 +1526,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
                   <div class="grupo-campo"><label class="etiqueta-campo">Cantidad</label><input class="entrada" value="60 comprimidos"></div>
                 </div>
                 <div style="display:flex;gap:8px;margin-top:10px;align-items:center;">
-                  <button class="boton primario" onclick="mostrarTostada('✓ Receta firmada digitalmente · QR generado','exito')">Firmar con QR digital</button>
+                  <button class="boton primario" onclick="mostrarTostada('Receta firmada digitalmente · QR generado','exito')">Firmar con QR digital</button>
                   <button class="boton">Agregar otro fármaco</button>
                   <div class="qr-simulado"><div class="qr-interior"></div></div>
                 </div>
@@ -1591,7 +1591,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
               <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 403 — Fernández, R. · Trauma craneal','alerta')"><div class="cama-num">403</div><div class="cama-etiqueta">Ocupada</div></div>
               <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 404 — Sánchez, M. · Post-quirúrgico','alerta')"><div class="cama-num">404</div><div class="cama-etiqueta">Ocupada</div></div>
             </div>
-            <div class="aviso peligro" style="margin-top:12px;">⚠ UCI al 100%. Derivar nuevos ingresos al área de observación.</div>
+            <div class="aviso peligro" style="margin-top:12px;">UCI al 100%. Derivar nuevos ingresos al área de observación.</div>
             <div class="divisor"></div>
             <div class="fila-item"><div class="av oscuro">PM</div><div class="fi-info"><div class="fi-nombre">Pérez, Miguel · Cama 401</div><div class="fi-sub">Ingreso: 20/04 · IAM · Dr. Vega</div></div><span class="etiqueta etiqueta-rojo">Crítico</span></div>
             <div class="fila-item"><div class="av">RV</div><div class="fi-info"><div class="fi-nombre">Ríos, Valentina · Cama 402</div><div class="fi-sub">Ingreso: 21/04 · ACV · Dra. Romero</div></div><span class="etiqueta etiqueta-ambar">Estable</span></div>
@@ -1625,7 +1625,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
     <!-- ═══ GUARDIA (módulo 04 — nuevo) ═══ -->
     <div class="modulo" id="modulo-guardia">
       <div class="guardia-cabecera">
-        <span class="guardia-ico-grande">🚨</span>
+        <span class="guardia-ico-grande" style="font-family:var(--mono);font-size:22px;font-weight:700;">GU</span>
         <div>
           <div class="guardia-titulo-bloque">Guardia · Emergencias</div>
           <div class="guardia-sub-bloque">3 pacientes en guardia · 1 caso crítico activo · 2 médicos disponibles</div>
@@ -1637,9 +1637,9 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
       <div class="grilla-2-1">
         <div>
           <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
-            <span class="etiqueta etiqueta-rojo" style="padding:5px 12px;font-size:12px;">🔴 ROJO: 1 paciente</span>
-            <span class="etiqueta etiqueta-ambar" style="padding:5px 12px;font-size:12px;">🟡 AMARILLO: 2 pacientes</span>
-            <span class="etiqueta etiqueta-verde" style="padding:5px 12px;font-size:12px;">🟢 VERDE: 0 pacientes</span>
+            <span class="etiqueta etiqueta-rojo" style="padding:5px 12px;font-size:12px;">ROJO · 1 paciente</span>
+            <span class="etiqueta etiqueta-ambar" style="padding:5px 12px;font-size:12px;">AMARILLO · 2 pacientes</span>
+            <span class="etiqueta etiqueta-verde" style="padding:5px 12px;font-size:12px;">VERDE · 0 pacientes</span>
           </div>
           <div id="listaTriage"></div>
         </div>
@@ -1647,8 +1647,8 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
           <div class="tarjeta" style="margin-bottom:14px;">
             <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Camas disponibles para derivar</span></div>
             <div class="tarjeta-cuerpo">
-              <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Cama 203 · Clínica Médica</div><div class="fi-sub">Piso 2 · Libre</div></div><button class="boton chico exito" onclick="mostrarTostada('✓ Cama 203 reservada para derivación','exito')">Reservar</button></div>
-              <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Cama 206 · Clínica Médica</div><div class="fi-sub">Piso 2 · Libre</div></div><button class="boton chico exito" onclick="mostrarTostada('✓ Cama 206 reservada para derivación','exito')">Reservar</button></div>
+              <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Cama 203 · Clínica Médica</div><div class="fi-sub">Piso 2 · Libre</div></div><button class="boton chico exito" onclick="mostrarTostada('Cama 203 reservada para derivación','exito')">Reservar</button></div>
+              <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Cama 206 · Clínica Médica</div><div class="fi-sub">Piso 2 · Libre</div></div><button class="boton chico exito" onclick="mostrarTostada('Cama 206 reservada para derivación','exito')">Reservar</button></div>
               <div class="fila-item"><div class="punto ambar"></div><div class="fi-info"><div class="fi-nombre">Cama 205 · Clínica Médica</div><div class="fi-sub">Piso 2 · En limpieza</div></div><span class="etiqueta etiqueta-ambar">~20 min</span></div>
             </div>
           </div>
@@ -1704,7 +1704,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
     <!-- ═══ AUDITORÍA ═══ -->
     <div class="modulo" id="modulo-auditoria">
       <div class="modulo-cabecera"><h1>Registro de Auditoría</h1><p>Acceso exclusivo administradores · Registros inmutables</p></div>
-      <div class="aviso peligro" style="margin-bottom:14px;">🔒 Este módulo es de solo lectura. Ningún registro puede modificarse ni eliminarse.</div>
+      <div class="aviso peligro" style="margin-bottom:14px;">Este módulo es de solo lectura. Ningún registro puede modificarse ni eliminarse.</div>
       <div class="tarjeta">
         <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Registro de accesos · Miércoles 22 abr</span>
           <div style="display:flex;gap:6px;">
@@ -1743,9 +1743,9 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
         <div class="tarjeta">
           <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Exportaciones disponibles</span></div>
           <div class="tarjeta-cuerpo">
-            <div class="fila-item"><div style="font-size:18px;">📄</div><div class="fi-info"><div class="fi-nombre">Historia clínica completa</div><div class="fi-sub">PDF con firma digital</div></div><button class="boton chico primario" onclick="mostrarTostada('Generando PDF con firma digital…','info')">Exportar</button></div>
-            <div class="fila-item"><div style="font-size:18px;">⚙</div><div class="fi-info"><div class="fi-nombre">Datos clínicos estructurados</div><div class="fi-sub">JSON / HL7 FHIR R4</div></div><button class="boton chico" onclick="mostrarTostada('Exportando HL7 FHIR R4…','info')">Exportar</button></div>
-            <div class="fila-item"><div style="font-size:18px;">📊</div><div class="fi-info"><div class="fi-nombre">Estadísticas del período</div><div class="fi-sub">Excel / CSV con filtros</div></div><button class="boton chico" onclick="mostrarTostada('Generando planilla Excel…','info')">Exportar</button></div>
+            <div class="fila-item"><div style="font-family:var(--mono);font-size:10px;font-weight:600;color:var(--color-texto-suave);width:24px;text-align:center;">HL</div><div class="fi-info"><div class="fi-nombre">Historia clínica completa</div><div class="fi-sub">PDF con firma digital</div></div><button class="boton chico primario" onclick="mostrarTostada('Generando PDF con firma digital…','info')">Exportar</button></div>
+            <div class="fila-item"><div style="font-family:var(--mono);font-size:10px;font-weight:600;color:var(--color-texto-suave);width:24px;text-align:center;">JS</div><div class="fi-info"><div class="fi-nombre">Datos clínicos estructurados</div><div class="fi-sub">JSON / HL7 FHIR R4</div></div><button class="boton chico" onclick="mostrarTostada('Exportando HL7 FHIR R4…','info')">Exportar</button></div>
+            <div class="fila-item"><div style="font-family:var(--mono);font-size:10px;font-weight:600;color:var(--color-texto-suave);width:24px;text-align:center;">CV</div><div class="fi-info"><div class="fi-nombre">Estadísticas del período</div><div class="fi-sub">Excel / CSV con filtros</div></div><button class="boton chico" onclick="mostrarTostada('Generando planilla Excel…','info')">Exportar</button></div>
           </div>
         </div>
       </div>
@@ -1833,15 +1833,15 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 <div class="panel-notificaciones" id="panel-notificaciones">
   <div class="pn-cabeza"><span class="pn-titulo">Notificaciones</span><div class="pn-acciones"><button class="pn-marcar-todo" onclick="marcarTodasLeidas()">Marcar todas como leídas</button><button class="pn-cerrar" onclick="cerrarPanelNotif()">✕</button></div></div>
   <div class="pn-cuerpo">
-    <div class="pn-grupo-titulo">🔴 Urgentes</div>
+    <div class="pn-grupo-titulo">Urgentes</div>
     <div class="notif-item no-leido-rojo" onclick="accionNotif(this,'internacion')"><div class="notif-icono" style="background:var(--rojo-claro);">🛏</div><div><div class="notif-texto"><b>UCI al 100%</b> — No hay camas disponibles. Derivar urgente.</div><div class="notif-hora">hace 2 min</div></div></div>
     <div class="notif-item no-leido-rojo" onclick="accionNotif(this,'medico')"><div class="notif-icono" style="background:var(--rojo-claro);">⚠️</div><div><div class="notif-texto"><b>Alerta de alergia</b> — López, Carlos: Penicilina. Verificar prescripción.</div><div class="notif-hora">hace 5 min</div></div></div>
-    <div class="pn-grupo-titulo">🔬 Laboratorio</div>
+    <div class="pn-grupo-titulo">Laboratorio</div>
     <div class="notif-item no-leido" onclick="accionNotif(this,'laboratorio')"><div class="notif-icono" style="background:var(--verde-mar-claro);">📋</div><div><div class="notif-texto"><b>Resultado recibido</b> — Hemograma García, M. Valores fuera de rango.</div><div class="notif-hora">hace 8 min</div></div></div>
     <div class="notif-item no-leido" onclick="accionNotif(this,'laboratorio')"><div class="notif-icono" style="background:#EDEAE4;">📤</div><div><div class="notif-texto"><b>Orden enviada</b> — Troponina I · López, Carlos. HL7 a Lab. Central.</div><div class="notif-hora">hace 12 min</div></div></div>
-    <div class="pn-grupo-titulo">🗓 Turnos</div>
+    <div class="pn-grupo-titulo">Turnos</div>
     <div class="notif-item no-leido-ambar" onclick="accionNotif(this,'turnos')"><div class="notif-icono" style="background:var(--ambar-claro);">⏰</div><div><div class="notif-texto"><b>Turno en 5 min</b> — Ferreyra, Ana · Dra. Romero · 09:30</div><div class="notif-hora">hace 1 min</div></div></div>
-    <div class="pn-grupo-titulo">⚙ Sistema</div>
+    <div class="pn-grupo-titulo">Sistema</div>
     <div class="notif-item" onclick="accionNotif(this,'interoperabilidad')"><div class="notif-icono" style="background:var(--ambar-claro);">🔌</div><div><div class="notif-texto"><b>DICOM intermitente</b> — Reconectando con servidor de imágenes.</div><div class="notif-hora">hace 18 min</div></div></div>
   </div>
 </div>
@@ -1860,16 +1860,16 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
       <span class="nm-etiqueta">Turnos</span>
     </button>
     <button class="nav-movil-item" onclick="navegarMovil('pacientes',this)" id="nm-pacientes">
-      <span class="nm-ico">♥</span>
+      <span class="nm-ico" style="font-family:var(--mono);font-size:11px;font-weight:600;">PC</span>
       <span class="nm-etiqueta">Pacientes</span>
     </button>
     <button class="nav-movil-item" onclick="navegarMovil('guardia',this)" id="nm-guardia">
-      <span class="nm-ico">🚨</span>
+      <span class="nm-ico" style="font-family:var(--mono);font-size:11px;font-weight:600;">GU</span>
       <span class="nm-etiqueta">Guardia</span>
       <span class="nm-badge">3</span>
     </button>
     <button class="nav-movil-item" onclick="abrirCajonMenu()">
-      <span class="nm-ico">☰</span>
+      <span class="nm-ico" style="font-family:var(--mono);font-size:11px;font-weight:600;">+</span>
       <span class="nm-etiqueta">Más</span>
     </button>
   </div>
@@ -1887,16 +1887,16 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
       <div class="cajon-item" onclick="navegarMovilCajon('tablero')"><span class="ci-ico">⊞</span>Tablero</div>
       <div class="cajon-item" onclick="navegarMovilCajon('admision')"><span class="ci-ico">◎</span>Admisión</div>
       <div class="cajon-item" onclick="navegarMovilCajon('turnos')"><span class="ci-ico">◷</span>Turnos</div>
-      <div class="cajon-item" onclick="navegarMovilCajon('pacientes')"><span class="ci-ico">♥</span>Pacientes</div>
-      <div class="cajon-item" onclick="navegarMovilCajon('medico')"><span class="ci-ico">✚</span>Médico</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('pacientes')"><span class="ci-ico" style="font-family:var(--mono);font-weight:600;font-size:12px;">PC</span>Pacientes</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('medico')"><span class="ci-ico" style="font-family:var(--mono);font-weight:600;font-size:12px;">MD</span>Médico</div>
       <div class="cajon-item" onclick="navegarMovilCajon('internacion')"><span class="ci-ico">▤</span>Internación</div>
       <div class="cajon-item" onclick="navegarMovilCajon('laboratorio')"><span class="ci-ico">⊘</span>Laboratorio</div>
-      <div class="cajon-item" onclick="navegarMovilCajon('guardia')"><span class="ci-ico">🚨</span>Guardia</div>
-      <div class="cajon-item" onclick="navegarMovilCajon('facturacion')"><span class="ci-ico">💳</span>Facturación</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('guardia')"><span class="ci-ico" style="font-family:var(--mono);font-weight:600;font-size:12px;">GU</span>Guardia</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('facturacion')"><span class="ci-ico" style="font-family:var(--mono);font-weight:600;font-size:12px;">FC</span>Facturación</div>
       <div class="cajon-item" onclick="navegarMovilCajon('auditoria')"><span class="ci-ico">⊛</span>Auditoría</div>
       <div class="cajon-item" onclick="navegarMovilCajon('interoperabilidad')"><span class="ci-ico">⇌</span>Interop.</div>
       <div class="cajon-item" onclick="navegarMovilCajon('estadisticas')"><span class="ci-ico">▸</span>Estadísticas</div>
-      <div class="cajon-item" onclick="navegarMovilCajon('configuracion')"><span class="ci-ico">⚙</span>Config.</div>
+      <div class="cajon-item" onclick="navegarMovilCajon('configuracion')"><span class="ci-ico" style="font-family:var(--mono);font-weight:600;font-size:12px;">CF</span>Config.</div>
       <div class="cajon-item" onclick="cerrarCajonMenu();alternarAltoContraste()"><span class="ci-ico">◑</span>Contraste</div>
     </div>
   </div>
@@ -1933,7 +1933,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
     <div class="fila-campo dos"><div class="grupo-campo"><label class="etiqueta-campo">Teléfono (WhatsApp)</label><input class="entrada" placeholder="+54 9 3755 000000"></div><div class="grupo-campo"><label class="etiqueta-campo">Correo electrónico</label><input class="entrada" placeholder="paciente@email.com"></div></div>
     <div class="grupo-campo"><label class="etiqueta-campo">Alergias conocidas</label><input class="entrada" placeholder="Ej: Penicilina, AINES…"></div>
   </div>
-  <div class="modal-pie"><button class="boton" onclick="cerrarModal('modal-nuevo-paciente')">Cancelar</button><button class="boton primario" onclick="cerrarModal('modal-nuevo-paciente');mostrarTostada('✓ Paciente registrado correctamente','exito')">Registrar paciente</button></div></div>
+  <div class="modal-pie"><button class="boton" onclick="cerrarModal('modal-nuevo-paciente')">Cancelar</button><button class="boton primario" onclick="cerrarModal('modal-nuevo-paciente');mostrarTostada('Paciente registrado correctamente','exito')">Registrar paciente</button></div></div>
 </div>
 
 <!-- Nuevo turno — con validación de conflicto (módulo 02) -->
@@ -1950,11 +1950,11 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
     </div>
     <!-- Alerta de conflicto -->
     <div class="aviso-conflicto" id="aviso-conflicto">
-      <span>⚠️</span>
+      
       <div><b>Conflicto de horario detectado.</b> <span id="conflicto-texto"></span><br><span id="conflicto-libre" style="font-weight:500;"></span></div>
     </div>
     <div class="grupo-campo" style="margin-top:8px;"><label class="etiqueta-campo">Motivo de consulta</label><input class="entrada" placeholder="Opcional"></div>
-    <div class="aviso info" style="margin-top:10px;">📱 Se enviará recordatorio automático 24h y 2h antes del turno.</div>
+    <div class="aviso info" style="margin-top:10px;">Se enviará recordatorio automático 24h y 2h antes del turno.</div>
   </div>
   <div class="modal-pie"><button class="boton" onclick="cerrarModal('modal-nuevo-turno')">Cancelar</button><button class="boton primario" onclick="confirmarTurno()">Confirmar turno</button></div></div>
 </div>
@@ -2001,14 +2001,14 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
     <div class="grupo-campo" style="margin-bottom:10px;"><label class="etiqueta-campo">Buscar paciente</label><input class="entrada" placeholder="Nombre o DNI…"></div>
     <div class="aviso info">El médico asignado será notificado automáticamente al confirmar el check-in.</div>
   </div>
-  <div class="modal-pie"><button class="boton" onclick="cerrarModal('modal-checkin')">Cancelar</button><button class="boton primario" onclick="cerrarModal('modal-checkin');mostrarTostada('✓ Check-in registrado · médico notificado','exito')">Confirmar llegada</button></div></div>
+  <div class="modal-pie"><button class="boton" onclick="cerrarModal('modal-checkin')">Cancelar</button><button class="boton primario" onclick="cerrarModal('modal-checkin');mostrarTostada('Check-in registrado · médico notificado','exito')">Confirmar llegada</button></div></div>
 </div>
 
 <!-- Visor de laboratorio (módulo 02) -->
 <div class="fondo-modal" id="modal-visor-lab">
   <div class="modal grande"><div class="modal-cabeza"><span class="modal-titulo" id="visor-lab-titulo">Resultado de laboratorio</span><button class="modal-cerrar" onclick="cerrarModal('modal-visor-lab')">✕</button></div>
   <div class="modal-cuerpo">
-    <div class="aviso info" style="margin-bottom:14px;">📡 Resultado recibido vía <b>HL7 FHIR R4</b> · Laboratorio Central · Los valores fuera de rango están marcados en rojo.</div>
+    <div class="aviso info" style="margin-bottom:14px;">Resultado recibido vía <b>HL7 FHIR R4</b> · Laboratorio Central · Los valores fuera de rango están marcados en rojo.</div>
     <table class="tabla" style="width:100%;border:1px solid var(--borde);border-radius:8px;overflow:hidden;">
       <thead><tr><th>Parámetro</th><th>Resultado</th><th>Rango normal</th><th>Unidad</th><th>Estado</th></tr></thead>
       <tbody id="visor-lab-cuerpo"></tbody>
@@ -2027,15 +2027,15 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
     </div>
     <div class="grupo-campo" style="margin-bottom:10px;"><label class="etiqueta-campo">Nivel de triage</label>
       <select class="entrada" id="triage-nivel-sel">
-        <option value="rojo">🔴 ROJO — Emergencia (riesgo de vida inmediato)</option>
-        <option value="amarillo">🟡 AMARILLO — Urgente (puede esperar hasta 30 min)</option>
-        <option value="verde">🟢 VERDE — Sin urgencia (puede esperar hasta 2hs)</option>
+        <option value="rojo">ROJO — Emergencia (riesgo de vida inmediato)</option>
+        <option value="amarillo">AMARILLO — Urgente (puede esperar hasta 30 min)</option>
+        <option value="verde">VERDE — Sin urgencia (puede esperar hasta 2hs)</option>
       </select>
     </div>
     <div class="grupo-campo"><label class="etiqueta-campo">Motivo / síntomas principales</label><textarea class="entrada" rows="3" placeholder="Describí brevemente los síntomas…"></textarea></div>
-    <div class="aviso alerta" style="margin-top:8px;">⚠ Si el paciente tiene riesgo de vida inmediato, llamá al médico de guardia directamente.</div>
+    <div class="aviso alerta" style="margin-top:8px;">Si el paciente tiene riesgo de vida inmediato, llamá al médico de guardia directamente.</div>
   </div>
-  <div class="modal-pie"><button class="boton" onclick="cerrarModal('modal-nuevo-triage')">Cancelar</button><button class="boton primario" onclick="cerrarModal('modal-nuevo-triage');mostrarTostada('✓ Paciente ingresado en guardia · Médico notificado','exito')">Registrar ingreso</button></div></div>
+  <div class="modal-pie"><button class="boton" onclick="cerrarModal('modal-nuevo-triage')">Cancelar</button><button class="boton primario" onclick="cerrarModal('modal-nuevo-triage');mostrarTostada('Paciente ingresado en guardia · Médico notificado','exito')">Registrar ingreso</button></div></div>
 </div>
 
 <!-- Nueva factura -->
@@ -2050,9 +2050,9 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
       <div class="grupo-campo"><label class="etiqueta-campo">Tipo de prestación</label><select class="entrada"><option>Consulta médica</option><option>Consulta especialista</option><option>Práctica de laboratorio</option><option>Internación (día)</option></select></div>
       <div class="grupo-campo"><label class="etiqueta-campo">Médico</label><select class="entrada"><option>Dr. Suárez</option><option>Dra. Romero</option><option>Dr. Vega</option></select></div>
     </div>
-    <div class="aviso exito" id="coseguro-resultado" style="margin-top:8px;">💲 Coseguro OSDE 210: <b>$1.200</b> · Arancel médico: $12.500</div>
+    <div class="aviso exito" id="coseguro-resultado" style="margin-top:8px;">Coseguro OSDE 210: <b>$1.200</b> · Arancel médico: $12.500</div>
   </div>
-  <div class="modal-pie"><button class="boton" onclick="cerrarModal('modal-nueva-factura')">Cancelar</button><button class="boton exito" onclick="cerrarModal('modal-nueva-factura');mostrarTostada('✓ Prestación registrada · Comprobante generado','exito')">Registrar y generar comprobante</button></div></div>
+  <div class="modal-pie"><button class="boton" onclick="cerrarModal('modal-nueva-factura')">Cancelar</button><button class="boton exito" onclick="cerrarModal('modal-nueva-factura');mostrarTostada('Prestación registrada · Comprobante generado','exito')">Registrar y generar comprobante</button></div></div>
 </div>
 
 <!-- ═══════════════════════════════════════════
@@ -2300,7 +2300,7 @@ campoBusq.addEventListener('input', function() {
   if (!q) { ddBusq.classList.remove('abierto'); ddBusq.innerHTML=''; return; }
   let html = '';
   const fondo = { Pacientes:'var(--verde-mar-claro)', Turnos:'var(--verde-claro)', Médicos:'var(--ambar-claro)' };
-  const ico   = { Pacientes:'👤', Turnos:'📅', Médicos:'🩺' };
+  const ico   = { Pacientes:'PC', Turnos:'TU', Médicos:'MD' };
   Object.entries(BUSQUEDA_BD).forEach(([cat, items]) => {
     const matches = items.filter(x => x.txt.toLowerCase().includes(q));
     if (!matches.length) return;
@@ -2437,7 +2437,7 @@ function confirmarTurno() {
     mostrarTostada('Resolvé el conflicto de horario antes de confirmar','alerta'); return;
   }
   cerrarModal('modal-nuevo-turno');
-  mostrarTostada('✓ Turno confirmado · Recordatorio programado','exito');
+  mostrarTostada('Turno confirmado · Recordatorio programado','exito');
 }
 
 /* ─── TRIAGE / GUARDIA (módulo 04) ─── */
@@ -2498,7 +2498,7 @@ function calcularCoseguro() {
   const os = document.getElementById('fact-os').value;
   const c = coseguros[os]||0;
   document.getElementById('coseguro-resultado').innerHTML =
-    `💲 Coseguro ${os}: <b>$${c.toLocaleString('es-AR')}</b> · Arancel médico: $12.500`;
+    `Coseguro ${os}: <b>$${c.toLocaleString('es-AR')}</b> · Arancel médico: $12.500`;
 }
 
 /* ─── COLA DE ADMISIÓN ─── */
@@ -2535,10 +2535,10 @@ function cambiarFuente(px, el) {
 /* ─── VERIFICAR AFILIACIÓN ─── */
 function verificarAfiliacion() {
   const res = document.getElementById('resultadoAfiliacion');
-  res.innerHTML = '<div class="aviso info" style="margin-top:10px;">🔄 Consultando base de datos de la obra social…</div>';
+  res.innerHTML = '<div class="aviso info" style="margin-top:10px;">Consultando base de datos de la obra social…</div>';
   setTimeout(() => {
-    res.innerHTML = '<div class="aviso exito" style="margin-top:10px;">✓ Afiliado activo · Plan 210 · Carencias: ninguna · Co-seguro: $1.200</div>';
-    mostrarTostada('✓ Afiliación verificada correctamente','exito');
+    res.innerHTML = '<div class="aviso exito" style="margin-top:10px;">Afiliado activo · Plan 210 · Carencias: ninguna · Co-seguro: $1.200</div>';
+    mostrarTostada('Afiliación verificada correctamente','exito');
   }, 1400);
 }
 
@@ -2752,8 +2752,7 @@ function entrarAlSistema(email, usuario) {
   // Actualizar UI de barra superior
   const chip = document.getElementById('bs-rol-chip');
   chip.className = 'bs-rol-chip ' + usuario.rol;
-  const iconosRol = { admin:'⚙', medico:'🩺', enfermeria:'💉', recepcion:'📋' };
-  chip.textContent = (iconosRol[usuario.rol]||'') + ' ' + usuario.rolLabel;
+  chip.textContent = usuario.rolLabel;
 
   // Actualizar chip de usuario en menú lateral
   document.querySelector('.lat-usuario-nombre').textContent = usuario.nombre;
@@ -2840,9 +2839,9 @@ function mostrarRecuperacion() {
   const err = document.getElementById('login-error');
   err.classList.remove('visible');
   if (email) {
-    rec.textContent = `📧 Se envió un enlace de recuperación a ${email}. Revisá tu bandeja de entrada.`;
+    rec.textContent = `Se envió un enlace de recuperación a ${email}. Revisá tu bandeja de entrada.`;
   } else {
-    rec.textContent = '📧 Ingresá tu correo arriba y volvé a hacer clic en "Olvidé mi contraseña".';
+    rec.textContent = 'Ingresá tu correo arriba y volvé a hacer clic en "Olvidé mi contraseña".';
   }
   rec.classList.add('visible');
 }
@@ -2875,7 +2874,7 @@ document.getElementById('login-pass').addEventListener('keydown',  e => { if (e.
 /* ─── INICIALIZAR ─── */
 window.addEventListener('DOMContentLoaded', () => {
   animarContadores();
-  setTimeout(() => mostrarTostada('⏰ Turno en 5 min — Ferreyra, Ana · Dra. Romero (09:30)', 'alerta', 6000), 3000);
+  setTimeout(() => mostrarTostada('Turno en 5 min — Ferreyra, Ana · Dra. Romero (09:30)', 'alerta', 6000), 3000);
 });
 </script>
 </body>
