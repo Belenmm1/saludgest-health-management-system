@@ -142,7 +142,7 @@ button,input,select,textarea{font-family:var(--fuente);}
 /* — BÚSQUEDA GLOBAL — */
 .bs-busqueda{position:relative;flex:1;max-width:280px;}
 .bs-busqueda input{width:100%;background:var(--color-fondo);border:1px solid var(--color-borde);border-radius:4px;padding:6px 11px 6px 28px;font-size:12px;color:var(--color-texto);outline:none;transition:border-color 0.14s;}
-.bs-busqueda input:focus{border-color:var(--azul-medio);background:#fff;}
+.bs-busqueda input:focus{border-color:var(--color-texto);background:#fff;}
 .bs-busqueda::before{content:'⌕';position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--color-texto-suave);font-size:13px;pointer-events:none;}
 /* Desplegable búsqueda */
 .busqueda-dd{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1px solid var(--color-borde);border-radius:5px;box-shadow:var(--sombra-media);z-index:300;overflow:hidden;max-height:300px;overflow-y:auto;}
@@ -184,8 +184,8 @@ button,input,select,textarea{font-family:var(--fuente);}
 
 .bs-boton{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:4px;border:1px solid var(--color-borde);background:#fff;font-size:11.5px;color:var(--color-texto-medio);cursor:pointer;min-height:30px;transition:background 0.12s;flex-shrink:0;}
 .bs-boton:hover{background:var(--color-fondo);}
-.bs-boton.primario{background:var(--azul);color:#fff;border-color:var(--azul);}
-.bs-boton.primario:hover{background:var(--azul-medio);}
+.bs-boton.primario{background:#1A1A16;color:#fff;border-color:#1A1A16;}
+.bs-boton.primario:hover{background:#333330;}
 
 /* Banner UCI */
 .banner-critico{display:none;background:var(--color-critico);color:#fff;padding:6px 18px;font-size:11.5px;font-weight:500;align-items:center;gap:8px;flex-shrink:0;font-family:var(--mono);}
@@ -273,7 +273,7 @@ button,input,select,textarea{font-family:var(--fuente);}
 .grupo-campo{display:flex;flex-direction:column;gap:4px;}
 .etiqueta-campo{font-size:10px;font-weight:500;color:var(--color-texto-suave);letter-spacing:0.06em;text-transform:uppercase;font-family:var(--mono);}
 .entrada{padding:8px 10px;border:1px solid var(--color-borde);border-radius:4px;font-size:13px;color:var(--color-texto);background:var(--color-tarjeta);outline:none;transition:border-color 0.14s;min-height:36px;}
-.entrada:focus{border-color:var(--azul-medio);}
+.entrada:focus{border-color:var(--color-texto-medio);}
 select.entrada{cursor:pointer;}
 textarea.entrada{min-height:78px;resize:vertical;}
 
@@ -488,7 +488,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
   box-shadow:var(--sombra-media);
 }
 .atajos-titulo{
-  font-size:15px;font-weight:700;color:var(--azul-oscuro);
+  font-size:15px;font-weight:700;color:var(--color-texto);
   font-family:var(--fuente-titulo);margin-bottom:16px;
   display:flex;justify-content:space-between;align-items:center;
 }
@@ -513,15 +513,15 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .panel-notificaciones{position:fixed;top:0;right:-380px;width:360px;height:100vh;background:var(--superficie);border-left:1px solid var(--borde);box-shadow:-6px 0 24px rgba(15,45,82,0.12);z-index:200;display:flex;flex-direction:column;transition:right 0.25s cubic-bezier(0.4,0,0.2,1);}
 .panel-notificaciones.abierto{right:0;}
 .pn-cabeza{padding:16px 18px;border-bottom:1px solid var(--borde);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-.pn-titulo{font-size:14px;font-weight:700;color:var(--azul-oscuro);font-family:var(--fuente-titulo);}
+.pn-titulo{font-size:14px;font-weight:700;color:var(--color-texto);font-family:var(--fuente-titulo);}
 .pn-acciones{display:flex;gap:6px;align-items:center;}
-.pn-marcar-todo{font-size:11px;color:var(--azul-medio);cursor:pointer;background:none;border:none;font-family:var(--fuente);}
+.pn-marcar-todo{font-size:11px;color:var(--color-texto-suave);cursor:pointer;background:none;border:none;font-family:var(--fuente);}
 .pn-cerrar{width:26px;height:26px;border-radius:6px;border:1px solid var(--borde);background:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--texto-suave);}
 .pn-cuerpo{flex:1;overflow-y:auto;padding:10px 0;}
 .pn-grupo-titulo{font-size:9.5px;font-weight:700;color:var(--texto-suave);letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px 4px;}
 .notif-item{display:flex;gap:10px;padding:10px 18px;cursor:pointer;transition:background 0.12s;border-left:3px solid transparent;}
 .notif-item:hover{background:#FAFBFD;}
-.notif-item.no-leido{background:#F6F9FD;border-left-color:var(--azul-medio);}
+.notif-item.no-leido{background:#F7F6F3;border-left-color:var(--color-texto-medio);}
 .notif-item.no-leido-rojo{background:#FFF6F6;border-left-color:var(--rojo);}
 .notif-item.no-leido-ambar{background:#FFFBF0;border-left-color:var(--ambar);}
 .notif-icono{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
@@ -549,7 +549,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .tostada.error{background:#FDF9F9;border-color:#F0BFBF;color:#3D1010;}
 .tostada.error .tostada-barra{background:var(--rojo);}
 .tostada.info{background:#F5F8FD;border-color:#BDD0EE;color:#0F2D52;}
-.tostada.info .tostada-barra{background:var(--azul-medio);}
+.tostada.info .tostada-barra{background:var(--color-texto-medio);}
 .tostada-mensaje{flex:1;line-height:1.35;}
 .tostada-cerrar{background:none;border:none;cursor:pointer;font-size:13px;opacity:0.4;color:inherit;padding:0 4px;margin-left:auto;}
 
@@ -572,7 +572,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 ═══════════════════════════════════════════ */
 .tooltip-cama{display:none;position:fixed;z-index:400;background:var(--superficie);border:1px solid var(--borde);border-radius:10px;padding:14px 16px;min-width:220px;box-shadow:var(--sombra-media);pointer-events:none;animation:desvanecerEntrar 0.12s ease;}
 .tooltip-cama.visible{display:block;}
-.tt-nombre{font-weight:700;font-size:14px;color:var(--azul-oscuro);margin-bottom:8px;font-family:var(--fuente-titulo);}
+.tt-nombre{font-weight:700;font-size:14px;color:var(--color-texto);margin-bottom:8px;font-family:var(--fuente-titulo);}
 .tt-fila{display:flex;justify-content:space-between;gap:16px;margin-bottom:4px;font-size:12px;}
 .tt-etiqueta{color:var(--texto-suave);}
 .tt-valor{color:var(--texto);font-weight:500;}
@@ -582,13 +582,13 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .cama{border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;}
 .cama:hover{transform:translateY(-2px);box-shadow:var(--sombra);}
 .cama.libre{background:var(--verde-claro);border:1px solid #BBF7D0;}
-.cama.ocupada{background:var(--azul-claro);border:1px solid #BFDBFE;}
+.cama.ocupada{background:#EDE9E3;border:1px solid #D4CFC7;}
 .cama.limpieza{background:var(--ambar-claro);border:1px solid #FDE68A;}
 .cama.reservada{background:var(--rojo-claro);border:1px solid #FECACA;}
-.cama-num{font-size:13px;font-weight:600;color:var(--azul-oscuro);}
+.cama-num{font-size:13px;font-weight:600;color:var(--color-texto);}
 .cama-etiqueta{font-size:9px;font-weight:500;margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;}
 .cama.libre .cama-etiqueta{color:var(--verde);}
-.cama.ocupada .cama-etiqueta{color:var(--azul-medio);}
+.cama.ocupada .cama-etiqueta{color:var(--color-texto-medio);}
 .cama.limpieza .cama-etiqueta{color:var(--ambar);}
 .cama.reservada .cama-etiqueta{color:var(--rojo);}
 
@@ -625,10 +625,10 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .factura-info{flex:1;}
 .factura-nombre{font-weight:600;font-size:13px;color:var(--texto);}
 .factura-detalle{font-size:11.5px;color:var(--texto-suave);margin-top:2px;}
-.factura-monto{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--azul-oscuro);text-align:right;}
+.factura-monto{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--color-texto);text-align:right;}
 .factura-coseguro{font-size:11px;color:var(--texto-suave);margin-top:1px;text-align:right;}
 .os-tag{display:inline-flex;padding:2px 8px;border-radius:99px;font-size:10.5px;font-weight:600;}
-.os-osde{background:#EFF6FF;color:#1D4ED8;}
+.os-osde{background:#EDEAE4;color:var(--color-texto-medio);}
 .os-swiss{background:#F0FDF4;color:#166534;}
 .os-galeno{background:#FFF7ED;color:#C2410C;}
 .os-pami{background:#FDF4FF;color:#7E22CE;}
@@ -638,12 +638,12 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
    MÓDULO 04: CONFIGURACIÓN
 ═══════════════════════════════════════════ */
 .config-seccion{margin-bottom:22px;}
-.config-seccion-titulo{font-family:var(--fuente-titulo);font-size:14px;font-weight:600;color:var(--azul-oscuro);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--borde);}
+.config-seccion-titulo{font-family:var(--fuente-titulo);font-size:14px;font-weight:600;color:var(--color-texto);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--borde);}
 .usuario-fila{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--superficie);border:1px solid var(--borde);border-radius:8px;margin-bottom:6px;transition:box-shadow 0.15s;}
 .usuario-fila:hover{box-shadow:var(--sombra);}
 .rol-chip{padding:2px 8px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:0.04em;}
 .rol-admin{background:var(--morado-claro);color:var(--morado);}
-.rol-medico{background:var(--azul-claro);color:var(--azul-medio);}
+.rol-medico{background:#EDEAE4;color:var(--color-texto-medio);}
 .rol-enfermeria{background:var(--verde-mar-claro);color:var(--verde-mar);}
 .rol-recepcion{background:var(--ambar-claro);color:var(--ambar);}
 /* Toggle switch */
@@ -652,7 +652,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .toggle-texto{font-size:13px;color:var(--texto);}
 .toggle-sub{font-size:11px;color:var(--texto-suave);margin-top:1px;}
 .toggle{width:40px;height:22px;border-radius:11px;border:none;cursor:pointer;transition:background 0.2s;position:relative;flex-shrink:0;}
-.toggle.on{background:var(--azul-medio);}
+.toggle.on{background:#1A1A16;}
 .toggle.off{background:var(--borde);}
 .toggle::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;transition:left 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2);}
 .toggle.on::after{left:21px;}
@@ -661,7 +661,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .fuente-control{display:flex;gap:6px;}
 .fuente-btn{padding:6px 14px;border-radius:7px;border:1px solid var(--borde);background:var(--superficie);font-size:12px;cursor:pointer;transition:all 0.15s;font-family:var(--fuente);color:var(--texto-medio);}
 .fuente-btn:hover{background:var(--fondo);}
-.fuente-btn.activo{background:var(--azul-claro);color:var(--azul-medio);border-color:var(--azul-medio);}
+.fuente-btn.activo{background:#EDEAE4;color:var(--color-texto);border-color:var(--color-borde);}
 
 /* ═══════════════════════════════════════════
    MODAL VISOR DE LABORATORIO (módulo 02)
@@ -671,10 +671,10 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .lab-tabla tr:last-child td{border-bottom:none;}
 .lab-valor-normal{font-family:var(--mono);color:var(--texto-medio);}
 .lab-valor-alto{font-family:var(--mono);color:var(--rojo);font-weight:700;}
-.lab-valor-bajo{font-family:var(--mono);color:var(--azul-medio);font-weight:700;}
+.lab-valor-bajo{font-family:var(--mono);color:var(--color-info);font-weight:700;}
 .lab-flag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:700;}
 .lab-flag.alto{background:var(--rojo-claro);color:var(--rojo);}
-.lab-flag.bajo{background:var(--azul-claro);color:var(--azul-medio);}
+.lab-flag.bajo{background:#EAF0F7;color:#2C4A6E;}
 .lab-flag.normal{background:var(--verde-claro);color:var(--verde);}
 
 /* Modal conflicto turno */
@@ -836,7 +836,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
   min-height:44px;
   position:relative;
 }
-.nav-movil-item.activo{ color:var(--azul-medio); }
+.nav-movil-item.activo{ color:var(--color-texto); }
 .nav-movil-item .nm-ico{ font-size:18px; line-height:1; }
 .nav-movil-item .nm-etiqueta{ font-size:9px; letter-spacing:0.02em; }
 .nav-movil-item .nm-badge{
@@ -865,19 +865,19 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
   width:48px;
   height:48px;
   border-radius:50%;
-  background:var(--azul);
+  background:#1A1A16;
   color:#fff;
   font-size:22px;
   display:none;
   align-items:center;
   justify-content:center;
-  box-shadow:0 4px 14px rgba(30,77,140,0.4);
+  box-shadow:0 4px 14px rgba(0,0,0,0.3);
   border:none;
   cursor:pointer;
   z-index:151;
   transition:transform 0.2s, background 0.15s;
 }
-.nav-movil-mas:hover{ background:var(--azul-medio); transform:scale(1.05); }
+.nav-movil-mas:hover{ background:#333330; transform:scale(1.05); }
 
 /* Cajón menú completo en móvil */
 .cajon-menu{
@@ -933,7 +933,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
   transition:background 0.15s;
   min-height:44px;
 }
-.cajon-item:hover, .cajon-item.activo{ background:var(--azul-claro); color:var(--azul-medio); }
+.cajon-item:hover, .cajon-item.activo{ background:#EDEAE4; color:var(--color-texto); }
 .cajon-item .ci-ico{ font-size:20px; }
 
 @media(max-width:640px){
@@ -1132,7 +1132,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
   letter-spacing:0.04em; text-transform:uppercase;
 }
 .bs-rol-chip.admin     { background:#EDE9FE; color:#5B21B6; }
-.bs-rol-chip.medico    { background:#EBF8FF; color:#2C5282; }
+.bs-rol-chip.medico    { background:#EDEAE4; color:var(--color-texto-medio); }
 .bs-rol-chip.enfermeria{ background:#E6FFFA; color:#234E52; }
 .bs-rol-chip.recepcion { background:#FFFBEB; color:#744210; }
 
@@ -1340,7 +1340,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
         <div class="tarjeta">
           <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Auditoría reciente</span><span class="etiqueta etiqueta-gris">Solo admin</span></div>
           <div class="tarjeta-cuerpo">
-            <div class="aud-fila"><div class="aud-icono" style="background:var(--azul-claro);color:var(--azul-medio);">VER</div><div><div class="aud-texto">Dra. Romero consultó historial de <b>López, Carlos</b></div><div class="aud-meta">09:09 · Tablet-Cons-2 · 192.168.1.14</div></div></div>
+            <div class="aud-fila"><div class="aud-icono" style="background:#EDEAE4;color:var(--color-texto-medio);">VER</div><div><div class="aud-texto">Dra. Romero consultó historial de <b>López, Carlos</b></div><div class="aud-meta">09:09 · Tablet-Cons-2 · 192.168.1.14</div></div></div>
             <div class="aud-fila"><div class="aud-icono" style="background:var(--ambar-claro);color:var(--ambar);">MOD</div><div><div class="aud-texto">Enf. Pérez modificó signos vitales de <b>García, M.</b></div><div class="aud-meta">08:58 · PC-Enfermería-1 · 192.168.1.8</div></div></div>
             <div class="aud-fila"><div class="aud-icono" style="background:var(--verde-claro);color:var(--verde);">LOG</div><div><div class="aud-texto">Recepción Díaz inició sesión correctamente</div><div class="aud-meta">08:30 · PC-Recepción · 192.168.1.3</div></div></div>
           </div>
@@ -1360,7 +1360,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
         <div class="tarjeta">
           <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Ocupación · camas</span></div>
           <div class="tarjeta-cuerpo">
-            <div class="progreso"><div class="progreso-cabeza"><span>Clínica Médica</span><span>8/12</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:66%;background:var(--azul-medio)"></div></div></div>
+            <div class="progreso"><div class="progreso-cabeza"><span>Clínica Médica</span><span>8/12</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:66%;background:var(--verde-mar)"></div></div></div>
             <div class="progreso"><div class="progreso-cabeza"><span>Pediatría</span><span>3/8</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:37%;background:var(--verde-mar)"></div></div></div>
             <div class="progreso"><div class="progreso-cabeza"><span>Cirugía</span><span>5/6</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:83%;background:var(--ambar)"></div></div></div>
             <div class="progreso"><div class="progreso-cabeza"><span>UCI</span><span>4/4</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:100%;background:var(--rojo)"></div></div></div>
@@ -1370,7 +1370,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
           <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Estadísticas semana</span></div>
           <div class="tarjeta-cuerpo">
             <div class="progreso"><div class="progreso-cabeza"><span>Asistencia turnos</span><span>87%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:87%;background:var(--verde)"></div></div></div>
-            <div class="progreso"><div class="progreso-cabeza"><span>Espera &lt;15 min</span><span>72%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:72%;background:var(--azul-medio)"></div></div></div>
+            <div class="progreso"><div class="progreso-cabeza"><span>Espera &lt;15 min</span><span>72%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:72%;background:var(--verde-mar)"></div></div></div>
             <div class="progreso"><div class="progreso-cabeza"><span>Lab. en plazo</span><span>94%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:94%;background:var(--verde-mar)"></div></div></div>
           </div>
         </div>
@@ -1465,7 +1465,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
         <div class="tarjeta">
           <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Accesos recientes al historial</span><span class="etiqueta etiqueta-gris">Trazabilidad</span></div>
           <div class="tarjeta-cuerpo">
-            <div class="aud-fila"><div class="aud-icono" style="background:var(--azul-claro);color:var(--azul-medio);">VER</div><div><div class="aud-texto"><b>Dra. Romero</b> · Historia de López, Carlos</div><div class="aud-meta">09:09 · Consultorio 2 · 192.168.1.14</div></div></div>
+            <div class="aud-fila"><div class="aud-icono" style="background:#EDEAE4;color:var(--color-texto-medio);">VER</div><div><div class="aud-texto"><b>Dra. Romero</b> · Historia de López, Carlos</div><div class="aud-meta">09:09 · Consultorio 2 · 192.168.1.14</div></div></div>
             <div class="aud-fila"><div class="aud-icono" style="background:var(--ambar-claro);color:var(--ambar);">MOD</div><div><div class="aud-texto"><b>Enf. Pérez</b> · Signos vitales García, Marta</div><div class="aud-meta">08:58 · Enfermería · 192.168.1.8</div></div></div>
             <div class="aud-fila"><div class="aud-icono" style="background:var(--verde-mar-claro);color:var(--verde-mar);">EXP</div><div><div class="aud-texto"><b>Dra. Romero</b> · Exportó PDF Sosa, Patricia</div><div class="aud-meta">08:20 · Consultorio 2 · 192.168.1.14</div></div></div>
           </div>
@@ -1553,7 +1553,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
             <div class="tarjeta-cuerpo">
               <div class="linea-tiempo">
                 <div class="lt-item"><div class="lt-icono" style="background:var(--ambar-claro);">⊘</div><div class="lt-cuerpo"><div class="lt-titulo">Laboratorio solicitado</div><div class="lt-sub">Troponina I · enviado al lab.</div><div class="lt-fecha">hoy 09:12</div></div></div>
-                <div class="lt-item"><div class="lt-icono" style="background:var(--azul-claro);">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Evolución registrada</div><div class="lt-sub">Consulta Dra. Romero</div><div class="lt-fecha">hoy 09:09</div></div></div>
+                <div class="lt-item"><div class="lt-icono" style="background:#EDEAE4;">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Evolución registrada</div><div class="lt-sub">Consulta Dra. Romero</div><div class="lt-fecha">hoy 09:09</div></div></div>
                 <div class="lt-item"><div class="lt-icono" style="background:var(--borde-claro);">◷</div><div class="lt-cuerpo"><div class="lt-titulo">Visita anterior</div><div class="lt-sub">HTA control · Dr. Suárez</div><div class="lt-fecha">15/04/2026</div></div></div>
               </div>
             </div>
@@ -1684,7 +1684,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
                   <tr><td><span class="os-tag os-swiss">Swiss Med.</span></td><td>310</td><td style="font-family:var(--mono);font-weight:600;">$950</td></tr>
                   <tr><td><span class="os-tag os-galeno">Galeno</span></td><td>Básico</td><td style="font-family:var(--mono);font-weight:600;">$800</td></tr>
                   <tr><td><span class="os-tag os-pami">PAMI</span></td><td>General</td><td style="font-family:var(--mono);font-weight:600;">$0</td></tr>
-                  <tr><td><span class="os-tag os-particular">Particular</span></td><td>Arancel completo</td><td style="font-family:var(--mono);font-weight:600;color:var(--azul-medio);">$12.500</td></tr>
+                  <tr><td><span class="os-tag os-particular">Particular</span></td><td>Arancel completo</td><td style="font-family:var(--mono);font-weight:600;color:var(--color-texto);">$12.500</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1763,7 +1763,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
       </div>
       <div class="grilla-2">
         <div class="tarjeta"><div class="tarjeta-cabeza"><span class="tarjeta-titulo">Rendimiento por especialidad</span></div><div class="tarjeta-cuerpo">
-          <div class="progreso"><div class="progreso-cabeza"><span>Clínica Médica</span><span>234</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:90%;background:var(--azul-medio)"></div></div></div>
+          <div class="progreso"><div class="progreso-cabeza"><span>Clínica Médica</span><span>234</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:90%;background:var(--verde-mar)"></div></div></div>
           <div class="progreso"><div class="progreso-cabeza"><span>Pediatría</span><span>180</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:70%;background:var(--verde-mar)"></div></div></div>
           <div class="progreso"><div class="progreso-cabeza"><span>Cardiología</span><span>120</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:46%;background:var(--ambar)"></div></div></div>
           <div class="progreso"><div class="progreso-cabeza"><span>Traumatología</span><span>98</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:38%;background:#7F77DD"></div></div></div>
@@ -1838,7 +1838,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
     <div class="notif-item no-leido-rojo" onclick="accionNotif(this,'medico')"><div class="notif-icono" style="background:var(--rojo-claro);">⚠️</div><div><div class="notif-texto"><b>Alerta de alergia</b> — López, Carlos: Penicilina. Verificar prescripción.</div><div class="notif-hora">hace 5 min</div></div></div>
     <div class="pn-grupo-titulo">🔬 Laboratorio</div>
     <div class="notif-item no-leido" onclick="accionNotif(this,'laboratorio')"><div class="notif-icono" style="background:var(--verde-mar-claro);">📋</div><div><div class="notif-texto"><b>Resultado recibido</b> — Hemograma García, M. Valores fuera de rango.</div><div class="notif-hora">hace 8 min</div></div></div>
-    <div class="notif-item no-leido" onclick="accionNotif(this,'laboratorio')"><div class="notif-icono" style="background:var(--azul-claro);">📤</div><div><div class="notif-texto"><b>Orden enviada</b> — Troponina I · López, Carlos. HL7 a Lab. Central.</div><div class="notif-hora">hace 12 min</div></div></div>
+    <div class="notif-item no-leido" onclick="accionNotif(this,'laboratorio')"><div class="notif-icono" style="background:#EDEAE4;">📤</div><div><div class="notif-texto"><b>Orden enviada</b> — Troponina I · López, Carlos. HL7 a Lab. Central.</div><div class="notif-hora">hace 12 min</div></div></div>
     <div class="pn-grupo-titulo">🗓 Turnos</div>
     <div class="notif-item no-leido-ambar" onclick="accionNotif(this,'turnos')"><div class="notif-icono" style="background:var(--ambar-claro);">⏰</div><div><div class="notif-texto"><b>Turno en 5 min</b> — Ferreyra, Ana · Dra. Romero · 09:30</div><div class="notif-hora">hace 1 min</div></div></div>
     <div class="pn-grupo-titulo">⚙ Sistema</div>
@@ -1965,7 +1965,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
   <div class="modal-cuerpo">
     <div style="display:flex;gap:14px;margin-bottom:14px;align-items:center;flex-wrap:wrap;">
       <div class="av verde-mar" style="width:44px;height:44px;font-size:15px;">LC</div>
-      <div><div style="font-size:15px;font-weight:600;color:var(--azul-oscuro);">López, Carlos M.</div><div style="font-size:12px;color:var(--texto-suave);">DNI 28.541.902 · 45 años · Swiss Medical 310</div></div>
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-texto);">López, Carlos M.</div><div style="font-size:12px;color:var(--texto-suave);">DNI 28.541.902 · 45 años · Swiss Medical 310</div></div>
       <div style="margin-left:auto;display:flex;gap:6px;"><button class="boton chico" onclick="mostrarTostada('Exportando PDF del historial…','info')">Exportar PDF</button><button class="boton chico primario">Nueva evolución</button></div>
     </div>
     <div class="pestanias">
@@ -1982,12 +1982,12 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
     </div>
     <div class="panel-pestania" id="pac-evoluciones">
       <div class="linea-tiempo">
-        <div class="lt-item"><div class="lt-icono" style="background:var(--azul-claro);">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Consulta Cardiología · Dra. Romero</div><div class="lt-sub">Dolor precordial leve. Solicita Troponina I</div><div class="lt-fecha">hoy 09:09</div></div></div>
+        <div class="lt-item"><div class="lt-icono" style="background:#EDEAE4;">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Consulta Cardiología · Dra. Romero</div><div class="lt-sub">Dolor precordial leve. Solicita Troponina I</div><div class="lt-fecha">hoy 09:09</div></div></div>
         <div class="lt-item"><div class="lt-icono" style="background:var(--borde-claro);">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Control HTA · Dr. Suárez</div><div class="lt-sub">TA 146/90. Ajuste dosis Enalapril</div><div class="lt-fecha">15/04/2026</div></div></div>
       </div>
     </div>
     <div class="panel-pestania" id="pac-accesos">
-      <div class="aud-fila"><div class="aud-icono" style="background:var(--azul-claro);color:var(--azul-medio);">VER</div><div><div class="aud-texto"><b>Dra. Romero</b> consultó historia clínica completa</div><div class="aud-meta">hoy 09:09 · Tablet-Cons-2 · 192.168.1.14</div></div></div>
+      <div class="aud-fila"><div class="aud-icono" style="background:#EDEAE4;color:var(--color-texto-medio);">VER</div><div><div class="aud-texto"><b>Dra. Romero</b> consultó historia clínica completa</div><div class="aud-meta">hoy 09:09 · Tablet-Cons-2 · 192.168.1.14</div></div></div>
       <div class="aud-fila"><div class="aud-icono" style="background:var(--verde-mar-claro);color:var(--verde-mar);">EXP</div><div><div class="aud-texto"><b>Recep. Díaz</b> exportó datos básicos para admisión</div><div class="aud-meta">22/04 08:31 · PC-Recepción · 192.168.1.3</div></div></div>
     </div>
   </div>
@@ -2072,7 +2072,7 @@ const NOMBRES_MODULOS = {
 /* Sala de espera: tiempos de check-in */
 const ESPERA_DATA = [
   { num:'01', pac:'García, Marta',   med:'Dr. Suárez',  turno:'09:00', checkin: Date.now()-22*60000, est:'ambar', estLabel:'En consulta' },
-  { num:'02', pac:'López, Carlos',   med:'Dra. Romero', turno:'09:15', checkin: Date.now()-14*60000, est:'azul',  estLabel:'Llamado' },
+  { num:'02', pac:'López, Carlos',   med:'Dra. Romero', turno:'09:15', checkin: Date.now()-14*60000, est:'gris',  estLabel:'Llamado' },
   { num:'03', pac:'Ferreyra, Ana',   med:'Dra. Romero', turno:'09:30', checkin: Date.now()-6*60000,  est:'gris',  estLabel:'Esperando' },
 ];
 
@@ -2150,7 +2150,7 @@ const FACTURAS_DIA = [
 /* Cola admisión */
 const COLA_ADM = [
   { ini:'GM', pac:'García, Marta',           os:'OSDE · Clínica Médica',          est:'ambar', estLabel:'En consulta', hora:'08:52' },
-  { ini:'LC', pac:'López, Carlos',           os:'Swiss Medical · Cardiología',    est:'azul',  estLabel:'Llamado',     hora:'09:08' },
+  { ini:'LC', pac:'López, Carlos',           os:'Swiss Medical · Cardiología',    est:'gris',  estLabel:'Llamado',     hora:'09:08' },
   { ini:'FA', pac:'Ferreyra, Ana',           os:'Galeno · Pediatría',             est:'gris',  estLabel:'Esperando',   hora:'09:21' },
   { ini:'RM', pac:'Rodríguez, M. (espontáneo)',os:'Sin cobertura · Guardia',      est:'rojo',  estLabel:'Urgente',     hora:'09:35' },
 ];
@@ -2299,7 +2299,7 @@ campoBusq.addEventListener('input', function() {
   const q = this.value.toLowerCase().trim();
   if (!q) { ddBusq.classList.remove('abierto'); ddBusq.innerHTML=''; return; }
   let html = '';
-  const fondo = { Pacientes:'var(--azul-claro)', Turnos:'var(--verde-claro)', Médicos:'var(--ambar-claro)' };
+  const fondo = { Pacientes:'var(--verde-mar-claro)', Turnos:'var(--verde-claro)', Médicos:'var(--ambar-claro)' };
   const ico   = { Pacientes:'👤', Turnos:'📅', Médicos:'🩺' };
   Object.entries(BUSQUEDA_BD).forEach(([cat, items]) => {
     const matches = items.filter(x => x.txt.toLowerCase().includes(q));
