@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MediGest Pro · Sistema de Gestión Hospitalaria</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Serif:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 
 /* ════════════════════════════════════════
@@ -118,14 +119,14 @@ button,input,select,textarea{font-family:var(--fuente);}
 .lat-logo{padding:12px 14px 10px;border-bottom:1px solid rgba(255,255,255,0.07);}
 .lat-logo-nombre{color:#fff;font-size:13px;font-weight:500;letter-spacing:0.01em;font-family:var(--fuente);}
 .lat-logo-sub{color:rgba(255,255,255,0.3);font-size:9.5px;margin-top:2px;letter-spacing:0.06em;text-transform:uppercase;font-family:var(--mono);}
-.lat-nav{flex:1;padding:8px 6px;overflow-y:auto;}
-.lat-seccion{font-size:9px;font-weight:500;color:rgba(255,255,255,0.22);letter-spacing:0.14em;text-transform:uppercase;padding:18px 8px 4px;font-family:var(--mono);}
-.lat-item{display:flex;align-items:center;gap:9px;padding:0 8px;border-radius:4px;cursor:pointer;font-size:12px;color:rgba(255,255,255,0.48);margin-bottom:1px;transition:color 0.14s,background 0.14s;border-left:2px solid transparent;min-height:32px;}
-.lat-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.85);}
-.lat-item.activo{background:rgba(255,255,255,0.09);color:#fff;border-left-color:#fff;}
-.lat-item .icono{width:22px;text-align:center;flex-shrink:0;font-family:var(--mono);font-size:10px;font-weight:500;color:rgba(255,255,255,0.35);letter-spacing:0;}
-.lat-item.activo .icono,.lat-item:hover .icono{color:rgba(255,255,255,0.7);}
-.lat-contador{margin-left:auto;background:var(--color-critico);color:#fff;font-size:9px;font-weight:600;padding:1px 5px;border-radius:3px;font-family:var(--mono);}
+.lat-nav{flex:1;padding:6px 0;overflow-y:auto;}
+.lat-seccion{font-size:9px;font-weight:500;color:rgba(255,255,255,0.22);letter-spacing:0.14em;text-transform:uppercase;padding:18px 10px 4px;font-family:var(--mono);}
+.lat-item{display:flex;align-items:center;gap:9px;padding:0 10px 0 8px;border-radius:0;cursor:pointer;font-size:12px;color:rgba(255,255,255,0.5);transition:color 0.14s,background 0.14s;border-left:2px solid transparent;min-height:32px;}
+.lat-item:hover{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);}
+.lat-item.activo{background:rgba(255,255,255,0.08);color:#fff;border-left-color:#fff;}
+.lat-item .icono{width:22px;text-align:center;flex-shrink:0;font-family:var(--mono);font-size:10px;font-weight:500;color:rgba(255,255,255,0.3);letter-spacing:0;}
+.lat-item.activo .icono,.lat-item:hover .icono{color:rgba(255,255,255,0.65);}
+.lat-contador{margin-left:auto;background:var(--color-critico);color:#fff;font-size:9px;font-weight:600;padding:1px 4px;border-radius:2px;font-family:var(--mono);}
 .lat-contador.verde{background:var(--verde-mar);}
 .lat-contador.ambar{background:var(--ambar);}
 .lat-usuario{padding:10px 12px;border-top:1px solid rgba(255,255,255,0.07);}
@@ -247,7 +248,6 @@ button,input,select,textarea{font-family:var(--fuente);}
 .tabla .td-nombre{color:var(--color-texto);font-weight:500;}
 /* Filas completas clicables */
 .tabla.clicable tbody tr{cursor:pointer;}
-.tabla.clicable tbody tr td{padding-top:8px;padding-bottom:8px;}
 
 /* ═══════════════════════════════════════════
    AVATAR
@@ -372,7 +372,6 @@ textarea.entrada{min-height:78px;resize:vertical;}
 .boton.ambar{background:#FFFCF0;color:var(--ambar);border-color:#E8D5A0;}
 .boton.chico{padding:5px 10px;font-size:11px;min-height:30px;}
 .tabla.clicable tbody tr{cursor:pointer;}
-.tabla.clicable tbody tr td{padding-top:8px;padding-bottom:8px;}
 
 /* ═══════════════════════════════════════════
    MÓDULO 05 — ATAJOS DE TECLADO (tooltips)
@@ -419,13 +418,25 @@ textarea.entrada{min-height:78px;resize:vertical;}
 .boton-contraste{
   display:flex;align-items:center;gap:6px;
   padding:6px 12px;min-height:44px;
-  border-radius:7px;border:1px solid var(--borde);
+  border-radius:4px;border:1px solid var(--borde);
   background:var(--superficie);font-size:11.5px;
   font-weight:600;color:var(--texto-medio);
   cursor:pointer;transition:all 0.15s;
   flex-shrink:0;
 }
 .boton-contraste:hover{background:var(--fondo);}
+
+.boton-modo-oscuro{
+  display:flex;align-items:center;gap:5px;
+  padding:6px 10px;border-radius:4px;
+  border:1px solid var(--borde);background:var(--superficie);
+  font-size:11.5px;font-weight:600;color:var(--texto-medio);
+  cursor:pointer;transition:all 0.15s;font-family:var(--fuente);
+  flex-shrink:0;
+}
+.boton-modo-oscuro:hover{background:var(--fondo);}
+.mo-ico{font-size:13px;line-height:1;}
+body.modo-oscuro .boton-modo-oscuro{background:var(--superficie);color:#D29922;border-color:#30363D;}
 .contraste-ico{font-size:14px;}
 
 /* Variables que se sobreescriben en alto contraste */
@@ -473,6 +484,62 @@ body.alto-contraste .boton-contraste{
 body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 
 /* ═══════════════════════════════════════════
+   MODO OSCURO COMPLETO
+═══════════════════════════════════════════ */
+body.modo-oscuro {
+  --color-fondo:           #0D1117;
+  --color-tarjeta:         #161B22;
+  --color-borde:           #30363D;
+  --color-borde-suave:     #21262D;
+  --color-texto:           #E6EDF3;
+  --color-texto-medio:     #8B949E;
+  --color-texto-suave:     #6E7681;
+  --color-registro:        #161B22;
+  --color-fondo-formulario:#0D1117;
+  --fondo:                 #0D1117;
+  --superficie:            #161B22;
+  --borde:                 #30363D;
+  --borde-claro:           #21262D;
+  --texto:                 #E6EDF3;
+  --texto-medio:           #8B949E;
+  --texto-suave:           #6E7681;
+  --color-ok:              #3FB950;
+  --color-ok-fondo:        #0F2D1A;
+  --color-ok-borde:        #1A4D2A;
+  --color-critico:         #F85149;
+  --color-critico-fondo:   #2D0A0A;
+  --color-critico-borde:   #5A1414;
+  --color-alerta:          #D29922;
+  --color-alerta-fondo:    #2D1F00;
+  --color-alerta-borde:    #4D3500;
+  --verde:                 #3FB950;
+  --verde-claro:           #0F2D1A;
+  --ambar:                 #D29922;
+  --ambar-claro:           #2D1F00;
+  --rojo:                  #F85149;
+  --rojo-claro:            #2D0A0A;
+  --verde-mar:             #2DD4BF;
+  --verde-mar-claro:       #0A2420;
+}
+body.modo-oscuro .barra-superior{background:#161B22;border-bottom-color:#30363D;}
+body.modo-oscuro .lateral{background:#0D1117 !important;}
+body.modo-oscuro .lateral .lat-item.activo{background:rgba(255,255,255,0.06);border-left-color:rgba(255,255,255,0.65);}
+body.modo-oscuro .panel-notificaciones{background:#161B22;border-color:#30363D;}
+body.modo-oscuro .modal{background:#161B22;border-color:#30363D;}
+body.modo-oscuro .tostada{background:#1C2128;border-color:#30363D;color:#E6EDF3;}
+body.modo-oscuro .entrada,
+body.modo-oscuro select.entrada{background:#0D1117;border-color:#30363D;color:#E6EDF3;}
+body.modo-oscuro .busqueda-dd{background:#161B22;border-color:#30363D;}
+body.modo-oscuro .bdd-item:hover{background:#21262D;}
+body.modo-oscuro .cajon-contenido{background:#161B22;}
+body.modo-oscuro .progreso-relleno{filter:brightness(1.4);}
+body.modo-oscuro .tooltip-cama{background:#161B22;border-color:#30363D;}
+body.modo-oscuro .banner-alergia{background:#2D0A0A;border-color:#5A1414;}
+body.modo-oscuro .aviso{background:#1C2128;border-color:#30363D;}
+body.modo-oscuro .lat-item:hover{background:rgba(255,255,255,0.04);}
+body.modo-oscuro .boton-modo-oscuro .mo-ico{content:'🌙';}
+
+/* ═══════════════════════════════════════════
    MÓDULO 05 — OVERLAY DE ATAJOS DE TECLADO
 ═══════════════════════════════════════════ */
 .panel-atajos{
@@ -483,9 +550,9 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 }
 .panel-atajos.abierto{display:flex;animation:aparecerPagina 0.18s ease both;}
 .atajos-modal{
-  background:var(--superficie);border-radius:14px;
+  background:var(--superficie);border-radius:5px;
   padding:24px 28px;max-width:420px;width:100%;
-  box-shadow:var(--sombra-media);
+  border:1px solid var(--borde);
 }
 .atajos-titulo{
   font-size:15px;font-weight:700;color:var(--color-texto);
@@ -510,21 +577,21 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 /* ═══════════════════════════════════════════
    PANEL DE NOTIFICACIONES
 ═══════════════════════════════════════════ */
-.panel-notificaciones{position:fixed;top:0;right:-380px;width:360px;height:100vh;background:var(--superficie);border-left:1px solid var(--borde);box-shadow:-6px 0 24px rgba(15,45,82,0.12);z-index:200;display:flex;flex-direction:column;transition:right 0.25s cubic-bezier(0.4,0,0.2,1);}
+.panel-notificaciones{position:fixed;top:0;right:-380px;width:360px;height:100vh;background:var(--superficie);border-left:1px solid var(--borde);z-index:200;display:flex;flex-direction:column;transition:right 0.25s cubic-bezier(0.4,0,0.2,1);}
 .panel-notificaciones.abierto{right:0;}
-.pn-cabeza{padding:16px 18px;border-bottom:1px solid var(--borde);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.pn-cabeza{padding:12px 16px;border-bottom:1px solid var(--borde);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .pn-titulo{font-size:14px;font-weight:700;color:var(--color-texto);font-family:var(--fuente-titulo);}
 .pn-acciones{display:flex;gap:6px;align-items:center;}
 .pn-marcar-todo{font-size:11px;color:var(--color-texto-suave);cursor:pointer;background:none;border:none;font-family:var(--fuente);}
 .pn-cerrar{width:26px;height:26px;border-radius:4px;border:1px solid var(--borde);background:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--texto-suave);}
 .pn-cuerpo{flex:1;overflow-y:auto;padding:10px 0;}
-.pn-grupo-titulo{font-size:9.5px;font-weight:700;color:var(--texto-suave);letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px 4px;}
-.notif-item{display:flex;gap:10px;padding:10px 18px;cursor:pointer;transition:background 0.12s;border-left:3px solid transparent;}
+.pn-grupo-titulo{font-size:9.5px;font-weight:700;color:var(--texto-suave);letter-spacing:0.1em;text-transform:uppercase;padding:8px 16px 3px;}
+.notif-item{display:flex;gap:10px;padding:8px 16px;cursor:pointer;transition:background 0.12s;border-left:3px solid transparent;}
 .notif-item:hover{background:#FAFBFD;}
 .notif-item.no-leido{background:#F7F6F3;border-left-color:var(--color-texto-medio);}
 .notif-item.no-leido-rojo{background:#FFF6F6;border-left-color:var(--rojo);}
 .notif-item.no-leido-ambar{background:#FFFBF0;border-left-color:var(--ambar);}
-.notif-icono{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.notif-icono{width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
 .notif-texto{font-size:12.5px;color:var(--texto);line-height:1.4;flex:1;}
 .notif-texto b{font-weight:600;}
 .notif-hora{font-size:10.5px;color:var(--texto-suave);margin-top:2px;}
@@ -532,7 +599,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .fondo-notif.abierto{display:block;}
 
 /* Banner alergia */
-.banner-alergia{display:none;background:#FFF1F1;border:1px solid #FECACA;border-radius:8px;padding:10px 14px;margin-bottom:12px;align-items:center;gap:10px;font-size:13px;color:var(--rojo);}
+.banner-alergia{display:none;background:#FFF1F1;border:1px solid #FECACA;border-radius:4px;padding:10px 14px;margin-bottom:12px;align-items:center;gap:10px;font-size:13px;color:var(--rojo);}
 .banner-alergia.visible{display:flex;}
 .ba-icono{font-size:18px;flex-shrink:0;}
 
@@ -560,17 +627,17 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .fondo-modal.abierto{display:flex;}
 .modal{background:var(--color-tarjeta);border-radius:5px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:aparecerPagina 0.18s ease both;border:1px solid var(--color-borde);}
 .modal.grande{max-width:700px;}
-.modal-cabeza{padding:16px 18px 12px;border-bottom:1px solid var(--color-borde);display:flex;align-items:center;justify-content:space-between;}
+.modal-cabeza{padding:12px 16px 10px;border-bottom:1px solid var(--color-borde);display:flex;align-items:center;justify-content:space-between;}
 .modal-titulo{font-size:14px;font-weight:500;color:var(--color-texto);font-family:var(--fuente);letter-spacing:0;}
 .modal-cerrar{background:none;border:none;font-size:16px;color:var(--color-texto-suave);cursor:pointer;line-height:1;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:3px;transition:background 0.12s;}
 .modal-cerrar:hover{background:var(--color-fondo);}
-.modal-cuerpo{padding:16px 18px;}
-.modal-pie{padding:10px 18px;border-top:1px solid var(--color-borde-suave);display:flex;gap:8px;justify-content:flex-end;}
+.modal-cuerpo{padding:14px 16px;}
+.modal-pie{padding:8px 16px;border-top:1px solid var(--color-borde-suave);display:flex;gap:8px;justify-content:flex-end;}
 
 /* ═══════════════════════════════════════════
    TOOLTIP CAMA (módulo 02)
 ═══════════════════════════════════════════ */
-.tooltip-cama{display:none;position:fixed;z-index:400;background:var(--superficie);border:1px solid var(--borde);border-radius:10px;padding:14px 16px;min-width:220px;box-shadow:var(--sombra-media);pointer-events:none;animation:desvanecerEntrar 0.12s ease;}
+.tooltip-cama{display:none;position:fixed;z-index:400;background:var(--superficie);border:1px solid var(--borde);border-radius:4px;padding:12px 14px;min-width:220px;pointer-events:none;animation:desvanecerEntrar 0.12s ease;}
 .tooltip-cama.visible{display:block;}
 .tt-nombre{font-weight:700;font-size:14px;color:var(--color-texto);margin-bottom:8px;font-family:var(--fuente-titulo);}
 .tt-fila{display:flex;justify-content:space-between;gap:16px;margin-bottom:4px;font-size:12px;}
@@ -579,7 +646,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 
 /* Mapa de camas */
 .grilla-camas{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
-.cama{border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;}
+.cama{border-radius:4px;padding:10px 8px;text-align:center;cursor:pointer;}
 .cama:hover{border-color:var(--borde);}
 .cama.libre{background:var(--verde-claro);border:1px solid #BBF7D0;}
 .cama.ocupada{background:#EDE9E3;border:1px solid #D4CFC7;}
@@ -595,7 +662,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 /* ═══════════════════════════════════════════
    MÓDULO 04: GUARDIA / EMERGENCIAS
 ═══════════════════════════════════════════ */
-.guardia-cabecera{background:linear-gradient(135deg,#7F1D1D,#991B1B);border-radius:10px;padding:16px 20px;margin-bottom:18px;display:flex;align-items:center;gap:14px;color:#fff;}
+.guardia-cabecera{background:#7F1D1D;border-radius:4px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:14px;color:#fff;}
 .guardia-ico-grande{font-size:32px;}
 .guardia-titulo-bloque{font-family:var(--fuente-titulo);font-size:18px;font-weight:700;letter-spacing:-0.01em;}
 .guardia-sub-bloque{font-size:12px;opacity:0.75;margin-top:2px;}
@@ -605,7 +672,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 /* Fila de triage */
 .triage-fila{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio);margin-bottom:8px;cursor:pointer;min-height:60px;}
 .triage-fila:hover{box-shadow:var(--sombra);}
-.triage-nivel{width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;letter-spacing:0.03em;flex-shrink:0;}
+.triage-nivel{width:44px;height:44px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;letter-spacing:0.03em;flex-shrink:0;}
 .nivel-rojo{background:var(--rojo-claro);color:var(--rojo);border:1.5px solid #FCA5A5;}
 .nivel-amarillo{background:var(--ambar-claro);color:var(--ambar);border:1.5px solid #FDE68A;}
 .nivel-verde{background:var(--verde-claro);color:var(--verde);border:1.5px solid #86EFAC;}
@@ -659,7 +726,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .toggle.off::after{left:3px;}
 /* Control tamaño fuente */
 .fuente-control{display:flex;gap:6px;}
-.fuente-btn{padding:6px 14px;border-radius:7px;border:1px solid var(--borde);background:var(--superficie);font-size:12px;cursor:pointer;transition:all 0.15s;font-family:var(--fuente);color:var(--texto-medio);}
+.fuente-btn{padding:6px 14px;border-radius:4px;border:1px solid var(--borde);background:var(--superficie);font-size:12px;cursor:pointer;transition:all 0.15s;font-family:var(--fuente);color:var(--texto-medio);}
 .fuente-btn:hover{background:var(--fondo);}
 .fuente-btn.activo{background:#EDEAE4;color:var(--color-texto);border-color:var(--color-borde);}
 
@@ -678,7 +745,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 .lab-flag.normal{background:var(--verde-claro);color:var(--verde);}
 
 /* Modal conflicto turno */
-.aviso-conflicto{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;display:none;gap:8px;font-size:12.5px;color:var(--ambar);}
+.aviso-conflicto{background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;padding:10px 14px;display:none;gap:8px;font-size:12.5px;color:var(--ambar);}
 .aviso-conflicto.visible{display:flex;}
 
 /* ═══════════════════════════════════════════
@@ -812,7 +879,6 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
   background:var(--superficie);
   border-top:1px solid var(--borde);
   z-index:150;
-  box-shadow:0 -2px 12px rgba(15,45,82,0.1);
 }
 .nav-movil-items{
   display:flex;
@@ -922,7 +988,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
   align-items:center;
   gap:5px;
   padding:12px 6px;
-  border-radius:10px;
+  border-radius:4px;
   background:var(--fondo);
   cursor:pointer;
   border:1px solid var(--borde-claro);
@@ -1290,6 +1356,11 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 
     <button class="boton-campana" onclick="alternarPanelNotif()" title="Notificaciones" data-atajo="Alt + N"><span class="icono">NT</span><span class="campana-contador" id="contador-campana">5</span></button>
 
+    <!-- Modo oscuro -->
+    <button class="boton-modo-oscuro" onclick="alternarModoOscuro()" id="boton-oscuro" title="Modo oscuro (Alt+D)">
+      <span class="mo-ico" id="mo-ico">☀</span>Oscuro
+    </button>
+
     <!-- Módulo 05: Alto contraste -->
     <button class="boton-contraste" onclick="alternarAltoContraste()" id="boton-contraste" data-atajo="Alt + C" title="Modo alto contraste">
       <span class="contraste-ico">◑</span>Contraste
@@ -1367,11 +1438,9 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
           </div>
         </div>
         <div class="tarjeta">
-          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Estadísticas semana</span></div>
-          <div class="tarjeta-cuerpo">
-            <div class="progreso"><div class="progreso-cabeza"><span>Asistencia turnos</span><span>87%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:87%;background:var(--verde)"></div></div></div>
-            <div class="progreso"><div class="progreso-cabeza"><span>Espera &lt;15 min</span><span>72%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:72%;background:var(--verde-mar)"></div></div></div>
-            <div class="progreso"><div class="progreso-cabeza"><span>Lab. en plazo</span><span>94%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:94%;background:var(--verde-mar)"></div></div></div>
+          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Consultas esta semana</span></div>
+          <div class="tarjeta-cuerpo" style="height:130px;position:relative;">
+            <canvas id="grafico-tablero-mini"></canvas>
           </div>
         </div>
       </div>
@@ -1761,18 +1830,39 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
         <div class="metrica"><div class="metrica-etiqueta">Ocupación camas</div><div class="metrica-valor" data-final="65">0</div><div class="metrica-sub neutro">UCI: 100%</div></div>
         <div class="metrica"><div class="metrica-etiqueta">NPS pacientes</div><div class="metrica-valor" data-final="78">0</div><div class="metrica-sub arriba">↑ 5 pts</div></div>
       </div>
+
+      <!-- Fila 1: Líneas + Dona -->
+      <div class="grilla-2" style="margin-bottom:14px;">
+        <div class="tarjeta">
+          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Consultas diarias — semana actual vs anterior</span></div>
+          <div class="tarjeta-cuerpo" style="height:220px;position:relative;">
+            <canvas id="grafico-lineas"></canvas>
+          </div>
+        </div>
+        <div class="tarjeta">
+          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Distribución por obra social</span></div>
+          <div class="tarjeta-cuerpo" style="height:220px;position:relative;display:flex;align-items:center;justify-content:center;">
+            <canvas id="grafico-dona" style="max-width:200px;max-height:200px;"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 2: Barras horizontales + Gauge -->
       <div class="grilla-2">
-        <div class="tarjeta"><div class="tarjeta-cabeza"><span class="tarjeta-titulo">Rendimiento por especialidad</span></div><div class="tarjeta-cuerpo">
-          <div class="progreso"><div class="progreso-cabeza"><span>Clínica Médica</span><span>234</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:90%;background:var(--verde-mar)"></div></div></div>
-          <div class="progreso"><div class="progreso-cabeza"><span>Pediatría</span><span>180</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:70%;background:var(--verde-mar)"></div></div></div>
-          <div class="progreso"><div class="progreso-cabeza"><span>Cardiología</span><span>120</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:46%;background:var(--ambar)"></div></div></div>
-          <div class="progreso"><div class="progreso-cabeza"><span>Traumatología</span><span>98</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:38%;background:#7F77DD"></div></div></div>
-        </div></div>
-        <div class="tarjeta"><div class="tarjeta-cabeza"><span class="tarjeta-titulo">Ausentismo y lista de espera</span></div><div class="tarjeta-cuerpo">
-          <div class="progreso"><div class="progreso-cabeza"><span>Ausentismo general</span><span>13%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:13%;background:var(--rojo)"></div></div></div>
-          <div class="progreso"><div class="progreso-cabeza"><span>Reducción con recordatorios SMS</span><span>-38%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:60%;background:var(--verde)"></div></div></div>
-          <div class="progreso"><div class="progreso-cabeza"><span>Vacantes reasignadas</span><span>82%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:82%;background:var(--verde-mar)"></div></div></div>
-        </div></div>
+        <div class="tarjeta">
+          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Rendimiento por especialidad</span></div>
+          <div class="tarjeta-cuerpo" style="height:220px;position:relative;">
+            <canvas id="grafico-barras"></canvas>
+          </div>
+        </div>
+        <div class="tarjeta">
+          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Ocupación de camas en tiempo real</span></div>
+          <div class="tarjeta-cuerpo" style="height:220px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+            <canvas id="grafico-gauge" style="max-width:220px;max-height:160px;"></canvas>
+            <div style="font-family:var(--mono);font-size:22px;font-weight:500;color:var(--color-texto);margin-top:-18px;" id="gauge-valor">65%</div>
+            <div style="font-size:11px;color:var(--color-texto-suave);">General · UCI al 100%</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1911,6 +2001,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
     <div class="atajos-fila"><span class="atajos-desc">Nuevo turno</span><span class="atajos-tecla">T</span></div>
     <div class="atajos-fila"><span class="atajos-desc">Foco en búsqueda</span><span class="atajos-tecla">B</span></div>
     <div class="atajos-fila"><span class="atajos-desc">Alto contraste</span><span class="atajos-tecla">Alt + C</span></div>
+    <div class="atajos-fila"><span class="atajos-desc">Modo oscuro</span><span class="atajos-tecla">Alt + D</span></div>
     <div class="atajos-fila"><span class="atajos-desc">Cerrar modal / panel</span><span class="atajos-tecla">Esc</span></div>
     <div class="atajos-fila"><span class="atajos-desc">Ir al Tablero</span><span class="atajos-tecla">1</span></div>
     <div class="atajos-fila"><span class="atajos-desc">Ir a Turnos</span><span class="atajos-tecla">2</span></div>
@@ -1961,37 +2052,173 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 
 <!-- Detalle paciente -->
 <div class="fondo-modal" id="modal-detalle-paciente">
-  <div class="modal grande"><div class="modal-cabeza"><span class="modal-titulo">Historia Clínica · López, Carlos M.</span><button class="modal-cerrar" onclick="cerrarModal('modal-detalle-paciente')">✕</button></div>
-  <div class="modal-cuerpo">
-    <div style="display:flex;gap:14px;margin-bottom:14px;align-items:center;flex-wrap:wrap;">
-      <div class="av verde-mar" style="width:44px;height:44px;font-size:15px;">LC</div>
-      <div><div style="font-size:15px;font-weight:600;color:var(--color-texto);">López, Carlos M.</div><div style="font-size:12px;color:var(--texto-suave);">DNI 28.541.902 · 45 años · Swiss Medical 310</div></div>
-      <div style="margin-left:auto;display:flex;gap:6px;"><button class="boton chico" onclick="mostrarTostada('Exportando PDF del historial…','info')">Exportar PDF</button><button class="boton chico primario">Nueva evolución</button></div>
+  <div class="modal hce"><div class="modal-cabeza">
+    <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
+      <div class="av verde-mar" style="width:36px;height:36px;font-size:13px;flex-shrink:0;">LC</div>
+      <div style="min-width:0;">
+        <div style="font-size:14px;font-weight:600;color:var(--color-texto);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">López, Carlos M.</div>
+        <div style="font-size:11px;color:var(--texto-suave);font-family:var(--mono);">DNI 28.541.902 · 45 años · M · Swiss Medical 310</div>
+      </div>
+      <div style="margin-left:10px;flex-shrink:0;">
+        <span class="etiqueta" style="background:var(--rojo-claro);color:var(--rojo);border-color:var(--rojo-claro);">Alergia: Penicilina</span>
+      </div>
     </div>
+    <div style="display:flex;gap:6px;flex-shrink:0;margin-left:12px;">
+      <button class="boton chico" onclick="mostrarTostada('Generando PDF de historia clínica…','info')">Imprimir / PDF</button>
+      <button class="boton chico primario" onclick="mostrarTostada('Nueva evolución registrada','exito')">＋ Evolución</button>
+    </div>
+    <button class="modal-cerrar" onclick="cerrarModal('modal-detalle-paciente')">✕</button>
+  </div>
+  <div class="modal-cuerpo" style="padding-top:0;">
+
+    <!-- Semáforo de riesgo cardiovascular -->
+    <div style="display:flex;gap:8px;padding:10px 0 12px;border-bottom:1px solid var(--borde);margin-bottom:14px;flex-wrap:wrap;align-items:center;">
+      <span style="font-size:11px;color:var(--texto-suave);font-family:var(--mono);">Riesgo cardiovasc.:</span>
+      <span class="etiqueta etiqueta-ambar">Moderado</span>
+      <span style="font-size:11px;color:var(--texto-suave);">HTA + Dislipemia · Framingham 14%</span>
+      <span style="margin-left:auto;font-size:11px;color:var(--texto-suave);font-family:var(--mono);">Última consulta: hoy 09:09 · Dra. Romero</span>
+    </div>
+
     <div class="pestanias">
       <div class="pestania activa" onclick="cambiarPestania('pac','resumen',this)">Resumen</div>
       <div class="pestania" onclick="cambiarPestania('pac','evoluciones',this)">Evoluciones</div>
-      <div class="pestania" onclick="cambiarPestania('pac','accesos',this)">Accesos al historial</div>
+      <div class="pestania" onclick="cambiarPestania('pac','estudios',this)">Estudios</div>
+      <div class="pestania" onclick="cambiarPestania('pac','medicacion',this)">Medicación activa</div>
+      <div class="pestania" onclick="cambiarPestania('pac','vacunas',this)">Vacunas</div>
+      <div class="pestania" onclick="cambiarPestania('pac','alergias',this)">Alergias e internaciones</div>
+      <div class="pestania" onclick="cambiarPestania('pac','accesos',this)">Accesos al registro</div>
     </div>
+
+    <!-- RESUMEN -->
     <div class="panel-pestania activo" id="pac-resumen">
+      <div class="fila-campo tres" style="margin-bottom:10px;">
+        <div class="grupo-campo"><label class="etiqueta-campo">Fecha de nacimiento</label><input class="entrada" value="14/07/1980" readonly></div>
+        <div class="grupo-campo"><label class="etiqueta-campo">Obra social</label><input class="entrada" value="Swiss Medical 310" readonly></div>
+        <div class="grupo-campo"><label class="etiqueta-campo">Médico de cabecera</label><input class="entrada" value="Dr. Suárez" readonly></div>
+      </div>
       <div class="fila-campo tres">
-        <div class="grupo-campo"><label class="etiqueta-campo">Patologías</label><input class="entrada" value="HTA · Dislipemia" readonly></div>
-        <div class="grupo-campo"><label class="etiqueta-campo">Alergias</label><input class="entrada" value="Penicilina" readonly style="background:var(--rojo-claro);color:var(--rojo);"></div>
-        <div class="grupo-campo"><label class="etiqueta-campo">Medicación</label><input class="entrada" value="Enalapril · Atorvastatina" readonly></div>
+        <div class="grupo-campo"><label class="etiqueta-campo">Patologías crónicas</label><input class="entrada" value="HTA · Dislipemia" readonly></div>
+        <div class="grupo-campo"><label class="etiqueta-campo">Alergias</label><input class="entrada" value="Penicilina" readonly style="background:var(--rojo-claro);color:var(--rojo);border-color:var(--rojo-claro);"></div>
+        <div class="grupo-campo"><label class="etiqueta-campo">Grupo / Factor</label><input class="entrada" value="A+" readonly></div>
+      </div>
+      <div class="fila-campo tres" style="margin-top:10px;">
+        <div class="grupo-campo"><label class="etiqueta-campo">Peso</label><input class="entrada" value="78 kg" readonly></div>
+        <div class="grupo-campo"><label class="etiqueta-campo">Talla</label><input class="entrada" value="1.72 m" readonly></div>
+        <div class="grupo-campo"><label class="etiqueta-campo">IMC</label><input class="entrada" value="26.4 — Sobrepeso leve" readonly></div>
       </div>
     </div>
+
+    <!-- EVOLUCIONES -->
     <div class="panel-pestania" id="pac-evoluciones">
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+        <select class="entrada" style="width:auto;min-width:160px;"><option>Todas las especialidades</option><option>Cardiología</option><option>Clínica Médica</option></select>
+        <input class="entrada" type="date" style="width:auto;" value="2026-01-01">
+        <input class="entrada" type="date" style="width:auto;" value="2026-04-28">
+      </div>
       <div class="linea-tiempo">
-        <div class="lt-item"><div class="lt-icono" style="background:#EDEAE4;">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Consulta Cardiología · Dra. Romero</div><div class="lt-sub">Dolor precordial leve. Solicita Troponina I</div><div class="lt-fecha">hoy 09:09</div></div></div>
-        <div class="lt-item"><div class="lt-icono" style="background:var(--borde-claro);">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Control HTA · Dr. Suárez</div><div class="lt-sub">TA 146/90. Ajuste dosis Enalapril</div><div class="lt-fecha">15/04/2026</div></div></div>
+        <div class="lt-item"><div class="lt-icono" style="background:#EDEAE4;">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Consulta Cardiología · Dra. Romero</div><div class="lt-sub">Dolor precordial leve. TA 148/92. Solicita Troponina I y ECG. Sin cambios en medicación.</div><div class="lt-fecha">hoy 09:09</div></div></div>
+        <div class="lt-item"><div class="lt-icono" style="background:var(--borde-claro);">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Control HTA · Dr. Suárez</div><div class="lt-sub">TA 146/90. Ajuste dosis Enalapril de 5mg a 10mg. Control en 30 días.</div><div class="lt-fecha">15/04/2026</div></div></div>
+        <div class="lt-item"><div class="lt-icono" style="background:var(--borde-claro);">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Control Lipídico · Dr. Suárez</div><div class="lt-sub">LDL 142 mg/dL. Se agrega Atorvastatina 20mg. Dieta hipocalórica.</div><div class="lt-fecha">02/03/2026</div></div></div>
+        <div class="lt-item"><div class="lt-icono" style="background:var(--borde-claro);">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Consulta general · Dr. Suárez</div><div class="lt-sub">Paciente refiere cefalea ocasional. Sin signos de alarma. Se solicita fondo de ojo.</div><div class="lt-fecha">10/01/2026</div></div></div>
       </div>
     </div>
+
+    <!-- ESTUDIOS -->
+    <div class="panel-pestania" id="pac-estudios">
+      <table class="tabla" style="width:100%;">
+        <thead><tr><th>Estudio</th><th>Fecha</th><th>Solicitado por</th><th>Estado</th><th></th></tr></thead>
+        <tbody>
+          <tr><td><b>Troponina I + ECG</b></td><td style="font-family:var(--mono);">hoy</td><td>Dra. Romero</td><td><span class="etiqueta etiqueta-ambar">Pendiente</span></td><td><button class="boton chico" onclick="mostrarTostada('Resultado no disponible aún','alerta')">Ver</button></td></tr>
+          <tr><td><b>Hemograma + Lipidograma</b></td><td style="font-family:var(--mono);">18/04/2026</td><td>Dr. Suárez</td><td><span class="etiqueta etiqueta-verde">Disponible</span></td><td><button class="boton chico" onclick="abrirModal('modal-visor-lab')">Ver</button></td></tr>
+          <tr><td><b>Ecocardiograma</b></td><td style="font-family:var(--mono);">01/03/2026</td><td>Dra. Romero</td><td><span class="etiqueta etiqueta-verde">Disponible</span></td><td><button class="boton chico" onclick="mostrarTostada('Abriendo imagen de ecocardiograma…','info')">Ver</button></td></tr>
+          <tr><td><b>Fondo de ojo</b></td><td style="font-family:var(--mono);">10/01/2026</td><td>Dr. Suárez</td><td><span class="etiqueta etiqueta-verde">Disponible</span></td><td><button class="boton chico" onclick="mostrarTostada('Abriendo informe…','info')">Ver</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MEDICACIÓN ACTIVA -->
+    <div class="panel-pestania" id="pac-medicacion">
+      <table class="tabla" style="width:100%;">
+        <thead><tr><th>Fármaco</th><th>Dosis</th><th>Inicio</th><th>Próximo control</th><th>Prescripto por</th><th>Interacciones</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>Enalapril</b></td>
+            <td style="font-family:var(--mono);">10 mg — 1 comp. mañana</td>
+            <td style="font-family:var(--mono);">15/04/2026</td>
+            <td style="font-family:var(--mono);">15/05/2026</td>
+            <td>Dr. Suárez</td>
+            <td><span class="etiqueta etiqueta-ambar" style="cursor:pointer;" onclick="mostrarTostada('Enalapril + Atorvastatina: sin interacciones clínicamente significativas','info')">Ver</span></td>
+          </tr>
+          <tr>
+            <td><b>Atorvastatina</b></td>
+            <td style="font-family:var(--mono);">20 mg — 1 comp. noche</td>
+            <td style="font-family:var(--mono);">02/03/2026</td>
+            <td style="font-family:var(--mono);">02/06/2026</td>
+            <td>Dr. Suárez</td>
+            <td><span class="etiqueta etiqueta-verde">Sin alertas</span></td>
+          </tr>
+          <tr>
+            <td><b>AAS</b></td>
+            <td style="font-family:var(--mono);">100 mg — 1 comp. mañana</td>
+            <td style="font-family:var(--mono);">10/01/2026</td>
+            <td style="font-family:var(--mono);">10/07/2026</td>
+            <td>Dr. Suárez</td>
+            <td><span class="etiqueta etiqueta-verde">Sin alertas</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- VACUNAS -->
+    <div class="panel-pestania" id="pac-vacunas">
+      <table class="tabla" style="width:100%;">
+        <thead><tr><th>Vacuna</th><th>Fecha aplicación</th><th>Lote</th><th>Próxima dosis</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td><b>COVID-19 (bivalente)</b></td><td style="font-family:var(--mono);">12/09/2023</td><td style="font-family:var(--mono);">BA.2-0093</td><td style="font-family:var(--mono);">—</td><td><span class="etiqueta etiqueta-verde">Completo</span></td></tr>
+          <tr><td><b>Gripe (2026)</b></td><td style="font-family:var(--mono);">—</td><td>—</td><td style="font-family:var(--mono);">Mayo 2026</td><td><span class="etiqueta etiqueta-ambar">Pendiente</span></td></tr>
+          <tr><td><b>Hepatitis B</b></td><td style="font-family:var(--mono);">Esquema 2018</td><td>—</td><td style="font-family:var(--mono);">—</td><td><span class="etiqueta etiqueta-verde">Completo</span></td></tr>
+          <tr><td><b>Doble adultos (dT)</b></td><td style="font-family:var(--mono);">03/2021</td><td>—</td><td style="font-family:var(--mono);">03/2031</td><td><span class="etiqueta etiqueta-verde">Vigente</span></td></tr>
+          <tr><td><b>Neumococo (PCV13)</b></td><td style="font-family:var(--mono);">—</td><td>—</td><td style="font-family:var(--mono);">Recomendado</td><td><span class="etiqueta etiqueta-gris">No aplicada</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ALERGIAS E INTERNACIONES -->
+    <div class="panel-pestania" id="pac-alergias">
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;font-weight:500;color:var(--texto-suave);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;font-family:var(--mono);">Alergias conocidas</div>
+        <table class="tabla" style="width:100%;">
+          <thead><tr><th>Alérgeno</th><th>Tipo de reacción</th><th>Severidad</th><th>Registrado por</th></tr></thead>
+          <tbody>
+            <tr><td><b>Penicilina</b></td><td>Urticaria generalizada</td><td><span class="etiqueta etiqueta-rojo">Severa</span></td><td>Dr. Suárez · 2018</td></tr>
+            <tr><td><b>AINE (Ibuprofeno)</b></td><td>Dispepsia / epigastralgia</td><td><span class="etiqueta etiqueta-ambar">Moderada</span></td><td>Dr. Suárez · 2021</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:500;color:var(--texto-suave);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;font-family:var(--mono);">Internaciones previas</div>
+        <table class="tabla" style="width:100%;">
+          <thead><tr><th>Fecha ingreso</th><th>Diagnóstico</th><th>Días</th><th>Médico responsable</th><th>Alta</th></tr></thead>
+          <tbody>
+            <tr><td style="font-family:var(--mono);">12/08/2022</td><td>Hipertensión severa · Crisis hipertensiva</td><td style="font-family:var(--mono);">3</td><td>Dr. Vega</td><td style="font-family:var(--mono);">15/08/2022</td></tr>
+            <tr><td style="font-family:var(--mono);">04/01/2019</td><td>Neumonía basal derecha</td><td style="font-family:var(--mono);">7</td><td>Dr. Suárez</td><td style="font-family:var(--mono);">11/01/2019</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ACCESOS AL REGISTRO -->
     <div class="panel-pestania" id="pac-accesos">
       <div class="aud-fila"><div class="aud-icono" style="background:#EDEAE4;color:var(--color-texto-medio);">VER</div><div><div class="aud-texto"><b>Dra. Romero</b> consultó historia clínica completa</div><div class="aud-meta">hoy 09:09 · Tablet-Cons-2 · 192.168.1.14</div></div></div>
       <div class="aud-fila"><div class="aud-icono" style="background:var(--verde-mar-claro);color:var(--verde-mar);">EXP</div><div><div class="aud-texto"><b>Recep. Díaz</b> exportó datos básicos para admisión</div><div class="aud-meta">22/04 08:31 · PC-Recepción · 192.168.1.3</div></div></div>
+      <div class="aud-fila"><div class="aud-icono" style="background:#EDEAE4;color:var(--color-texto-medio);">VER</div><div><div class="aud-texto"><b>Dr. Suárez</b> consultó medicación activa</div><div class="aud-meta">15/04/2026 10:22 · PC-Consultorio-1 · 192.168.1.8</div></div></div>
+      <div class="aud-fila"><div class="aud-icono" style="background:#EDEAE4;color:var(--color-texto-medio);">MOD</div><div><div class="aud-texto"><b>Dr. Suárez</b> actualizó dosis de Enalapril</div><div class="aud-meta">15/04/2026 10:35 · PC-Consultorio-1 · 192.168.1.8</div></div></div>
     </div>
+
   </div>
-  <div class="modal-pie"><button class="boton" onclick="cerrarModal('modal-detalle-paciente')">Cerrar</button></div></div>
+  <div class="modal-pie">
+    <button class="boton" onclick="cerrarModal('modal-detalle-paciente')">Cerrar</button>
+  </div></div>
 </div>
 
 <!-- Check-in -->
@@ -2009,7 +2236,7 @@ body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
   <div class="modal grande"><div class="modal-cabeza"><span class="modal-titulo" id="visor-lab-titulo">Resultado de laboratorio</span><button class="modal-cerrar" onclick="cerrarModal('modal-visor-lab')">✕</button></div>
   <div class="modal-cuerpo">
     <div class="aviso info" style="margin-bottom:14px;">Resultado recibido vía <b>HL7 FHIR R4</b> · Laboratorio Central · Los valores fuera de rango están marcados en rojo.</div>
-    <table class="tabla" style="width:100%;border:1px solid var(--borde);border-radius:8px;overflow:hidden;">
+    <table class="tabla" style="width:100%;border:1px solid var(--borde);border-radius:4px;overflow:hidden;">
       <thead><tr><th>Parámetro</th><th>Resultado</th><th>Rango normal</th><th>Unidad</th><th>Estado</th></tr></thead>
       <tbody id="visor-lab-cuerpo"></tbody>
     </table>
@@ -2599,6 +2826,35 @@ if (localStorage.getItem('altoContraste') === 'si') {
   document.body.classList.add('alto-contraste');
 }
 
+/* ─── MODO OSCURO ─── */
+function alternarModoOscuro() {
+  const activado = document.body.classList.toggle('modo-oscuro');
+  const ico = document.getElementById('mo-ico');
+  if (ico) ico.textContent = activado ? '🌙' : '☀';
+  mostrarTostada(activado ? 'Modo oscuro activado' : 'Modo claro activado', 'info');
+  localStorage.setItem('modoOscuro', activado ? 'si' : 'no');
+}
+
+/* Inicializar modo oscuro: localStorage → prefers-color-scheme */
+(function() {
+  const guardado = localStorage.getItem('modoOscuro');
+  const sistemaOscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const activar = guardado === 'si' || (guardado === null && sistemaOscuro);
+  if (activar) {
+    document.body.classList.add('modo-oscuro');
+    const ico = document.getElementById('mo-ico');
+    if (ico) ico.textContent = '🌙';
+  }
+  /* Escuchar cambios del sistema en tiempo real */
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (localStorage.getItem('modoOscuro') === null) {
+      document.body.classList.toggle('modo-oscuro', e.matches);
+      const ico = document.getElementById('mo-ico');
+      if (ico) ico.textContent = e.matches ? '🌙' : '☀';
+    }
+  });
+})();
+
 /* ─── MÓDULO 05: PANEL DE ATAJOS ─── */
 function abrirPanelAtaljos() {
   document.getElementById('panel-atajos').classList.add('abierto');
@@ -2628,6 +2884,13 @@ document.addEventListener('keydown', evento => {
   if (evento.altKey && evento.key.toLowerCase() === 'c') {
     evento.preventDefault();
     alternarAltoContraste();
+    return;
+  }
+
+  /* Alt + D: modo oscuro (siempre disponible) */
+  if (evento.altKey && evento.key.toLowerCase() === 'd') {
+    evento.preventDefault();
+    alternarModoOscuro();
     return;
   }
 
@@ -2870,6 +3133,229 @@ document.getElementById('login-pass').addEventListener('keydown',  e => { if (e.
     entrarAlSistema(emailGuardado, USUARIOS_DEMO[emailGuardado]);
   }
 })();
+
+
+/* ─── GRÁFICOS CHART.JS ─── */
+let graficosInstancias = {};
+
+function obtenerColoresGraficos() {
+  const oscuro = document.body.classList.contains('modo-oscuro');
+  return {
+    texto:    oscuro ? '#8B949E' : '#928E84',
+    borde:    oscuro ? '#30363D' : '#E8E6E0',
+    fondo:    oscuro ? '#161B22' : '#FAFAF8',
+    verde:    '#0D9488',
+    ambar:    '#B7791F',
+    rojo:     '#C53030',
+    azul:     '#2B6CB0',
+    violeta:  '#7F77DD',
+    verdeOk:  oscuro ? '#3FB950' : '#276749',
+  };
+}
+
+function inicializarGraficos() {
+  if (typeof Chart === 'undefined') return;
+  const c = obtenerColoresGraficos();
+  const fontMono = "'IBM Plex Mono', monospace";
+  const fontSans = "'IBM Plex Sans', sans-serif";
+
+  Chart.defaults.font.family = fontSans;
+  Chart.defaults.font.size = 11;
+  Chart.defaults.color = c.texto;
+
+  /* Destruir instancias previas si existen */
+  Object.values(graficosInstancias).forEach(g => g && g.destroy());
+  graficosInstancias = {};
+
+  /* ── 1. LÍNEAS: consultas semana actual vs anterior ── */
+  const ctxLineas = document.getElementById('grafico-lineas');
+  if (ctxLineas) {
+    graficosInstancias.lineas = new Chart(ctxLineas, {
+      type: 'line',
+      data: {
+        labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+        datasets: [
+          {
+            label: 'Semana actual',
+            data: [42, 58, 51, 67, 63, 28],
+            borderColor: c.verde,
+            backgroundColor: c.verde + '18',
+            borderWidth: 2,
+            pointRadius: 3,
+            pointBackgroundColor: c.verde,
+            tension: 0.35,
+            fill: true,
+          },
+          {
+            label: 'Semana anterior',
+            data: [38, 52, 47, 61, 55, 24],
+            borderColor: c.texto,
+            backgroundColor: 'transparent',
+            borderWidth: 1.5,
+            borderDash: [4, 3],
+            pointRadius: 2,
+            pointBackgroundColor: c.texto,
+            tension: 0.35,
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        animation: { duration: 700, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
+          tooltip: { backgroundColor: c.fondo, titleColor: c.texto, bodyColor: c.texto, borderColor: c.borde, borderWidth: 1, titleFont: { family: fontMono }, padding: 8 }
+        },
+        scales: {
+          x: { grid: { color: c.borde + '60' }, ticks: { font: { family: fontMono, size: 10 } } },
+          y: { grid: { color: c.borde + '60' }, ticks: { font: { family: fontMono, size: 10 }, precision: 0 }, beginAtZero: true }
+        }
+      }
+    });
+  }
+
+  /* ── 2. DONA: distribución obras sociales ── */
+  const ctxDona = document.getElementById('grafico-dona');
+  if (ctxDona) {
+    graficosInstancias.dona = new Chart(ctxDona, {
+      type: 'doughnut',
+      data: {
+        labels: ['OSDE', 'Swiss Medical', 'PAMI', 'Galeno', 'Particular'],
+        datasets: [{
+          data: [28, 22, 19, 15, 16],
+          backgroundColor: [c.verde, c.azul, c.ambar, c.violeta, c.texto + '60'],
+          borderColor: c.fondo,
+          borderWidth: 2,
+          hoverOffset: 6,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        cutout: '68%',
+        animation: { animateRotate: true, duration: 800, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 }, padding: 8 } },
+          tooltip: { backgroundColor: c.fondo, titleColor: c.texto, bodyColor: c.texto, borderColor: c.borde, borderWidth: 1, callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` } }
+        }
+      }
+    });
+  }
+
+  /* ── 3. BARRAS HORIZONTALES: rendimiento por especialidad ── */
+  const ctxBarras = document.getElementById('grafico-barras');
+  if (ctxBarras) {
+    graficosInstancias.barras = new Chart(ctxBarras, {
+      type: 'bar',
+      data: {
+        labels: ['Clínica Médica', 'Pediatría', 'Cardiología', 'Traumatología', 'Neurología'],
+        datasets: [{
+          label: 'Consultas',
+          data: [234, 180, 120, 98, 74],
+          backgroundColor: [c.verde + 'CC', c.verde + 'AA', c.ambar + 'CC', c.ambar + 'AA', c.texto + '50'],
+          borderRadius: 2,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        animation: { duration: 700, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: { backgroundColor: c.fondo, titleColor: c.texto, bodyColor: c.texto, borderColor: c.borde, borderWidth: 1, titleFont: { family: fontMono } }
+        },
+        scales: {
+          x: { grid: { color: c.borde + '60' }, ticks: { font: { family: fontMono, size: 10 } }, beginAtZero: true },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  /* ── 4. GAUGE: ocupación camas ── */
+  const ctxGauge = document.getElementById('grafico-gauge');
+  if (ctxGauge) {
+    const valor = 65;
+    const colorAguja = valor >= 85 ? c.rojo : valor >= 70 ? c.ambar : c.verdeOk;
+    graficosInstancias.gauge = new Chart(ctxGauge, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [valor, 100 - valor],
+          backgroundColor: [colorAguja, c.borde + '80'],
+          borderWidth: 0,
+          circumference: 180,
+          rotation: 270,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        cutout: '72%',
+        animation: { animateRotate: true, duration: 900, easing: 'easeOutQuart' },
+        plugins: { legend: { display: false }, tooltip: { enabled: false } }
+      }
+    });
+  }
+
+  /* ── 5. MINI en tablero ── */
+  const ctxMini = document.getElementById('grafico-tablero-mini');
+  if (ctxMini) {
+    graficosInstancias.mini = new Chart(ctxMini, {
+      type: 'line',
+      data: {
+        labels: ['L', 'M', 'X', 'J', 'V', 'S'],
+        datasets: [{
+          data: [42, 58, 51, 67, 63, 28],
+          borderColor: c.verde,
+          backgroundColor: c.verde + '18',
+          borderWidth: 2,
+          pointRadius: 2,
+          tension: 0.4,
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        animation: { duration: 600 },
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: fontMono, size: 9 } } },
+          y: { display: false, beginAtZero: true }
+        }
+      }
+    });
+  }
+}
+
+/* Re-inicializar gráficos al navegar a estadísticas o tablero */
+const _navegarAOriginal = typeof navegarA === 'function' ? navegarA : null;
+document.addEventListener('DOMContentLoaded', () => {
+  /* Esperar que Chart.js cargue y luego inicializar */
+  const esperarChart = setInterval(() => {
+    if (typeof Chart !== 'undefined') {
+      clearInterval(esperarChart);
+      inicializarGraficos();
+    }
+  }, 100);
+});
+
+/* Reinicializar al cambiar a modo oscuro para actualizar colores */
+const _alternarModoOscuroOriginal = window.alternarModoOscuro;
+window.alternarModoOscuro = function() {
+  if (_alternarModoOscuroOriginal) _alternarModoOscuroOriginal();
+  setTimeout(inicializarGraficos, 50);
+};
+
+/* Reinicializar al navegar a módulos con gráficos */
+document.addEventListener('click', e => {
+  const item = e.target.closest('[onclick*="navegarA"]') || e.target.closest('[onclick*="navegarMovil"]');
+  if (item) {
+    const fn = item.getAttribute('onclick') || '';
+    if (fn.includes('estadisticas') || fn.includes('tablero')) {
+      setTimeout(inicializarGraficos, 80);
+    }
+  }
+});
 
 /* ─── INICIALIZAR ─── */
 window.addEventListener('DOMContentLoaded', () => {
