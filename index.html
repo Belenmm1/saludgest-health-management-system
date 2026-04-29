@@ -207,7 +207,6 @@ button,input,select,textarea{font-family:var(--fuente);}
 .etiqueta-azul{background:#F4F4F1;color:#3D3D38;border:1px solid #E0DDD7;}
 .etiqueta-verde{background:#EDFFF3;color:#1A5C32;}
 .etiqueta-ambar{background:#FFF8ED;color:#7A4D0A;}
-.etiqueta-rojo{background:#FFEEED;color:#9B1C1C;}
 .etiqueta-verdemar{background:#EDFFF8;color:#0D5C48;}
 .etiqueta-gris{background:#F4F4F1;color:#6B6B64;}
 .etiqueta-morado{background:#F3F0FF;color:#5B21B6;}
@@ -539,9 +538,196 @@ body.modo-oscuro .aviso{background:#1C2128;border-color:#30363D;}
 body.modo-oscuro .lat-item:hover{background:rgba(255,255,255,0.04);}
 body.modo-oscuro .boton-modo-oscuro .mo-ico{content:'🌙';}
 
+body.modo-oscuro .lat-item:hover{background:rgba(255,255,255,0.04);}
+body.modo-oscuro .boton-modo-oscuro .mo-ico{content:'🌙';}
+
 /* ═══════════════════════════════════════════
-   MÓDULO 05 — OVERLAY DE ATAJOS DE TECLADO
+   MAPA DE RIESGO — MEJORA 07
 ═══════════════════════════════════════════ */
+.semaforo{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:3px;}
+.semaforo.verde {background:var(--verde-claro); color:var(--verde);}
+.semaforo.ambar {background:var(--ambar-claro); color:var(--ambar);}
+.semaforo.rojo  {background:var(--rojo-claro);  color:var(--rojo);}
+.semaforo::before{content:'';width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.semaforo.verde::before{background:var(--verde);}
+.semaforo.ambar::before{background:var(--ambar);}
+.semaforo.rojo::before {background:var(--rojo);}
+.reinternacion-badge{
+  font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:2px;
+  background:var(--rojo-claro);color:var(--rojo);margin-left:5px;
+  font-family:var(--mono);border:1px solid var(--rojo-claro);
+}
+
+/* ═══════════════════════════════════════════
+   ASISTENTE IA CLÍNICO — MEJORA 06
+═══════════════════════════════════════════ */
+.ia-boton-flotante{
+  position:absolute;bottom:16px;right:16px;
+  display:flex;align-items:center;gap:7px;
+  padding:8px 14px;background:#1A1A16;color:#fff;
+  border:none;border-radius:4px;font-size:12px;font-weight:600;
+  font-family:var(--mono);cursor:pointer;z-index:10;
+  transition:background 0.15s,transform 0.1s;letter-spacing:0.03em;
+}
+.ia-boton-flotante:hover{background:#333330;transform:translateY(-1px);}
+.ia-boton-flotante.activo{background:#0D5C48;color:#A7F3D0;}
+.ia-estrella{font-size:14px;}
+
+/* Panel lateral IA */
+.ia-panel{
+  position:fixed;top:0;right:-420px;width:400px;height:100vh;
+  background:var(--superficie);border-left:1px solid var(--borde);
+  z-index:300;display:flex;flex-direction:column;
+  transition:right 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+.ia-panel.abierto{right:0;}
+
+.ia-cabeza{
+  padding:12px 16px;border-bottom:1px solid var(--borde);
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
+}
+.ia-logo{
+  width:28px;height:28px;background:#0D5C48;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;
+}
+.ia-cabeza-info{flex:1;}
+.ia-cabeza-titulo{font-size:13px;font-weight:600;color:var(--texto);}
+.ia-cabeza-sub{font-size:10.5px;color:var(--texto-suave);margin-top:1px;}
+.ia-cerrar{background:none;border:none;cursor:pointer;font-size:18px;color:var(--texto-suave);padding:2px 6px;border-radius:3px;}
+.ia-cerrar:hover{background:var(--fondo);}
+
+.ia-contexto{
+  background:var(--fondo);border-bottom:1px solid var(--borde);
+  padding:8px 14px;font-size:11px;color:var(--texto-suave);
+  font-family:var(--mono);flex-shrink:0;line-height:1.5;
+}
+.ia-contexto-titulo{font-weight:600;color:var(--texto-medio);margin-bottom:3px;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;}
+
+.ia-mensajes{
+  flex:1;overflow-y:auto;padding:14px;
+  display:flex;flex-direction:column;gap:10px;
+}
+
+.ia-burbuja{max-width:88%;padding:9px 12px;border-radius:4px;font-size:12.5px;line-height:1.6;}
+.ia-burbuja.medico{
+  align-self:flex-end;background:#1A1A16;color:#fff;
+}
+.ia-burbuja.asistente{
+  align-self:flex-start;background:var(--fondo);
+  border:1px solid var(--borde);color:var(--texto);
+}
+body.modo-oscuro .ia-burbuja.medico{background:#1A4D3A;color:#D1FAE5;}
+body.modo-oscuro .ia-burbuja.asistente{background:#161B22;border-color:#30363D;}
+.ia-burbuja-meta{
+  font-size:10px;color:var(--texto-suave);margin-top:5px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--mono);
+}
+.ia-copiar{background:none;border:none;cursor:pointer;font-size:10px;
+  color:var(--texto-suave);padding:2px 5px;border-radius:3px;font-family:var(--fuente);}
+.ia-copiar:hover{background:var(--borde);color:var(--texto);}
+
+.ia-cargando{
+  align-self:flex-start;padding:10px 14px;background:var(--fondo);
+  border:1px solid var(--borde);border-radius:4px;
+  display:none;
+}
+.ia-puntos span{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--texto-suave);margin:0 2px;
+  animation:ia-pulso 1.2s infinite;
+}
+.ia-puntos span:nth-child(2){animation-delay:0.2s;}
+.ia-puntos span:nth-child(3){animation-delay:0.4s;}
+@keyframes ia-pulso{0%,80%,100%{transform:scale(0.6);opacity:0.4;}40%{transform:scale(1);opacity:1;}}
+
+.ia-input-area{
+  padding:10px 14px;border-top:1px solid var(--borde);flex-shrink:0;
+}
+.ia-sugerencias{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+.ia-sugerencia{
+  font-size:10.5px;padding:4px 9px;border:1px solid var(--borde);
+  border-radius:3px;background:var(--superficie);color:var(--texto-medio);
+  cursor:pointer;font-family:var(--fuente);transition:background 0.12s;
+  white-space:nowrap;
+}
+.ia-sugerencia:hover{background:var(--fondo);color:var(--texto);}
+.ia-input-fila{display:flex;gap:6px;}
+.ia-input{
+  flex:1;padding:7px 10px;border:1px solid var(--borde);
+  background:var(--fondo);border-radius:4px;font-size:12.5px;
+  font-family:var(--fuente);color:var(--texto);resize:none;
+  min-height:36px;max-height:80px;
+}
+.ia-input:focus{outline:none;border-color:var(--texto-medio);}
+.ia-enviar{
+  padding:7px 12px;background:#1A1A16;color:#fff;
+  border:none;border-radius:4px;cursor:pointer;
+  font-family:var(--mono);font-size:12px;font-weight:600;
+  transition:background 0.15s;flex-shrink:0;
+}
+.ia-enviar:hover{background:#333330;}
+.ia-enviar:disabled{background:var(--borde);color:var(--texto-suave);cursor:not-allowed;}
+
+.ia-disclaimer{
+  font-size:10px;color:var(--texto-suave);text-align:center;
+  padding:6px 14px 4px;border-top:1px solid var(--borde);
+  font-style:italic;flex-shrink:0;
+}
+
+.agenda-wrap{display:flex;flex-direction:column;gap:0;overflow:hidden;}
+.agenda-controles{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--borde);flex-wrap:wrap;}
+.agenda-nav-btn{padding:5px 10px;border:1px solid var(--borde);background:var(--superficie);border-radius:4px;cursor:pointer;font-size:12px;color:var(--texto-medio);font-family:var(--fuente);transition:background 0.12s;}
+.agenda-nav-btn:hover{background:var(--fondo);}
+.agenda-semana-label{font-size:12px;font-weight:600;color:var(--texto);font-family:var(--mono);min-width:160px;text-align:center;}
+.agenda-medico-sel{padding:5px 10px;border:1px solid var(--borde);background:var(--superficie);border-radius:4px;font-size:12px;color:var(--texto);font-family:var(--fuente);cursor:pointer;margin-left:auto;}
+
+.agenda-grid-wrap{overflow:auto;max-height:calc(100vh - 260px);}
+.agenda-grid{display:grid;grid-template-columns:52px repeat(6,1fr);min-width:700px;}
+
+/* cabecera de días */
+.ag-dia-vacio{position:sticky;top:0;z-index:5;background:var(--superficie);border-bottom:1px solid var(--borde);border-right:1px solid var(--borde);}
+.ag-dia-col{position:sticky;top:0;z-index:4;background:var(--superficie);border-bottom:1px solid var(--borde);border-right:1px solid var(--borde);padding:7px 6px;text-align:center;}
+.ag-dia-nombre{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--texto-suave);font-family:var(--mono);}
+.ag-dia-num{font-size:18px;font-weight:500;color:var(--texto);font-family:var(--mono);line-height:1.1;}
+.ag-dia-col.hoy{background:var(--fondo);}
+.ag-dia-col.hoy .ag-dia-num{color:var(--color-ok);}
+
+/* filas horarias */
+.ag-hora{font-size:10px;font-family:var(--mono);color:var(--texto-suave);text-align:right;padding:0 6px 0 0;border-right:1px solid var(--borde);display:flex;align-items:flex-start;padding-top:4px;position:relative;}
+.ag-celda{border-right:1px solid var(--borde-claro);border-bottom:1px solid var(--borde-claro);min-height:36px;position:relative;cursor:pointer;transition:background 0.1s;}
+.ag-celda:hover{background:var(--fondo);}
+.ag-celda.hoy-col{background:color-mix(in srgb, var(--fondo) 60%, transparent);}
+.ag-celda.media-hora{border-bottom-style:dashed;}
+
+/* bloque de turno */
+.ag-turno{position:absolute;inset:2px 3px;border-radius:3px;padding:3px 6px;font-size:10.5px;font-weight:500;cursor:pointer;overflow:hidden;z-index:2;border-left:3px solid transparent;transition:filter 0.1s;}
+.ag-turno:hover{filter:brightness(0.92);}
+.ag-turno-pac{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ag-turno-esp{opacity:0.75;font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+/* colores por especialidad */
+.ag-t-clinica  {background:#E8F4FD;border-color:#2B6CB0;color:#1A3A5C;}
+.ag-t-cardio   {background:var(--ambar-claro);border-color:var(--ambar);color:#5A3800;}
+.ag-t-pediatria{background:var(--verde-claro);border-color:var(--verde);color:#0A3D1F;}
+.ag-t-trauma   {background:#F3F0FF;border-color:#7C3AED;color:#3B1A8A;}
+.ag-t-neuro    {background:#FFF0F3;border-color:#E05A7A;color:#7A1535;}
+body.modo-oscuro .ag-t-clinica  {background:#0D2540;border-color:#60A5FA;color:#A8D0F5;}
+body.modo-oscuro .ag-t-cardio   {background:var(--ambar-claro);border-color:var(--ambar);color:#FDE68A;}
+body.modo-oscuro .ag-t-pediatria{background:var(--verde-claro);border-color:var(--verde);color:#6EE7B7;}
+body.modo-oscuro .ag-t-trauma   {background:#1A0D3A;border-color:#A78BFA;color:#C4B5FD;}
+body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#FBCFE8;}
+
+/* línea de "ahora" */
+.ag-linea-ahora{position:absolute;left:0;right:0;height:2px;background:var(--color-critico);z-index:3;pointer-events:none;}
+.ag-linea-ahora::before{content:'';position:absolute;left:-4px;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--color-critico);}
+
+/* popover turno */
+.ag-popover{position:fixed;z-index:500;background:var(--superficie);border:1px solid var(--borde);border-radius:5px;padding:12px 14px;min-width:220px;max-width:280px;box-shadow:0 4px 20px rgba(0,0,0,0.15);display:none;}
+.ag-pop-nombre{font-size:13px;font-weight:600;color:var(--texto);margin-bottom:4px;}
+.ag-pop-meta{font-size:11px;color:var(--texto-suave);margin-bottom:10px;font-family:var(--mono);}
+.ag-pop-acciones{display:flex;gap:6px;}
+
 .panel-atajos{
   display:none;position:fixed;inset:0;
   background:rgba(15,45,82,0.6);
@@ -627,6 +813,9 @@ body.modo-oscuro .boton-modo-oscuro .mo-ico{content:'🌙';}
 .fondo-modal.abierto{display:flex;}
 .modal{background:var(--color-tarjeta);border-radius:5px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:aparecerPagina 0.18s ease both;border:1px solid var(--color-borde);}
 .modal.grande{max-width:700px;}
+.modal.hce{max-width:90vw;width:90vw;max-height:92vh;display:flex;flex-direction:column;}
+.modal.hce .modal-cuerpo{flex:1;overflow-y:auto;min-height:0;}
+.etiqueta-rojo{background:var(--rojo-claro);color:var(--rojo);border-color:var(--rojo-claro);}
 .modal-cabeza{padding:12px 16px 10px;border-bottom:1px solid var(--color-borde);display:flex;align-items:center;justify-content:space-between;}
 .modal-titulo{font-size:14px;font-weight:500;color:var(--color-texto);font-family:var(--fuente);letter-spacing:0;}
 .modal-cerrar{background:none;border:none;font-size:16px;color:var(--color-texto-suave);cursor:pointer;line-height:1;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:3px;transition:background 0.12s;}
@@ -1476,40 +1665,103 @@ body.modo-oscuro .boton-modo-oscuro .mo-ico{content:'🌙';}
 
     <!-- ═══ TURNOS ═══ -->
     <div class="modulo" id="modulo-turnos">
-      <div class="modulo-cabecera"><h1>Gestión de Turnos</h1><p>Agenda diaria y programación de citas médicas</p></div>
-      <div class="grilla-2-1">
-        <div class="tarjeta">
-          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Agenda · Miércoles 22 abr</span>
-            <div style="display:flex;gap:6px;">
-              <button class="boton chico">◁ Ant.</button>
-              <button class="boton chico">Sig. ▷</button>
-              <button class="boton chico primario" onclick="abrirModal('modal-nuevo-turno')">＋ Nuevo turno</button>
+      <div class="modulo-cabecera"><h1>Agenda de Turnos</h1><p>Vista semanal — hacé clic en una celda vacía para asignar un turno</p></div>
+
+      <div style="display:grid;grid-template-columns:1fr 280px;gap:14px;align-items:start;">
+
+        <!-- AGENDA PRINCIPAL -->
+        <div class="tarjeta" style="padding:0;overflow:hidden;">
+          <div class="agenda-controles">
+            <button class="agenda-nav-btn" onclick="agendaNavegar(-1)">← Semana ant.</button>
+            <span class="agenda-semana-label" id="agenda-semana-label">28 abr – 03 may 2026</span>
+            <button class="agenda-nav-btn" onclick="agendaNavegar(1)">Sig. semana →</button>
+            <select class="agenda-medico-sel" id="agenda-medico-sel" onchange="agendaRenderizar()">
+              <option value="todos">Todos los médicos</option>
+              <option value="suarez">Dr. Suárez</option>
+              <option value="romero">Dra. Romero</option>
+              <option value="vega">Dr. Vega</option>
+            </select>
+          </div>
+          <div class="agenda-grid-wrap" id="agenda-grid-wrap">
+            <div class="agenda-grid" id="agenda-grid"></div>
+          </div>
+        </div>
+
+        <!-- PANEL LATERAL -->
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div class="tarjeta">
+            <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Leyenda de especialidades</span></div>
+            <div class="tarjeta-cuerpo" style="display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:12px;height:12px;border-radius:2px;background:#E8F4FD;border-left:3px solid #2B6CB0;flex-shrink:0;"></span>Clínica Médica</div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:12px;height:12px;border-radius:2px;background:var(--ambar-claro);border-left:3px solid var(--ambar);flex-shrink:0;"></span>Cardiología</div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:12px;height:12px;border-radius:2px;background:var(--verde-claro);border-left:3px solid var(--verde);flex-shrink:0;"></span>Pediatría</div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:12px;height:12px;border-radius:2px;background:#F3F0FF;border-left:3px solid #7C3AED;flex-shrink:0;"></span>Traumatología</div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:12px;height:12px;border-radius:2px;background:#FFF0F3;border-left:3px solid #E05A7A;flex-shrink:0;"></span>Neurología</div>
             </div>
           </div>
-          <div class="tarjeta-cuerpo">
-            <table class="tabla clicable">
-              <thead><tr><th>Hora</th><th>Paciente</th><th>Especialidad</th><th>Médico</th><th>Cobertura</th><th>Estado</th><th></th></tr></thead>
-              <tbody>
-                <tr onclick="mostrarTostada('Turno de Pérez, Juan — vista completa','info')"><td class="td-nombre">08:30</td><td>Pérez, Juan</td><td>Clínica</td><td>Dr. Suárez</td><td>OSDE</td><td><span class="etiqueta etiqueta-verde">Atendido</span></td><td><button class="boton chico" onclick="event.stopPropagation()">Ver</button></td></tr>
-                <tr onclick="mostrarTostada('Turno de García, Marta — en curso','alerta')"><td class="td-nombre">09:00</td><td>García, Marta</td><td>Cardiología</td><td>Dr. Suárez</td><td>OSDE</td><td><span class="etiqueta etiqueta-ambar">En curso</span></td><td><button class="boton chico" onclick="event.stopPropagation()">Ver</button></td></tr>
-                <tr onclick="mostrarTostada('Turno de López, Carlos — en sala','info')"><td class="td-nombre">09:15</td><td>López, Carlos</td><td>Clínica</td><td>Dra. Romero</td><td>Swiss Med.</td><td><span class="etiqueta etiqueta-azul">En sala</span></td><td><button class="boton chico" onclick="event.stopPropagation()">Ver</button></td></tr>
-                <tr onclick="mostrarTostada('Turno de Ferreyra, Ana — confirmado','info')"><td class="td-nombre">09:30</td><td>Ferreyra, Ana</td><td>Pediatría</td><td>Dra. Romero</td><td>Galeno</td><td><span class="etiqueta etiqueta-gris">Confirmado</span></td><td><button class="boton chico" onclick="event.stopPropagation()">Ver</button></td></tr>
-                <tr onclick="mostrarTostada('Turno de Martínez, R. — confirmado','info')"><td class="td-nombre">10:00</td><td>Martínez, R.</td><td>Traumatología</td><td>Dr. Vega</td><td>PAMI</td><td><span class="etiqueta etiqueta-gris">Confirmado</span></td><td><button class="boton chico" onclick="event.stopPropagation()">Ver</button></td></tr>
-                <tr><td class="td-nombre">10:30</td><td>–</td><td>–</td><td>Dr. Suárez</td><td>–</td><td><span class="etiqueta etiqueta-verde">Disponible</span></td><td><button class="boton chico primario" onclick="abrirModal('modal-nuevo-turno')">Asignar</button></td></tr>
-              </tbody>
-            </table>
+          <div class="tarjeta">
+            <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Recordatorios</span></div>
+            <div class="tarjeta-cuerpo">
+              <div class="aviso info" style="margin-bottom:10px;">WhatsApp/SMS enviado 24h y 2h antes de cada turno.</div>
+              <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Ferreyra, Ana</div><div class="fi-sub">WhatsApp · hace 2h</div></div><span class="etiqueta etiqueta-verde">Entregado</span></div>
+              <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Martínez, R.</div><div class="fi-sub">SMS · hace 45 min</div></div><span class="etiqueta etiqueta-verde">Entregado</span></div>
+              <div class="fila-item"><div class="punto ambar"></div><div class="fi-info"><div class="fi-nombre">Sosa, Patricia</div><div class="fi-sub">Sin respuesta · canceló</div></div><span class="etiqueta etiqueta-rojo">Canceló</span></div>
+            </div>
           </div>
         </div>
-        <div class="tarjeta">
-          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Recordatorios automáticos</span></div>
-          <div class="tarjeta-cuerpo">
-            <div class="aviso info" style="margin-bottom:12px;">WhatsApp/SMS enviado automáticamente 24h y 2h antes de cada turno.</div>
-            <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Ferreyra, Ana</div><div class="fi-sub">WhatsApp enviado · hace 2h</div></div><span class="etiqueta etiqueta-verde">Entregado</span></div>
-            <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Martínez, R.</div><div class="fi-sub">SMS enviado · hace 45 min</div></div><span class="etiqueta etiqueta-verde">Entregado</span></div>
-            <div class="fila-item"><div class="punto ambar"></div><div class="fi-info"><div class="fi-nombre">Sosa, Patricia</div><div class="fi-sub">Sin respuesta · canceló</div></div><span class="etiqueta etiqueta-rojo">Canceló</span></div>
-            <div class="fila-item"><div class="punto azul"></div><div class="fi-info"><div class="fi-nombre">Rodríguez, M. (lista espera)</div><div class="fi-sub">Notificado por vacante de Sosa</div></div><span class="etiqueta etiqueta-azul">Esperando</span></div>
+      </div>
+    </div>
+
+    <!-- ═══ ASISTENTE IA CLÍNICO — PANEL LATERAL ═══ -->
+    <div class="ia-panel" id="ia-panel">
+      <div class="ia-cabeza">
+        <div class="ia-logo">✦</div>
+        <div class="ia-cabeza-info">
+          <div class="ia-cabeza-titulo">Asistente clínico IA</div>
+          <div class="ia-cabeza-sub">Contexto: López, Carlos · Consulta activa</div>
+        </div>
+        <button class="ia-cerrar" onclick="cerrarPanelIA()">✕</button>
+      </div>
+      <div class="ia-contexto">
+        <div class="ia-contexto-titulo">Contexto del paciente</div>
+        Dx: HTA grado I + Dislipemia · Medicación: Enalapril 10mg, Atorvastatina 20mg, AAS 100mg · <span style="color:var(--rojo);">Alergia: Penicilina</span> · TA 148/92 · FC 88 · SpO2 97%
+      </div>
+      <div class="ia-mensajes" id="ia-mensajes">
+        <div class="ia-burbuja asistente">
+          Hola, soy una herramienta de apoyo clínico. La decisión diagnóstica y terapéutica es exclusiva del médico tratante.<br><br>
+          Tengo cargado el contexto de <b>López, Carlos</b>. ¿En qué te puedo ayudar?
+          <div class="ia-burbuja-meta">
+            <span>Asistente IA</span>
           </div>
         </div>
+      </div>
+      <div class="ia-cargando" id="ia-cargando">
+        <div class="ia-puntos"><span></span><span></span><span></span></div>
+      </div>
+      <div class="ia-input-area">
+        <div class="ia-sugerencias">
+          <button class="ia-sugerencia" onclick="iaEnviarSugerencia(this)">Interacciones Enalapril + Atorvastatina</button>
+          <button class="ia-sugerencia" onclick="iaEnviarSugerencia(this)">Dosis Amoxicilina adulto 78kg</button>
+          <button class="ia-sugerencia" onclick="iaEnviarSugerencia(this)">Resumen clínico para derivación</button>
+          <button class="ia-sugerencia" onclick="iaEnviarSugerencia(this)">¿Qué estudios solicitar para dolor precordial?</button>
+        </div>
+        <div class="ia-input-fila">
+          <textarea class="ia-input" id="ia-input" placeholder="Preguntá al asistente clínico…" rows="1"
+            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();iaEnviar();}"></textarea>
+          <button class="ia-enviar" id="ia-enviar" onclick="iaEnviar()">Enviar</button>
+        </div>
+      </div>
+      <div class="ia-disclaimer">Herramienta de apoyo · No reemplaza el criterio médico · Basado en Claude (Anthropic)</div>
+    </div>
+
+    <!-- Popover turno -->
+    <div class="ag-popover" id="ag-popover">
+      <div class="ag-pop-nombre" id="ag-pop-nombre"></div>
+      <div class="ag-pop-meta" id="ag-pop-meta"></div>
+      <div class="ag-pop-acciones">
+        <button class="boton chico primario" onclick="cerrarPopoverAgenda();abrirModal('modal-detalle-paciente')">Ver historia</button>
+        <button class="boton chico" onclick="cerrarPopoverAgenda();mostrarTostada('Turno cancelado','alerta')">Cancelar turno</button>
+        <button class="boton chico" onclick="cerrarPopoverAgenda()">✕</button>
       </div>
     </div>
 
@@ -1547,9 +1799,12 @@ body.modo-oscuro .boton-modo-oscuro .mo-ico{content:'🌙';}
       <div class="modulo-cabecera"><h1>Panel Médico</h1><p>Consulta activa, evolución clínica y prescripción digital</p></div>
       <div class="grilla-2-1">
         <div>
-          <div class="tarjeta" style="margin-bottom:14px;">
+          <div class="tarjeta" style="margin-bottom:14px;position:relative;">
             <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Consulta activa · López, Carlos</span>
               <div style="display:flex;gap:6px;">
+                <button class="ia-boton-flotante" id="ia-boton-flotante" onclick="togglePanelIA()" style="position:static;bottom:auto;right:auto;transform:none;">
+                  <span class="ia-estrella">✦</span> Asistente IA
+                </button>
                 <button class="boton chico exito" onclick="mostrarTostada('Consulta finalizada y guardada en el historial','exito')">Finalizar consulta</button>
                 <button class="boton chico peligro">Derivar</button>
               </div>
@@ -1633,42 +1888,119 @@ body.modo-oscuro .boton-modo-oscuro .mo-ico{content:'🌙';}
 
     <!-- ═══ INTERNACIÓN — con tooltip en camas (módulo 02) ═══ -->
     <div class="modulo" id="modulo-internacion">
-      <div class="modulo-cabecera"><h1>Internación y Camas</h1><p>Estado en tiempo real · Hacé clic en una cama ocupada para ver al paciente</p></div>
+      <div class="modulo-cabecera"><h1>Internación y Camas</h1><p>Estado en tiempo real · Clic en una cama ocupada para ver al paciente</p></div>
+
+      <!-- Métricas de resumen -->
       <div class="grilla-3" style="margin-bottom:14px;">
         <div class="metrica"><div class="metrica-etiqueta">Camas totales</div><div class="metrica-valor" data-final="58">0</div><div class="metrica-sub neutro">4 sectores</div></div>
         <div class="metrica"><div class="metrica-etiqueta">Ocupadas</div><div class="metrica-valor" data-final="38">0</div><div class="metrica-sub alerta">65%</div></div>
         <div class="metrica"><div class="metrica-etiqueta">Disponibles</div><div class="metrica-valor" data-final="14">0</div><div class="metrica-sub arriba">Para admisión</div></div>
       </div>
-      <div class="grilla-2">
-        <div class="tarjeta">
-          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Clínica Médica · Piso 2</span>
-            <div style="display:flex;gap:4px;flex-wrap:wrap;">
-              <span class="etiqueta etiqueta-verde">● Libre</span>
-              <span class="etiqueta etiqueta-azul">● Ocupada</span>
-              <span class="etiqueta etiqueta-ambar">● Limpieza</span>
-              <span class="etiqueta etiqueta-rojo">● Reservada</span>
+
+      <!-- Pestañas de vista -->
+      <div class="pestanias" style="margin-bottom:14px;">
+        <div class="pestania activa" onclick="cambiarPestania('int','mapa-camas',this)">Mapa de camas</div>
+        <div class="pestania" onclick="cambiarPestania('int','mapa-riesgo',this)">Mapa de riesgo</div>
+      </div>
+
+      <!-- VISTA 1: MAPA DE CAMAS -->
+      <div class="panel-pestania activo" id="int-mapa-camas">
+        <div class="grilla-2">
+          <div class="tarjeta">
+            <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Clínica Médica · Piso 2</span>
+              <div style="display:flex;gap:4px;flex-wrap:wrap;">
+                <span class="etiqueta etiqueta-verde">● Libre</span>
+                <span class="etiqueta etiqueta-azul">● Ocupada</span>
+                <span class="etiqueta etiqueta-ambar">● Limpieza</span>
+                <span class="etiqueta etiqueta-rojo">● Reservada</span>
+              </div>
             </div>
+            <div class="tarjeta-cuerpo"><div class="grilla-camas" id="grillaCamas"></div></div>
           </div>
-          <div class="tarjeta-cuerpo"><div class="grilla-camas" id="grillaCamas"></div></div>
-        </div>
-        <div class="tarjeta">
-          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">UCI · Piso 4</span><span class="etiqueta etiqueta-rojo">Capacidad máxima</span></div>
-          <div class="tarjeta-cuerpo">
-            <div class="grilla-camas" style="grid-template-columns:repeat(4,1fr);">
-              <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 401 — Pérez, Miguel · IAM · Crit.','error')"><div class="cama-num">401</div><div class="cama-etiqueta">Ocupada</div></div>
-              <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 402 — Ríos, Valentina · ACV · Estable','alerta')"><div class="cama-num">402</div><div class="cama-etiqueta">Ocupada</div></div>
-              <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 403 — Fernández, R. · Trauma craneal','alerta')"><div class="cama-num">403</div><div class="cama-etiqueta">Ocupada</div></div>
-              <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 404 — Sánchez, M. · Post-quirúrgico','alerta')"><div class="cama-num">404</div><div class="cama-etiqueta">Ocupada</div></div>
+          <div class="tarjeta">
+            <div class="tarjeta-cabeza"><span class="tarjeta-titulo">UCI · Piso 4</span><span class="etiqueta etiqueta-rojo">Capacidad máxima</span></div>
+            <div class="tarjeta-cuerpo">
+              <div class="grilla-camas" style="grid-template-columns:repeat(4,1fr);">
+                <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 401 — Pérez, Miguel · IAM · Crit.','error')"><div class="cama-num">401</div><div class="cama-etiqueta">Ocupada</div></div>
+                <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 402 — Ríos, Valentina · ACV · Estable','alerta')"><div class="cama-num">402</div><div class="cama-etiqueta">Ocupada</div></div>
+                <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 403 — Fernández, R. · Trauma craneal','alerta')"><div class="cama-num">403</div><div class="cama-etiqueta">Ocupada</div></div>
+                <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 404 — Sánchez, M. · Post-quirúrgico','alerta')"><div class="cama-num">404</div><div class="cama-etiqueta">Ocupada</div></div>
+              </div>
+              <div class="aviso peligro" style="margin-top:12px;">UCI al 100%. Derivar nuevos ingresos al área de observación.</div>
+              <div class="divisor"></div>
+              <div class="fila-item"><div class="av oscuro">PM</div><div class="fi-info"><div class="fi-nombre">Pérez, Miguel · Cama 401</div><div class="fi-sub">Ingreso: 20/04 · IAM · Dr. Vega</div></div><span class="etiqueta etiqueta-rojo">Crítico</span></div>
+              <div class="fila-item"><div class="av">RV</div><div class="fi-info"><div class="fi-nombre">Ríos, Valentina · Cama 402</div><div class="fi-sub">Ingreso: 21/04 · ACV · Dra. Romero</div></div><span class="etiqueta etiqueta-ambar">Estable</span></div>
             </div>
-            <div class="aviso peligro" style="margin-top:12px;">UCI al 100%. Derivar nuevos ingresos al área de observación.</div>
-            <div class="divisor"></div>
-            <div class="fila-item"><div class="av oscuro">PM</div><div class="fi-info"><div class="fi-nombre">Pérez, Miguel · Cama 401</div><div class="fi-sub">Ingreso: 20/04 · IAM · Dr. Vega</div></div><span class="etiqueta etiqueta-rojo">Crítico</span></div>
-            <div class="fila-item"><div class="av">RV</div><div class="fi-info"><div class="fi-nombre">Ríos, Valentina · Cama 402</div><div class="fi-sub">Ingreso: 21/04 · ACV · Dra. Romero</div></div><span class="etiqueta etiqueta-ambar">Estable</span></div>
           </div>
         </div>
       </div>
+
+      <!-- VISTA 2: MAPA DE RIESGO -->
+      <div class="panel-pestania" id="int-mapa-riesgo">
+
+        <!-- Tarjetas resumen de riesgo -->
+        <div class="grilla-3" style="margin-bottom:14px;">
+          <div class="metrica">
+            <div class="metrica-etiqueta">Promedio de días internado</div>
+            <div class="metrica-valor" style="color:var(--ambar);">6.4</div>
+            <div class="metrica-sub neutro">días</div>
+          </div>
+          <div class="metrica">
+            <div class="metrica-etiqueta">Pacientes en riesgo alto</div>
+            <div class="metrica-valor" style="color:var(--rojo);">3</div>
+            <div class="metrica-sub alerta">Requieren revisión</div>
+          </div>
+          <div class="metrica">
+            <div class="metrica-etiqueta">Tasa de rotación del mes</div>
+            <div class="metrica-valor" style="color:var(--color-ok);">1.8</div>
+            <div class="metrica-sub arriba">altas / ingresos</div>
+          </div>
+        </div>
+
+        <div class="tarjeta">
+          <div class="tarjeta-cabeza">
+            <span class="tarjeta-titulo">Pacientes internados · Semáforo de riesgo</span>
+            <button class="boton chico primario" onclick="abrirModalInformeGestion()">Generar informe de gestión</button>
+          </div>
+          <div class="tarjeta-cuerpo" style="padding:0;">
+            <table class="tabla" style="width:100%;">
+              <thead>
+                <tr>
+                  <th>Paciente</th>
+                  <th>Cama</th>
+                  <th>Días internado</th>
+                  <th>Diagnóstico</th>
+                  <th>Riesgo</th>
+                  <th>Próxima acción</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="riesgo-tabla-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <!-- Tooltip flotante para camas -->
       <div class="tooltip-cama" id="tooltipCama"></div>
+    </div>
+
+    <!-- Modal informe de gestión -->
+    <div class="fondo-modal" id="modal-informe-gestion">
+      <div class="modal" style="max-width:560px;">
+        <div class="modal-cabeza">
+          <span class="modal-titulo">Informe de gestión · <span id="informe-fecha"></span></span>
+          <button class="modal-cerrar" onclick="cerrarModal('modal-informe-gestion')">✕</button>
+        </div>
+        <div class="modal-cuerpo">
+          <div class="aviso info" style="margin-bottom:12px;">Texto listo para copiar y enviar por email o mensajería interna.</div>
+          <textarea class="entrada" id="informe-texto" rows="14" style="font-family:var(--mono);font-size:11.5px;line-height:1.7;" readonly></textarea>
+        </div>
+        <div class="modal-pie">
+          <button class="boton" onclick="cerrarModal('modal-informe-gestion')">Cerrar</button>
+          <button class="boton primario" onclick="copiarInforme()">Copiar texto</button>
+        </div>
+      </div>
     </div>
 
     <!-- ═══ LABORATORIO — con visor de resultados (módulo 02) ═══ -->
@@ -2428,6 +2760,8 @@ function navegarA(modulo, el) {
   if (el) el.classList.add('activo');
   document.getElementById('titulo-modulo').textContent = NOMBRES_MODULOS[modulo] || modulo;
   if (modulo === 'tablero' || modulo === 'internacion' || modulo === 'estadisticas') animarContadores();
+  if (modulo === 'turnos') agendaRenderizar();
+  if (modulo === 'internacion') renderizarMapaRiesgo();
 }
 function navegarDesde(modulo) {
   const el = document.querySelector(`.lat-item[onclick*="'${modulo}'"]`);
@@ -2854,6 +3188,405 @@ function alternarModoOscuro() {
     }
   });
 })();
+
+/* ─── MAPA DE RIESGO — MEJORA 07 ─── */
+
+const PACIENTES_INTERNADOS = [
+  { nombre:'Pérez, Miguel',    cama:'UCI 401', dias:9,  dx:'IAM (Infarto agudo de miocardio)',   medico:'Dr. Vega',    reinternacion:false, accion:'Evaluación cardiológica urgente' },
+  { nombre:'Ríos, Valentina',  cama:'UCI 402', dias:8,  dx:'ACV isquémico',                      medico:'Dra. Romero', reinternacion:true,  accion:'Control neurológico · Fisioterapia' },
+  { nombre:'Fernández, R.',    cama:'UCI 403', dias:6,  dx:'Trauma craneal moderado',             medico:'Dr. Vega',    reinternacion:false, accion:'TAC de control mañana' },
+  { nombre:'Sánchez, M.',      cama:'UCI 404', dias:3,  dx:'Post-quirúrgico apendicectomía',      medico:'Dr. Suárez',  reinternacion:false, accion:'Alta probable en 2 días' },
+  { nombre:'García, Laura',    cama:'203',     dias:15, dx:'Sepsis urinaria',                    medico:'Dra. Romero', reinternacion:true,  accion:'Hemocultivos pendientes · revisar ATB' },
+  { nombre:'Torres, Andrés',   cama:'205',     dias:12, dx:'Neumonía bilateral',                 medico:'Dr. Suárez',  reinternacion:false, accion:'Espirometría de control' },
+  { nombre:'Molina, Carmen',   cama:'208',     dias:4,  dx:'Pancreatitis aguda leve',            medico:'Dr. Vega',    reinternacion:false, accion:'Dieta progresiva · ecografía control' },
+  { nombre:'Romero, Diego',    cama:'211',     dias:2,  dx:'Fractura expuesta tibia',            medico:'Dr. Vega',    reinternacion:false, accion:'Cirugía diferida en 48hs' },
+  { nombre:'Herrera, Silvia',  cama:'214',     dias:7,  dx:'Insuficiencia cardíaca descompensada', medico:'Dra. Romero', reinternacion:true, accion:'Ajuste diurético · balance hídrico' },
+];
+
+const DX_RIESGO_ALTO = ['iam','avc','acv','sepsis','insuficiencia cardíaca'];
+
+function calcularRiesgo(p) {
+  const dxLower = p.dx.toLowerCase();
+  const esDxRiesgo = DX_RIESGO_ALTO.some(d => dxLower.includes(d));
+  if (esDxRiesgo || p.dias > 14) return 'rojo';
+  if (p.dias > 7 || p.reinternacion) return 'ambar';
+  return 'verde';
+}
+
+function renderizarMapaRiesgo() {
+  const tbody = document.getElementById('riesgo-tabla-body');
+  if (!tbody) return;
+
+  tbody.innerHTML = PACIENTES_INTERNADOS.map(p => {
+    const riesgo = calcularRiesgo(p);
+    const etiquetaRiesgo = riesgo === 'rojo' ? 'Alto' : riesgo === 'ambar' ? 'Moderado' : 'Bajo';
+    const reinternBadge = p.reinternacion
+      ? '<span class="reinternacion-badge">REINTERNACIÓN</span>'
+      : '';
+
+    return `<tr>
+      <td><b>${p.nombre}</b>${reinternBadge}</td>
+      <td style="font-family:var(--mono);font-size:11.5px;">${p.cama}</td>
+      <td style="font-family:var(--mono);font-size:12px;font-weight:600;color:${riesgo==='rojo'?'var(--rojo)':riesgo==='ambar'?'var(--ambar)':'var(--verde)'};">${p.dias} días</td>
+      <td style="font-size:12px;">${p.dx}</td>
+      <td><span class="semaforo ${riesgo}">${etiquetaRiesgo}</span></td>
+      <td style="font-size:11.5px;color:var(--texto-medio);">${p.accion}</td>
+      <td><button class="boton chico" onclick="mostrarTostada('Historia clínica de ${p.nombre}','info')">Ver HC</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function abrirModalInformeGestion() {
+  const hoy = new Date(2026, 3, 29);
+  const fecha = `${hoy.getDate()}/${hoy.getMonth()+1}/${hoy.getFullYear()}`;
+  document.getElementById('informe-fecha').textContent = fecha;
+
+  const altoRiesgo  = PACIENTES_INTERNADOS.filter(p => calcularRiesgo(p) === 'rojo');
+  const medRiesgo   = PACIENTES_INTERNADOS.filter(p => calcularRiesgo(p) === 'ambar');
+  const bajoRiesgo  = PACIENTES_INTERNADOS.filter(p => calcularRiesgo(p) === 'verde');
+  const reinternac  = PACIENTES_INTERNADOS.filter(p => p.reinternacion);
+  const promDias    = (PACIENTES_INTERNADOS.reduce((a,p) => a + p.dias, 0) / PACIENTES_INTERNADOS.length).toFixed(1);
+
+  const texto = `INFORME DE GESTIÓN DE INTERNACIÓN — ${fecha}
+Hospital / Clínica: Centro Médico MediGest
+Generado por: Sistema MediGest Pro · ${new Date().toLocaleTimeString('es-AR', {hour:'2-digit',minute:'2-digit'})}
+═══════════════════════════════════════
+
+RESUMEN EJECUTIVO
+─────────────────
+Total pacientes internados: ${PACIENTES_INTERNADOS.length}
+Promedio de días de internación: ${promDias} días
+Tasa de rotación del mes: 1.8 (altas/ingresos)
+Ocupación UCI: 100% — CAPACIDAD MÁXIMA
+
+SEMÁFORO DE RIESGO
+──────────────────
+🔴 Riesgo ALTO (${altoRiesgo.length} pacientes):
+${altoRiesgo.map(p => `  · ${p.nombre} — Cama ${p.cama} — ${p.dias} días — ${p.dx}`).join('\n')}
+
+🟡 Riesgo MODERADO (${medRiesgo.length} pacientes):
+${medRiesgo.map(p => `  · ${p.nombre} — Cama ${p.cama} — ${p.dias} días — ${p.dx}`).join('\n')}
+
+🟢 Riesgo BAJO (${bajoRiesgo.length} pacientes):
+${bajoRiesgo.map(p => `  · ${p.nombre} — Cama ${p.cama} — ${p.dias} días`).join('\n')}
+
+ALERTAS DE REINTERNACIÓN (${reinternac.length} pacientes)
+─────────────────────────
+${reinternac.map(p => `  ⚠ ${p.nombre} — ${p.dx} — Cama ${p.cama}`).join('\n')}
+
+ACCIONES PRIORITARIAS PARA HOY
+───────────────────────────────
+${altoRiesgo.map(p => `  1. [URGENTE] ${p.nombre}: ${p.accion}`).join('\n')}
+${medRiesgo.map((p,i) => `  ${i+altoRiesgo.length+1}. ${p.nombre}: ${p.accion}`).join('\n')}
+
+───────────────────────────────
+Este informe fue generado automáticamente por MediGest Pro.
+Para más información, consultá el módulo de Internación en el sistema.`;
+
+  document.getElementById('informe-texto').value = texto;
+  abrirModal('modal-informe-gestion');
+}
+
+function copiarInforme() {
+  const texto = document.getElementById('informe-texto').value;
+  navigator.clipboard.writeText(texto).then(() => {
+    mostrarTostada('Informe copiado al portapapeles', 'exito');
+  });
+}
+
+/* ─── ASISTENTE IA CLÍNICO ─── */
+
+const IA_CONTEXTO_PACIENTE = `Sos un asistente clínico de apoyo integrado en un sistema de gestión médica (MediGest Pro).
+Contexto del paciente activo:
+- Nombre: López, Carlos M. — 45 años, masculino
+- Diagnóstico activo: HTA grado I, Dislipemia. Motivo de consulta: dolor precordial leve, disnea de esfuerzo
+- Medicación actual: Enalapril 10mg/día, Atorvastatina 20mg/noche, AAS 100mg/día
+- Alergias: Penicilina (urticaria severa), AINE/Ibuprofeno (dispepsia)
+- Signos vitales: TA 148/92 mmHg, FC 88 lpm, SpO2 97%
+- Antecedentes: HTA, Dislipemia, apendicectomía 2010
+- Médico tratante: Dra. Romero
+
+Respondé de forma concisa, en español rioplatense, con formato claro. Usá listas cuando sea útil.
+SIEMPRE recordá que sos una herramienta de apoyo y que la decisión clínica final es del médico.
+Respondé solo sobre temas de medicina clínica, farmacología y gestión médica.`;
+
+let iaHistorial = [];
+let iaCargando = false;
+
+function togglePanelIA() {
+  const panel = document.getElementById('ia-panel');
+  const btn   = document.getElementById('ia-boton-flotante');
+  const abierto = panel.classList.toggle('abierto');
+  btn.classList.toggle('activo', abierto);
+  if (abierto) {
+    setTimeout(() => document.getElementById('ia-input')?.focus(), 300);
+  }
+}
+
+function cerrarPanelIA() {
+  document.getElementById('ia-panel').classList.remove('abierto');
+  document.getElementById('ia-boton-flotante')?.classList.remove('activo');
+}
+
+function iaEnviarSugerencia(btn) {
+  const texto = btn.textContent;
+  document.getElementById('ia-input').value = texto;
+  iaEnviar();
+}
+
+async function iaEnviar() {
+  if (iaCargando) return;
+  const input = document.getElementById('ia-input');
+  const texto = input.value.trim();
+  if (!texto) return;
+
+  // Agregar burbuja del médico
+  iaAgregarBurbuja(texto, 'medico');
+  iaHistorial.push({ role: 'user', content: texto });
+  input.value = '';
+
+  // Mostrar cargando
+  iaCargando = true;
+  const btnEnviar = document.getElementById('ia-enviar');
+  btnEnviar.disabled = true;
+  const cargando = document.getElementById('ia-cargando');
+  cargando.style.display = 'block';
+  iaScrollAbajo();
+
+  try {
+    const mensajes = [
+      { role: 'user', content: IA_CONTEXTO_PACIENTE + '\n\n---\nEl médico pregunta: ' + iaHistorial[0].content },
+      ...iaHistorial.slice(1)
+    ];
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: mensajes
+      })
+    });
+
+    const data = await res.json();
+    const respuesta = data.content?.[0]?.text || 'No se pudo obtener respuesta.';
+    iaHistorial.push({ role: 'assistant', content: respuesta });
+    iaAgregarBurbuja(respuesta, 'asistente', true);
+
+  } catch (err) {
+    iaAgregarBurbuja('Error al conectar con el asistente. Verificá tu conexión.', 'asistente');
+  } finally {
+    iaCargando = false;
+    btnEnviar.disabled = false;
+    cargando.style.display = 'none';
+    iaScrollAbajo();
+  }
+}
+
+function iaAgregarBurbuja(texto, tipo, conCopiar = false) {
+  const wrap = document.getElementById('ia-mensajes');
+  const div = document.createElement('div');
+  div.className = `ia-burbuja ${tipo}`;
+
+  // Convertir saltos de línea y negrita básica
+  const html = texto
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.*?)\*\*/g,'<b>$1</b>')
+    .replace(/\n/g,'<br>');
+
+  let meta = '';
+  if (conCopiar) {
+    meta = `<div class="ia-burbuja-meta">
+      <span>Asistente IA</span>
+      <button class="ia-copiar" onclick="iaCopiar(this)" data-texto="${texto.replace(/"/g,'&quot;')}">Copiar</button>
+    </div>`;
+  }
+
+  div.innerHTML = html + meta;
+  wrap.appendChild(div);
+  iaScrollAbajo();
+}
+
+function iaCopiar(btn) {
+  navigator.clipboard.writeText(btn.dataset.texto).then(() => {
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = 'Copiar', 2000);
+  });
+}
+
+function iaScrollAbajo() {
+  const wrap = document.getElementById('ia-mensajes');
+  if (wrap) requestAnimationFrame(() => wrap.scrollTop = wrap.scrollHeight);
+}
+
+/* ─── AGENDA VISUAL SEMANAL ─── */
+
+const AGENDA_TURNOS = [
+  // semana offset 0 (semana del 28 abr - 3 may 2026)
+  // dia 0=Lun, 1=Mar, 2=Mié, 3=Jue, 4=Vie, 5=Sáb
+  { dia:0, hora:'08:30', pac:'Pérez, Juan',     esp:'Clínica Médica', medico:'suarez',  css:'ag-t-clinica'   },
+  { dia:0, hora:'09:00', pac:'García, Marta',   esp:'Cardiología',    medico:'suarez',  css:'ag-t-cardio'    },
+  { dia:0, hora:'09:30', pac:'López, Carlos',   esp:'Clínica Médica', medico:'romero',  css:'ag-t-clinica'   },
+  { dia:0, hora:'10:00', pac:'Ferreyra, Ana',   esp:'Pediatría',      medico:'romero',  css:'ag-t-pediatria' },
+  { dia:0, hora:'11:00', pac:'Martínez, R.',    esp:'Traumatología',  medico:'vega',    css:'ag-t-trauma'    },
+  { dia:1, hora:'08:00', pac:'Sosa, Patricia',  esp:'Neurología',     medico:'vega',    css:'ag-t-neuro'     },
+  { dia:1, hora:'09:15', pac:'Rodríguez, M.',   esp:'Clínica Médica', medico:'suarez',  css:'ag-t-clinica'   },
+  { dia:1, hora:'10:30', pac:'Torres, Luis',    esp:'Cardiología',    medico:'romero',  css:'ag-t-cardio'    },
+  { dia:1, hora:'14:00', pac:'Herrera, C.',     esp:'Pediatría',      medico:'romero',  css:'ag-t-pediatria' },
+  { dia:2, hora:'09:00', pac:'Romero, V.',      esp:'Traumatología',  medico:'vega',    css:'ag-t-trauma'    },
+  { dia:2, hora:'09:30', pac:'Castro, D.',      esp:'Clínica Médica', medico:'suarez',  css:'ag-t-clinica'   },
+  { dia:2, hora:'11:30', pac:'Blanco, S.',      esp:'Neurología',     medico:'vega',    css:'ag-t-neuro'     },
+  { dia:3, hora:'08:30', pac:'Núñez, A.',       esp:'Pediatría',      medico:'romero',  css:'ag-t-pediatria' },
+  { dia:3, hora:'10:00', pac:'Morales, E.',     esp:'Cardiología',    medico:'suarez',  css:'ag-t-cardio'    },
+  { dia:3, hora:'15:00', pac:'Ríos, M.',        esp:'Clínica Médica', medico:'romero',  css:'ag-t-clinica'   },
+  { dia:4, hora:'09:00', pac:'Vidal, T.',       esp:'Traumatología',  medico:'vega',    css:'ag-t-trauma'    },
+  { dia:4, hora:'10:30', pac:'Mendez, C.',      esp:'Clínica Médica', medico:'suarez',  css:'ag-t-clinica'   },
+  { dia:5, hora:'09:00', pac:'López, C.',       esp:'Pediatría',      medico:'romero',  css:'ag-t-pediatria' },
+];
+
+let agendaOffsetSemana = 0;
+
+const DIAS_NOMBRES = ['Lun','Mar','Mié','Jue','Vie','Sáb'];
+const HORAS_AGENDA = [];
+for (let h = 7; h <= 20; h++) {
+  HORAS_AGENDA.push(`${String(h).padStart(2,'0')}:00`);
+  if (h < 20) HORAS_AGENDA.push(`${String(h).padStart(2,'0')}:30`);
+}
+
+function agendaNavegar(dir) {
+  agendaOffsetSemana += dir;
+  agendaRenderizar();
+}
+
+function agendaHoraAFila(hora) {
+  const [h, m] = hora.split(':').map(Number);
+  return (h - 7) * 2 + (m >= 30 ? 1 : 0);
+}
+
+function agendaRenderizar() {
+  const grid = document.getElementById('agenda-grid');
+  const label = document.getElementById('agenda-semana-label');
+  const filtroMedico = document.getElementById('agenda-medico-sel')?.value || 'todos';
+  if (!grid) return;
+
+  // Calcular fechas de la semana
+  const hoy = new Date(2026, 3, 29); // miércoles 29 abr 2026
+  const lunes = new Date(hoy);
+  lunes.setDate(hoy.getDate() - hoy.getDay() + 1 + agendaOffsetSemana * 7);
+
+  const dias = Array.from({length: 6}, (_, i) => {
+    const d = new Date(lunes);
+    d.setDate(lunes.getDate() + i);
+    return d;
+  });
+
+  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  label.textContent = `${dias[0].getDate()} ${meses[dias[0].getMonth()]} – ${dias[5].getDate()} ${meses[dias[5].getMonth()]} ${dias[5].getFullYear()}`;
+
+  // Construir HTML
+  let html = '';
+
+  // Cabecera
+  html += '<div class="ag-dia-vacio"></div>';
+  dias.forEach((d, i) => {
+    const esHoy = d.toDateString() === hoy.toDateString();
+    html += `<div class="ag-dia-col${esHoy?' hoy':''}">
+      <div class="ag-dia-nombre">${DIAS_NOMBRES[i]}</div>
+      <div class="ag-dia-num">${d.getDate()}</div>
+    </div>`;
+  });
+
+  // Filas
+  HORAS_AGENDA.forEach((hora, filaIdx) => {
+    const esMediaHora = hora.endsWith(':30');
+    html += `<div class="ag-hora">${esMediaHora ? '' : hora}</div>`;
+
+    dias.forEach((d, diaIdx) => {
+      const esHoy = d.toDateString() === hoy.toDateString();
+      // Buscar turno en esta celda
+      const turno = AGENDA_TURNOS.find(t =>
+        t.dia === diaIdx &&
+        t.hora === hora &&
+        (filtroMedico === 'todos' || t.medico === filtroMedico)
+      );
+
+      let contenido = '';
+      if (turno) {
+        contenido = `<div class="ag-turno ${turno.css}"
+          onclick="event.stopPropagation();mostrarPopoverAgenda(event,'${turno.pac}','${turno.hora} · ${turno.esp}')"
+          title="${turno.pac} — ${turno.esp}">
+          <div class="ag-turno-pac">${turno.pac}</div>
+          <div class="ag-turno-esp">${turno.esp}</div>
+        </div>`;
+      }
+
+      html += `<div class="ag-celda${esHoy?' hoy-col':''}${esMediaHora?' media-hora':''}"
+        onclick="celdaAgendaClic('${hora}', ${diaIdx})">${contenido}</div>`;
+    });
+  });
+
+  grid.innerHTML = html;
+  grid.style.gridTemplateRows = `36px repeat(${HORAS_AGENDA.length}, 36px)`;
+
+  // Línea de "ahora" — solo en semana actual
+  if (agendaOffsetSemana === 0) {
+    const ahora = new Date();
+    const horaActual = ahora.getHours() + ahora.getMinutes() / 60;
+    if (horaActual >= 7 && horaActual <= 20) {
+      const pct = ((horaActual - 7) / 13) * 100;
+      // diaHoy = miércoles = col 3 (0-indexed)
+      const diaHoyIdx = 2;
+      const celdas = grid.querySelectorAll('.ag-celda.hoy-col');
+      if (celdas.length > 0) {
+        const wrap = document.getElementById('agenda-grid-wrap');
+        const wrapRect = wrap.getBoundingClientRect();
+        // Usar posición relativa simple en las celdas
+        celdas.forEach((celda, idx) => {
+          if (idx === 0) { // primera celda del día de hoy, insertar línea
+            const linea = document.createElement('div');
+            linea.className = 'ag-linea-ahora';
+            linea.style.top = `${pct}%`;
+            celda.closest('.agenda-grid') && null; // no hacemos nada aquí
+          }
+        });
+      }
+    }
+  }
+
+  // Auto-scroll a las 8:00
+  const wrap = document.getElementById('agenda-grid-wrap');
+  if (wrap) {
+    requestAnimationFrame(() => { wrap.scrollTop = 36; });
+  }
+}
+
+function celdaAgendaClic(hora, diaIdx) {
+  cerrarPopoverAgenda();
+  abrirModal('modal-nuevo-turno');
+}
+
+function mostrarPopoverAgenda(e, pac, meta) {
+  const pop = document.getElementById('ag-popover');
+  document.getElementById('ag-pop-nombre').textContent = pac;
+  document.getElementById('ag-pop-meta').textContent = meta;
+  pop.style.display = 'block';
+  const x = Math.min(e.clientX + 12, window.innerWidth - 300);
+  const y = Math.min(e.clientY + 8,  window.innerHeight - 140);
+  pop.style.left = x + 'px';
+  pop.style.top  = y + 'px';
+}
+
+function cerrarPopoverAgenda() {
+  const pop = document.getElementById('ag-popover');
+  if (pop) pop.style.display = 'none';
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.ag-popover') && !e.target.closest('.ag-turno')) {
+    cerrarPopoverAgenda();
+  }
+});
 
 /* ─── MÓDULO 05: PANEL DE ATAJOS ─── */
 function abrirPanelAtaljos() {
