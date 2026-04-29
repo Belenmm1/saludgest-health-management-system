@@ -4,8 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MediGest Pro · Sistema de Gestión Hospitalaria</title>
+
+<!-- ═══ MÓDULO 11 — PWA META TAGS ═══ -->
+<meta name="theme-color" content="#0F2D52">
+<meta name="application-name" content="MediGest">
+<meta name="description" content="Sistema de Gestión Hospitalaria · MediGest Pro">
+
+<!-- Apple / iOS PWA -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MediGest">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%230F2D52'/%3E%3Ctext x='96' y='128' text-anchor='middle' font-family='monospace' font-size='90' font-weight='700' fill='white'%3EMG%3C/text%3E%3C/svg%3E">
+
+<!-- Manifest PWA -->
+<link rel="manifest" id="pwa-manifest">
+
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Serif:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 
 /* ════════════════════════════════════════
@@ -119,14 +133,14 @@ button,input,select,textarea{font-family:var(--fuente);}
 .lat-logo{padding:12px 14px 10px;border-bottom:1px solid rgba(255,255,255,0.07);}
 .lat-logo-nombre{color:#fff;font-size:13px;font-weight:500;letter-spacing:0.01em;font-family:var(--fuente);}
 .lat-logo-sub{color:rgba(255,255,255,0.3);font-size:9.5px;margin-top:2px;letter-spacing:0.06em;text-transform:uppercase;font-family:var(--mono);}
-.lat-nav{flex:1;padding:6px 0;overflow-y:auto;}
-.lat-seccion{font-size:9px;font-weight:500;color:rgba(255,255,255,0.22);letter-spacing:0.14em;text-transform:uppercase;padding:18px 10px 4px;font-family:var(--mono);}
-.lat-item{display:flex;align-items:center;gap:9px;padding:0 10px 0 8px;border-radius:0;cursor:pointer;font-size:12px;color:rgba(255,255,255,0.5);transition:color 0.14s,background 0.14s;border-left:2px solid transparent;min-height:32px;}
-.lat-item:hover{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);}
-.lat-item.activo{background:rgba(255,255,255,0.08);color:#fff;border-left-color:#fff;}
-.lat-item .icono{width:22px;text-align:center;flex-shrink:0;font-family:var(--mono);font-size:10px;font-weight:500;color:rgba(255,255,255,0.3);letter-spacing:0;}
-.lat-item.activo .icono,.lat-item:hover .icono{color:rgba(255,255,255,0.65);}
-.lat-contador{margin-left:auto;background:var(--color-critico);color:#fff;font-size:9px;font-weight:600;padding:1px 4px;border-radius:2px;font-family:var(--mono);}
+.lat-nav{flex:1;padding:8px 6px;overflow-y:auto;}
+.lat-seccion{font-size:9px;font-weight:500;color:rgba(255,255,255,0.22);letter-spacing:0.14em;text-transform:uppercase;padding:18px 8px 4px;font-family:var(--mono);}
+.lat-item{display:flex;align-items:center;gap:9px;padding:0 8px;border-radius:4px;cursor:pointer;font-size:12px;color:rgba(255,255,255,0.48);margin-bottom:1px;transition:color 0.14s,background 0.14s;border-left:2px solid transparent;min-height:32px;}
+.lat-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.85);}
+.lat-item.activo{background:rgba(255,255,255,0.09);color:#fff;border-left-color:#fff;}
+.lat-item .icono{width:22px;text-align:center;flex-shrink:0;font-family:var(--mono);font-size:10px;font-weight:500;color:rgba(255,255,255,0.35);letter-spacing:0;}
+.lat-item.activo .icono,.lat-item:hover .icono{color:rgba(255,255,255,0.7);}
+.lat-contador{margin-left:auto;background:var(--color-critico);color:#fff;font-size:9px;font-weight:600;padding:1px 5px;border-radius:3px;font-family:var(--mono);}
 .lat-contador.verde{background:var(--verde-mar);}
 .lat-contador.ambar{background:var(--ambar);}
 .lat-usuario{padding:10px 12px;border-top:1px solid rgba(255,255,255,0.07);}
@@ -207,6 +221,7 @@ button,input,select,textarea{font-family:var(--fuente);}
 .etiqueta-azul{background:#F4F4F1;color:#3D3D38;border:1px solid #E0DDD7;}
 .etiqueta-verde{background:#EDFFF3;color:#1A5C32;}
 .etiqueta-ambar{background:#FFF8ED;color:#7A4D0A;}
+.etiqueta-rojo{background:#FFEEED;color:#9B1C1C;}
 .etiqueta-verdemar{background:#EDFFF8;color:#0D5C48;}
 .etiqueta-gris{background:#F4F4F1;color:#6B6B64;}
 .etiqueta-morado{background:#F3F0FF;color:#5B21B6;}
@@ -247,6 +262,7 @@ button,input,select,textarea{font-family:var(--fuente);}
 .tabla .td-nombre{color:var(--color-texto);font-weight:500;}
 /* Filas completas clicables */
 .tabla.clicable tbody tr{cursor:pointer;}
+.tabla.clicable tbody tr td{padding-top:8px;padding-bottom:8px;}
 
 /* ═══════════════════════════════════════════
    AVATAR
@@ -371,6 +387,7 @@ textarea.entrada{min-height:78px;resize:vertical;}
 .boton.ambar{background:#FFFCF0;color:var(--ambar);border-color:#E8D5A0;}
 .boton.chico{padding:5px 10px;font-size:11px;min-height:30px;}
 .tabla.clicable tbody tr{cursor:pointer;}
+.tabla.clicable tbody tr td{padding-top:8px;padding-bottom:8px;}
 
 /* ═══════════════════════════════════════════
    MÓDULO 05 — ATAJOS DE TECLADO (tooltips)
@@ -417,25 +434,13 @@ textarea.entrada{min-height:78px;resize:vertical;}
 .boton-contraste{
   display:flex;align-items:center;gap:6px;
   padding:6px 12px;min-height:44px;
-  border-radius:4px;border:1px solid var(--borde);
+  border-radius:7px;border:1px solid var(--borde);
   background:var(--superficie);font-size:11.5px;
   font-weight:600;color:var(--texto-medio);
   cursor:pointer;transition:all 0.15s;
   flex-shrink:0;
 }
 .boton-contraste:hover{background:var(--fondo);}
-
-.boton-modo-oscuro{
-  display:flex;align-items:center;gap:5px;
-  padding:6px 10px;border-radius:4px;
-  border:1px solid var(--borde);background:var(--superficie);
-  font-size:11.5px;font-weight:600;color:var(--texto-medio);
-  cursor:pointer;transition:all 0.15s;font-family:var(--fuente);
-  flex-shrink:0;
-}
-.boton-modo-oscuro:hover{background:var(--fondo);}
-.mo-ico{font-size:13px;line-height:1;}
-body.modo-oscuro .boton-modo-oscuro{background:var(--superficie);color:#D29922;border-color:#30363D;}
 .contraste-ico{font-size:14px;}
 
 /* Variables que se sobreescriben en alto contraste */
@@ -483,251 +488,8 @@ body.alto-contraste .boton-contraste{
 body.alto-contraste .boton-contraste .contraste-ico::after{content:' ✓';}
 
 /* ═══════════════════════════════════════════
-   MODO OSCURO COMPLETO
+   MÓDULO 05 — OVERLAY DE ATAJOS DE TECLADO
 ═══════════════════════════════════════════ */
-body.modo-oscuro {
-  --color-fondo:           #0D1117;
-  --color-tarjeta:         #161B22;
-  --color-borde:           #30363D;
-  --color-borde-suave:     #21262D;
-  --color-texto:           #E6EDF3;
-  --color-texto-medio:     #8B949E;
-  --color-texto-suave:     #6E7681;
-  --color-registro:        #161B22;
-  --color-fondo-formulario:#0D1117;
-  --fondo:                 #0D1117;
-  --superficie:            #161B22;
-  --borde:                 #30363D;
-  --borde-claro:           #21262D;
-  --texto:                 #E6EDF3;
-  --texto-medio:           #8B949E;
-  --texto-suave:           #6E7681;
-  --color-ok:              #3FB950;
-  --color-ok-fondo:        #0F2D1A;
-  --color-ok-borde:        #1A4D2A;
-  --color-critico:         #F85149;
-  --color-critico-fondo:   #2D0A0A;
-  --color-critico-borde:   #5A1414;
-  --color-alerta:          #D29922;
-  --color-alerta-fondo:    #2D1F00;
-  --color-alerta-borde:    #4D3500;
-  --verde:                 #3FB950;
-  --verde-claro:           #0F2D1A;
-  --ambar:                 #D29922;
-  --ambar-claro:           #2D1F00;
-  --rojo:                  #F85149;
-  --rojo-claro:            #2D0A0A;
-  --verde-mar:             #2DD4BF;
-  --verde-mar-claro:       #0A2420;
-}
-body.modo-oscuro .barra-superior{background:#161B22;border-bottom-color:#30363D;}
-body.modo-oscuro .lateral{background:#0D1117 !important;}
-body.modo-oscuro .lateral .lat-item.activo{background:rgba(255,255,255,0.06);border-left-color:rgba(255,255,255,0.65);}
-body.modo-oscuro .panel-notificaciones{background:#161B22;border-color:#30363D;}
-body.modo-oscuro .modal{background:#161B22;border-color:#30363D;}
-body.modo-oscuro .tostada{background:#1C2128;border-color:#30363D;color:#E6EDF3;}
-body.modo-oscuro .entrada,
-body.modo-oscuro select.entrada{background:#0D1117;border-color:#30363D;color:#E6EDF3;}
-body.modo-oscuro .busqueda-dd{background:#161B22;border-color:#30363D;}
-body.modo-oscuro .bdd-item:hover{background:#21262D;}
-body.modo-oscuro .cajon-contenido{background:#161B22;}
-body.modo-oscuro .progreso-relleno{filter:brightness(1.4);}
-body.modo-oscuro .tooltip-cama{background:#161B22;border-color:#30363D;}
-body.modo-oscuro .banner-alergia{background:#2D0A0A;border-color:#5A1414;}
-body.modo-oscuro .aviso{background:#1C2128;border-color:#30363D;}
-body.modo-oscuro .lat-item:hover{background:rgba(255,255,255,0.04);}
-body.modo-oscuro .boton-modo-oscuro .mo-ico{content:'🌙';}
-
-body.modo-oscuro .lat-item:hover{background:rgba(255,255,255,0.04);}
-body.modo-oscuro .boton-modo-oscuro .mo-ico{content:'🌙';}
-
-/* ═══════════════════════════════════════════
-   MAPA DE RIESGO — MEJORA 07
-═══════════════════════════════════════════ */
-.semaforo{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:3px;}
-.semaforo.verde {background:var(--verde-claro); color:var(--verde);}
-.semaforo.ambar {background:var(--ambar-claro); color:var(--ambar);}
-.semaforo.rojo  {background:var(--rojo-claro);  color:var(--rojo);}
-.semaforo::before{content:'';width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.semaforo.verde::before{background:var(--verde);}
-.semaforo.ambar::before{background:var(--ambar);}
-.semaforo.rojo::before {background:var(--rojo);}
-.reinternacion-badge{
-  font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:2px;
-  background:var(--rojo-claro);color:var(--rojo);margin-left:5px;
-  font-family:var(--mono);border:1px solid var(--rojo-claro);
-}
-
-/* ═══════════════════════════════════════════
-   ASISTENTE IA CLÍNICO — MEJORA 06
-═══════════════════════════════════════════ */
-.ia-boton-flotante{
-  position:absolute;bottom:16px;right:16px;
-  display:flex;align-items:center;gap:7px;
-  padding:8px 14px;background:#1A1A16;color:#fff;
-  border:none;border-radius:4px;font-size:12px;font-weight:600;
-  font-family:var(--mono);cursor:pointer;z-index:10;
-  transition:background 0.15s,transform 0.1s;letter-spacing:0.03em;
-}
-.ia-boton-flotante:hover{background:#333330;transform:translateY(-1px);}
-.ia-boton-flotante.activo{background:#0D5C48;color:#A7F3D0;}
-.ia-estrella{font-size:14px;}
-
-/* Panel lateral IA */
-.ia-panel{
-  position:fixed;top:0;right:-420px;width:400px;height:100vh;
-  background:var(--superficie);border-left:1px solid var(--borde);
-  z-index:300;display:flex;flex-direction:column;
-  transition:right 0.25s cubic-bezier(0.4,0,0.2,1);
-}
-.ia-panel.abierto{right:0;}
-
-.ia-cabeza{
-  padding:12px 16px;border-bottom:1px solid var(--borde);
-  display:flex;align-items:center;gap:10px;flex-shrink:0;
-}
-.ia-logo{
-  width:28px;height:28px;background:#0D5C48;border-radius:4px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;flex-shrink:0;
-}
-.ia-cabeza-info{flex:1;}
-.ia-cabeza-titulo{font-size:13px;font-weight:600;color:var(--texto);}
-.ia-cabeza-sub{font-size:10.5px;color:var(--texto-suave);margin-top:1px;}
-.ia-cerrar{background:none;border:none;cursor:pointer;font-size:18px;color:var(--texto-suave);padding:2px 6px;border-radius:3px;}
-.ia-cerrar:hover{background:var(--fondo);}
-
-.ia-contexto{
-  background:var(--fondo);border-bottom:1px solid var(--borde);
-  padding:8px 14px;font-size:11px;color:var(--texto-suave);
-  font-family:var(--mono);flex-shrink:0;line-height:1.5;
-}
-.ia-contexto-titulo{font-weight:600;color:var(--texto-medio);margin-bottom:3px;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;}
-
-.ia-mensajes{
-  flex:1;overflow-y:auto;padding:14px;
-  display:flex;flex-direction:column;gap:10px;
-}
-
-.ia-burbuja{max-width:88%;padding:9px 12px;border-radius:4px;font-size:12.5px;line-height:1.6;}
-.ia-burbuja.medico{
-  align-self:flex-end;background:#1A1A16;color:#fff;
-}
-.ia-burbuja.asistente{
-  align-self:flex-start;background:var(--fondo);
-  border:1px solid var(--borde);color:var(--texto);
-}
-body.modo-oscuro .ia-burbuja.medico{background:#1A4D3A;color:#D1FAE5;}
-body.modo-oscuro .ia-burbuja.asistente{background:#161B22;border-color:#30363D;}
-.ia-burbuja-meta{
-  font-size:10px;color:var(--texto-suave);margin-top:5px;
-  display:flex;align-items:center;justify-content:space-between;
-  font-family:var(--mono);
-}
-.ia-copiar{background:none;border:none;cursor:pointer;font-size:10px;
-  color:var(--texto-suave);padding:2px 5px;border-radius:3px;font-family:var(--fuente);}
-.ia-copiar:hover{background:var(--borde);color:var(--texto);}
-
-.ia-cargando{
-  align-self:flex-start;padding:10px 14px;background:var(--fondo);
-  border:1px solid var(--borde);border-radius:4px;
-  display:none;
-}
-.ia-puntos span{
-  display:inline-block;width:6px;height:6px;border-radius:50%;
-  background:var(--texto-suave);margin:0 2px;
-  animation:ia-pulso 1.2s infinite;
-}
-.ia-puntos span:nth-child(2){animation-delay:0.2s;}
-.ia-puntos span:nth-child(3){animation-delay:0.4s;}
-@keyframes ia-pulso{0%,80%,100%{transform:scale(0.6);opacity:0.4;}40%{transform:scale(1);opacity:1;}}
-
-.ia-input-area{
-  padding:10px 14px;border-top:1px solid var(--borde);flex-shrink:0;
-}
-.ia-sugerencias{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
-.ia-sugerencia{
-  font-size:10.5px;padding:4px 9px;border:1px solid var(--borde);
-  border-radius:3px;background:var(--superficie);color:var(--texto-medio);
-  cursor:pointer;font-family:var(--fuente);transition:background 0.12s;
-  white-space:nowrap;
-}
-.ia-sugerencia:hover{background:var(--fondo);color:var(--texto);}
-.ia-input-fila{display:flex;gap:6px;}
-.ia-input{
-  flex:1;padding:7px 10px;border:1px solid var(--borde);
-  background:var(--fondo);border-radius:4px;font-size:12.5px;
-  font-family:var(--fuente);color:var(--texto);resize:none;
-  min-height:36px;max-height:80px;
-}
-.ia-input:focus{outline:none;border-color:var(--texto-medio);}
-.ia-enviar{
-  padding:7px 12px;background:#1A1A16;color:#fff;
-  border:none;border-radius:4px;cursor:pointer;
-  font-family:var(--mono);font-size:12px;font-weight:600;
-  transition:background 0.15s;flex-shrink:0;
-}
-.ia-enviar:hover{background:#333330;}
-.ia-enviar:disabled{background:var(--borde);color:var(--texto-suave);cursor:not-allowed;}
-
-.ia-disclaimer{
-  font-size:10px;color:var(--texto-suave);text-align:center;
-  padding:6px 14px 4px;border-top:1px solid var(--borde);
-  font-style:italic;flex-shrink:0;
-}
-
-.agenda-wrap{display:flex;flex-direction:column;gap:0;overflow:hidden;}
-.agenda-controles{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--borde);flex-wrap:wrap;}
-.agenda-nav-btn{padding:5px 10px;border:1px solid var(--borde);background:var(--superficie);border-radius:4px;cursor:pointer;font-size:12px;color:var(--texto-medio);font-family:var(--fuente);transition:background 0.12s;}
-.agenda-nav-btn:hover{background:var(--fondo);}
-.agenda-semana-label{font-size:12px;font-weight:600;color:var(--texto);font-family:var(--mono);min-width:160px;text-align:center;}
-.agenda-medico-sel{padding:5px 10px;border:1px solid var(--borde);background:var(--superficie);border-radius:4px;font-size:12px;color:var(--texto);font-family:var(--fuente);cursor:pointer;margin-left:auto;}
-
-.agenda-grid-wrap{overflow:auto;max-height:calc(100vh - 260px);}
-.agenda-grid{display:grid;grid-template-columns:52px repeat(6,1fr);min-width:700px;}
-
-/* cabecera de días */
-.ag-dia-vacio{position:sticky;top:0;z-index:5;background:var(--superficie);border-bottom:1px solid var(--borde);border-right:1px solid var(--borde);}
-.ag-dia-col{position:sticky;top:0;z-index:4;background:var(--superficie);border-bottom:1px solid var(--borde);border-right:1px solid var(--borde);padding:7px 6px;text-align:center;}
-.ag-dia-nombre{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--texto-suave);font-family:var(--mono);}
-.ag-dia-num{font-size:18px;font-weight:500;color:var(--texto);font-family:var(--mono);line-height:1.1;}
-.ag-dia-col.hoy{background:var(--fondo);}
-.ag-dia-col.hoy .ag-dia-num{color:var(--color-ok);}
-
-/* filas horarias */
-.ag-hora{font-size:10px;font-family:var(--mono);color:var(--texto-suave);text-align:right;padding:0 6px 0 0;border-right:1px solid var(--borde);display:flex;align-items:flex-start;padding-top:4px;position:relative;}
-.ag-celda{border-right:1px solid var(--borde-claro);border-bottom:1px solid var(--borde-claro);min-height:36px;position:relative;cursor:pointer;transition:background 0.1s;}
-.ag-celda:hover{background:var(--fondo);}
-.ag-celda.hoy-col{background:color-mix(in srgb, var(--fondo) 60%, transparent);}
-.ag-celda.media-hora{border-bottom-style:dashed;}
-
-/* bloque de turno */
-.ag-turno{position:absolute;inset:2px 3px;border-radius:3px;padding:3px 6px;font-size:10.5px;font-weight:500;cursor:pointer;overflow:hidden;z-index:2;border-left:3px solid transparent;transition:filter 0.1s;}
-.ag-turno:hover{filter:brightness(0.92);}
-.ag-turno-pac{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.ag-turno-esp{opacity:0.75;font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-/* colores por especialidad */
-.ag-t-clinica  {background:#E8F4FD;border-color:#2B6CB0;color:#1A3A5C;}
-.ag-t-cardio   {background:var(--ambar-claro);border-color:var(--ambar);color:#5A3800;}
-.ag-t-pediatria{background:var(--verde-claro);border-color:var(--verde);color:#0A3D1F;}
-.ag-t-trauma   {background:#F3F0FF;border-color:#7C3AED;color:#3B1A8A;}
-.ag-t-neuro    {background:#FFF0F3;border-color:#E05A7A;color:#7A1535;}
-body.modo-oscuro .ag-t-clinica  {background:#0D2540;border-color:#60A5FA;color:#A8D0F5;}
-body.modo-oscuro .ag-t-cardio   {background:var(--ambar-claro);border-color:var(--ambar);color:#FDE68A;}
-body.modo-oscuro .ag-t-pediatria{background:var(--verde-claro);border-color:var(--verde);color:#6EE7B7;}
-body.modo-oscuro .ag-t-trauma   {background:#1A0D3A;border-color:#A78BFA;color:#C4B5FD;}
-body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#FBCFE8;}
-
-/* línea de "ahora" */
-.ag-linea-ahora{position:absolute;left:0;right:0;height:2px;background:var(--color-critico);z-index:3;pointer-events:none;}
-.ag-linea-ahora::before{content:'';position:absolute;left:-4px;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--color-critico);}
-
-/* popover turno */
-.ag-popover{position:fixed;z-index:500;background:var(--superficie);border:1px solid var(--borde);border-radius:5px;padding:12px 14px;min-width:220px;max-width:280px;box-shadow:0 4px 20px rgba(0,0,0,0.15);display:none;}
-.ag-pop-nombre{font-size:13px;font-weight:600;color:var(--texto);margin-bottom:4px;}
-.ag-pop-meta{font-size:11px;color:var(--texto-suave);margin-bottom:10px;font-family:var(--mono);}
-.ag-pop-acciones{display:flex;gap:6px;}
-
 .panel-atajos{
   display:none;position:fixed;inset:0;
   background:rgba(15,45,82,0.6);
@@ -736,9 +498,9 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 }
 .panel-atajos.abierto{display:flex;animation:aparecerPagina 0.18s ease both;}
 .atajos-modal{
-  background:var(--superficie);border-radius:5px;
+  background:var(--superficie);border-radius:14px;
   padding:24px 28px;max-width:420px;width:100%;
-  border:1px solid var(--borde);
+  box-shadow:var(--sombra-media);
 }
 .atajos-titulo{
   font-size:15px;font-weight:700;color:var(--color-texto);
@@ -763,21 +525,21 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 /* ═══════════════════════════════════════════
    PANEL DE NOTIFICACIONES
 ═══════════════════════════════════════════ */
-.panel-notificaciones{position:fixed;top:0;right:-380px;width:360px;height:100vh;background:var(--superficie);border-left:1px solid var(--borde);z-index:200;display:flex;flex-direction:column;transition:right 0.25s cubic-bezier(0.4,0,0.2,1);}
+.panel-notificaciones{position:fixed;top:0;right:-380px;width:360px;height:100vh;background:var(--superficie);border-left:1px solid var(--borde);box-shadow:-6px 0 24px rgba(15,45,82,0.12);z-index:200;display:flex;flex-direction:column;transition:right 0.25s cubic-bezier(0.4,0,0.2,1);}
 .panel-notificaciones.abierto{right:0;}
-.pn-cabeza{padding:12px 16px;border-bottom:1px solid var(--borde);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.pn-cabeza{padding:16px 18px;border-bottom:1px solid var(--borde);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .pn-titulo{font-size:14px;font-weight:700;color:var(--color-texto);font-family:var(--fuente-titulo);}
 .pn-acciones{display:flex;gap:6px;align-items:center;}
 .pn-marcar-todo{font-size:11px;color:var(--color-texto-suave);cursor:pointer;background:none;border:none;font-family:var(--fuente);}
 .pn-cerrar{width:26px;height:26px;border-radius:4px;border:1px solid var(--borde);background:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--texto-suave);}
 .pn-cuerpo{flex:1;overflow-y:auto;padding:10px 0;}
-.pn-grupo-titulo{font-size:9.5px;font-weight:700;color:var(--texto-suave);letter-spacing:0.1em;text-transform:uppercase;padding:8px 16px 3px;}
-.notif-item{display:flex;gap:10px;padding:8px 16px;cursor:pointer;transition:background 0.12s;border-left:3px solid transparent;}
+.pn-grupo-titulo{font-size:9.5px;font-weight:700;color:var(--texto-suave);letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px 4px;}
+.notif-item{display:flex;gap:10px;padding:10px 18px;cursor:pointer;transition:background 0.12s;border-left:3px solid transparent;}
 .notif-item:hover{background:#FAFBFD;}
 .notif-item.no-leido{background:#F7F6F3;border-left-color:var(--color-texto-medio);}
 .notif-item.no-leido-rojo{background:#FFF6F6;border-left-color:var(--rojo);}
 .notif-item.no-leido-ambar{background:#FFFBF0;border-left-color:var(--ambar);}
-.notif-icono{width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.notif-icono{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
 .notif-texto{font-size:12.5px;color:var(--texto);line-height:1.4;flex:1;}
 .notif-texto b{font-weight:600;}
 .notif-hora{font-size:10.5px;color:var(--texto-suave);margin-top:2px;}
@@ -785,7 +547,7 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 .fondo-notif.abierto{display:block;}
 
 /* Banner alergia */
-.banner-alergia{display:none;background:#FFF1F1;border:1px solid #FECACA;border-radius:4px;padding:10px 14px;margin-bottom:12px;align-items:center;gap:10px;font-size:13px;color:var(--rojo);}
+.banner-alergia{display:none;background:#FFF1F1;border:1px solid #FECACA;border-radius:8px;padding:10px 14px;margin-bottom:12px;align-items:center;gap:10px;font-size:13px;color:var(--rojo);}
 .banner-alergia.visible{display:flex;}
 .ba-icono{font-size:18px;flex-shrink:0;}
 
@@ -813,20 +575,17 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 .fondo-modal.abierto{display:flex;}
 .modal{background:var(--color-tarjeta);border-radius:5px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:aparecerPagina 0.18s ease both;border:1px solid var(--color-borde);}
 .modal.grande{max-width:700px;}
-.modal.hce{max-width:90vw;width:90vw;max-height:92vh;display:flex;flex-direction:column;}
-.modal.hce .modal-cuerpo{flex:1;overflow-y:auto;min-height:0;}
-.etiqueta-rojo{background:var(--rojo-claro);color:var(--rojo);border-color:var(--rojo-claro);}
-.modal-cabeza{padding:12px 16px 10px;border-bottom:1px solid var(--color-borde);display:flex;align-items:center;justify-content:space-between;}
+.modal-cabeza{padding:16px 18px 12px;border-bottom:1px solid var(--color-borde);display:flex;align-items:center;justify-content:space-between;}
 .modal-titulo{font-size:14px;font-weight:500;color:var(--color-texto);font-family:var(--fuente);letter-spacing:0;}
 .modal-cerrar{background:none;border:none;font-size:16px;color:var(--color-texto-suave);cursor:pointer;line-height:1;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:3px;transition:background 0.12s;}
 .modal-cerrar:hover{background:var(--color-fondo);}
-.modal-cuerpo{padding:14px 16px;}
-.modal-pie{padding:8px 16px;border-top:1px solid var(--color-borde-suave);display:flex;gap:8px;justify-content:flex-end;}
+.modal-cuerpo{padding:16px 18px;}
+.modal-pie{padding:10px 18px;border-top:1px solid var(--color-borde-suave);display:flex;gap:8px;justify-content:flex-end;}
 
 /* ═══════════════════════════════════════════
    TOOLTIP CAMA (módulo 02)
 ═══════════════════════════════════════════ */
-.tooltip-cama{display:none;position:fixed;z-index:400;background:var(--superficie);border:1px solid var(--borde);border-radius:4px;padding:12px 14px;min-width:220px;pointer-events:none;animation:desvanecerEntrar 0.12s ease;}
+.tooltip-cama{display:none;position:fixed;z-index:400;background:var(--superficie);border:1px solid var(--borde);border-radius:10px;padding:14px 16px;min-width:220px;box-shadow:var(--sombra-media);pointer-events:none;animation:desvanecerEntrar 0.12s ease;}
 .tooltip-cama.visible{display:block;}
 .tt-nombre{font-weight:700;font-size:14px;color:var(--color-texto);margin-bottom:8px;font-family:var(--fuente-titulo);}
 .tt-fila{display:flex;justify-content:space-between;gap:16px;margin-bottom:4px;font-size:12px;}
@@ -835,7 +594,7 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 
 /* Mapa de camas */
 .grilla-camas{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
-.cama{border-radius:4px;padding:10px 8px;text-align:center;cursor:pointer;}
+.cama{border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;}
 .cama:hover{border-color:var(--borde);}
 .cama.libre{background:var(--verde-claro);border:1px solid #BBF7D0;}
 .cama.ocupada{background:#EDE9E3;border:1px solid #D4CFC7;}
@@ -851,7 +610,7 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 /* ═══════════════════════════════════════════
    MÓDULO 04: GUARDIA / EMERGENCIAS
 ═══════════════════════════════════════════ */
-.guardia-cabecera{background:#7F1D1D;border-radius:4px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:14px;color:#fff;}
+.guardia-cabecera{background:linear-gradient(135deg,#7F1D1D,#991B1B);border-radius:10px;padding:16px 20px;margin-bottom:18px;display:flex;align-items:center;gap:14px;color:#fff;}
 .guardia-ico-grande{font-size:32px;}
 .guardia-titulo-bloque{font-family:var(--fuente-titulo);font-size:18px;font-weight:700;letter-spacing:-0.01em;}
 .guardia-sub-bloque{font-size:12px;opacity:0.75;margin-top:2px;}
@@ -861,7 +620,7 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 /* Fila de triage */
 .triage-fila{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio);margin-bottom:8px;cursor:pointer;min-height:60px;}
 .triage-fila:hover{box-shadow:var(--sombra);}
-.triage-nivel{width:44px;height:44px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;letter-spacing:0.03em;flex-shrink:0;}
+.triage-nivel{width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;letter-spacing:0.03em;flex-shrink:0;}
 .nivel-rojo{background:var(--rojo-claro);color:var(--rojo);border:1.5px solid #FCA5A5;}
 .nivel-amarillo{background:var(--ambar-claro);color:var(--ambar);border:1.5px solid #FDE68A;}
 .nivel-verde{background:var(--verde-claro);color:var(--verde);border:1.5px solid #86EFAC;}
@@ -915,7 +674,7 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 .toggle.off::after{left:3px;}
 /* Control tamaño fuente */
 .fuente-control{display:flex;gap:6px;}
-.fuente-btn{padding:6px 14px;border-radius:4px;border:1px solid var(--borde);background:var(--superficie);font-size:12px;cursor:pointer;transition:all 0.15s;font-family:var(--fuente);color:var(--texto-medio);}
+.fuente-btn{padding:6px 14px;border-radius:7px;border:1px solid var(--borde);background:var(--superficie);font-size:12px;cursor:pointer;transition:all 0.15s;font-family:var(--fuente);color:var(--texto-medio);}
 .fuente-btn:hover{background:var(--fondo);}
 .fuente-btn.activo{background:#EDEAE4;color:var(--color-texto);border-color:var(--color-borde);}
 
@@ -934,129 +693,170 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 .lab-flag.normal{background:var(--verde-claro);color:var(--verde);}
 
 /* Modal conflicto turno */
-.aviso-conflicto{background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;padding:10px 14px;display:none;gap:8px;font-size:12.5px;color:var(--ambar);}
+.aviso-conflicto{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;display:none;gap:8px;font-size:12.5px;color:var(--ambar);}
 .aviso-conflicto.visible{display:flex;}
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE — TABLET Y CELULAR
+   RESPONSIVE — MÓDULO 04 COMPLETO
+   Densidad controlada en todos los breakpoints
 ═══════════════════════════════════════════ */
 
 /* ── TABLET (hasta 1024px) ── */
 @media(max-width:1024px){
   .lateral{ display:none; }
-  .metricas{ grid-template-columns:repeat(3,1fr); }
-  .grilla-2,.grilla-2-1,.grilla-1-2{ grid-template-columns:1fr; }
-  .grilla-3{ grid-template-columns:1fr 1fr; }
+  /* Métricas: 3 columnas */
+  .metricas{ grid-template-columns:repeat(3,1fr); gap:8px; }
+  /* Grillas: 1 columna */
+  .grilla-2,.grilla-2-1,.grilla-1-2{ grid-template-columns:1fr; gap:12px; }
+  .grilla-3{ grid-template-columns:1fr 1fr; gap:12px; }
+  /* Búsqueda más angosta */
   .bs-busqueda{ max-width:200px; }
+  /* Contrastar: solo ícono */
   .boton-contraste span:not(.contraste-ico){ display:none; }
+  /* Contenido */
+  .contenido{ padding:16px; }
+  /* Tarjetas: padding reducido */
+  .tarjeta-cabeza{ padding:9px 12px 0; }
+  .tarjeta-cuerpo{ padding:9px 12px 11px; }
+  .tarjeta-pie{ padding:7px 12px; }
+  /* Métricas: más compactas */
+  .metrica{ padding:10px 11px; }
+  .metrica-valor{ font-size:20px; }
+  .metrica-etiqueta{ font-size:9px; }
 }
 
-/* ── CELULAR (hasta 640px) ── */
+/* ── CELULAR (hasta 640px) — Módulo 04 completo ── */
 @media(max-width:640px){
 
-  /* Ocultar elementos de escritorio en barra superior */
+  /* ── Barra superior ── */
   .bs-etiqueta,
   .reloj-vivo,
   .boton-contraste,
   .bs-busqueda{ display:none !important; }
+  .barra-superior{ padding:0 12px; gap:8px; height:48px; }
+  .bs-titulo{ font-size:12.5px; }
+  .boton-campana{ width:36px; height:36px; font-size:16px; }
+  .bs-boton.primario{ padding:6px 10px; font-size:11.5px; }
+  .bs-rol-chip{ display:none; }
 
-  /* Barra superior compacta */
-  .barra-superior{
-    padding:0 12px;
-    gap:8px;
-    height:52px;
-  }
-  .bs-titulo{ font-size:13px; }
+  /* ── Contenido ── */
+  .contenido{ padding:10px 12px; padding-bottom:72px; }
 
-  /* Campana más grande para touch */
-  .boton-campana{ width:40px; height:40px; font-size:18px; }
+  /* ── Módulo cabecera — más compacto ── */
+  .modulo-cabecera{ margin-bottom:12px; }
+  .modulo-cabecera h1{ font-size:15px; font-weight:300; }
+  .modulo-cabecera p{ font-size:11px; margin-top:2px; }
 
-  /* Botón nuevo paciente compacto */
-  .bs-boton.primario{ padding:7px 10px; font-size:12px; }
-
-  /* Contenido con menos padding */
-  .contenido{ padding:12px; }
-
-  /* Métricas: 2 columnas en celular */
+  /* ── Métricas: 2 columnas, más densas ── */
   .metricas{
     grid-template-columns:repeat(2,1fr);
-    gap:8px;
-    margin-bottom:12px;
+    gap:7px;
+    margin-bottom:10px;
   }
-  .metrica{ padding:12px; }
-  .metrica-valor{ font-size:22px; }
+  .metrica{ padding:9px 10px; }
+  .metrica-valor{ font-size:20px; }
+  .metrica-etiqueta{ font-size:9px; margin-bottom:4px; }
+  .metrica-sub{ font-size:10px; margin-top:3px; }
 
-  /* Todas las grillas en 1 columna */
+  /* ── Todas las grillas: 1 columna ── */
   .grilla-2,.grilla-2-1,.grilla-1-2,.grilla-3{
     grid-template-columns:1fr;
-    gap:10px;
+    gap:8px;
+    margin-bottom:8px;
   }
 
-  /* Tarjetas más compactas */
-  .tarjeta-cabeza{ padding:12px 12px 0; flex-wrap:wrap; gap:6px; }
-  .tarjeta-cuerpo{ padding:10px 12px 12px; }
-  .tarjeta-pie{ padding:8px 12px; }
-  .tarjeta-titulo{ font-size:12.5px; }
+  /* ── Tarjetas ── */
+  .tarjeta-cabeza{ padding:9px 12px 0; flex-wrap:wrap; gap:5px; }
+  .tarjeta-cuerpo{ padding:8px 12px 10px; overflow-x:auto; }
+  .tarjeta-pie{ padding:7px 12px; }
+  .tarjeta-titulo{ font-size:12px; }
 
-  /* Tablas: scroll horizontal */
-  .tarjeta-cuerpo{ overflow-x:auto; }
-  .tabla{ font-size:12px; min-width:480px; }
-  .tabla th, .tabla td{ padding:8px 10px; }
-
-  /* Ocultar columnas menos importantes en tablas */
+  /* ── Tablas: scroll horizontal + texto 11px ── */
+  .tabla{ font-size:11px; min-width:440px; }
+  .tabla th{ padding:6px 8px; font-size:9px; }
+  .tabla td{ padding:6px 8px; }
   .tabla .col-ocultar-movil{ display:none; }
 
-  /* Módulo cabecera */
-  .modulo-cabecera h1{ font-size:16px; }
-  .modulo-cabecera p{ font-size:11.5px; }
+  /* ── Formularios: 1 columna ── */
+  .fila-campo.dos,.fila-campo.tres{ grid-template-columns:1fr; gap:8px; }
+  .entrada{ font-size:14px; min-height:40px; }
+  .etiqueta-campo{ font-size:9.5px; }
 
-  /* Formularios */
-  .fila-campo.dos,.fila-campo.tres{ grid-template-columns:1fr; }
-
-  /* Modal a pantalla completa en celular */
+  /* ── Modal: sheet desde abajo ── */
   .fondo-modal{ padding:0; align-items:flex-end; }
   .modal{
-    border-radius:16px 16px 0 0;
-    max-height:92vh;
+    border-radius:12px 12px 0 0;
+    max-height:90vh;
     max-width:100%;
+    /* Añadir padding inferior para evitar que el nav móvil tape el modal-pie */
+    padding-bottom:env(safe-area-inset-bottom, 0);
   }
   .modal.grande{ max-width:100%; }
+  .modal-cabeza{ padding:14px 16px 10px; }
+  .modal-titulo{ font-size:13px; }
+  .modal-cuerpo{ padding:14px 16px; }
+  .modal-pie{ padding:10px 16px; padding-bottom:calc(10px + env(safe-area-inset-bottom, 0)); }
 
-  /* Botones más grandes para touch */
-  .boton{ min-height:44px; font-size:13px; }
-  .boton.chico{ min-height:40px; font-size:12px; padding:6px 12px; }
+  /* ── Botones táctiles ── */
+  .boton{ min-height:42px; font-size:12.5px; }
+  .boton.chico{ min-height:38px; font-size:11.5px; padding:6px 11px; }
 
-  /* Banner UCI más compacto */
-  .banner-critico{ font-size:11px; padding:6px 12px; }
+  /* ── Banner UCI ── */
+  .banner-critico{ font-size:11px; padding:5px 12px; }
   .banner-critico span:last-child{ display:none; }
 
-  /* Tostadas ocupan todo el ancho */
-  .contenedor-tostadas{ left:12px; right:12px; bottom:80px; }
-  .tostada{ min-width:unset; max-width:100%; font-size:12.5px; }
+  /* ── Tostadas ── */
+  .contenedor-tostadas{ left:10px; right:10px; bottom:76px; }
+  .tostada{ min-width:unset; max-width:100%; font-size:12px; }
 
-  /* Panel notificaciones a pantalla completa */
+  /* ── Panel notificaciones ── */
   .panel-notificaciones{ width:100%; right:-100%; }
 
-  /* Panel de atajos adaptado */
-  .atajos-modal{ margin:12px; }
+  /* ── Fila de ítem ── */
+  .fila-item{ padding:7px 0; gap:8px; }
+  .fi-nombre{ font-size:12px; }
+  .fi-sub{ font-size:10.5px; }
 
-  /* Guardia: cabecera compacta */
-  .guardia-cabecera{ padding:14px; gap:10px; }
-  .guardia-ico-grande{ font-size:24px; }
-  .guardia-titulo-bloque{ font-size:15px; }
+  /* ── Pestañas médico ── */
+  .pestanias{ overflow-x:auto; white-space:nowrap; }
+  .pestania{ padding:7px 10px; font-size:11.5px; flex-shrink:0; }
 
-  /* Camas: más columnas chicas */
-  .grilla-camas{ grid-template-columns:repeat(4,1fr); gap:6px; }
-  .cama{ padding:8px 4px; }
-  .cama-num{ font-size:12px; }
+  /* ── Sala de espera ── */
+  .espera-fila{ padding:10px 12px; gap:10px; }
+  .espera-numero{ width:32px; height:32px; font-size:14px; }
+  .espera-nombre{ font-size:13px; }
+
+  /* ── Guardia: cabecera compacta ── */
+  .guardia-cabecera{ padding:12px 14px; gap:10px; border-radius:6px; }
+  .guardia-ico-grande{ font-size:22px; }
+  .guardia-titulo-bloque{ font-size:14px; }
+  .guardia-sub-bloque{ font-size:11px; }
+
+  /* ── Camas: 4 columnas ── */
+  .grilla-camas{ grid-template-columns:repeat(4,1fr); gap:5px; }
+  .cama{ padding:7px 4px; border-radius:4px; }
+  .cama-num{ font-size:11px; }
   .cama-etiqueta{ font-size:8px; }
 
-  /* Config: toggles */
+  /* ── Configuración ── */
   .toggle-fila{ gap:8px; }
+  .fuente-control{ gap:5px; }
+  .fuente-btn{ padding:5px 10px; font-size:11.5px; }
 
-  /* Pestaña médico: scroll horizontal */
-  .pestanias{ overflow-x:auto; gap:0; white-space:nowrap; }
-  .pestania{ padding:8px 10px; font-size:12px; flex-shrink:0; }
+  /* ── Facturación ── */
+  .factura-fila{ padding:10px 12px; gap:8px; flex-wrap:wrap; }
+  .factura-monto{ font-size:13px; }
+  .factura-coseguro{ font-size:10.5px; }
+
+  /* ── Auditoría ── */
+  .aud-fila{ gap:8px; padding:6px 0; }
+  .aud-icono{ width:22px; height:22px; font-size:9px; }
+  .aud-texto{ font-size:11.5px; }
+  .aud-meta{ font-size:9.5px; }
+
+  /* ── Progreso ── */
+  .progreso{ margin-bottom:7px; }
+  .progreso-cabeza{ font-size:10.5px; }
 }
 
 /* ── MENÚ INFERIOR MÓVIL ── */
@@ -1064,9 +864,9 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
   display:none;
   position:fixed;
   bottom:0; left:0; right:0;
-  height:60px;
-  background:var(--superficie);
-  border-top:1px solid var(--borde);
+  height:58px;
+  background:#fff;
+  border-top:1px solid var(--color-borde);
   z-index:150;
 }
 .nav-movil-items{
@@ -1079,60 +879,74 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:3px;
+  gap:2px;
   cursor:pointer;
-  font-size:9.5px;
-  font-weight:600;
-  color:var(--texto-suave);
-  transition:color 0.15s;
+  font-size:9px;
+  font-weight:500;
+  color:var(--color-texto-suave);
+  transition:color 0.12s;
   border:none;
   background:none;
   padding:0;
   min-height:44px;
   position:relative;
+  font-family:var(--fuente);
 }
 .nav-movil-item.activo{ color:var(--color-texto); }
-.nav-movil-item .nm-ico{ font-size:18px; line-height:1; }
-.nav-movil-item .nm-etiqueta{ font-size:9px; letter-spacing:0.02em; }
+.nav-movil-item .nm-ico{
+  font-size:10px;
+  line-height:1;
+  font-family:var(--mono);
+  font-weight:500;
+  letter-spacing:0.04em;
+  background:transparent;
+  padding:4px 7px;
+  border-radius:3px;
+}
+.nav-movil-item.activo .nm-ico{
+  background:var(--color-borde-suave);
+  color:var(--color-texto);
+}
+.nav-movil-item .nm-etiqueta{ font-size:8.5px; letter-spacing:0.01em; }
 .nav-movil-item .nm-badge{
   position:absolute;
-  top:6px; right:calc(50% - 18px);
-  background:var(--rojo);
+  top:5px; right:calc(50% - 20px);
+  background:var(--color-critico);
   color:#fff;
-  font-size:8.5px;
-  font-weight:700;
-  min-width:14px;
-  height:14px;
-  border-radius:99px;
+  font-size:8px;
+  font-weight:600;
+  min-width:13px;
+  height:13px;
+  border-radius:2px;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:0 3px;
-  border:1.5px solid var(--superficie);
+  padding:0 2px;
+  border:1.5px solid #fff;
   font-family:var(--mono);
 }
 
 /* Botón menú completo en nav móvil */
 .nav-movil-mas{
   position:fixed;
-  bottom:70px;
+  bottom:68px;
   right:14px;
-  width:48px;
-  height:48px;
-  border-radius:50%;
+  width:44px;
+  height:44px;
+  border-radius:4px;
   background:#1A1A16;
   color:#fff;
-  font-size:22px;
+  font-size:11px;
   display:none;
   align-items:center;
   justify-content:center;
-  box-shadow:0 4px 14px rgba(0,0,0,0.3);
   border:none;
   cursor:pointer;
   z-index:151;
-  transition:transform 0.2s, background 0.15s;
+  font-family:var(--mono);
+  font-weight:500;
+  letter-spacing:0.06em;
 }
-.nav-movil-mas:hover{ background:#333330; transform:scale(1.05); }
 
 /* Cajón menú completo en móvil */
 .cajon-menu{
@@ -1144,57 +958,71 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 .cajon-fondo{
   position:absolute;
   inset:0;
-  background:rgba(15,45,82,0.4);
+  background:rgba(26,26,22,0.45);
 }
 .cajon-contenido{
   position:absolute;
   bottom:0; left:0; right:0;
-  background:var(--superficie);
-  border-radius:16px 16px 0 0;
-  padding:16px;
-  max-height:75vh;
+  background:#fff;
+  border-radius:10px 10px 0 0;
+  padding:14px;
+  max-height:72vh;
   overflow-y:auto;
-  animation:aparecerPagina 0.2s ease both;
+  animation:aparecerPagina 0.18s ease both;
+  z-index:1;
 }
 .cajon-titulo{
-  font-size:13px;
-  font-weight:700;
-  color:var(--texto-suave);
-  letter-spacing:0.06em;
+  font-size:9px;
+  font-weight:500;
+  color:var(--color-texto-suave);
+  letter-spacing:0.1em;
   text-transform:uppercase;
   margin-bottom:10px;
-  padding-bottom:8px;
-  border-bottom:1px solid var(--borde-claro);
+  padding-bottom:7px;
+  border-bottom:1px solid var(--color-borde-suave);
+  font-family:var(--mono);
 }
 .cajon-grilla{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:8px;
+  gap:7px;
 }
 .cajon-item{
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:5px;
-  padding:12px 6px;
-  border-radius:4px;
-  background:var(--fondo);
+  padding:11px 6px;
+  border-radius:5px;
+  background:var(--color-fondo);
   cursor:pointer;
-  border:1px solid var(--borde-claro);
-  font-size:11px;
+  border:1px solid var(--color-borde-suave);
+  font-size:10.5px;
   font-weight:500;
-  color:var(--texto-medio);
+  color:var(--color-texto-medio);
   text-align:center;
-  transition:background 0.15s;
+  transition:background 0.12s;
   min-height:44px;
+  font-family:var(--fuente);
 }
-.cajon-item:hover, .cajon-item.activo{ background:#EDEAE4; color:var(--color-texto); }
-.cajon-item .ci-ico{ font-size:20px; }
+.cajon-item:hover,.cajon-item.activo{
+  background:var(--color-borde-suave);
+  color:var(--color-texto);
+}
+.cajon-item .ci-ico{
+  font-size:10px;
+  font-family:var(--mono);
+  font-weight:500;
+  background:var(--color-borde);
+  padding:3px 6px;
+  border-radius:3px;
+  letter-spacing:0.04em;
+}
 
 @media(max-width:640px){
   .nav-movil{ display:block; }
   .nav-movil-mas{ display:flex; }
-  .contenido{ padding-bottom:72px; }
+  .cajon-contenido{ padding-bottom:calc(14px + 58px); }
 }
 
 /* ═══════════════════════════════════════════
@@ -1375,6 +1203,11 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 .login-demo-linea b { color:#4A4A44; font-weight:500; display:block; margin-bottom:6px; letter-spacing:0.06em; text-transform:uppercase; font-size:9.5px; }
 .login-demo-link {
   color:#4A4A44; cursor:pointer; text-decoration:underline; text-underline-offset:2px;
+  display:inline-block; padding:6px 3px; margin:0 1px;
+  background:none; border:none; font-family:'IBM Plex Mono',monospace;
+  font-size:inherit; -webkit-tap-highlight-color:rgba(0,0,0,0.1);
+  touch-action:manipulation; min-height:40px; vertical-align:middle;
+  line-height:40px;
 }
 .login-demo-link:hover { color:#111827; }
 
@@ -1410,7 +1243,414 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
   .login-col-izq{ display:none; }
   .login-col-der{ padding:32px 20px; }
 }
+
+/* ═══════════════════════════════════════════
+   MÓDULO 09 — TOUR DE BIENVENIDA
+═══════════════════════════════════════════ */
+#tour-overlay{
+  display:none;position:fixed;inset:0;z-index:9000;pointer-events:none;
+}
+#tour-overlay.activo{ display:block; }
+
+/* Capa oscura con hueco (spotlight via clip-path o box-shadow) */
+#tour-fondo{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0.62);
+  transition:all 0.28s cubic-bezier(0.4,0,0.2,1);
+  pointer-events:all;
+}
+
+/* Anillo spotlight */
+#tour-spotlight{
+  position:absolute;
+  border-radius:6px;
+  box-shadow:0 0 0 9999px rgba(0,0,0,0.62);
+  transition:all 0.28s cubic-bezier(0.4,0,0.2,1);
+  pointer-events:none;
+  z-index:9001;
+}
+
+/* Tooltip del tour */
+#tour-tooltip{
+  position:absolute;
+  width:300px;
+  background:#fff;
+  border-radius:8px;
+  padding:18px 20px 14px;
+  box-shadow:0 16px 48px rgba(0,0,0,0.28);
+  z-index:9002;
+  pointer-events:all;
+  transition:all 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+.tour-progreso{
+  font-size:9.5px;font-weight:500;color:var(--color-texto-suave);
+  letter-spacing:0.1em;text-transform:uppercase;font-family:var(--mono);
+  margin-bottom:10px;display:flex;align-items:center;gap:8px;
+}
+.tour-barra{flex:1;height:3px;background:#F0EDE6;border-radius:2px;overflow:hidden;}
+.tour-barra-fill{height:100%;background:#1A1A16;border-radius:2px;transition:width 0.3s ease;}
+.tour-titulo{font-size:14.5px;font-weight:600;color:var(--color-texto);margin-bottom:6px;line-height:1.3;}
+.tour-desc{font-size:12px;color:var(--color-texto-medio);line-height:1.65;margin-bottom:14px;}
+.tour-acciones{display:flex;align-items:center;gap:6px;}
+.tour-btn-ant{
+  padding:6px 12px;border-radius:4px;border:1px solid var(--color-borde);
+  background:#fff;font-size:11.5px;color:var(--color-texto-medio);cursor:pointer;
+  font-family:var(--fuente);transition:background 0.12s;
+}
+.tour-btn-ant:hover{background:var(--color-fondo);}
+.tour-btn-sig{
+  padding:6px 14px;border-radius:4px;border:none;
+  background:#1A1A16;color:#fff;font-size:11.5px;font-weight:500;cursor:pointer;
+  font-family:var(--fuente);transition:opacity 0.12s;
+}
+.tour-btn-sig:hover{opacity:0.85;}
+.tour-btn-skip{
+  margin-left:auto;padding:6px 10px;border-radius:4px;border:none;
+  background:transparent;font-size:11px;color:var(--color-texto-suave);cursor:pointer;
+  font-family:var(--fuente);transition:color 0.12s;
+}
+.tour-btn-skip:hover{color:var(--color-texto);}
+
+/* Pantalla final del tour */
+#tour-final{
+  display:none;position:fixed;inset:0;z-index:9100;
+  background:rgba(0,0,0,0.72);align-items:center;justify-content:center;
+  pointer-events:all;
+}
+#tour-final.activo{ display:flex; }
+.tour-final-card{
+  background:#fff;border-radius:12px;padding:36px 36px 28px;
+  max-width:420px;width:90%;text-align:center;
+  box-shadow:0 24px 64px rgba(0,0,0,0.28);
+  animation:aparecerPagina 0.3s ease both;
+}
+.tour-final-ico{font-size:36px;margin-bottom:14px;}
+.tour-final-titulo{font-size:20px;font-weight:600;color:var(--color-texto);margin-bottom:8px;}
+.tour-final-desc{font-size:13px;color:var(--color-texto-medio);line-height:1.65;margin-bottom:22px;}
+.tour-final-accesos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:22px;}
+.tour-final-acc{
+  padding:10px 12px;border-radius:5px;border:1px solid var(--color-borde);
+  background:var(--color-fondo);font-size:11.5px;color:var(--color-texto-medio);
+  cursor:pointer;text-align:left;font-family:var(--fuente);transition:background 0.12s;
+}
+.tour-final-acc:hover{background:#EDEAE4;}
+.tour-final-acc b{display:block;font-size:12px;color:var(--color-texto);font-weight:500;margin-bottom:2px;}
+.tour-final-cerrar{
+  width:100%;padding:11px;border-radius:5px;border:none;
+  background:#1A1A16;color:#fff;font-size:13px;font-weight:500;cursor:pointer;
+  font-family:var(--fuente);transition:opacity 0.12s;
+}
+.tour-final-cerrar:hover{opacity:0.85;}
+
+/* Botón ? en barra superior */
+.boton-tour{
+  display:flex;align-items:center;gap:5px;
+  padding:5px 10px;border-radius:4px;border:1px solid var(--color-borde);
+  background:#fff;font-size:11px;font-weight:500;color:var(--color-texto-medio);
+  cursor:pointer;font-family:var(--mono);transition:background 0.12s;flex-shrink:0;
+}
+.boton-tour:hover{background:var(--color-fondo);}
+
+/* ═══════════════════════════════════════════
+   MÓDULO 10 — MICRO-UX: SKELETON, VACÍOS, PAGINACIÓN
+═══════════════════════════════════════════ */
+
+/* ── Skeleton shimmer ── */
+@keyframes shimmer {
+  0%   { background-position: -700px 0; }
+  100% { background-position:  700px 0; }
+}
+.skeleton-wrap {
+  padding: 10px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sk-linea {
+  height: 12px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #EDEAE4 25%, #F5F3EF 50%, #EDEAE4 75%);
+  background-size: 700px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+.sk-linea.ancha  { width: 80%; }
+.sk-linea.media  { width: 55%; }
+.sk-linea.corta  { width: 35%; }
+.sk-linea.tall   { height: 20px; }
+.sk-bloque {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-borde-suave);
+}
+.sk-circulo {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #EDEAE4 25%, #F5F3EF 50%, #EDEAE4 75%);
+  background-size: 700px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+.sk-grupo { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+
+/* ── Estado vacío ── */
+.estado-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 20px;
+  text-align: center;
+  gap: 10px;
+}
+.vacio-ilustracion { margin-bottom: 6px; }
+.vacio-titulo {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-texto-medio);
+  font-family: var(--fuente);
+}
+.vacio-sub {
+  font-size: 11.5px;
+  color: var(--color-texto-suave);
+  max-width: 240px;
+  line-height: 1.55;
+}
+.vacio-accion {
+  margin-top: 6px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--color-borde);
+  background: var(--color-tarjeta);
+  font-size: 11.5px;
+  color: var(--color-texto-medio);
+  cursor: pointer;
+  transition: background 0.12s;
+  font-family: var(--fuente);
+}
+.vacio-accion:hover { background: var(--color-fondo); }
+
+/* ── Modal confirmación destructiva ── */
+#modal-confirmar-destructivo .modal { max-width: 400px; }
+.destr-zona {
+  background: #FFF5F5;
+  border: 1px solid #FEB2B2;
+  border-radius: 5px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+.destr-aviso {
+  font-size: 13px;
+  color: var(--color-critico);
+  font-weight: 500;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.destr-sub {
+  font-size: 11.5px;
+  color: var(--color-critico);
+  opacity: 0.75;
+  margin-bottom: 14px;
+}
+.destr-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-texto-suave);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-family: var(--mono);
+  margin-bottom: 6px;
+  display: block;
+}
+.destr-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1.5px solid #FEB2B2;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--color-texto);
+  background: #fff;
+  outline: none;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  transition: border-color 0.14s;
+}
+.destr-input:focus { border-color: var(--color-critico); }
+#destr-btn-confirmar {
+  transition: opacity 0.15s;
+}
+#destr-btn-confirmar:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Indicador de guardado inline ── */
+.guardado-indicador {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--color-ok);
+  font-family: var(--mono);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.guardado-indicador.visible {
+  opacity: 1;
+}
+
+/* ── Paginación ── */
+.paginacion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-top: 1px solid var(--color-borde-suave);
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.pag-info {
+  font-size: 11px;
+  color: var(--color-texto-suave);
+  font-family: var(--mono);
+}
+.pag-controles {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pag-btn {
+  padding: 4px 10px;
+  border-radius: 3px;
+  border: 1px solid var(--color-borde);
+  background: var(--color-tarjeta);
+  font-size: 11px;
+  color: var(--color-texto-medio);
+  cursor: pointer;
+  transition: background 0.12s;
+  font-family: var(--fuente);
+  min-height: 28px;
+}
+.pag-btn:hover:not(:disabled) { background: var(--color-fondo); }
+.pag-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.pag-num {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--color-texto-medio);
+  padding: 0 8px;
+}
+
+/* ═══════════════════════════════════════════
+   MÓDULO 11 — PWA: BANNER DE INSTALACIÓN + OFFLINE
+═══════════════════════════════════════════ */
+
+/* Banner de instalación — desliza desde abajo */
+#pwa-banner {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #fff;
+  border-top: 1px solid var(--color-borde);
+  padding: 14px 18px;
+  z-index: 900;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.10);
+  animation: subirBanner 0.3s cubic-bezier(0.4,0,0.2,1) both;
+}
+@keyframes subirBanner {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+#pwa-banner.visible { display: flex; }
+.pwa-banner-ico {
+  width: 42px; height: 42px;
+  background: #0F2D52;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-size: 11px; font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.pwa-banner-texto { flex: 1; }
+.pwa-banner-titulo {
+  font-size: 13px; font-weight: 500;
+  color: var(--color-texto); line-height: 1.3;
+}
+.pwa-banner-sub {
+  font-size: 11px; color: var(--color-texto-suave);
+  margin-top: 2px;
+}
+.pwa-banner-acciones { display: flex; gap: 8px; flex-shrink: 0; }
+.pwa-btn-instalar {
+  padding: 7px 14px;
+  background: #0F2D52; color: #fff;
+  border: none; border-radius: 4px;
+  font-size: 12px; font-weight: 500;
+  cursor: pointer; font-family: var(--fuente);
+  transition: opacity 0.12s;
+  min-height: 34px;
+}
+.pwa-btn-instalar:hover { opacity: 0.88; }
+.pwa-btn-no {
+  padding: 7px 12px;
+  background: transparent; color: var(--color-texto-suave);
+  border: 1px solid var(--color-borde);
+  border-radius: 4px;
+  font-size: 12px; cursor: pointer;
+  font-family: var(--fuente);
+  transition: background 0.12s;
+  min-height: 34px;
+}
+.pwa-btn-no:hover { background: var(--color-fondo); }
+
+/* Indicador offline */
+#pwa-offline-bar {
+  display: none;
+  position: fixed;
+  top: var(--alto-superior);
+  left: 0; right: 0;
+  background: #2D3748;
+  color: #fff;
+  font-size: 11.5px;
+  font-family: var(--mono);
+  padding: 6px 14px;
+  z-index: 200;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.03em;
+}
+#pwa-offline-bar.visible { display: flex; }
+.offline-punto {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #F6AD55;
+  flex-shrink: 0;
+}
+
+/* En móvil: ajustar banner sobre nav inferior */
+@media(max-width:640px){
+  #pwa-banner { padding-bottom: calc(14px + 58px); }
+}
 </style>
+<script>
+// Login vars — definidas temprano para que onclick inline funcione siempre
+var _loginReady = false;
+var _loginQueue = [];
+function loginDemo(email, pass) {
+  if (_loginReady) {
+    var u = USUARIOS_DEMO[email];
+    if (u && u.pass === pass) entrarAlSistema(email, u);
+  } else {
+    _loginQueue.push([email, pass]);
+  }
+}
+</script>
 </head>
 <body>
 
@@ -1473,10 +1713,10 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
       <!-- Usuarios demo como texto plano -->
       <div class="login-demo-linea">
         <b>Acceso rápido — demo</b>
-        <span class="login-demo-link" onclick="loginDemo('admin@medigest.ar','admin123')">Admin</span>
-        · <span class="login-demo-link" onclick="loginDemo('romero@medigest.ar','medico123')">Dra. Romero</span>
-        · <span class="login-demo-link" onclick="loginDemo('perez.enf@medigest.ar','enf123')">Enf. Pérez</span>
-        · <span class="login-demo-link" onclick="loginDemo('diaz.recep@medigest.ar','recep123')">Recep. Díaz</span>
+        <button type="button" class="login-demo-link" onclick="loginDemo('admin@medigest.ar','admin123')">Admin</button>
+        · <button type="button" class="login-demo-link" onclick="loginDemo('romero@medigest.ar','medico123')">Dra. Romero</button>
+        · <button type="button" class="login-demo-link" onclick="loginDemo('perez.enf@medigest.ar','enf123')">Enf. Pérez</button>
+        · <button type="button" class="login-demo-link" onclick="loginDemo('diaz.recep@medigest.ar','recep123')">Recep. Díaz</button>
       </div>
 
     </div>
@@ -1545,11 +1785,6 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 
     <button class="boton-campana" onclick="alternarPanelNotif()" title="Notificaciones" data-atajo="Alt + N"><span class="icono">NT</span><span class="campana-contador" id="contador-campana">5</span></button>
 
-    <!-- Modo oscuro -->
-    <button class="boton-modo-oscuro" onclick="alternarModoOscuro()" id="boton-oscuro" title="Modo oscuro (Alt+D)">
-      <span class="mo-ico" id="mo-ico">☀</span>Oscuro
-    </button>
-
     <!-- Módulo 05: Alto contraste -->
     <button class="boton-contraste" onclick="alternarAltoContraste()" id="boton-contraste" data-atajo="Alt + C" title="Modo alto contraste">
       <span class="contraste-ico">◑</span>Contraste
@@ -1573,6 +1808,9 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 
     <!-- Cerrar sesión — módulo 01 -->
     <button class="bs-cerrar-sesion" onclick="cerrarSesion()" title="Cerrar sesión">⏻</button>
+
+    <!-- Módulo 09: Botón tour -->
+    <button class="boton-tour" onclick="iniciarTour()" title="Iniciar tour de bienvenida">? Tour</button>
   </div>
 
   <div class="contenido">
@@ -1627,9 +1865,11 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
           </div>
         </div>
         <div class="tarjeta">
-          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Consultas esta semana</span></div>
-          <div class="tarjeta-cuerpo" style="height:130px;position:relative;">
-            <canvas id="grafico-tablero-mini"></canvas>
+          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Estadísticas semana</span></div>
+          <div class="tarjeta-cuerpo">
+            <div class="progreso"><div class="progreso-cabeza"><span>Asistencia turnos</span><span>87%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:87%;background:var(--verde)"></div></div></div>
+            <div class="progreso"><div class="progreso-cabeza"><span>Espera &lt;15 min</span><span>72%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:72%;background:var(--verde-mar)"></div></div></div>
+            <div class="progreso"><div class="progreso-cabeza"><span>Lab. en plazo</span><span>94%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:94%;background:var(--verde-mar)"></div></div></div>
           </div>
         </div>
       </div>
@@ -1665,103 +1905,41 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 
     <!-- ═══ TURNOS ═══ -->
     <div class="modulo" id="modulo-turnos">
-      <div class="modulo-cabecera"><h1>Agenda de Turnos</h1><p>Vista semanal — hacé clic en una celda vacía para asignar un turno</p></div>
-
-      <div style="display:grid;grid-template-columns:1fr 280px;gap:14px;align-items:start;">
-
-        <!-- AGENDA PRINCIPAL -->
-        <div class="tarjeta" style="padding:0;overflow:hidden;">
-          <div class="agenda-controles">
-            <button class="agenda-nav-btn" onclick="agendaNavegar(-1)">← Semana ant.</button>
-            <span class="agenda-semana-label" id="agenda-semana-label">28 abr – 03 may 2026</span>
-            <button class="agenda-nav-btn" onclick="agendaNavegar(1)">Sig. semana →</button>
-            <select class="agenda-medico-sel" id="agenda-medico-sel" onchange="agendaRenderizar()">
-              <option value="todos">Todos los médicos</option>
-              <option value="suarez">Dr. Suárez</option>
-              <option value="romero">Dra. Romero</option>
-              <option value="vega">Dr. Vega</option>
-            </select>
-          </div>
-          <div class="agenda-grid-wrap" id="agenda-grid-wrap">
-            <div class="agenda-grid" id="agenda-grid"></div>
-          </div>
-        </div>
-
-        <!-- PANEL LATERAL -->
-        <div style="display:flex;flex-direction:column;gap:14px;">
-          <div class="tarjeta">
-            <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Leyenda de especialidades</span></div>
-            <div class="tarjeta-cuerpo" style="display:flex;flex-direction:column;gap:6px;">
-              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:12px;height:12px;border-radius:2px;background:#E8F4FD;border-left:3px solid #2B6CB0;flex-shrink:0;"></span>Clínica Médica</div>
-              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:12px;height:12px;border-radius:2px;background:var(--ambar-claro);border-left:3px solid var(--ambar);flex-shrink:0;"></span>Cardiología</div>
-              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:12px;height:12px;border-radius:2px;background:var(--verde-claro);border-left:3px solid var(--verde);flex-shrink:0;"></span>Pediatría</div>
-              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:12px;height:12px;border-radius:2px;background:#F3F0FF;border-left:3px solid #7C3AED;flex-shrink:0;"></span>Traumatología</div>
-              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:12px;height:12px;border-radius:2px;background:#FFF0F3;border-left:3px solid #E05A7A;flex-shrink:0;"></span>Neurología</div>
+      <div class="modulo-cabecera"><h1>Gestión de Turnos</h1><p>Agenda diaria y programación de citas médicas</p></div>
+      <div class="grilla-2-1">
+        <div class="tarjeta">
+          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Agenda · Miércoles 22 abr</span>
+            <div style="display:flex;gap:6px;">
+              <button class="boton chico">◁ Ant.</button>
+              <button class="boton chico">Sig. ▷</button>
+              <button class="boton chico primario" onclick="abrirModal('modal-nuevo-turno')">＋ Nuevo turno</button>
             </div>
           </div>
-          <div class="tarjeta">
-            <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Recordatorios</span></div>
-            <div class="tarjeta-cuerpo">
-              <div class="aviso info" style="margin-bottom:10px;">WhatsApp/SMS enviado 24h y 2h antes de cada turno.</div>
-              <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Ferreyra, Ana</div><div class="fi-sub">WhatsApp · hace 2h</div></div><span class="etiqueta etiqueta-verde">Entregado</span></div>
-              <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Martínez, R.</div><div class="fi-sub">SMS · hace 45 min</div></div><span class="etiqueta etiqueta-verde">Entregado</span></div>
-              <div class="fila-item"><div class="punto ambar"></div><div class="fi-info"><div class="fi-nombre">Sosa, Patricia</div><div class="fi-sub">Sin respuesta · canceló</div></div><span class="etiqueta etiqueta-rojo">Canceló</span></div>
+          <div class="tarjeta-cuerpo">
+            <table class="tabla clicable">
+              <thead><tr><th>Hora</th><th>Paciente</th><th>Especialidad</th><th>Médico</th><th>Cobertura</th><th>Estado</th><th></th></tr></thead>
+              <tbody id="turnos-tbody"></tbody>
+            </table>
+          </div>
+          <div class="paginacion" id="turnos-paginacion">
+            <span class="pag-info" id="turnos-pag-info"></span>
+            <div class="pag-controles">
+              <button class="pag-btn" id="turnos-btn-ant" onclick="cambiarPaginaTurnos(-1)">← Anterior</button>
+              <span class="pag-num" id="turnos-pag-num"></span>
+              <button class="pag-btn" id="turnos-btn-sig" onclick="cambiarPaginaTurnos(1)">Siguiente →</button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- ═══ ASISTENTE IA CLÍNICO — PANEL LATERAL ═══ -->
-    <div class="ia-panel" id="ia-panel">
-      <div class="ia-cabeza">
-        <div class="ia-logo">✦</div>
-        <div class="ia-cabeza-info">
-          <div class="ia-cabeza-titulo">Asistente clínico IA</div>
-          <div class="ia-cabeza-sub">Contexto: López, Carlos · Consulta activa</div>
-        </div>
-        <button class="ia-cerrar" onclick="cerrarPanelIA()">✕</button>
-      </div>
-      <div class="ia-contexto">
-        <div class="ia-contexto-titulo">Contexto del paciente</div>
-        Dx: HTA grado I + Dislipemia · Medicación: Enalapril 10mg, Atorvastatina 20mg, AAS 100mg · <span style="color:var(--rojo);">Alergia: Penicilina</span> · TA 148/92 · FC 88 · SpO2 97%
-      </div>
-      <div class="ia-mensajes" id="ia-mensajes">
-        <div class="ia-burbuja asistente">
-          Hola, soy una herramienta de apoyo clínico. La decisión diagnóstica y terapéutica es exclusiva del médico tratante.<br><br>
-          Tengo cargado el contexto de <b>López, Carlos</b>. ¿En qué te puedo ayudar?
-          <div class="ia-burbuja-meta">
-            <span>Asistente IA</span>
+        <div class="tarjeta">
+          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Recordatorios automáticos</span></div>
+          <div class="tarjeta-cuerpo">
+            <div class="aviso info" style="margin-bottom:12px;">WhatsApp/SMS enviado automáticamente 24h y 2h antes de cada turno.</div>
+            <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Ferreyra, Ana</div><div class="fi-sub">WhatsApp enviado · hace 2h</div></div><span class="etiqueta etiqueta-verde">Entregado</span></div>
+            <div class="fila-item"><div class="punto verde"></div><div class="fi-info"><div class="fi-nombre">Martínez, R.</div><div class="fi-sub">SMS enviado · hace 45 min</div></div><span class="etiqueta etiqueta-verde">Entregado</span></div>
+            <div class="fila-item"><div class="punto ambar"></div><div class="fi-info"><div class="fi-nombre">Sosa, Patricia</div><div class="fi-sub">Sin respuesta · canceló</div></div><span class="etiqueta etiqueta-rojo">Canceló</span></div>
+            <div class="fila-item"><div class="punto azul"></div><div class="fi-info"><div class="fi-nombre">Rodríguez, M. (lista espera)</div><div class="fi-sub">Notificado por vacante de Sosa</div></div><span class="etiqueta etiqueta-azul">Esperando</span></div>
           </div>
         </div>
-      </div>
-      <div class="ia-cargando" id="ia-cargando">
-        <div class="ia-puntos"><span></span><span></span><span></span></div>
-      </div>
-      <div class="ia-input-area">
-        <div class="ia-sugerencias">
-          <button class="ia-sugerencia" onclick="iaEnviarSugerencia(this)">Interacciones Enalapril + Atorvastatina</button>
-          <button class="ia-sugerencia" onclick="iaEnviarSugerencia(this)">Dosis Amoxicilina adulto 78kg</button>
-          <button class="ia-sugerencia" onclick="iaEnviarSugerencia(this)">Resumen clínico para derivación</button>
-          <button class="ia-sugerencia" onclick="iaEnviarSugerencia(this)">¿Qué estudios solicitar para dolor precordial?</button>
-        </div>
-        <div class="ia-input-fila">
-          <textarea class="ia-input" id="ia-input" placeholder="Preguntá al asistente clínico…" rows="1"
-            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();iaEnviar();}"></textarea>
-          <button class="ia-enviar" id="ia-enviar" onclick="iaEnviar()">Enviar</button>
-        </div>
-      </div>
-      <div class="ia-disclaimer">Herramienta de apoyo · No reemplaza el criterio médico · Basado en Claude (Anthropic)</div>
-    </div>
-
-    <!-- Popover turno -->
-    <div class="ag-popover" id="ag-popover">
-      <div class="ag-pop-nombre" id="ag-pop-nombre"></div>
-      <div class="ag-pop-meta" id="ag-pop-meta"></div>
-      <div class="ag-pop-acciones">
-        <button class="boton chico primario" onclick="cerrarPopoverAgenda();abrirModal('modal-detalle-paciente')">Ver historia</button>
-        <button class="boton chico" onclick="cerrarPopoverAgenda();mostrarTostada('Turno cancelado','alerta')">Cancelar turno</button>
-        <button class="boton chico" onclick="cerrarPopoverAgenda()">✕</button>
       </div>
     </div>
 
@@ -1774,13 +1952,30 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
           <div class="tarjeta-cuerpo">
             <table class="tabla clicable">
               <thead><tr><th>Paciente</th><th>DNI</th><th>Cobertura</th><th>Última visita</th><th>Estado</th><th></th></tr></thead>
-              <tbody>
-                <tr onclick="abrirModal('modal-detalle-paciente')"><td><div class="fila-av"><div class="av">GM</div><span class="td-nombre">García, Marta</span></div></td><td style="font-family:var(--mono);font-size:11.5px;">22.113.440</td><td>OSDE 210</td><td>Hoy</td><td><span class="etiqueta etiqueta-verde">Activo</span></td><td><button class="boton chico" onclick="event.stopPropagation();abrirModal('modal-detalle-paciente')">Historia</button></td></tr>
-                <tr onclick="abrirModal('modal-detalle-paciente')"><td><div class="fila-av"><div class="av verde-mar">LC</div><span class="td-nombre">López, Carlos</span></div></td><td style="font-family:var(--mono);font-size:11.5px;">28.541.902</td><td>Swiss Med.</td><td>Hoy</td><td><span class="etiqueta etiqueta-verde">Activo</span></td><td><button class="boton chico" onclick="event.stopPropagation();abrirModal('modal-detalle-paciente')">Historia</button></td></tr>
-                <tr onclick="abrirModal('modal-detalle-paciente')"><td><div class="fila-av"><div class="av ambar">FA</div><span class="td-nombre">Ferreyra, Ana</span></div></td><td style="font-family:var(--mono);font-size:11.5px;">35.780.211</td><td>Galeno</td><td>15/04</td><td><span class="etiqueta etiqueta-verde">Activo</span></td><td><button class="boton chico" onclick="event.stopPropagation();abrirModal('modal-detalle-paciente')">Historia</button></td></tr>
-                <tr onclick="abrirModal('modal-detalle-paciente')"><td><div class="fila-av"><div class="av oscuro">SP</div><span class="td-nombre">Sosa, Patricia</span></div></td><td style="font-family:var(--mono);font-size:11.5px;">30.445.881</td><td>Particular</td><td>10/03</td><td><span class="etiqueta etiqueta-ambar">Seguimiento</span></td><td><button class="boton chico" onclick="event.stopPropagation();abrirModal('modal-detalle-paciente')">Historia</button></td></tr>
-              </tbody>
+              <tbody id="pacientes-tbody"></tbody>
             </table>
+            <div id="pacientes-vacio" style="display:none;">
+              <div class="estado-vacio">
+                <div class="vacio-ilustracion">
+                  <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="56" height="56" rx="12" fill="#F5F4F0"/>
+                    <circle cx="28" cy="22" r="8" stroke="#C8C5BE" stroke-width="1.5" fill="none"/>
+                    <path d="M14 42c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#C8C5BE" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                  </svg>
+                </div>
+                <div class="vacio-titulo">No hay pacientes registrados</div>
+                <div class="vacio-sub">Registrá el primer paciente usando el botón "Nuevo" o buscá por nombre o DNI.</div>
+                <button class="vacio-accion" onclick="abrirModal('modal-nuevo-paciente')">＋ Registrar primer paciente</button>
+              </div>
+            </div>
+          </div>
+          <div class="paginacion" id="pacientes-paginacion">
+            <span class="pag-info" id="pacientes-pag-info"></span>
+            <div class="pag-controles">
+              <button class="pag-btn" id="pacientes-btn-ant" onclick="cambiarPaginaPacientes(-1)">← Anterior</button>
+              <span class="pag-num" id="pacientes-pag-num"></span>
+              <button class="pag-btn" id="pacientes-btn-sig" onclick="cambiarPaginaPacientes(1)">Siguiente →</button>
+            </div>
           </div>
         </div>
         <div class="tarjeta">
@@ -1799,12 +1994,9 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
       <div class="modulo-cabecera"><h1>Panel Médico</h1><p>Consulta activa, evolución clínica y prescripción digital</p></div>
       <div class="grilla-2-1">
         <div>
-          <div class="tarjeta" style="margin-bottom:14px;position:relative;">
+          <div class="tarjeta" style="margin-bottom:14px;">
             <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Consulta activa · López, Carlos</span>
               <div style="display:flex;gap:6px;">
-                <button class="ia-boton-flotante" id="ia-boton-flotante" onclick="togglePanelIA()" style="position:static;bottom:auto;right:auto;transform:none;">
-                  <span class="ia-estrella">✦</span> Asistente IA
-                </button>
                 <button class="boton chico exito" onclick="mostrarTostada('Consulta finalizada y guardada en el historial','exito')">Finalizar consulta</button>
                 <button class="boton chico peligro">Derivar</button>
               </div>
@@ -1827,7 +2019,7 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
                   <div class="grupo-campo"><label class="etiqueta-campo">SpO2</label><input class="entrada" value="97%"></div>
                 </div>
                 <div class="grupo-campo"><label class="etiqueta-campo">Evolución / notas</label><textarea class="entrada" rows="3">Paciente masculino 45 años, refiere episodios de dolor precordial leve con esfuerzo. Sin fiebre. Solicito ECG y laboratorio cardíaco urgente.</textarea></div>
-                <div style="display:flex;gap:8px;margin-top:10px;"><button class="boton primario" onclick="mostrarTostada('Evolución guardada en historia clínica','exito')">Guardar evolución</button><button class="boton">Solicitar estudio</button></div>
+                <div style="display:flex;gap:8px;margin-top:10px;align-items:center;"><button class="boton primario" onclick="guardarEvolucion(this)">Guardar evolución</button><span class="guardado-indicador" id="guardado-evolucion">✓ Guardado</span><button class="boton">Solicitar estudio</button></div>
               </div>
               <div class="panel-pestania" id="med-antecedentes">
                 <div class="fila-campo dos">
@@ -1888,119 +2080,42 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 
     <!-- ═══ INTERNACIÓN — con tooltip en camas (módulo 02) ═══ -->
     <div class="modulo" id="modulo-internacion">
-      <div class="modulo-cabecera"><h1>Internación y Camas</h1><p>Estado en tiempo real · Clic en una cama ocupada para ver al paciente</p></div>
-
-      <!-- Métricas de resumen -->
+      <div class="modulo-cabecera"><h1>Internación y Camas</h1><p>Estado en tiempo real · Hacé clic en una cama ocupada para ver al paciente</p></div>
       <div class="grilla-3" style="margin-bottom:14px;">
         <div class="metrica"><div class="metrica-etiqueta">Camas totales</div><div class="metrica-valor" data-final="58">0</div><div class="metrica-sub neutro">4 sectores</div></div>
         <div class="metrica"><div class="metrica-etiqueta">Ocupadas</div><div class="metrica-valor" data-final="38">0</div><div class="metrica-sub alerta">65%</div></div>
         <div class="metrica"><div class="metrica-etiqueta">Disponibles</div><div class="metrica-valor" data-final="14">0</div><div class="metrica-sub arriba">Para admisión</div></div>
       </div>
-
-      <!-- Pestañas de vista -->
-      <div class="pestanias" style="margin-bottom:14px;">
-        <div class="pestania activa" onclick="cambiarPestania('int','mapa-camas',this)">Mapa de camas</div>
-        <div class="pestania" onclick="cambiarPestania('int','mapa-riesgo',this)">Mapa de riesgo</div>
-      </div>
-
-      <!-- VISTA 1: MAPA DE CAMAS -->
-      <div class="panel-pestania activo" id="int-mapa-camas">
-        <div class="grilla-2">
-          <div class="tarjeta">
-            <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Clínica Médica · Piso 2</span>
-              <div style="display:flex;gap:4px;flex-wrap:wrap;">
-                <span class="etiqueta etiqueta-verde">● Libre</span>
-                <span class="etiqueta etiqueta-azul">● Ocupada</span>
-                <span class="etiqueta etiqueta-ambar">● Limpieza</span>
-                <span class="etiqueta etiqueta-rojo">● Reservada</span>
-              </div>
-            </div>
-            <div class="tarjeta-cuerpo"><div class="grilla-camas" id="grillaCamas"></div></div>
-          </div>
-          <div class="tarjeta">
-            <div class="tarjeta-cabeza"><span class="tarjeta-titulo">UCI · Piso 4</span><span class="etiqueta etiqueta-rojo">Capacidad máxima</span></div>
-            <div class="tarjeta-cuerpo">
-              <div class="grilla-camas" style="grid-template-columns:repeat(4,1fr);">
-                <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 401 — Pérez, Miguel · IAM · Crit.','error')"><div class="cama-num">401</div><div class="cama-etiqueta">Ocupada</div></div>
-                <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 402 — Ríos, Valentina · ACV · Estable','alerta')"><div class="cama-num">402</div><div class="cama-etiqueta">Ocupada</div></div>
-                <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 403 — Fernández, R. · Trauma craneal','alerta')"><div class="cama-num">403</div><div class="cama-etiqueta">Ocupada</div></div>
-                <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 404 — Sánchez, M. · Post-quirúrgico','alerta')"><div class="cama-num">404</div><div class="cama-etiqueta">Ocupada</div></div>
-              </div>
-              <div class="aviso peligro" style="margin-top:12px;">UCI al 100%. Derivar nuevos ingresos al área de observación.</div>
-              <div class="divisor"></div>
-              <div class="fila-item"><div class="av oscuro">PM</div><div class="fi-info"><div class="fi-nombre">Pérez, Miguel · Cama 401</div><div class="fi-sub">Ingreso: 20/04 · IAM · Dr. Vega</div></div><span class="etiqueta etiqueta-rojo">Crítico</span></div>
-              <div class="fila-item"><div class="av">RV</div><div class="fi-info"><div class="fi-nombre">Ríos, Valentina · Cama 402</div><div class="fi-sub">Ingreso: 21/04 · ACV · Dra. Romero</div></div><span class="etiqueta etiqueta-ambar">Estable</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- VISTA 2: MAPA DE RIESGO -->
-      <div class="panel-pestania" id="int-mapa-riesgo">
-
-        <!-- Tarjetas resumen de riesgo -->
-        <div class="grilla-3" style="margin-bottom:14px;">
-          <div class="metrica">
-            <div class="metrica-etiqueta">Promedio de días internado</div>
-            <div class="metrica-valor" style="color:var(--ambar);">6.4</div>
-            <div class="metrica-sub neutro">días</div>
-          </div>
-          <div class="metrica">
-            <div class="metrica-etiqueta">Pacientes en riesgo alto</div>
-            <div class="metrica-valor" style="color:var(--rojo);">3</div>
-            <div class="metrica-sub alerta">Requieren revisión</div>
-          </div>
-          <div class="metrica">
-            <div class="metrica-etiqueta">Tasa de rotación del mes</div>
-            <div class="metrica-valor" style="color:var(--color-ok);">1.8</div>
-            <div class="metrica-sub arriba">altas / ingresos</div>
-          </div>
-        </div>
-
+      <div class="grilla-2">
         <div class="tarjeta">
-          <div class="tarjeta-cabeza">
-            <span class="tarjeta-titulo">Pacientes internados · Semáforo de riesgo</span>
-            <button class="boton chico primario" onclick="abrirModalInformeGestion()">Generar informe de gestión</button>
+          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Clínica Médica · Piso 2</span>
+            <div style="display:flex;gap:4px;flex-wrap:wrap;">
+              <span class="etiqueta etiqueta-verde">● Libre</span>
+              <span class="etiqueta etiqueta-azul">● Ocupada</span>
+              <span class="etiqueta etiqueta-ambar">● Limpieza</span>
+              <span class="etiqueta etiqueta-rojo">● Reservada</span>
+            </div>
           </div>
-          <div class="tarjeta-cuerpo" style="padding:0;">
-            <table class="tabla" style="width:100%;">
-              <thead>
-                <tr>
-                  <th>Paciente</th>
-                  <th>Cama</th>
-                  <th>Días internado</th>
-                  <th>Diagnóstico</th>
-                  <th>Riesgo</th>
-                  <th>Próxima acción</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody id="riesgo-tabla-body"></tbody>
-            </table>
+          <div class="tarjeta-cuerpo"><div class="grilla-camas" id="grillaCamas"></div></div>
+        </div>
+        <div class="tarjeta">
+          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">UCI · Piso 4</span><span class="etiqueta etiqueta-rojo">Capacidad máxima</span></div>
+          <div class="tarjeta-cuerpo">
+            <div class="grilla-camas" style="grid-template-columns:repeat(4,1fr);">
+              <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 401 — Pérez, Miguel · IAM · Crit.','error')"><div class="cama-num">401</div><div class="cama-etiqueta">Ocupada</div></div>
+              <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 402 — Ríos, Valentina · ACV · Estable','alerta')"><div class="cama-num">402</div><div class="cama-etiqueta">Ocupada</div></div>
+              <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 403 — Fernández, R. · Trauma craneal','alerta')"><div class="cama-num">403</div><div class="cama-etiqueta">Ocupada</div></div>
+              <div class="cama ocupada" onclick="mostrarTostada('Cama UCI 404 — Sánchez, M. · Post-quirúrgico','alerta')"><div class="cama-num">404</div><div class="cama-etiqueta">Ocupada</div></div>
+            </div>
+            <div class="aviso peligro" style="margin-top:12px;">UCI al 100%. Derivar nuevos ingresos al área de observación.</div>
+            <div class="divisor"></div>
+            <div class="fila-item"><div class="av oscuro">PM</div><div class="fi-info"><div class="fi-nombre">Pérez, Miguel · Cama 401</div><div class="fi-sub">Ingreso: 20/04 · IAM · Dr. Vega</div></div><span class="etiqueta etiqueta-rojo">Crítico</span></div>
+            <div class="fila-item"><div class="av">RV</div><div class="fi-info"><div class="fi-nombre">Ríos, Valentina · Cama 402</div><div class="fi-sub">Ingreso: 21/04 · ACV · Dra. Romero</div></div><span class="etiqueta etiqueta-ambar">Estable</span></div>
           </div>
         </div>
       </div>
-
       <!-- Tooltip flotante para camas -->
       <div class="tooltip-cama" id="tooltipCama"></div>
-    </div>
-
-    <!-- Modal informe de gestión -->
-    <div class="fondo-modal" id="modal-informe-gestion">
-      <div class="modal" style="max-width:560px;">
-        <div class="modal-cabeza">
-          <span class="modal-titulo">Informe de gestión · <span id="informe-fecha"></span></span>
-          <button class="modal-cerrar" onclick="cerrarModal('modal-informe-gestion')">✕</button>
-        </div>
-        <div class="modal-cuerpo">
-          <div class="aviso info" style="margin-bottom:12px;">Texto listo para copiar y enviar por email o mensajería interna.</div>
-          <textarea class="entrada" id="informe-texto" rows="14" style="font-family:var(--mono);font-size:11.5px;line-height:1.7;" readonly></textarea>
-        </div>
-        <div class="modal-pie">
-          <button class="boton" onclick="cerrarModal('modal-informe-gestion')">Cerrar</button>
-          <button class="boton primario" onclick="copiarInforme()">Copiar texto</button>
-        </div>
-      </div>
     </div>
 
     <!-- ═══ LABORATORIO — con visor de resultados (módulo 02) ═══ -->
@@ -2162,39 +2277,18 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
         <div class="metrica"><div class="metrica-etiqueta">Ocupación camas</div><div class="metrica-valor" data-final="65">0</div><div class="metrica-sub neutro">UCI: 100%</div></div>
         <div class="metrica"><div class="metrica-etiqueta">NPS pacientes</div><div class="metrica-valor" data-final="78">0</div><div class="metrica-sub arriba">↑ 5 pts</div></div>
       </div>
-
-      <!-- Fila 1: Líneas + Dona -->
-      <div class="grilla-2" style="margin-bottom:14px;">
-        <div class="tarjeta">
-          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Consultas diarias — semana actual vs anterior</span></div>
-          <div class="tarjeta-cuerpo" style="height:220px;position:relative;">
-            <canvas id="grafico-lineas"></canvas>
-          </div>
-        </div>
-        <div class="tarjeta">
-          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Distribución por obra social</span></div>
-          <div class="tarjeta-cuerpo" style="height:220px;position:relative;display:flex;align-items:center;justify-content:center;">
-            <canvas id="grafico-dona" style="max-width:200px;max-height:200px;"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fila 2: Barras horizontales + Gauge -->
       <div class="grilla-2">
-        <div class="tarjeta">
-          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Rendimiento por especialidad</span></div>
-          <div class="tarjeta-cuerpo" style="height:220px;position:relative;">
-            <canvas id="grafico-barras"></canvas>
-          </div>
-        </div>
-        <div class="tarjeta">
-          <div class="tarjeta-cabeza"><span class="tarjeta-titulo">Ocupación de camas en tiempo real</span></div>
-          <div class="tarjeta-cuerpo" style="height:220px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
-            <canvas id="grafico-gauge" style="max-width:220px;max-height:160px;"></canvas>
-            <div style="font-family:var(--mono);font-size:22px;font-weight:500;color:var(--color-texto);margin-top:-18px;" id="gauge-valor">65%</div>
-            <div style="font-size:11px;color:var(--color-texto-suave);">General · UCI al 100%</div>
-          </div>
-        </div>
+        <div class="tarjeta"><div class="tarjeta-cabeza"><span class="tarjeta-titulo">Rendimiento por especialidad</span></div><div class="tarjeta-cuerpo">
+          <div class="progreso"><div class="progreso-cabeza"><span>Clínica Médica</span><span>234</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:90%;background:var(--verde-mar)"></div></div></div>
+          <div class="progreso"><div class="progreso-cabeza"><span>Pediatría</span><span>180</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:70%;background:var(--verde-mar)"></div></div></div>
+          <div class="progreso"><div class="progreso-cabeza"><span>Cardiología</span><span>120</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:46%;background:var(--ambar)"></div></div></div>
+          <div class="progreso"><div class="progreso-cabeza"><span>Traumatología</span><span>98</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:38%;background:#7F77DD"></div></div></div>
+        </div></div>
+        <div class="tarjeta"><div class="tarjeta-cabeza"><span class="tarjeta-titulo">Ausentismo y lista de espera</span></div><div class="tarjeta-cuerpo">
+          <div class="progreso"><div class="progreso-cabeza"><span>Ausentismo general</span><span>13%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:13%;background:var(--rojo)"></div></div></div>
+          <div class="progreso"><div class="progreso-cabeza"><span>Reducción con recordatorios SMS</span><span>-38%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:60%;background:var(--verde)"></div></div></div>
+          <div class="progreso"><div class="progreso-cabeza"><span>Vacantes reasignadas</span><span>82%</span></div><div class="progreso-pista"><div class="progreso-relleno" style="width:82%;background:var(--verde-mar)"></div></div></div>
+        </div></div>
       </div>
     </div>
 
@@ -2241,6 +2335,20 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
               <button class="fuente-btn" onclick="cambiarFuente(16,this)">A grande</button>
             </div>
             <div style="font-size:11px;color:var(--texto-suave);margin-top:8px;">El modo "grande" aumenta formularios a 16px para uso en tablet.</div>
+          </div>
+          <div class="config-seccion">
+            <div class="config-seccion-titulo">Tour de bienvenida</div>
+            <div style="font-size:12px;color:var(--color-texto-medio);margin-bottom:10px;line-height:1.6;">Mostrá nuevamente el recorrido interactivo por los módulos del sistema. Útil para capacitar personal nuevo.</div>
+            <button class="boton" style="width:100%;" onclick="reiniciarTour()">↺ Reiniciar tour de bienvenida</button>
+          </div>
+          <div class="config-seccion">
+            <div class="config-seccion-titulo">Aplicación móvil (PWA)</div>
+            <div style="font-size:12px;color:var(--color-texto-medio);margin-bottom:10px;line-height:1.6;">Instalá MediGest Pro directamente en tu dispositivo para acceder sin navegador, con carga más rápida y soporte offline básico.</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="boton primario" style="flex:1;" onclick="demoPWABanner()">📲 Instalar en este dispositivo</button>
+              <button class="boton" onclick="mostrarTostada('Estado: Service Worker activo · Caché: medigest-v1','info',4000)">Ver estado offline</button>
+            </div>
+            <div class="aviso info" style="margin-top:10px;">En iOS (Safari): tocá el ícono compartir → "Agregar a pantalla de inicio". En Android (Chrome): tocá los 3 puntos → "Instalar app".</div>
           </div>
         </div>
       </div>
@@ -2333,7 +2441,6 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
     <div class="atajos-fila"><span class="atajos-desc">Nuevo turno</span><span class="atajos-tecla">T</span></div>
     <div class="atajos-fila"><span class="atajos-desc">Foco en búsqueda</span><span class="atajos-tecla">B</span></div>
     <div class="atajos-fila"><span class="atajos-desc">Alto contraste</span><span class="atajos-tecla">Alt + C</span></div>
-    <div class="atajos-fila"><span class="atajos-desc">Modo oscuro</span><span class="atajos-tecla">Alt + D</span></div>
     <div class="atajos-fila"><span class="atajos-desc">Cerrar modal / panel</span><span class="atajos-tecla">Esc</span></div>
     <div class="atajos-fila"><span class="atajos-desc">Ir al Tablero</span><span class="atajos-tecla">1</span></div>
     <div class="atajos-fila"><span class="atajos-desc">Ir a Turnos</span><span class="atajos-tecla">2</span></div>
@@ -2344,9 +2451,34 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
   </div>
 </div>
 
-<!-- ═══ MODALES ═══ -->
+<!-- ═══ MÓDULO 10 — MODAL CONFIRMACIÓN DESTRUCTIVA ═══ -->
+<div class="fondo-modal" id="modal-confirmar-destructivo">
+  <div class="modal" style="max-width:400px;">
+    <div class="modal-cabeza">
+      <span class="modal-titulo" id="destr-titulo">Confirmar acción</span>
+      <button class="modal-cerrar" onclick="cerrarModal('modal-confirmar-destructivo')">✕</button>
+    </div>
+    <div class="modal-cuerpo">
+      <div class="destr-zona">
+        <div class="destr-aviso" id="destr-aviso">Esta acción no se puede deshacer.</div>
+        <div class="destr-sub" id="destr-sub">El registro será eliminado permanentemente del sistema.</div>
+      </div>
+      <div>
+        <label class="destr-label">Para confirmar, escribí CONFIRMAR en el campo</label>
+        <input class="destr-input" id="destr-input" placeholder="Escribí CONFIRMAR" oninput="validarDestructivo()" autocomplete="off">
+      </div>
+    </div>
+    <div class="modal-pie">
+      <button class="boton" onclick="cerrarModal('modal-confirmar-destructivo')">Cancelar</button>
+      <button class="boton peligro" id="destr-btn-confirmar" onclick="ejecutarDestructivo()" disabled>Confirmar</button>
+    </div>
+  </div>
+</div>
 
-<!-- Nuevo paciente -->
+<!-- ═══ MÓDULO 10 — SKELETON OVERLAY ═══ -->
+<div id="skeleton-overlay" style="display:none;position:absolute;top:0;left:0;right:0;background:var(--color-tarjeta);z-index:10;border-radius:var(--radio);pointer-events:none;"></div>
+
+
 <div class="fondo-modal" id="modal-nuevo-paciente">
   <div class="modal"><div class="modal-cabeza"><span class="modal-titulo">Registro de nuevo paciente</span><button class="modal-cerrar" onclick="cerrarModal('modal-nuevo-paciente')">✕</button></div>
   <div class="modal-cuerpo">
@@ -2384,173 +2516,37 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
 
 <!-- Detalle paciente -->
 <div class="fondo-modal" id="modal-detalle-paciente">
-  <div class="modal hce"><div class="modal-cabeza">
-    <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
-      <div class="av verde-mar" style="width:36px;height:36px;font-size:13px;flex-shrink:0;">LC</div>
-      <div style="min-width:0;">
-        <div style="font-size:14px;font-weight:600;color:var(--color-texto);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">López, Carlos M.</div>
-        <div style="font-size:11px;color:var(--texto-suave);font-family:var(--mono);">DNI 28.541.902 · 45 años · M · Swiss Medical 310</div>
-      </div>
-      <div style="margin-left:10px;flex-shrink:0;">
-        <span class="etiqueta" style="background:var(--rojo-claro);color:var(--rojo);border-color:var(--rojo-claro);">Alergia: Penicilina</span>
-      </div>
+  <div class="modal grande"><div class="modal-cabeza"><span class="modal-titulo">Historia Clínica · López, Carlos M.</span><button class="modal-cerrar" onclick="cerrarModal('modal-detalle-paciente')">✕</button></div>
+  <div class="modal-cuerpo">
+    <div style="display:flex;gap:14px;margin-bottom:14px;align-items:center;flex-wrap:wrap;">
+      <div class="av verde-mar" style="width:44px;height:44px;font-size:15px;">LC</div>
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-texto);">López, Carlos M.</div><div style="font-size:12px;color:var(--texto-suave);">DNI 28.541.902 · 45 años · Swiss Medical 310</div></div>
+      <div style="margin-left:auto;display:flex;gap:6px;"><button class="boton chico" onclick="mostrarTostada('Exportando PDF del historial…','info')">Exportar PDF</button><button class="boton chico primario">Nueva evolución</button></div>
     </div>
-    <div style="display:flex;gap:6px;flex-shrink:0;margin-left:12px;">
-      <button class="boton chico" onclick="mostrarTostada('Generando PDF de historia clínica…','info')">Imprimir / PDF</button>
-      <button class="boton chico primario" onclick="mostrarTostada('Nueva evolución registrada','exito')">＋ Evolución</button>
-    </div>
-    <button class="modal-cerrar" onclick="cerrarModal('modal-detalle-paciente')">✕</button>
-  </div>
-  <div class="modal-cuerpo" style="padding-top:0;">
-
-    <!-- Semáforo de riesgo cardiovascular -->
-    <div style="display:flex;gap:8px;padding:10px 0 12px;border-bottom:1px solid var(--borde);margin-bottom:14px;flex-wrap:wrap;align-items:center;">
-      <span style="font-size:11px;color:var(--texto-suave);font-family:var(--mono);">Riesgo cardiovasc.:</span>
-      <span class="etiqueta etiqueta-ambar">Moderado</span>
-      <span style="font-size:11px;color:var(--texto-suave);">HTA + Dislipemia · Framingham 14%</span>
-      <span style="margin-left:auto;font-size:11px;color:var(--texto-suave);font-family:var(--mono);">Última consulta: hoy 09:09 · Dra. Romero</span>
-    </div>
-
     <div class="pestanias">
       <div class="pestania activa" onclick="cambiarPestania('pac','resumen',this)">Resumen</div>
       <div class="pestania" onclick="cambiarPestania('pac','evoluciones',this)">Evoluciones</div>
-      <div class="pestania" onclick="cambiarPestania('pac','estudios',this)">Estudios</div>
-      <div class="pestania" onclick="cambiarPestania('pac','medicacion',this)">Medicación activa</div>
-      <div class="pestania" onclick="cambiarPestania('pac','vacunas',this)">Vacunas</div>
-      <div class="pestania" onclick="cambiarPestania('pac','alergias',this)">Alergias e internaciones</div>
-      <div class="pestania" onclick="cambiarPestania('pac','accesos',this)">Accesos al registro</div>
+      <div class="pestania" onclick="cambiarPestania('pac','accesos',this)">Accesos al historial</div>
     </div>
-
-    <!-- RESUMEN -->
     <div class="panel-pestania activo" id="pac-resumen">
-      <div class="fila-campo tres" style="margin-bottom:10px;">
-        <div class="grupo-campo"><label class="etiqueta-campo">Fecha de nacimiento</label><input class="entrada" value="14/07/1980" readonly></div>
-        <div class="grupo-campo"><label class="etiqueta-campo">Obra social</label><input class="entrada" value="Swiss Medical 310" readonly></div>
-        <div class="grupo-campo"><label class="etiqueta-campo">Médico de cabecera</label><input class="entrada" value="Dr. Suárez" readonly></div>
-      </div>
       <div class="fila-campo tres">
-        <div class="grupo-campo"><label class="etiqueta-campo">Patologías crónicas</label><input class="entrada" value="HTA · Dislipemia" readonly></div>
-        <div class="grupo-campo"><label class="etiqueta-campo">Alergias</label><input class="entrada" value="Penicilina" readonly style="background:var(--rojo-claro);color:var(--rojo);border-color:var(--rojo-claro);"></div>
-        <div class="grupo-campo"><label class="etiqueta-campo">Grupo / Factor</label><input class="entrada" value="A+" readonly></div>
-      </div>
-      <div class="fila-campo tres" style="margin-top:10px;">
-        <div class="grupo-campo"><label class="etiqueta-campo">Peso</label><input class="entrada" value="78 kg" readonly></div>
-        <div class="grupo-campo"><label class="etiqueta-campo">Talla</label><input class="entrada" value="1.72 m" readonly></div>
-        <div class="grupo-campo"><label class="etiqueta-campo">IMC</label><input class="entrada" value="26.4 — Sobrepeso leve" readonly></div>
+        <div class="grupo-campo"><label class="etiqueta-campo">Patologías</label><input class="entrada" value="HTA · Dislipemia" readonly></div>
+        <div class="grupo-campo"><label class="etiqueta-campo">Alergias</label><input class="entrada" value="Penicilina" readonly style="background:var(--rojo-claro);color:var(--rojo);"></div>
+        <div class="grupo-campo"><label class="etiqueta-campo">Medicación</label><input class="entrada" value="Enalapril · Atorvastatina" readonly></div>
       </div>
     </div>
-
-    <!-- EVOLUCIONES -->
     <div class="panel-pestania" id="pac-evoluciones">
-      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
-        <select class="entrada" style="width:auto;min-width:160px;"><option>Todas las especialidades</option><option>Cardiología</option><option>Clínica Médica</option></select>
-        <input class="entrada" type="date" style="width:auto;" value="2026-01-01">
-        <input class="entrada" type="date" style="width:auto;" value="2026-04-28">
-      </div>
       <div class="linea-tiempo">
-        <div class="lt-item"><div class="lt-icono" style="background:#EDEAE4;">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Consulta Cardiología · Dra. Romero</div><div class="lt-sub">Dolor precordial leve. TA 148/92. Solicita Troponina I y ECG. Sin cambios en medicación.</div><div class="lt-fecha">hoy 09:09</div></div></div>
-        <div class="lt-item"><div class="lt-icono" style="background:var(--borde-claro);">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Control HTA · Dr. Suárez</div><div class="lt-sub">TA 146/90. Ajuste dosis Enalapril de 5mg a 10mg. Control en 30 días.</div><div class="lt-fecha">15/04/2026</div></div></div>
-        <div class="lt-item"><div class="lt-icono" style="background:var(--borde-claro);">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Control Lipídico · Dr. Suárez</div><div class="lt-sub">LDL 142 mg/dL. Se agrega Atorvastatina 20mg. Dieta hipocalórica.</div><div class="lt-fecha">02/03/2026</div></div></div>
-        <div class="lt-item"><div class="lt-icono" style="background:var(--borde-claro);">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Consulta general · Dr. Suárez</div><div class="lt-sub">Paciente refiere cefalea ocasional. Sin signos de alarma. Se solicita fondo de ojo.</div><div class="lt-fecha">10/01/2026</div></div></div>
+        <div class="lt-item"><div class="lt-icono" style="background:#EDEAE4;">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Consulta Cardiología · Dra. Romero</div><div class="lt-sub">Dolor precordial leve. Solicita Troponina I</div><div class="lt-fecha">hoy 09:09</div></div></div>
+        <div class="lt-item"><div class="lt-icono" style="background:var(--borde-claro);">✎</div><div class="lt-cuerpo"><div class="lt-titulo">Control HTA · Dr. Suárez</div><div class="lt-sub">TA 146/90. Ajuste dosis Enalapril</div><div class="lt-fecha">15/04/2026</div></div></div>
       </div>
     </div>
-
-    <!-- ESTUDIOS -->
-    <div class="panel-pestania" id="pac-estudios">
-      <table class="tabla" style="width:100%;">
-        <thead><tr><th>Estudio</th><th>Fecha</th><th>Solicitado por</th><th>Estado</th><th></th></tr></thead>
-        <tbody>
-          <tr><td><b>Troponina I + ECG</b></td><td style="font-family:var(--mono);">hoy</td><td>Dra. Romero</td><td><span class="etiqueta etiqueta-ambar">Pendiente</span></td><td><button class="boton chico" onclick="mostrarTostada('Resultado no disponible aún','alerta')">Ver</button></td></tr>
-          <tr><td><b>Hemograma + Lipidograma</b></td><td style="font-family:var(--mono);">18/04/2026</td><td>Dr. Suárez</td><td><span class="etiqueta etiqueta-verde">Disponible</span></td><td><button class="boton chico" onclick="abrirModal('modal-visor-lab')">Ver</button></td></tr>
-          <tr><td><b>Ecocardiograma</b></td><td style="font-family:var(--mono);">01/03/2026</td><td>Dra. Romero</td><td><span class="etiqueta etiqueta-verde">Disponible</span></td><td><button class="boton chico" onclick="mostrarTostada('Abriendo imagen de ecocardiograma…','info')">Ver</button></td></tr>
-          <tr><td><b>Fondo de ojo</b></td><td style="font-family:var(--mono);">10/01/2026</td><td>Dr. Suárez</td><td><span class="etiqueta etiqueta-verde">Disponible</span></td><td><button class="boton chico" onclick="mostrarTostada('Abriendo informe…','info')">Ver</button></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- MEDICACIÓN ACTIVA -->
-    <div class="panel-pestania" id="pac-medicacion">
-      <table class="tabla" style="width:100%;">
-        <thead><tr><th>Fármaco</th><th>Dosis</th><th>Inicio</th><th>Próximo control</th><th>Prescripto por</th><th>Interacciones</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><b>Enalapril</b></td>
-            <td style="font-family:var(--mono);">10 mg — 1 comp. mañana</td>
-            <td style="font-family:var(--mono);">15/04/2026</td>
-            <td style="font-family:var(--mono);">15/05/2026</td>
-            <td>Dr. Suárez</td>
-            <td><span class="etiqueta etiqueta-ambar" style="cursor:pointer;" onclick="mostrarTostada('Enalapril + Atorvastatina: sin interacciones clínicamente significativas','info')">Ver</span></td>
-          </tr>
-          <tr>
-            <td><b>Atorvastatina</b></td>
-            <td style="font-family:var(--mono);">20 mg — 1 comp. noche</td>
-            <td style="font-family:var(--mono);">02/03/2026</td>
-            <td style="font-family:var(--mono);">02/06/2026</td>
-            <td>Dr. Suárez</td>
-            <td><span class="etiqueta etiqueta-verde">Sin alertas</span></td>
-          </tr>
-          <tr>
-            <td><b>AAS</b></td>
-            <td style="font-family:var(--mono);">100 mg — 1 comp. mañana</td>
-            <td style="font-family:var(--mono);">10/01/2026</td>
-            <td style="font-family:var(--mono);">10/07/2026</td>
-            <td>Dr. Suárez</td>
-            <td><span class="etiqueta etiqueta-verde">Sin alertas</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- VACUNAS -->
-    <div class="panel-pestania" id="pac-vacunas">
-      <table class="tabla" style="width:100%;">
-        <thead><tr><th>Vacuna</th><th>Fecha aplicación</th><th>Lote</th><th>Próxima dosis</th><th>Estado</th></tr></thead>
-        <tbody>
-          <tr><td><b>COVID-19 (bivalente)</b></td><td style="font-family:var(--mono);">12/09/2023</td><td style="font-family:var(--mono);">BA.2-0093</td><td style="font-family:var(--mono);">—</td><td><span class="etiqueta etiqueta-verde">Completo</span></td></tr>
-          <tr><td><b>Gripe (2026)</b></td><td style="font-family:var(--mono);">—</td><td>—</td><td style="font-family:var(--mono);">Mayo 2026</td><td><span class="etiqueta etiqueta-ambar">Pendiente</span></td></tr>
-          <tr><td><b>Hepatitis B</b></td><td style="font-family:var(--mono);">Esquema 2018</td><td>—</td><td style="font-family:var(--mono);">—</td><td><span class="etiqueta etiqueta-verde">Completo</span></td></tr>
-          <tr><td><b>Doble adultos (dT)</b></td><td style="font-family:var(--mono);">03/2021</td><td>—</td><td style="font-family:var(--mono);">03/2031</td><td><span class="etiqueta etiqueta-verde">Vigente</span></td></tr>
-          <tr><td><b>Neumococo (PCV13)</b></td><td style="font-family:var(--mono);">—</td><td>—</td><td style="font-family:var(--mono);">Recomendado</td><td><span class="etiqueta etiqueta-gris">No aplicada</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ALERGIAS E INTERNACIONES -->
-    <div class="panel-pestania" id="pac-alergias">
-      <div style="margin-bottom:16px;">
-        <div style="font-size:11px;font-weight:500;color:var(--texto-suave);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;font-family:var(--mono);">Alergias conocidas</div>
-        <table class="tabla" style="width:100%;">
-          <thead><tr><th>Alérgeno</th><th>Tipo de reacción</th><th>Severidad</th><th>Registrado por</th></tr></thead>
-          <tbody>
-            <tr><td><b>Penicilina</b></td><td>Urticaria generalizada</td><td><span class="etiqueta etiqueta-rojo">Severa</span></td><td>Dr. Suárez · 2018</td></tr>
-            <tr><td><b>AINE (Ibuprofeno)</b></td><td>Dispepsia / epigastralgia</td><td><span class="etiqueta etiqueta-ambar">Moderada</span></td><td>Dr. Suárez · 2021</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:500;color:var(--texto-suave);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;font-family:var(--mono);">Internaciones previas</div>
-        <table class="tabla" style="width:100%;">
-          <thead><tr><th>Fecha ingreso</th><th>Diagnóstico</th><th>Días</th><th>Médico responsable</th><th>Alta</th></tr></thead>
-          <tbody>
-            <tr><td style="font-family:var(--mono);">12/08/2022</td><td>Hipertensión severa · Crisis hipertensiva</td><td style="font-family:var(--mono);">3</td><td>Dr. Vega</td><td style="font-family:var(--mono);">15/08/2022</td></tr>
-            <tr><td style="font-family:var(--mono);">04/01/2019</td><td>Neumonía basal derecha</td><td style="font-family:var(--mono);">7</td><td>Dr. Suárez</td><td style="font-family:var(--mono);">11/01/2019</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ACCESOS AL REGISTRO -->
     <div class="panel-pestania" id="pac-accesos">
       <div class="aud-fila"><div class="aud-icono" style="background:#EDEAE4;color:var(--color-texto-medio);">VER</div><div><div class="aud-texto"><b>Dra. Romero</b> consultó historia clínica completa</div><div class="aud-meta">hoy 09:09 · Tablet-Cons-2 · 192.168.1.14</div></div></div>
       <div class="aud-fila"><div class="aud-icono" style="background:var(--verde-mar-claro);color:var(--verde-mar);">EXP</div><div><div class="aud-texto"><b>Recep. Díaz</b> exportó datos básicos para admisión</div><div class="aud-meta">22/04 08:31 · PC-Recepción · 192.168.1.3</div></div></div>
-      <div class="aud-fila"><div class="aud-icono" style="background:#EDEAE4;color:var(--color-texto-medio);">VER</div><div><div class="aud-texto"><b>Dr. Suárez</b> consultó medicación activa</div><div class="aud-meta">15/04/2026 10:22 · PC-Consultorio-1 · 192.168.1.8</div></div></div>
-      <div class="aud-fila"><div class="aud-icono" style="background:#EDEAE4;color:var(--color-texto-medio);">MOD</div><div><div class="aud-texto"><b>Dr. Suárez</b> actualizó dosis de Enalapril</div><div class="aud-meta">15/04/2026 10:35 · PC-Consultorio-1 · 192.168.1.8</div></div></div>
     </div>
-
   </div>
-  <div class="modal-pie">
-    <button class="boton" onclick="cerrarModal('modal-detalle-paciente')">Cerrar</button>
-  </div></div>
+  <div class="modal-pie"><button class="boton" onclick="cerrarModal('modal-detalle-paciente')">Cerrar</button></div></div>
 </div>
 
 <!-- Check-in -->
@@ -2568,7 +2564,7 @@ body.modo-oscuro .ag-t-neuro    {background:#2D0A18;border-color:#F472B6;color:#
   <div class="modal grande"><div class="modal-cabeza"><span class="modal-titulo" id="visor-lab-titulo">Resultado de laboratorio</span><button class="modal-cerrar" onclick="cerrarModal('modal-visor-lab')">✕</button></div>
   <div class="modal-cuerpo">
     <div class="aviso info" style="margin-bottom:14px;">Resultado recibido vía <b>HL7 FHIR R4</b> · Laboratorio Central · Los valores fuera de rango están marcados en rojo.</div>
-    <table class="tabla" style="width:100%;border:1px solid var(--borde);border-radius:4px;overflow:hidden;">
+    <table class="tabla" style="width:100%;border:1px solid var(--borde);border-radius:8px;overflow:hidden;">
       <thead><tr><th>Parámetro</th><th>Resultado</th><th>Rango normal</th><th>Unidad</th><th>Estado</th></tr></thead>
       <tbody id="visor-lab-cuerpo"></tbody>
     </table>
@@ -2760,8 +2756,9 @@ function navegarA(modulo, el) {
   if (el) el.classList.add('activo');
   document.getElementById('titulo-modulo').textContent = NOMBRES_MODULOS[modulo] || modulo;
   if (modulo === 'tablero' || modulo === 'internacion' || modulo === 'estadisticas') animarContadores();
-  if (modulo === 'turnos') agendaRenderizar();
-  if (modulo === 'internacion') renderizarMapaRiesgo();
+  // Resetear scroll al tope al cambiar de módulo
+  const contenido = document.querySelector('.contenido');
+  if (contenido) contenido.scrollTop = 0;
 }
 function navegarDesde(modulo) {
   const el = document.querySelector(`.lat-item[onclick*="'${modulo}'"]`);
@@ -3129,7 +3126,11 @@ function navegarMovil(nombreModulo, elementoClicado) {
   /* Sincronizar con sidebar de escritorio */
   const itemLateral = document.querySelector(`.lat-item[onclick*="${nombreModulo}"]`);
   if (itemLateral) itemLateral.classList.add('activo');
-  if (nombreModulo === 'tablero') animarContadores();
+  if (nombreModulo === 'tablero' || nombreModulo === 'internacion' || nombreModulo === 'estadisticas') animarContadores();
+  // Resetear scroll al tope al cambiar de módulo
+  const contenido = document.querySelector('.contenido');
+  if (contenido) contenido.scrollTop = 0;
+  window.scrollTo(0, 0);
 }
 
 function navegarMovilCajon(nombreModulo) {
@@ -3141,9 +3142,13 @@ function navegarMovilCajon(nombreModulo) {
 
 function abrirCajonMenu() {
   document.getElementById('cajonMenu').style.display = 'block';
+  const fab = document.querySelector('.nav-movil-mas');
+  if (fab) fab.style.display = 'none';
 }
 function cerrarCajonMenu() {
   document.getElementById('cajonMenu').style.display = 'none';
+  const fab = document.querySelector('.nav-movil-mas');
+  if (fab) fab.style.display = 'flex';
 }
 
 /* ─── MÓDULO 05: ALTO CONTRASTE ─── */
@@ -3159,434 +3164,6 @@ function alternarAltoContraste() {
 if (localStorage.getItem('altoContraste') === 'si') {
   document.body.classList.add('alto-contraste');
 }
-
-/* ─── MODO OSCURO ─── */
-function alternarModoOscuro() {
-  const activado = document.body.classList.toggle('modo-oscuro');
-  const ico = document.getElementById('mo-ico');
-  if (ico) ico.textContent = activado ? '🌙' : '☀';
-  mostrarTostada(activado ? 'Modo oscuro activado' : 'Modo claro activado', 'info');
-  localStorage.setItem('modoOscuro', activado ? 'si' : 'no');
-}
-
-/* Inicializar modo oscuro: localStorage → prefers-color-scheme */
-(function() {
-  const guardado = localStorage.getItem('modoOscuro');
-  const sistemaOscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const activar = guardado === 'si' || (guardado === null && sistemaOscuro);
-  if (activar) {
-    document.body.classList.add('modo-oscuro');
-    const ico = document.getElementById('mo-ico');
-    if (ico) ico.textContent = '🌙';
-  }
-  /* Escuchar cambios del sistema en tiempo real */
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (localStorage.getItem('modoOscuro') === null) {
-      document.body.classList.toggle('modo-oscuro', e.matches);
-      const ico = document.getElementById('mo-ico');
-      if (ico) ico.textContent = e.matches ? '🌙' : '☀';
-    }
-  });
-})();
-
-/* ─── MAPA DE RIESGO — MEJORA 07 ─── */
-
-const PACIENTES_INTERNADOS = [
-  { nombre:'Pérez, Miguel',    cama:'UCI 401', dias:9,  dx:'IAM (Infarto agudo de miocardio)',   medico:'Dr. Vega',    reinternacion:false, accion:'Evaluación cardiológica urgente' },
-  { nombre:'Ríos, Valentina',  cama:'UCI 402', dias:8,  dx:'ACV isquémico',                      medico:'Dra. Romero', reinternacion:true,  accion:'Control neurológico · Fisioterapia' },
-  { nombre:'Fernández, R.',    cama:'UCI 403', dias:6,  dx:'Trauma craneal moderado',             medico:'Dr. Vega',    reinternacion:false, accion:'TAC de control mañana' },
-  { nombre:'Sánchez, M.',      cama:'UCI 404', dias:3,  dx:'Post-quirúrgico apendicectomía',      medico:'Dr. Suárez',  reinternacion:false, accion:'Alta probable en 2 días' },
-  { nombre:'García, Laura',    cama:'203',     dias:15, dx:'Sepsis urinaria',                    medico:'Dra. Romero', reinternacion:true,  accion:'Hemocultivos pendientes · revisar ATB' },
-  { nombre:'Torres, Andrés',   cama:'205',     dias:12, dx:'Neumonía bilateral',                 medico:'Dr. Suárez',  reinternacion:false, accion:'Espirometría de control' },
-  { nombre:'Molina, Carmen',   cama:'208',     dias:4,  dx:'Pancreatitis aguda leve',            medico:'Dr. Vega',    reinternacion:false, accion:'Dieta progresiva · ecografía control' },
-  { nombre:'Romero, Diego',    cama:'211',     dias:2,  dx:'Fractura expuesta tibia',            medico:'Dr. Vega',    reinternacion:false, accion:'Cirugía diferida en 48hs' },
-  { nombre:'Herrera, Silvia',  cama:'214',     dias:7,  dx:'Insuficiencia cardíaca descompensada', medico:'Dra. Romero', reinternacion:true, accion:'Ajuste diurético · balance hídrico' },
-];
-
-const DX_RIESGO_ALTO = ['iam','avc','acv','sepsis','insuficiencia cardíaca'];
-
-function calcularRiesgo(p) {
-  const dxLower = p.dx.toLowerCase();
-  const esDxRiesgo = DX_RIESGO_ALTO.some(d => dxLower.includes(d));
-  if (esDxRiesgo || p.dias > 14) return 'rojo';
-  if (p.dias > 7 || p.reinternacion) return 'ambar';
-  return 'verde';
-}
-
-function renderizarMapaRiesgo() {
-  const tbody = document.getElementById('riesgo-tabla-body');
-  if (!tbody) return;
-
-  tbody.innerHTML = PACIENTES_INTERNADOS.map(p => {
-    const riesgo = calcularRiesgo(p);
-    const etiquetaRiesgo = riesgo === 'rojo' ? 'Alto' : riesgo === 'ambar' ? 'Moderado' : 'Bajo';
-    const reinternBadge = p.reinternacion
-      ? '<span class="reinternacion-badge">REINTERNACIÓN</span>'
-      : '';
-
-    return `<tr>
-      <td><b>${p.nombre}</b>${reinternBadge}</td>
-      <td style="font-family:var(--mono);font-size:11.5px;">${p.cama}</td>
-      <td style="font-family:var(--mono);font-size:12px;font-weight:600;color:${riesgo==='rojo'?'var(--rojo)':riesgo==='ambar'?'var(--ambar)':'var(--verde)'};">${p.dias} días</td>
-      <td style="font-size:12px;">${p.dx}</td>
-      <td><span class="semaforo ${riesgo}">${etiquetaRiesgo}</span></td>
-      <td style="font-size:11.5px;color:var(--texto-medio);">${p.accion}</td>
-      <td><button class="boton chico" onclick="mostrarTostada('Historia clínica de ${p.nombre}','info')">Ver HC</button></td>
-    </tr>`;
-  }).join('');
-}
-
-function abrirModalInformeGestion() {
-  const hoy = new Date(2026, 3, 29);
-  const fecha = `${hoy.getDate()}/${hoy.getMonth()+1}/${hoy.getFullYear()}`;
-  document.getElementById('informe-fecha').textContent = fecha;
-
-  const altoRiesgo  = PACIENTES_INTERNADOS.filter(p => calcularRiesgo(p) === 'rojo');
-  const medRiesgo   = PACIENTES_INTERNADOS.filter(p => calcularRiesgo(p) === 'ambar');
-  const bajoRiesgo  = PACIENTES_INTERNADOS.filter(p => calcularRiesgo(p) === 'verde');
-  const reinternac  = PACIENTES_INTERNADOS.filter(p => p.reinternacion);
-  const promDias    = (PACIENTES_INTERNADOS.reduce((a,p) => a + p.dias, 0) / PACIENTES_INTERNADOS.length).toFixed(1);
-
-  const texto = `INFORME DE GESTIÓN DE INTERNACIÓN — ${fecha}
-Hospital / Clínica: Centro Médico MediGest
-Generado por: Sistema MediGest Pro · ${new Date().toLocaleTimeString('es-AR', {hour:'2-digit',minute:'2-digit'})}
-═══════════════════════════════════════
-
-RESUMEN EJECUTIVO
-─────────────────
-Total pacientes internados: ${PACIENTES_INTERNADOS.length}
-Promedio de días de internación: ${promDias} días
-Tasa de rotación del mes: 1.8 (altas/ingresos)
-Ocupación UCI: 100% — CAPACIDAD MÁXIMA
-
-SEMÁFORO DE RIESGO
-──────────────────
-🔴 Riesgo ALTO (${altoRiesgo.length} pacientes):
-${altoRiesgo.map(p => `  · ${p.nombre} — Cama ${p.cama} — ${p.dias} días — ${p.dx}`).join('\n')}
-
-🟡 Riesgo MODERADO (${medRiesgo.length} pacientes):
-${medRiesgo.map(p => `  · ${p.nombre} — Cama ${p.cama} — ${p.dias} días — ${p.dx}`).join('\n')}
-
-🟢 Riesgo BAJO (${bajoRiesgo.length} pacientes):
-${bajoRiesgo.map(p => `  · ${p.nombre} — Cama ${p.cama} — ${p.dias} días`).join('\n')}
-
-ALERTAS DE REINTERNACIÓN (${reinternac.length} pacientes)
-─────────────────────────
-${reinternac.map(p => `  ⚠ ${p.nombre} — ${p.dx} — Cama ${p.cama}`).join('\n')}
-
-ACCIONES PRIORITARIAS PARA HOY
-───────────────────────────────
-${altoRiesgo.map(p => `  1. [URGENTE] ${p.nombre}: ${p.accion}`).join('\n')}
-${medRiesgo.map((p,i) => `  ${i+altoRiesgo.length+1}. ${p.nombre}: ${p.accion}`).join('\n')}
-
-───────────────────────────────
-Este informe fue generado automáticamente por MediGest Pro.
-Para más información, consultá el módulo de Internación en el sistema.`;
-
-  document.getElementById('informe-texto').value = texto;
-  abrirModal('modal-informe-gestion');
-}
-
-function copiarInforme() {
-  const texto = document.getElementById('informe-texto').value;
-  navigator.clipboard.writeText(texto).then(() => {
-    mostrarTostada('Informe copiado al portapapeles', 'exito');
-  });
-}
-
-/* ─── ASISTENTE IA CLÍNICO ─── */
-
-const IA_CONTEXTO_PACIENTE = `Sos un asistente clínico de apoyo integrado en un sistema de gestión médica (MediGest Pro).
-Contexto del paciente activo:
-- Nombre: López, Carlos M. — 45 años, masculino
-- Diagnóstico activo: HTA grado I, Dislipemia. Motivo de consulta: dolor precordial leve, disnea de esfuerzo
-- Medicación actual: Enalapril 10mg/día, Atorvastatina 20mg/noche, AAS 100mg/día
-- Alergias: Penicilina (urticaria severa), AINE/Ibuprofeno (dispepsia)
-- Signos vitales: TA 148/92 mmHg, FC 88 lpm, SpO2 97%
-- Antecedentes: HTA, Dislipemia, apendicectomía 2010
-- Médico tratante: Dra. Romero
-
-Respondé de forma concisa, en español rioplatense, con formato claro. Usá listas cuando sea útil.
-SIEMPRE recordá que sos una herramienta de apoyo y que la decisión clínica final es del médico.
-Respondé solo sobre temas de medicina clínica, farmacología y gestión médica.`;
-
-let iaHistorial = [];
-let iaCargando = false;
-
-function togglePanelIA() {
-  const panel = document.getElementById('ia-panel');
-  const btn   = document.getElementById('ia-boton-flotante');
-  const abierto = panel.classList.toggle('abierto');
-  btn.classList.toggle('activo', abierto);
-  if (abierto) {
-    setTimeout(() => document.getElementById('ia-input')?.focus(), 300);
-  }
-}
-
-function cerrarPanelIA() {
-  document.getElementById('ia-panel').classList.remove('abierto');
-  document.getElementById('ia-boton-flotante')?.classList.remove('activo');
-}
-
-function iaEnviarSugerencia(btn) {
-  const texto = btn.textContent;
-  document.getElementById('ia-input').value = texto;
-  iaEnviar();
-}
-
-async function iaEnviar() {
-  if (iaCargando) return;
-  const input = document.getElementById('ia-input');
-  const texto = input.value.trim();
-  if (!texto) return;
-
-  // Agregar burbuja del médico
-  iaAgregarBurbuja(texto, 'medico');
-  iaHistorial.push({ role: 'user', content: texto });
-  input.value = '';
-
-  // Mostrar cargando
-  iaCargando = true;
-  const btnEnviar = document.getElementById('ia-enviar');
-  btnEnviar.disabled = true;
-  const cargando = document.getElementById('ia-cargando');
-  cargando.style.display = 'block';
-  iaScrollAbajo();
-
-  try {
-    const mensajes = [
-      { role: 'user', content: IA_CONTEXTO_PACIENTE + '\n\n---\nEl médico pregunta: ' + iaHistorial[0].content },
-      ...iaHistorial.slice(1)
-    ];
-
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: mensajes
-      })
-    });
-
-    const data = await res.json();
-    const respuesta = data.content?.[0]?.text || 'No se pudo obtener respuesta.';
-    iaHistorial.push({ role: 'assistant', content: respuesta });
-    iaAgregarBurbuja(respuesta, 'asistente', true);
-
-  } catch (err) {
-    iaAgregarBurbuja('Error al conectar con el asistente. Verificá tu conexión.', 'asistente');
-  } finally {
-    iaCargando = false;
-    btnEnviar.disabled = false;
-    cargando.style.display = 'none';
-    iaScrollAbajo();
-  }
-}
-
-function iaAgregarBurbuja(texto, tipo, conCopiar = false) {
-  const wrap = document.getElementById('ia-mensajes');
-  const div = document.createElement('div');
-  div.className = `ia-burbuja ${tipo}`;
-
-  // Convertir saltos de línea y negrita básica
-  const html = texto
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/\*\*(.*?)\*\*/g,'<b>$1</b>')
-    .replace(/\n/g,'<br>');
-
-  let meta = '';
-  if (conCopiar) {
-    meta = `<div class="ia-burbuja-meta">
-      <span>Asistente IA</span>
-      <button class="ia-copiar" onclick="iaCopiar(this)" data-texto="${texto.replace(/"/g,'&quot;')}">Copiar</button>
-    </div>`;
-  }
-
-  div.innerHTML = html + meta;
-  wrap.appendChild(div);
-  iaScrollAbajo();
-}
-
-function iaCopiar(btn) {
-  navigator.clipboard.writeText(btn.dataset.texto).then(() => {
-    btn.textContent = '✓ Copiado';
-    setTimeout(() => btn.textContent = 'Copiar', 2000);
-  });
-}
-
-function iaScrollAbajo() {
-  const wrap = document.getElementById('ia-mensajes');
-  if (wrap) requestAnimationFrame(() => wrap.scrollTop = wrap.scrollHeight);
-}
-
-/* ─── AGENDA VISUAL SEMANAL ─── */
-
-const AGENDA_TURNOS = [
-  // semana offset 0 (semana del 28 abr - 3 may 2026)
-  // dia 0=Lun, 1=Mar, 2=Mié, 3=Jue, 4=Vie, 5=Sáb
-  { dia:0, hora:'08:30', pac:'Pérez, Juan',     esp:'Clínica Médica', medico:'suarez',  css:'ag-t-clinica'   },
-  { dia:0, hora:'09:00', pac:'García, Marta',   esp:'Cardiología',    medico:'suarez',  css:'ag-t-cardio'    },
-  { dia:0, hora:'09:30', pac:'López, Carlos',   esp:'Clínica Médica', medico:'romero',  css:'ag-t-clinica'   },
-  { dia:0, hora:'10:00', pac:'Ferreyra, Ana',   esp:'Pediatría',      medico:'romero',  css:'ag-t-pediatria' },
-  { dia:0, hora:'11:00', pac:'Martínez, R.',    esp:'Traumatología',  medico:'vega',    css:'ag-t-trauma'    },
-  { dia:1, hora:'08:00', pac:'Sosa, Patricia',  esp:'Neurología',     medico:'vega',    css:'ag-t-neuro'     },
-  { dia:1, hora:'09:15', pac:'Rodríguez, M.',   esp:'Clínica Médica', medico:'suarez',  css:'ag-t-clinica'   },
-  { dia:1, hora:'10:30', pac:'Torres, Luis',    esp:'Cardiología',    medico:'romero',  css:'ag-t-cardio'    },
-  { dia:1, hora:'14:00', pac:'Herrera, C.',     esp:'Pediatría',      medico:'romero',  css:'ag-t-pediatria' },
-  { dia:2, hora:'09:00', pac:'Romero, V.',      esp:'Traumatología',  medico:'vega',    css:'ag-t-trauma'    },
-  { dia:2, hora:'09:30', pac:'Castro, D.',      esp:'Clínica Médica', medico:'suarez',  css:'ag-t-clinica'   },
-  { dia:2, hora:'11:30', pac:'Blanco, S.',      esp:'Neurología',     medico:'vega',    css:'ag-t-neuro'     },
-  { dia:3, hora:'08:30', pac:'Núñez, A.',       esp:'Pediatría',      medico:'romero',  css:'ag-t-pediatria' },
-  { dia:3, hora:'10:00', pac:'Morales, E.',     esp:'Cardiología',    medico:'suarez',  css:'ag-t-cardio'    },
-  { dia:3, hora:'15:00', pac:'Ríos, M.',        esp:'Clínica Médica', medico:'romero',  css:'ag-t-clinica'   },
-  { dia:4, hora:'09:00', pac:'Vidal, T.',       esp:'Traumatología',  medico:'vega',    css:'ag-t-trauma'    },
-  { dia:4, hora:'10:30', pac:'Mendez, C.',      esp:'Clínica Médica', medico:'suarez',  css:'ag-t-clinica'   },
-  { dia:5, hora:'09:00', pac:'López, C.',       esp:'Pediatría',      medico:'romero',  css:'ag-t-pediatria' },
-];
-
-let agendaOffsetSemana = 0;
-
-const DIAS_NOMBRES = ['Lun','Mar','Mié','Jue','Vie','Sáb'];
-const HORAS_AGENDA = [];
-for (let h = 7; h <= 20; h++) {
-  HORAS_AGENDA.push(`${String(h).padStart(2,'0')}:00`);
-  if (h < 20) HORAS_AGENDA.push(`${String(h).padStart(2,'0')}:30`);
-}
-
-function agendaNavegar(dir) {
-  agendaOffsetSemana += dir;
-  agendaRenderizar();
-}
-
-function agendaHoraAFila(hora) {
-  const [h, m] = hora.split(':').map(Number);
-  return (h - 7) * 2 + (m >= 30 ? 1 : 0);
-}
-
-function agendaRenderizar() {
-  const grid = document.getElementById('agenda-grid');
-  const label = document.getElementById('agenda-semana-label');
-  const filtroMedico = document.getElementById('agenda-medico-sel')?.value || 'todos';
-  if (!grid) return;
-
-  // Calcular fechas de la semana
-  const hoy = new Date(2026, 3, 29); // miércoles 29 abr 2026
-  const lunes = new Date(hoy);
-  lunes.setDate(hoy.getDate() - hoy.getDay() + 1 + agendaOffsetSemana * 7);
-
-  const dias = Array.from({length: 6}, (_, i) => {
-    const d = new Date(lunes);
-    d.setDate(lunes.getDate() + i);
-    return d;
-  });
-
-  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-  label.textContent = `${dias[0].getDate()} ${meses[dias[0].getMonth()]} – ${dias[5].getDate()} ${meses[dias[5].getMonth()]} ${dias[5].getFullYear()}`;
-
-  // Construir HTML
-  let html = '';
-
-  // Cabecera
-  html += '<div class="ag-dia-vacio"></div>';
-  dias.forEach((d, i) => {
-    const esHoy = d.toDateString() === hoy.toDateString();
-    html += `<div class="ag-dia-col${esHoy?' hoy':''}">
-      <div class="ag-dia-nombre">${DIAS_NOMBRES[i]}</div>
-      <div class="ag-dia-num">${d.getDate()}</div>
-    </div>`;
-  });
-
-  // Filas
-  HORAS_AGENDA.forEach((hora, filaIdx) => {
-    const esMediaHora = hora.endsWith(':30');
-    html += `<div class="ag-hora">${esMediaHora ? '' : hora}</div>`;
-
-    dias.forEach((d, diaIdx) => {
-      const esHoy = d.toDateString() === hoy.toDateString();
-      // Buscar turno en esta celda
-      const turno = AGENDA_TURNOS.find(t =>
-        t.dia === diaIdx &&
-        t.hora === hora &&
-        (filtroMedico === 'todos' || t.medico === filtroMedico)
-      );
-
-      let contenido = '';
-      if (turno) {
-        contenido = `<div class="ag-turno ${turno.css}"
-          onclick="event.stopPropagation();mostrarPopoverAgenda(event,'${turno.pac}','${turno.hora} · ${turno.esp}')"
-          title="${turno.pac} — ${turno.esp}">
-          <div class="ag-turno-pac">${turno.pac}</div>
-          <div class="ag-turno-esp">${turno.esp}</div>
-        </div>`;
-      }
-
-      html += `<div class="ag-celda${esHoy?' hoy-col':''}${esMediaHora?' media-hora':''}"
-        onclick="celdaAgendaClic('${hora}', ${diaIdx})">${contenido}</div>`;
-    });
-  });
-
-  grid.innerHTML = html;
-  grid.style.gridTemplateRows = `36px repeat(${HORAS_AGENDA.length}, 36px)`;
-
-  // Línea de "ahora" — solo en semana actual
-  if (agendaOffsetSemana === 0) {
-    const ahora = new Date();
-    const horaActual = ahora.getHours() + ahora.getMinutes() / 60;
-    if (horaActual >= 7 && horaActual <= 20) {
-      const pct = ((horaActual - 7) / 13) * 100;
-      // diaHoy = miércoles = col 3 (0-indexed)
-      const diaHoyIdx = 2;
-      const celdas = grid.querySelectorAll('.ag-celda.hoy-col');
-      if (celdas.length > 0) {
-        const wrap = document.getElementById('agenda-grid-wrap');
-        const wrapRect = wrap.getBoundingClientRect();
-        // Usar posición relativa simple en las celdas
-        celdas.forEach((celda, idx) => {
-          if (idx === 0) { // primera celda del día de hoy, insertar línea
-            const linea = document.createElement('div');
-            linea.className = 'ag-linea-ahora';
-            linea.style.top = `${pct}%`;
-            celda.closest('.agenda-grid') && null; // no hacemos nada aquí
-          }
-        });
-      }
-    }
-  }
-
-  // Auto-scroll a las 8:00
-  const wrap = document.getElementById('agenda-grid-wrap');
-  if (wrap) {
-    requestAnimationFrame(() => { wrap.scrollTop = 36; });
-  }
-}
-
-function celdaAgendaClic(hora, diaIdx) {
-  cerrarPopoverAgenda();
-  abrirModal('modal-nuevo-turno');
-}
-
-function mostrarPopoverAgenda(e, pac, meta) {
-  const pop = document.getElementById('ag-popover');
-  document.getElementById('ag-pop-nombre').textContent = pac;
-  document.getElementById('ag-pop-meta').textContent = meta;
-  pop.style.display = 'block';
-  const x = Math.min(e.clientX + 12, window.innerWidth - 300);
-  const y = Math.min(e.clientY + 8,  window.innerHeight - 140);
-  pop.style.left = x + 'px';
-  pop.style.top  = y + 'px';
-}
-
-function cerrarPopoverAgenda() {
-  const pop = document.getElementById('ag-popover');
-  if (pop) pop.style.display = 'none';
-}
-
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.ag-popover') && !e.target.closest('.ag-turno')) {
-    cerrarPopoverAgenda();
-  }
-});
 
 /* ─── MÓDULO 05: PANEL DE ATAJOS ─── */
 function abrirPanelAtaljos() {
@@ -3617,13 +3194,6 @@ document.addEventListener('keydown', evento => {
   if (evento.altKey && evento.key.toLowerCase() === 'c') {
     evento.preventDefault();
     alternarAltoContraste();
-    return;
-  }
-
-  /* Alt + D: modo oscuro (siempre disponible) */
-  if (evento.altKey && evento.key.toLowerCase() === 'd') {
-    evento.preventDefault();
-    alternarModoOscuro();
     return;
   }
 
@@ -3717,10 +3287,13 @@ function intentarLogin() {
     errorEl.classList.add('visible');
     document.getElementById('login-email').classList.add('error-campo');
     document.getElementById('login-pass').classList.add('error-campo');
-    // Animación de shake en la card
-    const card = document.querySelector('.login-card');
-    card.style.animation = 'none'; card.offsetHeight;
-    card.style.animation = 'loginShake 0.4s ease';
+    // Animación de shake en la columna del formulario (no .login-card que ya no existe)
+    const formWrap = document.querySelector('.login-form-wrap');
+    if (formWrap) {
+      formWrap.style.animation = 'none';
+      formWrap.offsetHeight;
+      formWrap.style.animation = 'loginShake 0.35s ease';
+    }
     return;
   }
 
@@ -3733,45 +3306,74 @@ function intentarLogin() {
 
 /* ── Login directo desde botones demo ── */
 function loginDemo(email, pass) {
-  document.getElementById('login-email').value = email;
-  document.getElementById('login-pass').value = pass;
-  intentarLogin();
+  const usuario = USUARIOS_DEMO[email];
+  if (!usuario || usuario.pass !== pass) return;
+  entrarAlSistema(email, usuario);
 }
 
 /* ── Entrar al sistema con el usuario dado ── */
 function entrarAlSistema(email, usuario) {
-  usuarioActivo = { email, ...usuario };
+  try { usuarioActivo = { email, ...usuario }; } catch(e){}
 
-  // Aplicar permisos al menú lateral
-  aplicarPermisos(usuario.rol);
+  // PRIMERO: ocultar pantalla de login (antes que cualquier otra cosa)
+  try {
+    const pantalla = document.getElementById('pantalla-login');
+    if (pantalla) {
+      pantalla.style.pointerEvents = 'none';
+      pantalla.style.opacity = '0';
+      pantalla.style.transition = 'opacity 0.3s';
+      setTimeout(function(){ pantalla.style.display='none'; pantalla.style.opacity=''; pantalla.style.transition=''; }, 320);
+    }
+  } catch(e){}
+
+  // Aplicar permisos al menu lateral
+  try { aplicarPermisos(usuario.rol); } catch(e){}
 
   // Actualizar UI de barra superior
-  const chip = document.getElementById('bs-rol-chip');
-  chip.className = 'bs-rol-chip ' + usuario.rol;
-  chip.textContent = usuario.rolLabel;
+  try {
+    const chip = document.getElementById('bs-rol-chip');
+    if (chip) { chip.className = 'bs-rol-chip ' + usuario.rol; chip.textContent = usuario.rolLabel; }
+  } catch(e){}
 
-  // Actualizar chip de usuario en menú lateral
-  document.querySelector('.lat-usuario-nombre').textContent = usuario.nombre;
-  document.querySelector('.lat-usuario-rol').textContent    = usuario.rolLabel + ' · ' + usuario.turno;
-  document.querySelector('.lat-avatar').textContent         = usuario.iniciales;
-  document.getElementById('relojTurno') && (document.getElementById('relojTurno').textContent = usuario.turno);
+  // Actualizar datos de usuario en menu lateral
+  try {
+    const n = document.querySelector('.lat-usuario-nombre'); if (n) n.textContent = usuario.nombre;
+    const r = document.querySelector('.lat-usuario-rol');    if (r) r.textContent = usuario.rolLabel + ' - ' + usuario.turno;
+    const a = document.querySelector('.lat-avatar');         if (a) a.textContent = usuario.iniciales;
+    const t = document.getElementById('relojTurno');        if (t) t.textContent = usuario.turno;
+  } catch(e){}
 
-  // Mostrar/ocultar botón "Nuevo paciente"
-  const btnNuevo = document.getElementById('btn-nuevo-paciente');
-  if (btnNuevo) btnNuevo.style.display = PERMISOS_ROL[usuario.rol].btnNuevoPaciente ? '' : 'none';
+  // Mostrar/ocultar boton Nuevo paciente
+  try {
+    const btnNuevo = document.getElementById('btn-nuevo-paciente');
+    if (btnNuevo) btnNuevo.style.display = PERMISOS_ROL[usuario.rol].btnNuevoPaciente ? '' : 'none';
+  } catch(e){}
 
   // Navegar al tablero
-  const primerModulo = PERMISOS_ROL[usuario.rol].nav[0] || 'tablero';
-  const primerItem = document.querySelector(`.lat-item[onclick*="'${primerModulo}'"]`);
-  navegarA(primerModulo, primerItem);
-
-  // Ocultar pantalla de login con animación
-  const pantalla = document.getElementById('pantalla-login');
-  pantalla.classList.add('oculto');
-  setTimeout(() => pantalla.style.display = 'none', 380);
+  try {
+    const primerModulo = PERMISOS_ROL[usuario.rol].nav[0] || 'tablero';
+    const primerItem = document.querySelector('.lat-item[onclick*="' + primerModulo + '"]');
+    navegarA(primerModulo, primerItem);
+  } catch(e) {
+    try {
+      document.querySelectorAll('.modulo').forEach(function(m){ m.classList.remove('activo'); });
+      const t = document.getElementById('modulo-tablero');
+      if (t) t.classList.add('activo');
+    } catch(e2){}
+  }
 
   // Tostada de bienvenida
-  setTimeout(() => mostrarTostada(`Bienvenido/a, ${usuario.nombre}`, 'exito', 4000), 500);
+  try { setTimeout(function(){ mostrarTostada('Bienvenido/a, ' + usuario.nombre, 'exito', 4000); }, 500); } catch(e){}
+
+  // Tour solo en desktop
+  try {
+    const esMobile = window.innerWidth <= 1024;
+    if (esMobile) {
+      localStorage.setItem('medigest-tour-completado', '1');
+    } else if (!localStorage.getItem('medigest-tour-completado')) {
+      setTimeout(function(){ iniciarTour(); }, 900);
+    }
+  } catch(e){}
 }
 
 /* ── Aplicar permisos al menú lateral ── */
@@ -3867,234 +3469,768 @@ document.getElementById('login-pass').addEventListener('keydown',  e => { if (e.
   }
 })();
 
+/* ─── INICIALIZAR ─── */
+window.addEventListener('DOMContentLoaded', function() {
+  animarContadores();
+  // Marcar login como listo y procesar queue
+  _loginReady = true;
+  _loginQueue.forEach(function(q){ loginDemo(q[0], q[1]); });
+  _loginQueue = [];
+  setTimeout(function(){ mostrarTostada('Turno en 5 min — Ferreyra, Ana · Dra. Romero (09:30)', 'alerta', 6000); }, 3000);
 
-/* ─── GRÁFICOS CHART.JS ─── */
-let graficosInstancias = {};
-
-function obtenerColoresGraficos() {
-  const oscuro = document.body.classList.contains('modo-oscuro');
-  return {
-    texto:    oscuro ? '#8B949E' : '#928E84',
-    borde:    oscuro ? '#30363D' : '#E8E6E0',
-    fondo:    oscuro ? '#161B22' : '#FAFAF8',
-    verde:    '#0D9488',
-    ambar:    '#B7791F',
-    rojo:     '#C53030',
-    azul:     '#2B6CB0',
-    violeta:  '#7F77DD',
-    verdeOk:  oscuro ? '#3FB950' : '#276749',
-  };
-}
-
-function inicializarGraficos() {
-  if (typeof Chart === 'undefined') return;
-  const c = obtenerColoresGraficos();
-  const fontMono = "'IBM Plex Mono', monospace";
-  const fontSans = "'IBM Plex Sans', sans-serif";
-
-  Chart.defaults.font.family = fontSans;
-  Chart.defaults.font.size = 11;
-  Chart.defaults.color = c.texto;
-
-  /* Destruir instancias previas si existen */
-  Object.values(graficosInstancias).forEach(g => g && g.destroy());
-  graficosInstancias = {};
-
-  /* ── 1. LÍNEAS: consultas semana actual vs anterior ── */
-  const ctxLineas = document.getElementById('grafico-lineas');
-  if (ctxLineas) {
-    graficosInstancias.lineas = new Chart(ctxLineas, {
-      type: 'line',
-      data: {
-        labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
-        datasets: [
-          {
-            label: 'Semana actual',
-            data: [42, 58, 51, 67, 63, 28],
-            borderColor: c.verde,
-            backgroundColor: c.verde + '18',
-            borderWidth: 2,
-            pointRadius: 3,
-            pointBackgroundColor: c.verde,
-            tension: 0.35,
-            fill: true,
-          },
-          {
-            label: 'Semana anterior',
-            data: [38, 52, 47, 61, 55, 24],
-            borderColor: c.texto,
-            backgroundColor: 'transparent',
-            borderWidth: 1.5,
-            borderDash: [4, 3],
-            pointRadius: 2,
-            pointBackgroundColor: c.texto,
-            tension: 0.35,
-          }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        animation: { duration: 700, easing: 'easeOutQuart' },
-        plugins: {
-          legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
-          tooltip: { backgroundColor: c.fondo, titleColor: c.texto, bodyColor: c.texto, borderColor: c.borde, borderWidth: 1, titleFont: { family: fontMono }, padding: 8 }
-        },
-        scales: {
-          x: { grid: { color: c.borde + '60' }, ticks: { font: { family: fontMono, size: 10 } } },
-          y: { grid: { color: c.borde + '60' }, ticks: { font: { family: fontMono, size: 10 }, precision: 0 }, beginAtZero: true }
-        }
-      }
+  // Botones demo — se vinculan AQUI para garantizar que el JS ya cargó
+  function bindDemo(id, email, pass) {
+    var btn = document.getElementById(id);
+    if (!btn) return;
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var u = USUARIOS_DEMO[email];
+      if (u && u.pass === pass) entrarAlSistema(email, u);
+    });
+    btn.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      var u = USUARIOS_DEMO[email];
+      if (u && u.pass === pass) entrarAlSistema(email, u);
     });
   }
-
-  /* ── 2. DONA: distribución obras sociales ── */
-  const ctxDona = document.getElementById('grafico-dona');
-  if (ctxDona) {
-    graficosInstancias.dona = new Chart(ctxDona, {
-      type: 'doughnut',
-      data: {
-        labels: ['OSDE', 'Swiss Medical', 'PAMI', 'Galeno', 'Particular'],
-        datasets: [{
-          data: [28, 22, 19, 15, 16],
-          backgroundColor: [c.verde, c.azul, c.ambar, c.violeta, c.texto + '60'],
-          borderColor: c.fondo,
-          borderWidth: 2,
-          hoverOffset: 6,
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        cutout: '68%',
-        animation: { animateRotate: true, duration: 800, easing: 'easeOutQuart' },
-        plugins: {
-          legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 }, padding: 8 } },
-          tooltip: { backgroundColor: c.fondo, titleColor: c.texto, bodyColor: c.texto, borderColor: c.borde, borderWidth: 1, callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` } }
-        }
-      }
-    });
-  }
-
-  /* ── 3. BARRAS HORIZONTALES: rendimiento por especialidad ── */
-  const ctxBarras = document.getElementById('grafico-barras');
-  if (ctxBarras) {
-    graficosInstancias.barras = new Chart(ctxBarras, {
-      type: 'bar',
-      data: {
-        labels: ['Clínica Médica', 'Pediatría', 'Cardiología', 'Traumatología', 'Neurología'],
-        datasets: [{
-          label: 'Consultas',
-          data: [234, 180, 120, 98, 74],
-          backgroundColor: [c.verde + 'CC', c.verde + 'AA', c.ambar + 'CC', c.ambar + 'AA', c.texto + '50'],
-          borderRadius: 2,
-          borderSkipped: false,
-        }]
-      },
-      options: {
-        indexAxis: 'y',
-        responsive: true, maintainAspectRatio: false,
-        animation: { duration: 700, easing: 'easeOutQuart' },
-        plugins: {
-          legend: { display: false },
-          tooltip: { backgroundColor: c.fondo, titleColor: c.texto, bodyColor: c.texto, borderColor: c.borde, borderWidth: 1, titleFont: { family: fontMono } }
-        },
-        scales: {
-          x: { grid: { color: c.borde + '60' }, ticks: { font: { family: fontMono, size: 10 } }, beginAtZero: true },
-          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
-        }
-      }
-    });
-  }
-
-  /* ── 4. GAUGE: ocupación camas ── */
-  const ctxGauge = document.getElementById('grafico-gauge');
-  if (ctxGauge) {
-    const valor = 65;
-    const colorAguja = valor >= 85 ? c.rojo : valor >= 70 ? c.ambar : c.verdeOk;
-    graficosInstancias.gauge = new Chart(ctxGauge, {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          data: [valor, 100 - valor],
-          backgroundColor: [colorAguja, c.borde + '80'],
-          borderWidth: 0,
-          circumference: 180,
-          rotation: 270,
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        cutout: '72%',
-        animation: { animateRotate: true, duration: 900, easing: 'easeOutQuart' },
-        plugins: { legend: { display: false }, tooltip: { enabled: false } }
-      }
-    });
-  }
-
-  /* ── 5. MINI en tablero ── */
-  const ctxMini = document.getElementById('grafico-tablero-mini');
-  if (ctxMini) {
-    graficosInstancias.mini = new Chart(ctxMini, {
-      type: 'line',
-      data: {
-        labels: ['L', 'M', 'X', 'J', 'V', 'S'],
-        datasets: [{
-          data: [42, 58, 51, 67, 63, 28],
-          borderColor: c.verde,
-          backgroundColor: c.verde + '18',
-          borderWidth: 2,
-          pointRadius: 2,
-          tension: 0.4,
-          fill: true,
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        animation: { duration: 600 },
-        plugins: { legend: { display: false }, tooltip: { enabled: false } },
-        scales: {
-          x: { grid: { display: false }, ticks: { font: { family: fontMono, size: 9 } } },
-          y: { display: false, beginAtZero: true }
-        }
-      }
-    });
-  }
-}
-
-/* Re-inicializar gráficos al navegar a estadísticas o tablero */
-const _navegarAOriginal = typeof navegarA === 'function' ? navegarA : null;
-document.addEventListener('DOMContentLoaded', () => {
-  /* Esperar que Chart.js cargue y luego inicializar */
-  const esperarChart = setInterval(() => {
-    if (typeof Chart !== 'undefined') {
-      clearInterval(esperarChart);
-      inicializarGraficos();
-    }
-  }, 100);
+  bindDemo('demo-admin',  'admin@medigest.ar',      'admin123');
+  bindDemo('demo-romero', 'romero@medigest.ar',      'medico123');
+  bindDemo('demo-perez',  'perez.enf@medigest.ar',   'enf123');
+  bindDemo('demo-diaz',   'diaz.recep@medigest.ar',  'recep123');
 });
+</script>
 
-/* Reinicializar al cambiar a modo oscuro para actualizar colores */
-const _alternarModoOscuroOriginal = window.alternarModoOscuro;
-window.alternarModoOscuro = function() {
-  if (_alternarModoOscuroOriginal) _alternarModoOscuroOriginal();
-  setTimeout(inicializarGraficos, 50);
+<!-- ═══════════════════════════════════════════
+     MÓDULO 09 — TOUR DE BIENVENIDA (HTML)
+═══════════════════════════════════════════ -->
+<div id="tour-overlay">
+  <div id="tour-fondo" onclick="cerrarTour()"></div>
+  <div id="tour-spotlight"></div>
+  <div id="tour-tooltip">
+    <div class="tour-progreso">
+      <span id="tour-paso-label">Paso 1 de 8</span>
+      <div class="tour-barra"><div class="tour-barra-fill" id="tour-barra-fill" style="width:12.5%"></div></div>
+    </div>
+    <div class="tour-titulo" id="tour-titulo"></div>
+    <div class="tour-desc" id="tour-desc"></div>
+    <div class="tour-acciones">
+      <button class="tour-btn-ant" id="tour-btn-ant" onclick="tourAnterior()">← Anterior</button>
+      <button class="tour-btn-sig" id="tour-btn-sig" onclick="tourSiguiente()">Siguiente →</button>
+      <button class="tour-btn-skip" onclick="cerrarTour()">Saltar tour</button>
+    </div>
+  </div>
+</div>
+
+<!-- Pantalla final del tour -->
+<div id="tour-final">
+  <div class="tour-final-card">
+    <div class="tour-final-ico">🎉</div>
+    <div class="tour-final-titulo">¡Listo para empezar!</div>
+    <div class="tour-final-desc">Ya conocés los módulos principales. Accedé rápidamente a las acciones más frecuentes según tu rol.</div>
+    <div class="tour-final-accesos" id="tour-final-accesos"></div>
+    <button class="tour-final-cerrar" onclick="cerrarTourFinal()">Comenzar a usar MediGest Pro</button>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   MÓDULO 09 — TOUR DE BIENVENIDA
+═══════════════════════════════════════════ */
+
+const PASOS_TOUR = [
+  {
+    selector: '.lateral',
+    titulo: 'Menú de navegación',
+    desc: 'Desde aquí accedés a todos los módulos del sistema. Los ítems visibles dependen de tu rol.',
+    pos: 'derecha'
+  },
+  {
+    selector: '.barra-superior',
+    titulo: 'Barra superior',
+    desc: 'Buscá pacientes, turnos o médicos en tiempo real. También controlás notificaciones, modo de contraste y tu sesión.',
+    pos: 'abajo'
+  },
+  {
+    selector: '.metricas',
+    titulo: 'Métricas en tiempo real',
+    desc: 'Un resumen instantáneo del estado del establecimiento: turnos, internados, laboratorio pendiente y más.',
+    pos: 'abajo'
+  },
+  {
+    selector: '#tablaSalaEspera',
+    titulo: 'Sala de espera en vivo',
+    desc: 'Visualizá qué pacientes están esperando, cuánto tiempo llevan y su estado. Se actualiza automáticamente.',
+    pos: 'derecha'
+  },
+  {
+    selector: '#btn-nuevo-paciente',
+    titulo: 'Nuevo paciente',
+    desc: 'Registrá un nuevo paciente de forma rápida con el formulario de admisión. También podés usar la tecla N.',
+    pos: 'abajo-izq'
+  },
+  {
+    selector: '.lat-item[onclick*="\'turnos\'"]',
+    titulo: 'Módulo de turnos',
+    desc: 'Gestioná agenda, asignación de turnos, sobreturnos y confirmaciones de asistencia por canal.',
+    pos: 'derecha'
+  },
+  {
+    selector: '.lat-item[onclick*="\'medico\'"]',
+    titulo: 'Panel médico',
+    desc: 'Los médicos acceden a su agenda personal, historiales clínicos, evoluciones y prescripciones desde aquí.',
+    pos: 'derecha'
+  },
+  {
+    selector: '.boton-campana',
+    titulo: 'Notificaciones',
+    desc: 'Alertas de turnos próximos, resultados de laboratorio, internaciones y mensajes del equipo. Nunca te perdés nada.',
+    pos: 'abajo-izq'
+  }
+];
+
+let tourPasoActual = 0;
+
+function iniciarTour() {
+  // Asegurarse de estar en el tablero
+  const itemTablero = document.querySelector('.lat-item[onclick*="\'tablero\'"]');
+  navegarA('tablero', itemTablero);
+
+  tourPasoActual = 0;
+  document.getElementById('tour-overlay').classList.add('activo');
+  document.getElementById('tour-fondo').style.background = 'transparent';
+  setTimeout(() => mostrarPasoTour(0), 50);
+}
+
+function mostrarPasoTour(idx) {
+  const paso = PASOS_TOUR[idx];
+  const total = PASOS_TOUR.length;
+  const el = document.querySelector(paso.selector);
+
+  // Actualizar texto
+  document.getElementById('tour-paso-label').textContent = `Paso ${idx + 1} de ${total}`;
+  document.getElementById('tour-barra-fill').style.width = `${((idx + 1) / total) * 100}%`;
+  document.getElementById('tour-titulo').textContent = paso.titulo;
+  document.getElementById('tour-desc').textContent = paso.desc;
+
+  // Botón anterior
+  document.getElementById('tour-btn-ant').style.display = idx === 0 ? 'none' : '';
+  // Botón siguiente
+  const btnSig = document.getElementById('tour-btn-sig');
+  btnSig.textContent = idx === total - 1 ? '¡Finalizar! →' : 'Siguiente →';
+
+  if (!el) {
+    posicionarTooltipCentro();
+    return;
+  }
+
+  // Scroll al elemento si es necesario
+  el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+
+  setTimeout(() => {
+    const rect = el.getBoundingClientRect();
+    const PAD = 6;
+
+    // Spotlight
+    const spot = document.getElementById('tour-spotlight');
+    spot.style.left   = (rect.left - PAD) + 'px';
+    spot.style.top    = (rect.top  - PAD) + 'px';
+    spot.style.width  = (rect.width  + PAD * 2) + 'px';
+    spot.style.height = (rect.height + PAD * 2) + 'px';
+
+    // Fondo semitransparente
+    document.getElementById('tour-fondo').style.background = 'rgba(0,0,0,0.0)';
+
+    // Posicionar tooltip
+    posicionarTooltip(rect, paso.pos);
+  }, 80);
+}
+
+function posicionarTooltip(rect, pos) {
+  const tip = document.getElementById('tour-tooltip');
+  const TW = 300, TH = tip.offsetHeight || 180, MARGEN = 14;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  let left, top;
+
+  if (pos === 'derecha') {
+    left = rect.right + MARGEN;
+    top  = rect.top + rect.height / 2 - TH / 2;
+  } else if (pos === 'abajo') {
+    left = rect.left + rect.width / 2 - TW / 2;
+    top  = rect.bottom + MARGEN;
+  } else if (pos === 'abajo-izq') {
+    left = rect.right - TW;
+    top  = rect.bottom + MARGEN;
+  } else {
+    left = rect.left;
+    top  = rect.bottom + MARGEN;
+  }
+
+  // Mantener dentro del viewport
+  left = Math.max(MARGEN, Math.min(left, vw - TW - MARGEN));
+  top  = Math.max(MARGEN, Math.min(top,  vh - TH - MARGEN));
+
+  tip.style.left = left + 'px';
+  tip.style.top  = top  + 'px';
+}
+
+function posicionarTooltipCentro() {
+  const tip = document.getElementById('tour-tooltip');
+  tip.style.left = '50%';
+  tip.style.top  = '50%';
+  tip.style.transform = 'translate(-50%, -50%)';
+}
+
+function tourSiguiente() {
+  if (tourPasoActual < PASOS_TOUR.length - 1) {
+    tourPasoActual++;
+    mostrarPasoTour(tourPasoActual);
+  } else {
+    // Finalizar
+    cerrarTour();
+    mostrarTourFinal();
+  }
+}
+
+function tourAnterior() {
+  if (tourPasoActual > 0) {
+    tourPasoActual--;
+    mostrarPasoTour(tourPasoActual);
+  }
+}
+
+function cerrarTour() {
+  document.getElementById('tour-overlay').classList.remove('activo');
+  const spot = document.getElementById('tour-spotlight');
+  spot.style.left = spot.style.top = spot.style.width = spot.style.height = '';
+  // Guardar en localStorage
+  try { localStorage.setItem('medigest-tour-completado', '1'); } catch(e){}
+}
+
+function mostrarTourFinal() {
+  // Accesos rápidos según rol
+  const rol = usuarioActivo ? usuarioActivo.rol : 'admin';
+  const ACCESOS = {
+    admin:      [['Nuevo turno','Agenda del día'],['Nuevo paciente','Admisión rápida'],['Ver internados','UCI y camas'],['Reportes','Estadísticas']],
+    medico:     [['Mi agenda','Turnos del día'],['Historial','Buscar paciente'],['Receta','Nueva prescripción'],['Lab','Resultados']],
+    enfermeria: [['Internados','Estado de camas'],['Signos vitales','Registrar'],['Guardia','Ingresos'],['Sala espera','En vivo']],
+    recepcion:  [['Nuevo turno','Agenda'],['Admisión','Registrar paciente'],['Facturación','Cobros pendientes'],['Turnos','Hoy']],
+  };
+  const accesos = ACCESOS[rol] || ACCESOS.admin;
+  const cont = document.getElementById('tour-final-accesos');
+  cont.innerHTML = accesos.map(([titulo, sub]) =>
+    `<button class="tour-final-acc" onclick="cerrarTourFinal()"><b>${titulo}</b>${sub}</button>`
+  ).join('');
+
+  document.getElementById('tour-final').classList.add('activo');
+}
+
+function cerrarTourFinal() {
+  document.getElementById('tour-final').classList.remove('activo');
+  try { localStorage.setItem('medigest-tour-completado', '1'); } catch(e){}
+}
+
+function reiniciarTour() {
+  try { localStorage.removeItem('medigest-tour-completado'); } catch(e){}
+  mostrarTostada('Tour reiniciado — iniciando recorrido…', 'info', 3000);
+  setTimeout(() => iniciarTour(), 600);
+}
+
+/* Iniciar tour automáticamente si es la primera vez */
+(function verificarTourAutomatico() {
+  try {
+    if (!localStorage.getItem('medigest-tour-completado')) {
+      // Se dispara luego del login, dentro de entrarAlSistema
+    }
+  } catch(e){}
+})();
+
+
+/* Inyectar llamada al tour en entrarAlSistema */
+const _entrarOriginal = entrarAlSistema;
+// El tour se dispara desde entrarAlSistema redefinido abajo
+
+/* ═══════════════════════════════════════════
+   MÓDULO 10 — MICRO-UX: SKELETON, VACÍOS, PAGINACIÓN, GUARDADO, DESTRUCTIVO
+═══════════════════════════════════════════ */
+
+/* ── Skeleton: mostrar / ocultar ── */
+function mostrarSkeleton(contenedorId, filas = 4) {
+  const cont = document.getElementById(contenedorId);
+  if (!cont) return;
+  const sk = document.createElement('div');
+  sk.className = 'skeleton-wrap';
+  sk.id = 'sk-' + contenedorId;
+  for (let i = 0; i < filas; i++) {
+    sk.innerHTML += `
+      <div class="sk-bloque">
+        <div class="sk-circulo"></div>
+        <div class="sk-grupo">
+          <div class="sk-linea ${i%3===0?'ancha':'media'}"></div>
+          <div class="sk-linea corta"></div>
+        </div>
+        <div class="sk-linea" style="width:60px;align-self:center;"></div>
+      </div>`;
+  }
+  // Superponer sin remover contenido real
+  cont.style.position = 'relative';
+  cont.appendChild(sk);
+}
+
+function ocultarSkeleton(contenedorId) {
+  const sk = document.getElementById('sk-' + contenedorId);
+  if (sk) sk.remove();
+}
+
+/* ── Wrapper de navegarA con skeleton ── */
+const _navOriginal = navegarA;
+window.navegarA = function(modulo, el) {
+  const esMobile = window.innerWidth <= 640;
+  const leftOffset = esMobile ? '0px' : 'var(--ancho-lateral)';
+  const skTemp = document.createElement('div');
+  skTemp.id = 'sk-transicion';
+  skTemp.style.cssText = `position:fixed;top:var(--alto-superior);left:${leftOffset};right:0;bottom:0;background:var(--color-fondo);z-index:5;pointer-events:none;padding:18px;display:flex;flex-direction:column;gap:10px;`;
+  skTemp.innerHTML = `
+    <div class="sk-linea tall" style="width:200px;margin-bottom:4px;"></div>
+    <div style="display:grid;grid-template-columns:repeat(${esMobile?'2':'5'},1fr);gap:10px;margin-bottom:8px;">
+      ${[1,2,3,4,esMobile?null:5].filter(Boolean).map(()=>`<div class="sk-linea" style="height:60px;border-radius:5px;"></div>`).join('')}
+    </div>
+    <div>
+      ${[1,2,3,4].map(()=>`
+        <div class="sk-bloque">
+          <div class="sk-circulo"></div>
+          <div class="sk-grupo">
+            <div class="sk-linea ancha"></div>
+            <div class="sk-linea corta"></div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+  document.body.appendChild(skTemp);
+  setTimeout(() => { if (skTemp.parentElement) skTemp.remove(); }, 400);
+  _navOriginal(modulo, el);
 };
 
-/* Reinicializar al navegar a módulos con gráficos */
-document.addEventListener('click', e => {
-  const item = e.target.closest('[onclick*="navegarA"]') || e.target.closest('[onclick*="navegarMovil"]');
-  if (item) {
-    const fn = item.getAttribute('onclick') || '';
-    if (fn.includes('estadisticas') || fn.includes('tablero')) {
-      setTimeout(inicializarGraficos, 80);
-    }
+/* ── Paginación — Turnos ── */
+const TURNOS_TODOS = [
+  { hora:'08:30', pac:'Pérez, Juan',    esp:'Clínica',       med:'Dr. Suárez',  os:'OSDE',      estado:'Atendido',   clase:'etiqueta-verde' },
+  { hora:'09:00', pac:'García, Marta',  esp:'Cardiología',   med:'Dr. Suárez',  os:'OSDE',      estado:'En curso',   clase:'etiqueta-ambar' },
+  { hora:'09:15', pac:'López, Carlos',  esp:'Clínica',       med:'Dra. Romero', os:'Swiss Med.', estado:'En sala',    clase:'etiqueta-azul'  },
+  { hora:'09:30', pac:'Ferreyra, Ana',  esp:'Pediatría',     med:'Dra. Romero', os:'Galeno',    estado:'Confirmado', clase:'etiqueta-gris'  },
+  { hora:'10:00', pac:'Martínez, R.',   esp:'Traumatología', med:'Dr. Vega',    os:'PAMI',      estado:'Confirmado', clase:'etiqueta-gris'  },
+  { hora:'10:30', pac:'–',              esp:'–',             med:'Dr. Suárez',  os:'–',         estado:'Disponible', clase:'etiqueta-verde' },
+  { hora:'11:00', pac:'Sosa, Patricia', esp:'Ginecología',   med:'Dra. Torres', os:'Particular', estado:'Confirmado',clase:'etiqueta-gris'  },
+  { hora:'11:30', pac:'Romero, Diego',  esp:'Clínica',       med:'Dr. Suárez',  os:'OSDE',      estado:'Confirmado', clase:'etiqueta-gris'  },
+  { hora:'12:00', pac:'Vidal, Cecilia', esp:'Pediatría',     med:'Dra. Torres', os:'PAMI',      estado:'Confirmado', clase:'etiqueta-gris'  },
+  { hora:'12:30', pac:'Benítez, Hugo',  esp:'Cardiología',   med:'Dra. Romero', os:'Swiss Med.', estado:'Confirmado',clase:'etiqueta-gris'  },
+  { hora:'13:00', pac:'–',              esp:'–',             med:'Dr. Vega',    os:'–',         estado:'Disponible', clase:'etiqueta-verde' },
+  { hora:'14:00', pac:'Torres, Mónica', esp:'Traumatología', med:'Dr. Vega',    os:'Galeno',    estado:'Confirmado', clase:'etiqueta-gris'  },
+];
+
+let turnosPagActual = 0;
+const TURNOS_POR_PAG = 6;
+
+function renderizarTurnos() {
+  const tbody = document.getElementById('turnos-tbody');
+  if (!tbody) return;
+  const total = TURNOS_TODOS.length;
+  const ini = turnosPagActual * TURNOS_POR_PAG;
+  const fin = Math.min(ini + TURNOS_POR_PAG, total);
+  const pagData = TURNOS_TODOS.slice(ini, fin);
+
+  tbody.innerHTML = pagData.map(t => `
+    <tr onclick="mostrarTostada('Turno de ${t.pac} — ${t.hora}','info')">
+      <td class="td-nombre">${t.hora}</td>
+      <td>${t.pac}</td>
+      <td>${t.esp}</td>
+      <td>${t.med}</td>
+      <td>${t.os}</td>
+      <td><span class="etiqueta ${t.clase}">${t.estado}</span></td>
+      <td><button class="boton chico" onclick="event.stopPropagation();confirmarCancelacionTurno('${t.pac} · ${t.hora}')">Cancelar</button></td>
+    </tr>`).join('');
+
+  document.getElementById('turnos-pag-info').textContent = `Mostrando ${ini+1}–${fin} de ${total} turnos`;
+  document.getElementById('turnos-pag-num').textContent = `${turnosPagActual+1} / ${Math.ceil(total/TURNOS_POR_PAG)}`;
+  document.getElementById('turnos-btn-ant').disabled = turnosPagActual === 0;
+  document.getElementById('turnos-btn-sig').disabled = fin >= total;
+}
+
+function cambiarPaginaTurnos(delta) {
+  const totalPags = Math.ceil(TURNOS_TODOS.length / TURNOS_POR_PAG);
+  turnosPagActual = Math.max(0, Math.min(turnosPagActual + delta, totalPags - 1));
+  renderizarTurnos();
+}
+
+/* ── Paginación — Pacientes ── */
+const PACIENTES_TODOS = [
+  { ini:'GM', color:'',          nombre:'García, Marta',      dni:'22.113.440', os:'OSDE 210',   visita:'Hoy',    est:'Activo',      clase:'etiqueta-verde' },
+  { ini:'LC', color:'verde-mar', nombre:'López, Carlos',      dni:'28.541.902', os:'Swiss Med.', visita:'Hoy',    est:'Activo',      clase:'etiqueta-verde' },
+  { ini:'FA', color:'ambar',     nombre:'Ferreyra, Ana',      dni:'35.780.211', os:'Galeno',     visita:'15/04',  est:'Activo',      clase:'etiqueta-verde' },
+  { ini:'SP', color:'oscuro',    nombre:'Sosa, Patricia',     dni:'30.445.881', os:'Particular', visita:'10/03',  est:'Seguimiento', clase:'etiqueta-ambar' },
+  { ini:'RD', color:'',          nombre:'Romero, Diego',      dni:'40.112.009', os:'OSDE',       visita:'08/04',  est:'Activo',      clase:'etiqueta-verde' },
+  { ini:'VC', color:'',          nombre:'Vidal, Cecilia',     dni:'33.509.817', os:'PAMI',       visita:'01/04',  est:'Activo',      clase:'etiqueta-verde' },
+  { ini:'BH', color:'',          nombre:'Benítez, Hugo',      dni:'29.778.442', os:'Swiss Med.', visita:'22/03',  est:'Activo',      clase:'etiqueta-verde' },
+  { ini:'TM', color:'ambar',     nombre:'Torres, Mónica',     dni:'38.004.123', os:'Galeno',     visita:'18/03',  est:'Alta',        clase:'etiqueta-gris'  },
+  { ini:'MR', color:'',          nombre:'Medina, Roberto',    dni:'25.663.880', os:'OSDE',       visita:'10/03',  est:'Activo',      clase:'etiqueta-verde' },
+  { ini:'PL', color:'verde-mar', nombre:'Ponce, Laura',       dni:'41.234.567', os:'Particular', visita:'05/03',  est:'Seguimiento', clase:'etiqueta-ambar' },
+  { ini:'OJ', color:'',          nombre:'Ortega, Josefina',   dni:'36.908.211', os:'PAMI',       visita:'28/02',  est:'Activo',      clase:'etiqueta-verde' },
+  { ini:'CS', color:'',          nombre:'Cabrera, Santiago',  dni:'44.001.789', os:'Swiss Med.', visita:'20/02',  est:'Alta',        clase:'etiqueta-gris'  },
+];
+
+let pacientesPagActual = 0;
+const PACIENTES_POR_PAG = 8;
+
+function renderizarPacientes() {
+  const tbody = document.getElementById('pacientes-tbody');
+  const vacioCont = document.getElementById('pacientes-vacio');
+  const pagCont = document.getElementById('pacientes-paginacion');
+  if (!tbody) return;
+
+  const total = PACIENTES_TODOS.length;
+
+  if (total === 0) {
+    tbody.innerHTML = '';
+    if (vacioCont) vacioCont.style.display = '';
+    if (pagCont) pagCont.style.display = 'none';
+    return;
   }
+
+  if (vacioCont) vacioCont.style.display = 'none';
+  if (pagCont) pagCont.style.display = '';
+
+  const ini = pacientesPagActual * PACIENTES_POR_PAG;
+  const fin = Math.min(ini + PACIENTES_POR_PAG, total);
+  const pagData = PACIENTES_TODOS.slice(ini, fin);
+
+  tbody.innerHTML = pagData.map(p => `
+    <tr onclick="abrirModal('modal-detalle-paciente')">
+      <td><div class="fila-av"><div class="av ${p.color}">${p.ini}</div><span class="td-nombre">${p.nombre}</span></div></td>
+      <td style="font-family:var(--mono);font-size:11.5px;">${p.dni}</td>
+      <td>${p.os}</td>
+      <td>${p.visita}</td>
+      <td><span class="etiqueta ${p.clase}">${p.est}</span></td>
+      <td>
+        <button class="boton chico" onclick="event.stopPropagation();abrirModal('modal-detalle-paciente')">Historia</button>
+        <button class="boton chico peligro" style="margin-left:4px;" onclick="event.stopPropagation();confirmarEliminacion('${p.nombre}')">Eliminar</button>
+      </td>
+    </tr>`).join('');
+
+  document.getElementById('pacientes-pag-info').textContent = `Mostrando ${ini+1}–${fin} de ${total} pacientes`;
+  document.getElementById('pacientes-pag-num').textContent = `${pacientesPagActual+1} / ${Math.ceil(total/PACIENTES_POR_PAG)}`;
+  document.getElementById('pacientes-btn-ant').disabled = pacientesPagActual === 0;
+  document.getElementById('pacientes-btn-sig').disabled = fin >= total;
+}
+
+function cambiarPaginaPacientes(delta) {
+  const totalPags = Math.ceil(PACIENTES_TODOS.length / PACIENTES_POR_PAG);
+  pacientesPagActual = Math.max(0, Math.min(pacientesPagActual + delta, totalPags - 1));
+  renderizarPacientes();
+}
+
+/* ── Indicador de guardado inline ── */
+function guardarEvolucion(btn) {
+  const indicador = document.getElementById('guardado-evolucion');
+  btn.disabled = true;
+  btn.textContent = 'Guardando…';
+  setTimeout(() => {
+    btn.textContent = 'Guardar evolución';
+    btn.disabled = false;
+    if (indicador) {
+      indicador.classList.add('visible');
+      setTimeout(() => indicador.classList.remove('visible'), 2000);
+    }
+    mostrarTostada('Evolución guardada en historia clínica', 'exito');
+  }, 700);
+}
+
+/* ── Confirmación destructiva ── */
+let _callbackDestructivo = null;
+
+function abrirModalDestructivo(titulo, aviso, sub, callback) {
+  document.getElementById('destr-titulo').textContent = titulo;
+  document.getElementById('destr-aviso').textContent = aviso;
+  document.getElementById('destr-sub').textContent = sub;
+  document.getElementById('destr-input').value = '';
+  document.getElementById('destr-btn-confirmar').disabled = true;
+  _callbackDestructivo = callback;
+  abrirModal('modal-confirmar-destructivo');
+  setTimeout(() => document.getElementById('destr-input').focus(), 100);
+}
+
+function validarDestructivo() {
+  const val = document.getElementById('destr-input').value.trim().toUpperCase();
+  document.getElementById('destr-btn-confirmar').disabled = val !== 'CONFIRMAR';
+}
+
+function ejecutarDestructivo() {
+  cerrarModal('modal-confirmar-destructivo');
+  if (_callbackDestructivo) _callbackDestructivo();
+  _callbackDestructivo = null;
+}
+
+function confirmarCancelacionTurno(info) {
+  abrirModalDestructivo(
+    'Cancelar turno',
+    `¿Cancelar el turno de ${info}?`,
+    'El paciente será notificado automáticamente. Esta acción no se puede deshacer.',
+    () => mostrarTostada(`Turno cancelado · Paciente notificado`, 'alerta')
+  );
+}
+
+function confirmarEliminacion(nombre) {
+  abrirModalDestructivo(
+    'Eliminar paciente',
+    `¿Eliminar a ${nombre} del sistema?`,
+    'Se borrará toda la información clínica, historial y turnos asociados. No se puede recuperar.',
+    () => mostrarTostada(`${nombre} eliminado del sistema`, 'error')
+  );
+}
+
+/* ── Laboratorio: botón cancelar muestra modal destructivo ── */
+function confirmarCancelacionLab(estudio) {
+  abrirModalDestructivo(
+    'Cancelar estudio',
+    `¿Cancelar el estudio de ${estudio}?`,
+    'La solicitud será anulada en el laboratorio central.',
+    () => mostrarTostada(`Estudio cancelado`, 'alerta')
+  );
+}
+
+/* ── Inicializar tablas ── */
+renderizarTurnos();
+renderizarPacientes();
+
+/* ── Safety net mobile: cerrar tour con cualquier tap ── */
+(function safetyNetMobile() {
+  if (window.innerWidth > 1024) return;
+  // Si el tour quedó activo, cerrarlo
+  const overlay = document.getElementById('tour-overlay');
+  const tourFinal = document.getElementById('tour-final');
+  if (overlay) {
+    overlay.addEventListener('touchstart', function(e) {
+      cerrarTour();
+    }, { passive: true });
+  }
+  if (tourFinal) {
+    tourFinal.addEventListener('touchstart', function(e) {
+      cerrarTourFinal();
+    }, { passive: true });
+  }
+  // Forzar cierre del tour al cargar en mobile (por si quedó en localStorage mal seteado)
+  if (overlay && overlay.classList.contains('activo')) {
+    cerrarTour();
+  }
+})();
+
+</script>
+
+<!-- ═══════════════════════════════════════════
+     MÓDULO 11 — PWA: BANNER DE INSTALACIÓN + OFFLINE
+═══════════════════════════════════════════ -->
+
+<!-- Barra de estado offline -->
+<div id="pwa-offline-bar">
+  <div class="offline-punto"></div>
+  Sin conexión — trabajando en modo offline. Los datos se sincronizarán al reconectar.
+</div>
+
+<!-- Banner de instalación -->
+<div id="pwa-banner">
+  <div class="pwa-banner-ico">MG</div>
+  <div class="pwa-banner-texto">
+    <div class="pwa-banner-titulo">Instalá MediGest en tu pantalla de inicio</div>
+    <div class="pwa-banner-sub">Accedé sin navegador, más rápido y sin conexión</div>
+  </div>
+  <div class="pwa-banner-acciones">
+    <button class="pwa-btn-instalar" id="pwa-btn-instalar" onclick="pwaInstalar()">Instalar</button>
+    <button class="pwa-btn-no" onclick="pwaCerrarBanner(false)">Ahora no</button>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   MÓDULO 11 — PWA
+═══════════════════════════════════════════ */
+
+/* ── 1. Manifest embebido dinámicamente ── */
+(function inyectarManifest() {
+  const ICONO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="40" fill="#0F2D52"/><text x="96" y="128" text-anchor="middle" font-family="monospace" font-size="90" font-weight="700" fill="white">MG</text></svg>`;
+  const iconoB64 = 'data:image/svg+xml;base64,' + btoa(ICONO_SVG);
+
+  const manifest = {
+    name: 'MediGest Pro',
+    short_name: 'MediGest',
+    description: 'Sistema de Gestión Hospitalaria',
+    start_url: './',
+    display: 'standalone',
+    background_color: '#0F2D52',
+    theme_color: '#0F2D52',
+    orientation: 'any',
+    icons: [
+      { src: iconoB64, sizes: '192x192', type: 'image/svg+xml', purpose: 'any maskable' },
+      { src: iconoB64, sizes: '512x512', type: 'image/svg+xml', purpose: 'any maskable' }
+    ],
+    screenshots: [],
+    categories: ['medical', 'health', 'productivity']
+  };
+
+  const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const link = document.getElementById('pwa-manifest');
+  if (link) link.href = url;
+})();
+
+/* ── 2. Service Worker inline (Blob) ── */
+(function registrarSW() {
+  if (!('serviceWorker' in navigator)) return;
+
+  const SW_CODE = `
+const CACHE = 'medigest-v1';
+const RECURSOS = [
+  './',
+  'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Serif:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap'
+];
+
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(CACHE).then(c => c.addAll(RECURSOS)).catch(() => {})
+  );
+  self.skipWaiting();
 });
 
-/* ─── INICIALIZAR ─── */
-window.addEventListener('DOMContentLoaded', () => {
-  animarContadores();
-  setTimeout(() => mostrarTostada('Turno en 5 min — Ferreyra, Ana · Dra. Romero (09:30)', 'alerta', 6000), 3000);
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+    )
+  );
+  self.clients.claim();
 });
+
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  e.respondWith(
+    fetch(e.request)
+      .then(res => {
+        const clone = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, clone)).catch(() => {});
+        return res;
+      })
+      .catch(() => caches.match(e.request).then(r => r || new Response('Sin conexión', { status: 503 })))
+  );
+});
+`;
+
+  try {
+    const blob = new Blob([SW_CODE], { type: 'application/javascript' });
+    const swUrl = URL.createObjectURL(blob);
+
+    navigator.serviceWorker.register(swUrl, { scope: './' })
+      .then(reg => {
+        console.log('[MediGest PWA] Service Worker registrado:', reg.scope);
+      })
+      .catch(err => {
+        // En algunos entornos no se puede registrar SW desde blob — silenciamos
+        console.warn('[MediGest PWA] SW no disponible en este entorno:', err.message);
+      });
+  } catch(e) {
+    console.warn('[MediGest PWA] Error creando SW:', e.message);
+  }
+})();
+
+/* ── 3. Banner de instalación ── */
+let _deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  _deferredPrompt = e;
+  // Solo mostrar si no fue rechazado antes
+  try {
+    if (!localStorage.getItem('pwa-banner-rechazado')) {
+      setTimeout(() => mostrarBannerPWA(), 3500);
+    }
+  } catch(err) { mostrarBannerPWA(); }
+});
+
+function mostrarBannerPWA() {
+  // En móvil o si hay deferredPrompt
+  const banner = document.getElementById('pwa-banner');
+  if (banner) banner.classList.add('visible');
+}
+
+async function pwaInstalar() {
+  const banner = document.getElementById('pwa-banner');
+  if (_deferredPrompt) {
+    _deferredPrompt.prompt();
+    const { outcome } = await _deferredPrompt.userChoice;
+    _deferredPrompt = null;
+    if (outcome === 'accepted') {
+      mostrarTostada('MediGest instalado correctamente en tu dispositivo', 'exito', 5000);
+      try { localStorage.setItem('pwa-instalado', '1'); } catch(e){}
+    }
+  } else {
+    // Instrucciones manuales para iOS u otros
+    mostrarTostada('En iOS: abrí el menú compartir → "Agregar a pantalla de inicio"', 'info', 6000);
+  }
+  if (banner) banner.classList.remove('visible');
+  try { localStorage.setItem('pwa-banner-rechazado', '1'); } catch(e){}
+}
+
+function pwaCerrarBanner(permanente = false) {
+  const banner = document.getElementById('pwa-banner');
+  if (banner) banner.classList.remove('visible');
+  if (permanente) {
+    try { localStorage.setItem('pwa-banner-rechazado', '1'); } catch(e){}
+  }
+}
+
+/* Cuando ya está instalada, no mostrar banner */
+window.addEventListener('appinstalled', () => {
+  pwaCerrarBanner(true);
+  mostrarTostada('MediGest Pro instalado como app', 'exito', 4000);
+});
+
+/* ── 4. Indicador offline / online ── */
+function actualizarEstadoRed() {
+  const bar = document.getElementById('pwa-offline-bar');
+  if (!bar) return;
+  if (!navigator.onLine) {
+    bar.classList.add('visible');
+  } else {
+    if (bar.classList.contains('visible')) {
+      bar.classList.remove('visible');
+      mostrarTostada('Conexión restaurada — datos sincronizados', 'exito', 3000);
+    }
+  }
+}
+
+window.addEventListener('online',  actualizarEstadoRed);
+window.addEventListener('offline', actualizarEstadoRed);
+actualizarEstadoRed(); // Estado inicial
+
+/* ── 5. Demo: botón de prueba del banner en configuración ── */
+function demoPWABanner() {
+  const banner = document.getElementById('pwa-banner');
+  if (banner) {
+    banner.classList.add('visible');
+    mostrarTostada('Banner PWA activado para demo', 'info', 2000);
+  }
+}
+
+/* ── 6. En iOS: mostrar banner automáticamente si es Safari y no instalado ── */
+(function detectarIOS() {
+  const esIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const esStandalone = window.navigator.standalone === true;
+  if (esIOS && !esStandalone) {
+    try {
+      if (!localStorage.getItem('pwa-banner-rechazado')) {
+        setTimeout(() => {
+          const banner = document.getElementById('pwa-banner');
+          if (banner) banner.classList.add('visible');
+        }, 4000);
+      }
+    } catch(e) {}
+  }
+})();
+
 </script>
 </body>
 </html>
