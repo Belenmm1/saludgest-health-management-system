@@ -1,4 +1,4 @@
-#  SaludGest - Sistema de Gestión Hospitalaria
+#  Medigest - Sistema de Gestión Hospitalaria
 
 Este proyecto es una plataforma integral de gestión administrativa y clínica diseñada para optimizar los flujos de trabajo en centros de salud. Como **Analista de Sistemas**, desarrollé esta solución enfocada en la escalabilidad (modelo SaaS) y en la mejora de la experiencia del usuario (UX) para el personal médico.
 
