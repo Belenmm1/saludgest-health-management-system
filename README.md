@@ -18,7 +18,7 @@
 
 ## 👩‍💻 Sobre la Autora
 **Maricela Belén Milde**  
-*Analista de Sistemas | Desarrolladora Full-Stack*.
+*Analista de Sistemas*.
 
 🌍 **Portfolio:** [belenmm1.github.io/Belenmm1/](https://belenmm1.github.io/Belenmm1/)
 
