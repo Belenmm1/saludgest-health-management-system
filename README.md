@@ -1,55 +1,55 @@
-#  Medigest Backend: Arquitectura de Gestión Clínica
-
-Este repositorio contiene el núcleo lógico de **Medigest**, una solución diseñada para la digitalización de flujos de trabajo médicos. El sistema implementa una arquitectura desacoplada enfocada en la persistencia de datos y la seguridad clínica.
-
-### Arquitectura del Sistema
-El backend sigue un patrón de diseño **Layered Architecture** para asegurar la mantenibilidad:
-*   **`database.py`**: Capa de abstracción de datos. Gestiona el ciclo de vida de la conexión y la configuración del motor de persistencia.
-*   **`models.py`**: Definición de esquemas. Implementa la lógica de entidades (Pacientes, Médicos, Historias Clínicas) con restricciones de integridad.
-*   **`main.py`**: Orquestador de la API. Define los puntos de entrada (endpoints) y el procesamiento de las peticiones HTTP.
-
----
-
-###  Diseño de Base de Datos
-Medigest utiliza un esquema relacional que previene la redundancia:
-*   **Gestión de Entidades:** Uso de Claves Primarias (PK) y Claves Foráneas (FK) para vincular turnos con pacientes y especialistas de forma unívoca.
-*   **Persistencia Segura:** Implementación de consultas parametrizadas para prevenir ataques de inyección SQL.
-*   **Validación de Datos:** Reglas de negocio estrictas que impiden registros duplicados o inconsistentes en la agenda médica.
+medigest/
+ ├── backend/          # Lógica de servidor y Base de Datos
+ │   ├── main.py       # Punto de entrada de la API
+ │   ├── models.py     # Definición de entidades y esquemas
+ │   └── database.py   # Gestión de conexión y persistencia
+ ├── frontend/         # Interfaz de Usuario (UI)
+ │   ├── index.html    # Estructura del sitio
+ │   └── app.js        # Lógica de cliente y consumo de API
+ └── README.md
+```[cite: 1]
 
 ---
 
-### 📡 Especificación de la API (Endpoints)
-La comunicación con el frontend (`app.js`) se realiza mediante una interfaz RESTful:
-
-| Método | Endpoint | Acción Técnica |
-| :--- | :--- | :--- |
-| **GET** | `/pacientes` | Recupera el listado de pacientes mediante una consulta optimizada.
-| **POST** | `/pacientes/registro` | Inserta un nuevo registro validando CUIL y datos de contacto. |
-| **POST** | `/turnos/agendar` | Registra una cita médica, verificando disponibilidad en tiempo real. |
-| **PUT** | `/historia/update/:id` | Actualiza la información clínica asegurando la trazabilidad del dato. |
+## Frontend (Interfaz de Usuario)
+La capa de presentación ha sido desarrollada con enfoque en la usabilidad clínica y la velocidad de respuesta.
+*   **Tecnologías:** HTML5, CSS3 y JavaScript (ES6+).
+*   **Lógica de Cliente (`app.js`):** Gestiona la captura de eventos, las validaciones de formularios en el lado del cliente y la comunicación asíncrona mediante `fetch`.
+*   **Integración:** Consume los endpoints del backend para cargar listas de pacientes, agendar turnos y actualizar historias clínicas en tiempo real sin recargar la página.
 
 ---
 
-### Core Tecnológico
-*   **Lenguaje:** Python (Enfoque en procesamiento lógico y limpieza de código).
-*   **Base de Datos:** SQLite / SQL Engine (Gestión de transacciones y estados).
-*   **Frontend Integration:** Interfaz reactiva a través de `app.js` consumiendo JSON.
+##  Backend (Servidor y Datos)
+El núcleo del sistema está construido en **Python**, priorizando la integridad de los datos médicos sensibles.
+*   **`database.py`**: Implementa la capa de acceso a datos. Utiliza consultas SQL optimizadas para garantizar que la información de los pacientes sea accesible y segura.
+*   **`models.py`**: Define las estructuras de datos (Pacientes, Médicos, Turnos) aplicando reglas de **integridad referencial** para evitar registros huérfanos o inconsistencias.
+*   **`main.py`**: Orquestador principal que levanta el servicio y expone las rutas RESTful necesarias para el funcionamiento del frontend.
 
 ---
 
-###  Despliegue Técnico
-1.  **Entorno Virtual:**
-    ```bash
-    python -m venv venv && source venv/bin/activate
-    ```
-2.  **Inicialización de la DB:**
-    El sistema verifica automáticamente la existencia de las tablas al arranque (`IF NOT EXISTS`) para garantizar un entorno listo para operar.
-3.  **Ejecución:**
-    ```bash
-    python main.py
-    ```
+## Gestión de Base de Datos
+Siguiendo los estándares de un **Analista de sistemas**, el diseño relacional incluye:
+*   **Validación de Negocio:** El sistema impide la duplicidad de CUIL/DNI y asegura que no existan solapamientos en la agenda de turnos.
+*   **Persistencia Atómica:** Las operaciones de escritura garantizan que los datos se guarden correctamente o se reviertan en caso de error, protegiendo el historial del paciente.
 
 ---
 
-**Desarrollado por:** [Maricela Belén Milde](https://belenmm1.github.io/Belenmm1/) – *Systems Analyst & Developer*.
+##  Instalación y Ejecución
+
+### 1. Preparar el backend
+```bash
+cd medigest/backend
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
+pip install -r requirements.txt  # Si aplica
+python main.py
+```´´
+
+### 2. Ejecutar el frontend
+Simplemente abre el archivo `frontend/index.html` en un navegador o utiliza un servidor local (como Live Server) para interactuar con la API iniciada en el paso anterior.
+
+---
+
+**Autor:** [Maricela Belén Milde](https://belenmm1.github.io/Belenmm1/) – *Systems Analyst & Developer*.
+
 
